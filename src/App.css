@@ -1,18 +1,4 @@
-html,
-body {
-  font-family: 'Roboto', 'Noto Sans TC', sans-serif;
-}
-
-.App-logo {
-  width: 90px;
-  margin-right: 2rem;
-  pointer-events: none;
-}
-/* navbar */
-.navbar-hugdog {
-}
-
-/* .App {
+.App {
   text-align: center;
 }
 
@@ -49,4 +35,4 @@ body {
   to {
     transform: rotate(360deg);
   }
-} */
+}

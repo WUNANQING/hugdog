@@ -1,35 +1,22 @@
-import React, { useState } from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-// import logo from './logo.svg';
-import './App.css'
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
-import Header from './components/public/Header'
-import ProtectedRoute from './utils/ProtectedRoute'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
-  const [auth, setAuth] = useState(false)
-
   return (
     <Router>
       <>
         <Header />
-        <div className="container">
+        <div className="container py-3">
           <Switch>
-            {/* <Route path="/login">
-              <Login
-                isAuth={auth}
-                login={() => setAuth(true)}
-                logout={() => setAuth(false)}
-              />
-            </Route> */}
             <Route exact path="/">
               <Home />
             </Route>
-            <ProtectedRoute exact path="/Home">
-              <Home isAuth={auth} />
-            </ProtectedRoute>
           </Switch>
         </div>
+        <Footer />
       </>
     </Router>
   )
