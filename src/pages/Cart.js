@@ -44,7 +44,7 @@ const Cart = () => {
             加入購物車
           </Button>{' '}
           <Button variant="secondary" size="lg">
-            快速結帳
+            快速結帳ad
           </Button>
         </div>
       </Col>
