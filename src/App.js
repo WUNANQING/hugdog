@@ -18,8 +18,12 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
+            <Route path="/member">
+              <Member />
+            </Route>
             <Route path="/blog">
               <Blog />
+            </Route>
             <Route path="/productlist">
               <ProductList />
             </Route>
@@ -28,16 +32,6 @@ function App() {
             </Route>
           </Switch>
         </div>
-        {/* <div className="container py-3"> */}
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/member">
-            <Member />
-          </Route>
-        </Switch>
-        {/* </div> */}
         <Footer />
       </>
     </Router>
