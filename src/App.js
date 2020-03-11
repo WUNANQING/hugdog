@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
-
+import Member from '../src/pages/member/Member'
 function App() {
   return (
     <Router>
@@ -13,6 +13,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route path="/member">
+              <Member />
             </Route>
           </Switch>
         </div>
