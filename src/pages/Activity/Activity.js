@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { FiClock } from 'react-icons/fi'
 import { IconContext } from 'react-icons'
 
-function Home(props) {
+function Event(props) {
   return (
     <>
       <div className="jumbotron jumbotron-fluid">
@@ -78,4 +78,4 @@ function Home(props) {
   )
 }
 
-export default Home
+export default 
