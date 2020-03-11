@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Navbar,
   Nav,
@@ -7,13 +7,20 @@ import {
   Image,
   ButtonGroup,
   Button,
-  ToggleButton,
+  Form,
   InputGroup,
   FormControl,
   Accordion,
   Card,
 } from 'react-bootstrap'
+import {
+  MdAddShoppingCart,
+  MdShoppingCart,
+  MdPlaylistAdd,
+} from 'react-icons/md'
+import Breadcrumb from '../../components/Breadcrumbs'
 const ProductPageDetail = () => {
+  const [total, setTotal] = useState(0)
   const producyCategory = [
     '飼料',
     '零食',
@@ -84,7 +91,7 @@ const ProductPageDetail = () => {
   return (
     <Row className="my-5">
       <Col className="p-0" md={2}>
-        <Navbar className="bg-light my-3" expand="md">
+        <Navbar className="bg-light" expand="md">
           <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
           <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
             <Nav className="nav-menu mr-auto flex-column">
@@ -102,37 +109,106 @@ const ProductPageDetail = () => {
         </Navbar>
       </Col>
       <Col md={10}>
-        <Row className="my-5">
-          <Col className="m-0" md={6}>
+        <Row className="m-2">
+          <Breadcrumb />
+        </Row>
+        <Row className="mb-5">
+          <Col md={6}>
             <Image src="https://via.placeholder.com/370" thumbnail />
           </Col>
           <Col className="p-0" md={6}>
             <h3>商品名稱</h3>
             <h4>$100</h4>
-            <p>--尺寸</p>
-            <Button variant="outline-warning">小</Button>{' '}
-            <Button variant="outline-warning">中</Button>{' '}
-            <Button variant="outline-warning">大</Button> <p>--顏色</p>
-            <ButtonGroup toggle>
-              <ToggleButton type="radio" name="radio" defaultChecked value="1">
-                Active
-              </ToggleButton>
-              <ToggleButton type="radio" name="radio" value="2">
-                Radio
-              </ToggleButton>
-              <ToggleButton type="radio" name="radio" value="3">
-                Radio
-              </ToggleButton>
+            <Form.Label>--尺寸</Form.Label>
+            <br />
+            <ButtonGroup>
+              <Button
+                className="rounded border-dark bg-light text-dark mx-2"
+                type="input"
+                name="radio"
+                defalutValue="sm"
+              >
+                小
+              </Button>
+              <Button
+                className="rounded border-dark bg-light text-dark mx-2"
+                type="input"
+                name="radio"
+                defalutValue="md"
+              >
+                中
+              </Button>
+              <Button
+                className="rounded border-dark bg-light text-dark mx-2"
+                type="input"
+                name="radio"
+                defalutValue="lg"
+              >
+                大
+              </Button>
+            </ButtonGroup>
+            <br />
+            <Form.Label>--顏色</Form.Label>
+            <br />
+            <ButtonGroup>
+              <Button
+                className="rounded btn-primary mx-2"
+                type="radio"
+                name="radio"
+                value="blue"
+              />
+              <Button
+                className="rounded btn-danger mx-2"
+                type="radio"
+                name="radio"
+                value="red"
+              />
+              <Button
+                className="rounded btn-info mx-2"
+                type="radio"
+                name="radio"
+                value="green"
+              />
             </ButtonGroup>
             <br />
             <div className="mt-3">
               <Button variant="warning" size="lg">
+                <MdAddShoppingCart className="mb-1" />
+                加入購物車
+              </Button>{' '}
+              <ButtonGroup>
+                <Button
+                  className="border-dark bg-light text-dark"
+                  onClick={() => {
+                    setTotal(total - 1)
+                  }}
+                >
+                  -
+                </Button>
+                <Button
+                  className="border-dark bg-light text-dark"
+                  as="input"
+                  type="button"
+                  value={total}
+                  disabled
+                />
+                <Button
+                  className="border-dark bg-light text-dark"
+                  onClick={() => {
+                    setTotal(total + 1)
+                  }}
+                >
+                  +
+                </Button>
+              </ButtonGroup>
+            </div>
+            <div className="mt-3">
+              <Button variant="warning" size="lg">
+                <MdPlaylistAdd className="mb-1" />
                 加入願望清單
               </Button>{' '}
               <Button variant="warning" size="lg">
-                加入購物車
-              </Button>{' '}
-              <Button variant="warning" size="lg">
+                <MdShoppingCart className="mb-1" />
                 快速結帳
               </Button>
             </div>
