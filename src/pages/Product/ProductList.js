@@ -1,6 +1,6 @@
 import React from 'react'
 import Breadcrumb from '../../components/Breadcrumbs'
-
+import { FaPaw } from 'react-icons/fa'
 const ProductList = () => {
   const sidebar = (
     <div className="col-md-2 p-0">
@@ -168,6 +168,10 @@ const ProductList = () => {
             <h5 className="card-title">Book</h5>
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
+            <div className="d-flex justify-content-around mb-3">
+              <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />{' '}
+              <FaPaw />
+            </div>
             <div className="d-flex justify-content-around">
               <a href="/productpagedetail" class="btn border p-0">
                 查看商品
@@ -190,6 +194,10 @@ const ProductList = () => {
             <h5 className="card-title">Book</h5>
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
+            <div className="d-flex justify-content-around mb-3">
+              <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />{' '}
+              <FaPaw />
+            </div>
             <div className="d-flex justify-content-around">
               <a href="/productpagedetail" class="btn border p-0">
                 查看商品
@@ -212,6 +220,10 @@ const ProductList = () => {
             <h5 className="card-title">Book</h5>
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
+            <div className="d-flex justify-content-around mb-3">
+              <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />{' '}
+              <FaPaw />
+            </div>
             <div className="d-flex justify-content-around">
               <a href="/productpagedetail" class="btn border p-0">
                 查看商品
@@ -234,6 +246,10 @@ const ProductList = () => {
             <h5 className="card-title">Book</h5>
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
+            <div className="d-flex justify-content-around mb-3">
+              <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />{' '}
+              <FaPaw />
+            </div>
             <div className="d-flex justify-content-around">
               <a href="/productpagedetail" class="btn border p-0">
                 查看商品

@@ -20,7 +20,7 @@ import {
 } from 'react-icons/md'
 import Breadcrumb from '../../components/Breadcrumbs'
 const ProductPageDetail = () => {
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(1)
   const producyCategory = [
     '飼料',
     '零食',
@@ -113,10 +113,10 @@ const ProductPageDetail = () => {
           <Breadcrumb />
         </Row>
         <Row className="mb-5">
-          <Col md={6}>
+          <Col md={5}>
             <Image src="https://via.placeholder.com/370" thumbnail />
           </Col>
-          <Col className="p-0" md={6}>
+          <Col className="ml-3 p-0" md={4}>
             <h3>商品名稱</h3>
             <h4>$100</h4>
             <Form.Label>--尺寸</Form.Label>
@@ -124,7 +124,7 @@ const ProductPageDetail = () => {
             <ButtonGroup>
               <Button
                 className="rounded border-dark bg-light text-dark mx-2"
-                type="input"
+                type="radio"
                 name="radio"
                 defalutValue="sm"
               >
@@ -132,7 +132,7 @@ const ProductPageDetail = () => {
               </Button>
               <Button
                 className="rounded border-dark bg-light text-dark mx-2"
-                type="input"
+                type="radio"
                 name="radio"
                 defalutValue="md"
               >
@@ -140,7 +140,7 @@ const ProductPageDetail = () => {
               </Button>
               <Button
                 className="rounded border-dark bg-light text-dark mx-2"
-                type="input"
+                type="radio"
                 name="radio"
                 defalutValue="lg"
               >
@@ -148,7 +148,7 @@ const ProductPageDetail = () => {
               </Button>
             </ButtonGroup>
             <br />
-            <Form.Label>--顏色</Form.Label>
+            <Form.Label className="mt-2">--顏色</Form.Label>
             <br />
             <ButtonGroup>
               <Button
@@ -179,19 +179,20 @@ const ProductPageDetail = () => {
               <ButtonGroup>
                 <Button
                   className="border-dark bg-light text-dark"
-                  onClick={() => {
-                    setTotal(total - 1)
+                  onClick={e => {
+                    total <= 1 ? setTotal(1) : setTotal(total - 1)
                   }}
                 >
                   -
                 </Button>
                 <Button
                   className="border-dark bg-light text-dark"
-                  as="input"
-                  type="button"
                   value={total}
-                  disabled
-                />
+                  type="input"
+                  min="0"
+                >
+                  {total}
+                </Button>
                 <Button
                   className="border-dark bg-light text-dark"
                   onClick={() => {
@@ -213,12 +214,53 @@ const ProductPageDetail = () => {
               </Button>
             </div>
           </Col>
+          <Col className="d-flex flex-column justify-content-around">
+            <div
+              className="border"
+              style={{
+                width: 100 + '%',
+                height: 100 + 'px',
+                whiteSpace: 'normal',
+                overflow: 'scroll',
+              }}
+            >
+              為何選擇我們為何選擇我們為何選擇我們為何選擇我們
+              為何選擇我們為何選擇我們為何選擇我們為何選擇我們
+              為何選擇我們為何選擇我們為何選擇我們為何選擇
+            </div>
+            <div
+              className="border"
+              style={{
+                width: 100 + '%',
+                height: 100 + 'px',
+                whiteSpace: 'normal',
+                overflow: 'scroll',
+              }}
+            >
+              為何選擇我們為何選擇我們為何選擇我們為何選擇我們
+              為何選擇我們為何選擇我們為何選擇我們為何選擇我們
+              為何選擇我們為何選擇我們為何選擇我們為何選擇
+            </div>
+            <div
+              className="border"
+              style={{
+                width: 100 + '%',
+                height: 100 + 'px',
+                whiteSpace: 'normal',
+                overflow: 'scroll',
+              }}
+            >
+              為何選擇我們為何選擇我們為何選擇我們為何選擇我們
+              為何選擇我們為何選擇我們為何選擇我們為何選擇我們
+              為何選擇我們為何選擇我們為何選擇我們為何選擇
+            </div>
+          </Col>
         </Row>
         <Row>
           <Col className="mt-5" md={12}>
             <Accordion className="mb-5" defaultActiveKey="0">
               <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="0">
+                <Accordion.Toggle as={Card.Header} eventKey="0" type="button">
                   商品說明
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
@@ -226,9 +268,13 @@ const ProductPageDetail = () => {
                 </Accordion.Collapse>
               </Card>
             </Accordion>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
             <Accordion defaultActiveKey="1">
               <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="1">
+                <Accordion.Toggle as={Card.Header} eventKey="1" type="button">
                   商品評論
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="1">
@@ -237,6 +283,85 @@ const ProductPageDetail = () => {
               </Card>
             </Accordion>
           </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="mt-5 d-flex justify-content-between">
+              <p>猜你喜歡</p>
+              <a href="#product">查看更多></a>
+            </div>
+            <div></div>
+          </Col>
+        </Row>
+        <Row>
+          <div className="col-md-3 mb-3">
+            <div className="card shadow-sm">
+              <a href="/productpagedetail" class="btn border p-0">
+                <img
+                  src="https://via.placeholder.com/250x150"
+                  className="card-img-top"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title">Book</h5>
+                  <p className="card-text">商品說明</p>
+                  <p className="card-text text-danger">NTD 200元</p>
+                  <div className="d-flex justify-content-around"></div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div className="col-md-3 mb-3">
+            <div className="card shadow-sm">
+              <a href="/productpagedetail" class="btn border p-0">
+                <img
+                  src="https://via.placeholder.com/250x150"
+                  className="card-img-top"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title">Book</h5>
+                  <p className="card-text">商品說明</p>
+                  <p className="card-text text-danger">NTD 200元</p>
+                  <div className="d-flex justify-content-around"></div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div className="col-md-3 mb-3">
+            <div className="card shadow-sm">
+              <a href="/productpagedetail" class="btn border p-0">
+                <img
+                  src="https://via.placeholder.com/250x150"
+                  className="card-img-top"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title">Book</h5>
+                  <p className="card-text">商品說明</p>
+                  <p className="card-text text-danger">NTD 200元</p>
+                  <div className="d-flex justify-content-around"></div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div className="col-md-3 mb-3">
+            <div className="card shadow-sm">
+              <a href="/productpagedetail" class="btn border p-0">
+                <img
+                  src="https://via.placeholder.com/250x150"
+                  className="card-img-top"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title">Book</h5>
+                  <p className="card-text">商品說明</p>
+                  <p className="card-text text-danger">NTD 200元</p>
+                  <div className="d-flex justify-content-around"></div>
+                </div>
+              </a>
+            </div>
+          </div>
         </Row>
       </Col>
     </Row>
