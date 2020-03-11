@@ -9,16 +9,16 @@ function App() {
     <Router>
       <>
         <Header />
-        <div className="container py-3">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/member">
-              <Member />
-            </Route>
-          </Switch>
-        </div>
+        {/* <div className="container py-3"> */}
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/member">
+            <Member />
+          </Route>
+        </Switch>
+        {/* </div> */}
         <Footer />
       </>
     </Router>
