@@ -4,6 +4,9 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Blog from './pages/BLOG/Blog'
+import ProductList from './pages/Product/ProductList'
+import ProductPageDetail from './pages/Product/ProductPageDetail'
+import Member from '../src/pages/member/Member'
 
 function App() {
   return (
@@ -17,9 +20,24 @@ function App() {
             </Route>
             <Route path="/blog">
               <Blog />
+            <Route path="/productlist">
+              <ProductList />
+            </Route>
+            <Route path="/productpagedetail">
+              <ProductPageDetail />
             </Route>
           </Switch>
         </div>
+        {/* <div className="container py-3"> */}
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/member">
+            <Member />
+          </Route>
+        </Switch>
+        {/* </div> */}
         <Footer />
       </>
     </Router>
