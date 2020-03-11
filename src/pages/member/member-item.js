@@ -9,7 +9,7 @@ import {
   Button,
 } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import '../../css/member/member-info.css'
+import '../../css/member/member-info.scss'
 class App extends React.Component {
   constructor(props) {
     super(props)
