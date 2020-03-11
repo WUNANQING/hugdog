@@ -22,6 +22,7 @@ body {
   font-family: 'Roboto', 'Noto Sans TC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #555555;
 }
 
 a,
@@ -33,6 +34,10 @@ a:link {
 .App-logo {
   width: 90px;
   pointer-events: none;
+}
+// btn
+.btn-primary {
+  color: #fff;
 }
 /* -----header----- */
 header .navbar {

@@ -1,0 +1,135 @@
+/* btn */
+// .btn {
+//   font-size: 0.85rem;
+//   padding: 0.5rem 1.5rem;
+//   border-radius: 3px;
+//   display: flex;
+//   align-items: center;
+//   color: #fff;
+// }
+// .btn-primary,
+// .btn-primary.focus,
+// .btn-primary:focus {
+//   background-color: #cea160;
+//   border-color: #cea160;
+// }
+// .btn-primary:hover,
+// .btn-primary:not(:disabled):not(.disabled).active,
+// .btn-primary:not(:disabled):not(.disabled):active,
+// .show > .btn-primary.dropdown-toggle {
+//   background-color: #ebbd7d;
+//   border-color: #ebbd7d;
+// }
+//服務
+.Service {
+  select.form-control,
+  .custom-control {
+    font-size: 0.85rem;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .card-light {
+    background: #eeeeee;
+    border: 1px solid transparent;
+    border-radius: 0;
+  }
+
+  .card-shadow {
+    background: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 0;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.175);
+  }
+
+  .google-map-maker {
+    font-size: 2rem;
+    transform: translate(-50%, -100%);
+    color: #dc3545;
+  }
+}
+// 保母列表
+.ServiceQuery {
+  a {
+    color: #555555;
+  }
+  a:hover .card-list {
+    border: 1px solid #ccc;
+  }
+  a:hover .card-list .avatar img {
+    transform: scale(1.1);
+  }
+  .search-col label.title {
+    font-size: 0.9rem;
+  }
+  .search-col hr {
+    margin: 0rem 0 1rem 0;
+    width: auto;
+    border-color: #cccccc;
+  }
+  .card-list .avatar {
+    overflow: hidden;
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+  }
+  .card-list .avatar img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+  }
+  .card-list ul.data {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .card-list ul.data li {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .card-list ul.data li:last-child {
+    margin-bottom: 0;
+  }
+  .card-list ul.data li.name .icon {
+    width: 16px;
+    display: inline-block;
+    margin-left: 1rem;
+  }
+  .card-list .price {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .card-query.closed {
+    height: 0;
+    opacity: 0;
+  }
+  .card-query {
+    height: 100%;
+    overflow: hidden;
+    transition: 0.5s;
+    opacity: 1;
+  }
+  .mdStar {
+    color: #cea160;
+  }
+  .mdStarBorder {
+    color: #cccccc;
+  }
+  @media (min-width: 768px) {
+    .card-list .avatar {
+      width: 140px;
+      min-width: 140px;
+      height: 140px;
+    }
+    .search-col select {
+      width: auto;
+    }
+    .search-col hr {
+      margin: 0rem auto 1rem 0;
+      width: 80px;
+    }
+  }
+}
