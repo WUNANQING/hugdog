@@ -1,0 +1,32 @@
+* {
+  padding: 0px;
+}
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul li {
+  list-style: none;
+}
+
+.event-icon {
+  /* max-width: 300px; */
+  margin: 0 auto;
+  justify-content: space-around;
+}
+
+.event-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.event-btn {
+  right: 0px;
+  bottom: 0px;
+}
+
+.card-icon-clock img {
+  width: 20px;
+  height: 20px;
+}
