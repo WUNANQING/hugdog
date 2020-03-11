@@ -38,12 +38,12 @@ function Header(props) {
                 <FiSearch />
               </IconContext.Provider>
             </Nav.Link>
-            <Nav.Link href="#">
+            <Nav.Link href="/member">
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <AiOutlineUser />
               </IconContext.Provider>
             </Nav.Link>
-            <Nav.Link href="/member">
+            <Nav.Link href="#">
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <FiHeart />
               </IconContext.Provider>
