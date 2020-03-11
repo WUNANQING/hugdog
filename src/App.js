@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ProductList from './pages/Product/ProductList'
+import ProductPageDetail from './pages/Product/ProductPageDetail'
 
 function App() {
   return (
@@ -15,8 +16,11 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/product">
+            <Route path="/productlist">
               <ProductList />
+            </Route>
+            <Route path="/productpagedetail">
+              <ProductPageDetail />
             </Route>
           </Switch>
         </div>

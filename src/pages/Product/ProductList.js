@@ -169,7 +169,29 @@ const ProductList = () => {
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
             <div className="d-flex justify-content-around">
-              <a href="#" class="btn border p-0">
+              <a href="/productpagedetail" class="btn border p-0">
+                查看商品
+              </a>
+              <a href="/cart" class="btn border p-0">
+                快速結帳
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="col-md-4 mb-3">
+        <div className="card shadow-sm">
+          <img
+            src="https://via.placeholder.com/250x150"
+            className="card-img-top"
+            alt="..."
+          />
+          <div className="card-body">
+            <h5 className="card-title">Book</h5>
+            <p className="card-text">商品說明</p>
+            <p className="card-text text-danger">NTD 200元</p>
+            <div className="d-flex justify-content-around">
+              <a href="/productpagedetail" class="btn border p-0">
                 查看商品
               </a>
               <a href="#" class="btn border p-0">
@@ -191,7 +213,7 @@ const ProductList = () => {
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
             <div className="d-flex justify-content-around">
-              <a href="#" class="btn border p-0">
+              <a href="/productpagedetail" class="btn border p-0">
                 查看商品
               </a>
               <a href="#" class="btn border p-0">
@@ -213,29 +235,7 @@ const ProductList = () => {
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
             <div className="d-flex justify-content-around">
-              <a href="#" class="btn border p-0">
-                查看商品
-              </a>
-              <a href="#" class="btn border p-0">
-                快速結帳
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="col-md-4 mb-3">
-        <div className="card shadow-sm">
-          <img
-            src="https://via.placeholder.com/250x150"
-            className="card-img-top"
-            alt="..."
-          />
-          <div className="card-body">
-            <h5 className="card-title">Book</h5>
-            <p className="card-text">商品說明</p>
-            <p className="card-text text-danger">NTD 200元</p>
-            <div className="d-flex justify-content-around">
-              <a href="#" class="btn border p-0">
+              <a href="/productpagedetail" class="btn border p-0">
                 查看商品
               </a>
               <a href="#" class="btn border p-0">
