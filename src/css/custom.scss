@@ -1,0 +1,196 @@
+// 修改變數專用
+$primary: #cea160;
+$font-family-base: 'Roboto', 'Noto Sans TC', sans-serif;
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+/* -----google font----- */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC:300|Roboto&display=swap');
+
+// 修改css類別專用
+// 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
+// .btn-primary {
+//     color: #fff;
+//     background-color: #ca0a91;
+//     border-color: #2b0bb9;
+// }
+/* -----default setting----- */
+html,
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Noto Sans TC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #555555;
+}
+
+a,
+a:link {
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.App-logo {
+  width: 90px;
+  pointer-events: none;
+}
+// btn
+.btn-primary {
+  color: #fff;
+}
+/* -----header----- */
+header .navbar {
+  padding: 1rem;
+  position: relative;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .navbar .navbar-collapse {
+  position: absolute;
+  top: 60px;
+  background: #ffffff;
+  z-index: 9;
+  width: 100%;
+  left: 0;
+  padding: 0.5rem 1rem;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 768px) {
+  header .navbar .navbar-collapse {
+    position: static;
+    padding: 0;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0);
+  }
+}
+
+/* header .navbar .navbar-collapse.show::after {
+  content: '';
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  z-index: 1;
+} */
+
+header .navbar-toggler {
+  border: 0;
+}
+
+header .nav-menu {
+  font-size: 0.9rem;
+}
+
+header .navbar-light .navbar-nav .nav-link {
+  color: #333333;
+  text-align: center;
+}
+
+header .navbar-light .navbar-nav .nav-link:hover,
+header .navbar-light .nav-menu .active > .nav-link,
+header .navbar-light .nav-menu .nav-link.active,
+header .navbar-light .nav-menu .nav-link.show,
+header .navbar-light .nav-menu .show > .nav-link {
+  color: #cfa161;
+}
+
+header .navbar-light .nav-menu .nav-link::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 0px;
+  transition: width 0.5s;
+  background: #cfa161;
+  margin: 0 auto;
+}
+
+header .navbar-light .nav-menu .nav-link:hover::after {
+  width: 0px;
+}
+
+@media (min-width: 768px) {
+  header .navbar-light .nav-menu .nav-link.active::after,
+  header .navbar-light .nav-menu .nav-link:hover::after {
+    width: 100%;
+  }
+}
+
+header .nav-icon {
+  display: flex;
+  flex-direction: row;
+}
+
+header .nav-icon > a.nav-link {
+  padding: 0.5rem;
+}
+/* -----footer----- */
+footer {
+  background: #b2a190;
+  padding: 2rem 0;
+  color: #ffffff;
+}
+
+footer ul.footer-menu,
+footer ul.footer-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer ul.footer-menu {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+footer ul.footer-menu > li {
+  flex: 1 0 100%;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+footer ul.footer-menu ul > li {
+  margin-bottom: 0.5rem;
+}
+footer ul.footer-menu ul > li a {
+  color: #eeeeee;
+  font-size: 0.8rem;
+}
+
+footer ul.footer-menu ul > li a:hover {
+  color: #ffffff;
+}
+
+footer ul.footer-menu ul::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: #eeeeee;
+  width: 50px;
+  margin: 5px auto 10px;
+}
+
+footer .App-logo path,
+footer .App-logo circle {
+  fill: #ffffff;
+}
+
+footer .copy-right {
+  font-size: 0.8rem;
+  color: #eeeeee;
+}
+
+@media (min-width: 768px) {
+  footer ul.footer-menu {
+    flex-direction: row;
+    text-align: left;
+  }
+  footer ul.footer-menu > li {
+    flex: 1 0 0%;
+  }
+  footer ul.footer-menu ul::before {
+    margin: 5px 0 10px;
+  }
+}
