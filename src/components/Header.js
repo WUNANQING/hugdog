@@ -43,7 +43,7 @@ function Header(props) {
                 <AiOutlineUser />
               </IconContext.Provider>
             </Nav.Link>
-            <Nav.Link href="#">
+            <Nav.Link href="/member">
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <FiHeart />
               </IconContext.Provider>
