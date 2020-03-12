@@ -8,7 +8,7 @@ import ProductList from './pages/Product/ProductList'
 import ProductPageDetail from './pages/Product/ProductPageDetail'
 import Member from '../src/pages/member/Member'
 import ServiceQuery from './pages/service/ServiceQuery'
-
+import Coupon from './pages/Marketing/Coupon'
 function App() {
   return (
     <Router>
@@ -32,6 +32,9 @@ function App() {
           </Route>
           <Route path="/productpagedetail">
             <ProductPageDetail />
+          </Route>
+          <Route path="/coupon">
+            <Coupon />
           </Route>
         </Switch>
         <Footer />

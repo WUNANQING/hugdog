@@ -22,6 +22,7 @@ function Header(props) {
               <Nav.Link href="#activities">找活動</Nav.Link>
               <Nav.Link href="/blog">找知識</Nav.Link>
               <Nav.Link href="#qa">常見Q&A</Nav.Link>
+              <Nav.Link href="/Coupon">Test Coupon</Nav.Link>
               {/* <NavDropdown title="下拉選單" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">選單1</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">選單2</NavDropdown.Item>
