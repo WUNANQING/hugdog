@@ -9,6 +9,7 @@ import ProductPageDetail from './pages/Product/ProductPageDetail'
 import Member from '../src/pages/member/Member'
 import ServiceQuery from './pages/service/ServiceQuery'
 import ServiceDetail from './pages/service/ServiceDetail'
+import ServiceChat from './pages/service/ServiceChat'
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/service/detail/:sid">
             <ServiceDetail />
+          </Route>
+          <Route path="/service/chat">
+            <ServiceChat />
           </Route>
           <Route path="/blog">
             <Blog />

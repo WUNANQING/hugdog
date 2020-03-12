@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Card, Row, Col, Button } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Row, Col, Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { starRating, checkIcon } from '../../../utils/service/ServiceFunction'
 import {
@@ -7,6 +7,7 @@ import {
   FaRegClock,
   FaEnvelope,
   FaRegHeart,
+  FaUserAlt,
 } from 'react-icons/fa'
 
 function ServiceDetailSidebar(props) {
@@ -49,7 +50,105 @@ function ServiceDetailSidebar(props) {
     },
   ]
 
+  const handleLinkTo = src => {
+    window.location.href = src
+  }
+
   const obj = userData[0]
+
+  //Modal
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  const serviceData = (
+    <Card className="card-light">
+      <Card.Body>
+        <h4>服務內容</h4>
+        <hr className="title" />
+        <div className="mb-4">
+          <h5 className="mb-3">項目</h5>
+          <div className="d-flex px-3 mb-3">
+            <div className="text-center">
+              <h6>到府陪伴</h6>
+              到府餵食及陪伴狗狗
+            </div>
+            <div className="text-center ml-auto">
+              <h5 className="text-info">$400</h5>
+              每趟
+            </div>
+          </div>
+          <div className="d-flex px-3">
+            <div className="text-center">
+              <h6>到府遛狗</h6>
+              到府帶狗狗出門散步
+            </div>
+            <div className="text-center ml-auto">
+              <h5 className="text-info">$250</h5>
+              每趟
+            </div>
+          </div>
+        </div>
+        <div className="mb-2">
+          <h5>接待體型</h5>
+          <Row className="p-2 dog-size">
+            {dogSize.map((dog, i) => (
+              <Col className={`dog-size-${dog.size}`} key={i}>
+                <div className="icon">
+                  <img
+                    src={require('../../../images/service/icon/dog-size-' +
+                      dog.size +
+                      '.svg')}
+                    alt=""
+                    className={
+                      obj.dogSize.indexOf(dog.size) === -1 ? 'muted' : ''
+                    }
+                  />
+                </div>
+                <h6
+                  className={`my-2 text-center ${
+                    obj.dogSize.indexOf(dog.size) === -1 ? 'muted' : ''
+                  }`}
+                >
+                  {dog.name}
+                </h6>
+                <h6
+                  className={`my-2 text-center ${
+                    obj.dogSize.indexOf(dog.size) === -1 ? 'muted' : ''
+                  }`}
+                >
+                  {dog.weight}
+                </h6>
+              </Col>
+            ))}
+          </Row>
+        </div>
+        <div className="text-center">
+          <Link
+            to="#"
+            className="text-primary font-weight-bold"
+            onClick={handleShow}
+          >
+            詳細服務內容
+          </Link>
+        </div>
+      </Card.Body>
+    </Card>
+  )
+
+  const serviceDataDetail = (
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>詳細服務內容</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{serviceData}</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          關閉
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )
 
   return (
     <>
@@ -82,6 +181,12 @@ function ServiceDetailSidebar(props) {
                 <li>
                   {starRating(obj.rating)} ({obj.rating})
                 </li>
+                <li>
+                  <h6 className="text-info text-center">
+                    <FaUserAlt className="mr-1 text-info" />
+                    上線中
+                  </h6>
+                </li>
               </ul>
             </Col>
             <Col md={12} className="d-flex justify-content-center mb-3">
@@ -97,7 +202,13 @@ function ServiceDetailSidebar(props) {
               </ul>
             </Col>
             <Col md={12} className="d-flex justify-content-center">
-              <Button variant="primary" className="mr-3">
+              <Button
+                variant="primary"
+                className="mr-3"
+                onClick={() => {
+                  handleLinkTo('/service/chat/' + obj.mId)
+                }}
+              >
                 <FaEnvelope className="mr-1" />
                 聯絡
               </Button>
@@ -110,69 +221,14 @@ function ServiceDetailSidebar(props) {
         </Col>
         <Col md={6} lg={12}>
           <Row>
-            <Col>
-              <Card className="card-light">
-                <Card.Body>
-                  <h4>服務內容</h4>
-                  <hr className="title" />
-                  <div className="mb-4">
-                    <h5 className="mb-3">項目</h5>
-                    <div className="d-flex px-3 mb-3">
-                      <div className="text-center">
-                        <h6>到府陪伴</h6>
-                        到府餵食及陪伴狗狗
-                      </div>
-                      <div className="text-center ml-auto">
-                        <h5 className="text-info">$400</h5>
-                        每趟
-                      </div>
-                    </div>
-                    <div className="d-flex px-3">
-                      <div className="text-center">
-                        <h6>到府遛狗</h6>
-                        到府帶狗狗出門散步
-                      </div>
-                      <div className="text-center ml-auto">
-                        <h5 className="text-info">$250</h5>
-                        每趟
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mb-2">
-                    <h5>接待體型</h5>
-                    <Row className="p-2 dog-size">
-                      {dogSize.map(dog => (
-                        <Col className={`dog-size-${dog.size}`}>
-                          <div className="icon">
-                            <img
-                              src={require('../../../images/service/icon/dog-size-' +
-                                dog.size +
-                                '.svg')}
-                              alt=""
-                              className={
-                                obj.dogSize.indexOf(dog.size) !== -1
-                                  ? 'active'
-                                  : ''
-                              }
-                            />
-                          </div>
-                          <h6 className="my-2 text-center">{dog.name}</h6>
-                          <h6 className="my-2 text-center">{dog.weight}</h6>
-                        </Col>
-                      ))}
-                    </Row>
-                  </div>
-                  <div className="text-center">
-                    <Link to="#" className="text-primary font-weight-bold h5">
-                      詳細服務內容
-                    </Link>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
+            <Col>{serviceData}</Col>
+          </Row>
+          <Row>
+            <Col></Col>
           </Row>
         </Col>
       </Row>
+      {serviceDataDetail}
     </>
   )
 }

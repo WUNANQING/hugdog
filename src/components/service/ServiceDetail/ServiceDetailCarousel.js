@@ -7,10 +7,7 @@ function ServiceDetailCarousel() {
 
   return (
     <>
-      <Carousel
-        autoPlay="true"
-        statusFormatter={(current, total) => `第 ${current} 張，共 ${total} 張	`}
-      >
+      <Carousel autoPlay={true} infiniteLoop={true} statusFormatter={() => ``}>
         <div>
           <img
             src={require('../../../images/service/album/animal-1846380_1920.jpg')}
