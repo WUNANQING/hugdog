@@ -1,9 +1,19 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-// @import './styles/custom.scss';
+// 修改變數專用
+//定義顏色
+$primary: #cea160;
+//字型
+$font-size-base: 0.9rem;
+$font-family-base: 'Roboto', 'Noto Sans TC', sans-serif;
+//按鈕樣式
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1.5rem;
 
->>>>>>> c0664b0ac30b1d3d638ac2da4ef156ed5db2bcd7
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+/* -----google font----- */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC:300|Roboto&display=swap');
+
 /* -----default setting----- */
 html,
 body {
@@ -11,6 +21,7 @@ body {
   font-family: 'Roboto', 'Noto Sans TC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #555555;
 }
 
 a,
@@ -23,10 +34,15 @@ a:link {
   width: 90px;
   pointer-events: none;
 }
+// btn
+.btn-primary {
+  color: #fff;
+}
 /* -----header----- */
 header .navbar {
   padding: 1rem;
   position: relative;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 header .navbar .navbar-collapse {
@@ -37,7 +53,7 @@ header .navbar .navbar-collapse {
   width: 100%;
   left: 0;
   padding: 0.5rem 1rem;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 @media (min-width: 768px) {
   header .navbar .navbar-collapse {
@@ -177,34 +193,3 @@ footer .copy-right {
     margin: 5px 0 10px;
   }
 }
-
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
-=======
-@import './css/custom.scss';
-
-// body {
-//   margin: 0;
-//   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-//     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-//     sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-// }
-
-// code {
-//   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-//     monospace;
-// }
->>>>>>> 28c17a019afb9e0ca0cadf5485c7b0bc7a27f673
