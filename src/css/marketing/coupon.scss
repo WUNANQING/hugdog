@@ -14,13 +14,13 @@
 .marketing-nav {
   background-color: #fff3e0;
   width: 45vw;
-  border: #858585 solid 0.1px;
+  border: #858585 solid 1px;
 }
 .marketing .coupon-box {
   width: 45vw;
   height: 200px;
   //   min-width: 250px;
-  border: solid #000000 0.5px;
+  border: solid #000000 1px;
   justify-content: center;
 }
 .marketing .coupon-box button {
@@ -37,7 +37,7 @@
   font-family: '微軟正黑體';
   font-weight: bold;
   font-size: 20px;
-  margin: 0px 0.25px;
+  //   margin: 0px 0.25px;
 }
 .couponlistnav .nav-link:hover {
   //   background-color: #b2a190;
