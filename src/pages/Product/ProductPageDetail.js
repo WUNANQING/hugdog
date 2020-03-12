@@ -290,7 +290,6 @@ const ProductPageDetail = () => {
                 <p>猜你喜歡</p>
                 <a href="#product">查看更多></a>
               </div>
-              <div></div>
             </Col>
           </Row>
           <Row>
