@@ -144,8 +144,8 @@ const ProductList = () => {
       </nav>
     </div>
   )
-  let filter = (
-    <div className="d-flex justify-content-md-between">
+  let sort = (
+    <div className="d-md-flex justify-content-md-between">
       <span>共有250項商品</span>
       <select>
         <option>依上架時間(近期-早期)</option>
@@ -168,11 +168,11 @@ const ProductList = () => {
             <h5 className="card-title">Book</h5>
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
-            <div className="d-flex justify-content-around mb-3">
+            <div className="d-md-flex justify-content-around mb-3">
               <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />{' '}
               <FaPaw />
             </div>
-            <div className="d-flex justify-content-around">
+            <div className="d-md-flex justify-content-around">
               <a href="/productpagedetail" class="btn border p-0">
                 查看商品
               </a>
@@ -194,15 +194,15 @@ const ProductList = () => {
             <h5 className="card-title">Book</h5>
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
-            <div className="d-flex justify-content-around mb-3">
+            <div className="d-md-flex justify-content-around mb-3">
               <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />{' '}
               <FaPaw />
             </div>
-            <div className="d-flex justify-content-around">
+            <div className="d-md-flex justify-content-around">
               <a href="/productpagedetail" class="btn border p-0">
                 查看商品
               </a>
-              <a href="#" class="btn border p-0">
+              <a href="/cart" class="btn border p-0">
                 快速結帳
               </a>
             </div>
@@ -220,15 +220,15 @@ const ProductList = () => {
             <h5 className="card-title">Book</h5>
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
-            <div className="d-flex justify-content-around mb-3">
+            <div className="d-md-flex justify-content-around mb-3">
               <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />{' '}
               <FaPaw />
             </div>
-            <div className="d-flex justify-content-around">
+            <div className="d-md-flex justify-content-around">
               <a href="/productpagedetail" class="btn border p-0">
                 查看商品
               </a>
-              <a href="#" class="btn border p-0">
+              <a href="/cart" class="btn border p-0">
                 快速結帳
               </a>
             </div>
@@ -246,15 +246,15 @@ const ProductList = () => {
             <h5 className="card-title">Book</h5>
             <p className="card-text">商品說明</p>
             <p className="card-text text-danger">NTD 200元</p>
-            <div className="d-flex justify-content-around mb-3">
+            <div className="d-md-flex justify-content-around mb-3">
               <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />{' '}
               <FaPaw />
             </div>
-            <div className="d-flex justify-content-around">
+            <div className="d-md-flex justify-content-around">
               <a href="/productpagedetail" class="btn border p-0">
                 查看商品
               </a>
-              <a href="#" class="btn border p-0">
+              <a href="/cart" class="btn border p-0">
                 快速結帳
               </a>
             </div>
@@ -264,12 +264,14 @@ const ProductList = () => {
     </div>
   )
   return (
-    <div className="row my-5">
-      {sidebar}
-      <div className="col-10 pl-5">
-        <Breadcrumb />
-        {filter}
-        {productList}
+    <div className="container">
+      <div className="row my-5">
+        {sidebar}
+        <div className="col-10 pl-5">
+          <Breadcrumb />
+          {sort}
+          {productList}
+        </div>
       </div>
     </div>
   )
