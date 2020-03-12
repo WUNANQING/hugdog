@@ -1,6 +1,12 @@
 // 修改變數專用
+//定義顏色
 $primary: #cea160;
+//字型
+$font-size-base: 0.9rem;
 $font-family-base: 'Roboto', 'Noto Sans TC', sans-serif;
+//按鈕樣式
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1.5rem;
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
@@ -8,13 +14,6 @@ $font-family-base: 'Roboto', 'Noto Sans TC', sans-serif;
 /* -----google font----- */
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC:300|Roboto&display=swap');
 
-// 修改css類別專用
-// 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
-// .btn-primary {
-//     color: #fff;
-//     background-color: #ca0a91;
-//     border-color: #2b0bb9;
-// }
 /* -----default setting----- */
 html,
 body {

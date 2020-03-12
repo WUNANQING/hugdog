@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 // import $ from 'jquery'
 import { Button, Form, Row, Col, Card } from 'react-bootstrap'
 import { FaChevronUp } from 'react-icons/fa'
@@ -61,27 +61,15 @@ function ServiceQuerySearch() {
     { id: 4, name: '有專業執照' },
   ]
 
-  //偵測手機寬度時關閉搜尋面板
-  // const [queryHeight, setQueryHeight] = useState(0)
-  useEffect(() => {
-    // console.log(cardQuery.current.clientHeight)
-    const handleClosed = () => {
-      if (window.innerWidth <= '768') {
-        setIsclosed(true)
-      }
+  const handleClosed = () => {
+    if (window.innerWidth <= '768') {
+      setIsclosed(true)
     }
-    window.addEventListener('load', handleClosed)
-  }, [])
-  //偵測搜尋框高度
-  // let cardQuery = useRef(null)
-  // const getQueryHeight = () => {
-  //   return cardQuery.current.clientHeight
-  // }
-  //搜尋面板開啟/關閉
+  }
+  window.addEventListener('load', handleClosed)
   const [isclosed, setIsclosed] = useState(false)
   const toogleSearch = () => {
     setIsclosed(!isclosed)
-    console.log(isclosed)
   }
 
   return (
