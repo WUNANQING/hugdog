@@ -8,6 +8,7 @@ import ProductList from './pages/Product/ProductList'
 import ProductPageDetail from './pages/Product/ProductPageDetail'
 import Member from '../src/pages/member/Member'
 import ServiceQuery from './pages/service/ServiceQuery'
+import ServiceDetail from './pages/service/ServiceDetail'
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/service/query">
             <ServiceQuery />
+          </Route>
+          <Route path="/service/detail/:sid">
+            <ServiceDetail />
           </Route>
           <Route path="/blog">
             <Blog />

@@ -11,3 +11,18 @@ export function starRating(rating) {
   }
   return icon
 }
+
+export function checkIcon(text) {
+  return (
+    <>
+      <span className="inline-block-icon ml-3">
+        <img
+          className="img-fluid"
+          src={require('../../images/service/icon/check.svg')}
+          alt=""
+        />
+        <span className="icon-text">{text}</span>
+      </span>
+    </>
+  )
+}
