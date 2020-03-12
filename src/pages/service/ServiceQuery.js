@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Spinner } from 'react-bootstrap'
-import ServiceQuerySearch from '../../components/service/ServiceQuerySearch'
-import ServiceQueryList from '../../components/service/ServiceQueryList'
-import ServiceQueryMap from '../../components/service/ServiceQueryMap'
+import ServiceQuerySearch from '../../components/service/ServiceQuery/ServiceQuerySearch'
+import ServiceQueryList from '../../components/service/ServiceQuery/ServiceQueryList'
+import ServiceQueryMap from '../../components/service/ServiceQuery/ServiceQueryMap'
 //引入自己的scss
 import '../../css/service/style.scss'
 
@@ -22,7 +22,7 @@ function ServiceQuery(props) {
       <div className="Service ServiceQuery">
         <div className="container py-3">
           <Row>
-            <Col className="mb-5">
+            <Col className="mb-4">
               <ServiceQuerySearch />
             </Col>
           </Row>

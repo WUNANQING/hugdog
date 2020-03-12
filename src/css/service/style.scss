@@ -79,7 +79,7 @@
       color: #555555;
     }
     a:hover .card-list {
-      border: 1px solid #dddddd;
+      // border: 1px solid #dddddd;
     }
     a:hover .card-list .avatar img {
       transform: scale(1.1);
@@ -125,16 +125,16 @@
       // font-size: 0.85rem;
       text-align: center;
     }
-    .card-query.closed {
-      height: 0;
-      opacity: 0;
-    }
-    .card-query {
-      height: 100%;
-      overflow: hidden;
-      transition: 0.5s;
-      opacity: 1;
-    }
+    // .card-query.closed {
+    //   height: 0;
+    //   opacity: 0;
+    // }
+    // .card-query {
+    //   height: 100%;
+    //   overflow: hidden;
+    //   transition: 0.5s;
+    //   opacity: 1;
+    // }
     .mdStar {
       color: #cea160;
     }
