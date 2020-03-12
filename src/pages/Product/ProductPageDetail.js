@@ -177,12 +177,16 @@ const ProductPageDetail = () => {
                 />
               </ButtonGroup>
               <br />
-              <div className="mt-3">
-                <Button className="mb-md-2" variant="warning" size="lg">
+              <div className="mt-3 d-flex justify-content-between">
+                <Button
+                  className="mb-md-2 btn-padding-x btn-padding-y"
+                  variant="primary "
+                  size="lg"
+                >
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>{' '}
-                <ButtonGroup className="mb-md-2">
+                <ButtonGroup className="mb-md-2" size="lg">
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={e => {
@@ -209,12 +213,20 @@ const ProductPageDetail = () => {
                   </Button>
                 </ButtonGroup>
               </div>
-              <div className="my-3">
-                <Button className="mb-md-2" variant="warning" size="lg">
+              <div className="my-3 d-flex justify-content-between">
+                <Button
+                  className="mb-md-2 btn-padding-x btn-padding-y"
+                  variant="primary"
+                  size="lg"
+                >
                   <MdPlaylistAdd className="mb-md-1" />
                   加入清單
                 </Button>{' '}
-                <Button className="mb-md-2" variant="warning" size="lg">
+                <Button
+                  className="mb-md-2 btn-padding-x btn-padding-y"
+                  variant="primary"
+                  size="lg"
+                >
                   <MdShoppingCart className="mb-md-1" />
                   快速結帳
                 </Button>

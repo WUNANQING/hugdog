@@ -145,7 +145,7 @@ const ProductList = () => {
     </div>
   )
   let sort = (
-    <div className="d-md-flex justify-content-md-between">
+    <div className="d-md-flex justify-content-md-between align-items-center">
       <span>共有250項商品</span>
       <select>
         <option>依上架時間(近期-早期)</option>
@@ -173,10 +173,16 @@ const ProductList = () => {
               <FaPaw />
             </div>
             <div className="d-md-flex justify-content-around">
-              <a href="/productpagedetail" class="btn border p-0">
+              <a
+                href="/productpagedetail"
+                class="btn btn-primary btn-padding-x btn-padding-y border p-0"
+              >
                 查看商品
               </a>
-              <a href="/cart" class="btn border p-0">
+              <a
+                href="/cart"
+                class="btn btn-primary btn-padding-x btn-padding-y border p-0"
+              >
                 快速結帳
               </a>
             </div>
@@ -199,10 +205,16 @@ const ProductList = () => {
               <FaPaw />
             </div>
             <div className="d-md-flex justify-content-around">
-              <a href="/productpagedetail" class="btn border p-0">
+              <a
+                href="/productpagedetail"
+                class="btn btn-primary btn-padding-x btn-padding-y border p-0"
+              >
                 查看商品
               </a>
-              <a href="/cart" class="btn border p-0">
+              <a
+                href="/cart"
+                class="btn btn-primary btn-padding-x btn-padding-y border p-0"
+              >
                 快速結帳
               </a>
             </div>
@@ -225,10 +237,16 @@ const ProductList = () => {
               <FaPaw />
             </div>
             <div className="d-md-flex justify-content-around">
-              <a href="/productpagedetail" class="btn border p-0">
+              <a
+                href="/productpagedetail"
+                class="btn btn-primary btn-padding-x btn-padding-y border p-0"
+              >
                 查看商品
               </a>
-              <a href="/cart" class="btn border p-0">
+              <a
+                href="/cart"
+                class="btn btn-primary btn-padding-x btn-padding-y border p-0"
+              >
                 快速結帳
               </a>
             </div>
@@ -251,10 +269,16 @@ const ProductList = () => {
               <FaPaw />
             </div>
             <div className="d-md-flex justify-content-around">
-              <a href="/productpagedetail" class="btn border p-0">
+              <a
+                href="/productpagedetail"
+                class="btn btn-primary btn-padding-x btn-padding-y border p-0"
+              >
                 查看商品
               </a>
-              <a href="/cart" class="btn border p-0">
+              <a
+                href="/cart"
+                class="btn btn-primary btn-padding-x btn-padding-y border p-0"
+              >
                 快速結帳
               </a>
             </div>

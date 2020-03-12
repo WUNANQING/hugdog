@@ -1,13 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Container,
-  Row,
-  Col,
-  ButtonGroup,
-  Button,
-  Card,
-  Nav,
-} from 'react-bootstrap'
+import { Container, Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap'
 import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
 import $ from 'jquery'
 const Cart = () => {
@@ -20,7 +12,7 @@ const Cart = () => {
           <Col md={12} className="mt-5 d-flex justify-content-center">
             <Col md={7} className="border position-relative">
               <div
-                className="rounded bg-dark position-absolute rounded-circle"
+                className="rounded bg-primary position-absolute rounded-circle"
                 style={{
                   width: 20 + 'px',
                   height: 20 + 'px',
@@ -90,18 +82,18 @@ const Cart = () => {
                 <hr />
               </Col>
             </Row>
-            <Row className="justify-content-around">
+            <Row className="align-items-center">
               <img
                 src="https://via.placeholder.com/150x150"
                 className="col-md-4"
                 alt="..."
               />
-              <Col md={2} className="align-self-center">
+              <Col md={2}>
                 <h3>商品名稱</h3>
                 <h4>尺寸:小</h4>
                 <h4>顏色:紅</h4>
               </Col>
-              <Col md={2} className="align-self-center">
+              <Col md={2}>
                 <ButtonGroup className="mb-md-2">
                   <Button
                     className="border-dark bg-light text-dark"
@@ -129,15 +121,15 @@ const Cart = () => {
                   </Button>
                 </ButtonGroup>
               </Col>
-              <Col md={2} className="align-self-center">
-                <h4>$100</h4>
+              <Col md={2}>
+                <h4 className="text-center">$100</h4>
               </Col>
-              <Col md={2} className="align-self-center">
-                <Button className="mb-2" variant="warning" size="lg">
+              <Col md={2}>
+                <Button className="mb-2" variant="primary" size="lg">
                   <MdPlaylistAdd className="mb-md-1" />
                   下次再買
                 </Button>{' '}
-                <Button className="mb-2" variant="warning" size="lg">
+                <Button className="mb-2" variant="primary" size="lg">
                   <MdDelete className="mb-md-1" />
                   刪除商品
                 </Button>
@@ -191,7 +183,7 @@ const Cart = () => {
         </Row>
         <Row className="mt-1">
           <Col md={{ offset: 9 }}>
-            <Button variant="warning" size="lg" block href="/checkout">
+            <Button variant="primary" size="lg" block href="/checkout">
               前往結帳
             </Button>
           </Col>
@@ -222,7 +214,7 @@ const Cart = () => {
                     NTD 1000元
                   </Card.Text>
                 </Card.Text>
-                <Button className="mb-md-2" variant="warning" size="md">
+                <Button className="mb-md-2" variant="primary" size="md">
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
@@ -248,7 +240,7 @@ const Cart = () => {
                     NTD 1000元
                   </Card.Text>
                 </Card.Text>
-                <Button className="mb-md-2" variant="warning" size="md">
+                <Button className="mb-md-2" variant="primary" size="md">
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
@@ -274,7 +266,7 @@ const Cart = () => {
                     NTD 1000元
                   </Card.Text>
                 </Card.Text>
-                <Button className="mb-md-2" variant="warning" size="md">
+                <Button className="mb-md-2" variant="primary" size="md">
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
@@ -302,7 +294,7 @@ const Cart = () => {
                 </Card.Text>
                 <Button
                   className="mb-md-2"
-                  variant="warning"
+                  variant="primary"
                   size="md"
                   onClick={() => alert('hello')}
                 >
