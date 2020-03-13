@@ -96,48 +96,47 @@ class App extends React.Component {
     return (
       <>
         <Draggable
-          axis="x"
           handle=".handle"
           defaultPosition={{ x: 0, y: 0 }}
           position={null}
-          grid={[25, 25]}
+          grid={[1, 1]}
           scale={1}
           onStart={this.handleStart}
           onDrag={this.handleDrag}
           onStop={this.handleStop}
         >
-          <div>
+          {/* <div>
             <div className="handle">Drag from here</div>
             <div>This readme is really dragging on...</div>
-          </div>
-        </Draggable>
-        <div className="container pokemon" id="container">
-          <img
-            src="../../images/member/check.png"
-            alt=""
-            className="check disappear"
-          />
-          <div className="card coupon disappear">我是折價券</div>
-          <div id="draggable" className="draggable">
-            <div className="robot-container a" id="a">
-              <img
-                src="../../images/member/close.png"
-                alt=""
-                id="close"
-                className="close"
-              />
-              <div className="robot" id="robot">
-                <ul className="list-group help">
-                  <a href="https://www.google.com.tw/">
-                    <li class="list-group-item active">
-                      請問我有什麼可以幫您的嗎?
-                    </li>
-                  </a>
-                </ul>
+          </div> */}
+          <div className="container pokemon handle" id="container">
+            <img
+              src="../../images/member/check.png"
+              alt=""
+              className="check disappear"
+            />
+            <div className="card coupon disappear">我是折價券</div>
+            <div id="draggable" className="draggable">
+              <div className="robot-container a" id="a">
+                <img
+                  src="../../images/member/close.png"
+                  alt=""
+                  id="close"
+                  className="close"
+                />
+                <div className="robot" id="robot">
+                  <ul className="list-group help">
+                    <a href="https://www.google.com.tw/">
+                      <li class="list-group-item active">
+                        請問我有什麼可以幫您的嗎?
+                      </li>
+                    </a>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Draggable>
       </>
     )
   }
