@@ -7,11 +7,8 @@ import Blog from './pages/Knowledge/Blog'
 import ProductList from './pages/Product/ProductList'
 import ProductPageDetail from './pages/Product/ProductPageDetail'
 import Member from './pages/member/Member'
-import ServiceQuery from './pages/service/ServiceQuery'
+import Service from './pages/service/ServiceHome'
 import Coupon from './pages/Marketing/Coupon'
-import ServiceDetail from './pages/service/ServiceDetail'
-import ServiceChat from './pages/service/ServiceChat'
-import ServiceBooking from './pages/service/ServiceBooking'
 
 function App() {
   return (
@@ -25,8 +22,8 @@ function App() {
           <Route path="/member">
             <Member />
           </Route>
-          <Route path="/service/query">
-            <ServiceQuery />
+          <Route path="/service">
+            <Service />
           </Route>
           <Route path="/blog">
             <Blog />
