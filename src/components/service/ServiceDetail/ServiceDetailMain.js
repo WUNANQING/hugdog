@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Card, Row, Col, Button } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Row, Col, Button, Modal } from 'react-bootstrap'
 import Carousel from './ServiceDetailCarousel'
 import { starRating, checkIcon } from '../../../utils/service/ServiceFunction'
 
@@ -31,6 +31,25 @@ function ServiceDetailMain() {
       mId: 'm003',
     },
   ]
+
+  //Modal
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  const serviceCommentDetail = (
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>所有評論</Modal.Title>
+      </Modal.Header>
+      <Modal.Body></Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          關閉
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )
 
   return (
     <>
@@ -71,10 +90,10 @@ function ServiceDetailMain() {
                     </span>
                   </h4>
                   <hr className="title" />
-                  <ul className="comment">
+                  <ul className="comment mb-3">
                     {commentData.map((obj, i) => (
                       <li key={i}>
-                        <div className="d-flex p-3">
+                        <div className="d-flex p-2 p-sm-3">
                           <div className="d-flex flex-column">
                             <figure className="avatar mb-3">
                               <img
@@ -87,7 +106,7 @@ function ServiceDetailMain() {
                             </figure>
                             <h5 className="text-center">{obj.name}</h5>
                           </div>
-                          <div className="d-flex flex-column px-4">
+                          <div className="d-flex flex-column pl-2 px-sm-4">
                             <div className="mb-3">
                               1個月前 {starRating(obj.rating)}
                             </div>
@@ -98,7 +117,11 @@ function ServiceDetailMain() {
                     ))}
                   </ul>
                   <div className="text-center">
-                    <Button variant="outline-dark" size="sm">
+                    <Button
+                      variant="outline-dark"
+                      size="sm"
+                      onClick={handleShow}
+                    >
                       查看所有評論
                     </Button>
                   </div>
@@ -108,6 +131,7 @@ function ServiceDetailMain() {
           </Card>
         </Col>
       </Row>
+      {serviceCommentDetail}
     </>
   )
 }

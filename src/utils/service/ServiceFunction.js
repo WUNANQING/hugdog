@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdStar } from 'react-icons/md'
 
 export function starRating(rating) {
@@ -25,4 +25,8 @@ export function checkIcon(text) {
       </span>
     </>
   )
+}
+
+export function linkTo(src) {
+  return (window.location.href = src)
 }

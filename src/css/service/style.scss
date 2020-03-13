@@ -174,8 +174,14 @@ $primary: #cea160;
       border-bottom: 1px solid transparent;
     }
     ul.comment .avatar {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
+    }
+    @media (min-width: 768px) {
+      ul.comment .avatar {
+        width: 100px;
+        height: 100px;
+      }
     }
     .dog-size .col {
       padding: 0.5rem;

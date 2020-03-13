@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Row, Col, Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { starRating, checkIcon } from '../../../utils/service/ServiceFunction'
+import {
+  starRating,
+  checkIcon,
+  linkTo,
+} from '../../../utils/service/ServiceFunction'
 import {
   FaRegCommentDots,
   FaRegClock,
@@ -50,11 +54,72 @@ function ServiceDetailSidebar(props) {
     },
   ]
 
-  const handleLinkTo = src => {
-    window.location.href = src
-  }
-
   const obj = userData[0]
+
+  const serviceUser = (
+    <>
+      <Col md={12}>
+        <figure className="avatar mx-auto mb-3">
+          <img
+            className="rounded-circle"
+            src={require('../../../images/service/avatar/' + obj.mId + '.jpg')}
+            alt=""
+          />
+        </figure>
+      </Col>
+      <Col md={12}>
+        <ul className="user-data text-center mb-3">
+          <li>
+            <h5>
+              {obj.name}
+              {obj.isConfirmed ? checkIcon() : ''}
+            </h5>
+          </li>
+          <li>{obj.description}</li>
+          <li>
+            {obj.city} {obj.dict}
+          </li>
+          <li>
+            {starRating(obj.rating)} ({obj.rating})
+          </li>
+          <li>
+            <h6 className="text-info text-center">
+              <FaUserAlt className="mr-1 text-info" />
+              上線中
+            </h6>
+          </li>
+        </ul>
+      </Col>
+      <Col md={12} className="d-flex justify-content-center mb-3">
+        <ul>
+          <li>
+            <FaRegCommentDots className="mr-1" />
+            回覆率：95%
+          </li>
+          <li>
+            <FaRegClock className="mr-1" />
+            平均回覆時間：1天內
+          </li>
+        </ul>
+      </Col>
+      <Col md={12} className="d-flex justify-content-center">
+        <Button
+          variant="primary"
+          className="mr-3"
+          onClick={() => {
+            linkTo('/service/chat/' + obj.mId)
+          }}
+        >
+          <FaEnvelope className="mr-1" />
+          聯絡
+        </Button>
+        <Button variant="outline-danger">
+          <FaRegHeart className="mr-1" />
+          追蹤
+        </Button>
+      </Col>
+    </>
+  )
 
   //Modal
   const [show, setShow] = useState(false)
@@ -93,32 +158,22 @@ function ServiceDetailSidebar(props) {
           <h5>接待體型</h5>
           <Row className="p-2 dog-size">
             {dogSize.map((dog, i) => (
-              <Col className={`dog-size-${dog.size}`} key={i}>
+              <Col
+                className={`dog-size-${dog.size} ${
+                  obj.dogSize.indexOf(dog.size) === -1 ? 'muted' : ''
+                }`}
+                key={i}
+              >
                 <div className="icon">
                   <img
                     src={require('../../../images/service/icon/dog-size-' +
                       dog.size +
                       '.svg')}
                     alt=""
-                    className={
-                      obj.dogSize.indexOf(dog.size) === -1 ? 'muted' : ''
-                    }
                   />
                 </div>
-                <h6
-                  className={`my-2 text-center ${
-                    obj.dogSize.indexOf(dog.size) === -1 ? 'muted' : ''
-                  }`}
-                >
-                  {dog.name}
-                </h6>
-                <h6
-                  className={`my-2 text-center ${
-                    obj.dogSize.indexOf(dog.size) === -1 ? 'muted' : ''
-                  }`}
-                >
-                  {dog.weight}
-                </h6>
+                <h6 className={`my-2 text-center`}>{dog.name}</h6>
+                <h6 className={`my-2 text-center`}>{dog.weight}</h6>
               </Col>
             ))}
           </Row>
@@ -154,77 +209,11 @@ function ServiceDetailSidebar(props) {
     <>
       <Row>
         <Col md={6} lg={12}>
-          <Row className="mb-3">
-            <Col md={12}>
-              <figure className="avatar mx-auto mb-3">
-                <img
-                  className="rounded-circle"
-                  src={require('../../../images/service/avatar/' +
-                    obj.mId +
-                    '.jpg')}
-                  alt=""
-                />
-              </figure>
-            </Col>
-            <Col md={12}>
-              <ul className="user-data text-center mb-3">
-                <li>
-                  <h5>
-                    {obj.name}
-                    {obj.isConfirmed ? checkIcon() : ''}
-                  </h5>
-                </li>
-                <li>{obj.description}</li>
-                <li>
-                  {obj.city} {obj.dict}
-                </li>
-                <li>
-                  {starRating(obj.rating)} ({obj.rating})
-                </li>
-                <li>
-                  <h6 className="text-info text-center">
-                    <FaUserAlt className="mr-1 text-info" />
-                    上線中
-                  </h6>
-                </li>
-              </ul>
-            </Col>
-            <Col md={12} className="d-flex justify-content-center mb-3">
-              <ul>
-                <li>
-                  <FaRegCommentDots className="mr-1" />
-                  回覆率：95%
-                </li>
-                <li>
-                  <FaRegClock className="mr-1" />
-                  平均回覆時間：1天內
-                </li>
-              </ul>
-            </Col>
-            <Col md={12} className="d-flex justify-content-center">
-              <Button
-                variant="primary"
-                className="mr-3"
-                onClick={() => {
-                  handleLinkTo('/service/chat/' + obj.mId)
-                }}
-              >
-                <FaEnvelope className="mr-1" />
-                聯絡
-              </Button>
-              <Button variant="outline-danger">
-                <FaRegHeart className="mr-1" />
-                追蹤
-              </Button>
-            </Col>
-          </Row>
+          <Row className="mb-3">{serviceUser}</Row>
         </Col>
         <Col md={6} lg={12}>
           <Row>
             <Col>{serviceData}</Col>
-          </Row>
-          <Row>
-            <Col></Col>
           </Row>
         </Col>
       </Row>

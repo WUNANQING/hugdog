@@ -12,9 +12,9 @@ function ServiceChat(props) {
         <div className="container py-3">
           <Row>
             <Col lg={4} className="mb-5">
-              {/* <ServiceChatSidebar /> */}
+              chat
             </Col>
-            <Col lg={8}>{/* <ServiceChatMain /> */}</Col>
+            <Col lg={8}>chat</Col>
           </Row>
         </div>
       </div>
