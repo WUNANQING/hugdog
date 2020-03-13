@@ -1,27 +1,21 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
-import ServiceQuerySearch from '../../components/service/ServiceQuerySearch'
-import ServiceQueryList from '../../components/service/ServiceQueryList'
-import ServiceQueryMap from '../../components/service/ServiceQueryMap'
+import ServiceDetailSidebar from '../../components/service/ServiceDetail/ServiceDetailSidebar'
+import ServiceDetailMain from '../../components/service/ServiceDetail/ServiceDetailMain'
 //引入自己的scss
 import '../../css/service/style.scss'
 
 function ServiceDetail(props) {
   return (
     <>
-      <div className="container py-3">
-        <div className="Service ServiceDetail">
+      <div className="Service ServiceDetail">
+        <div className="container py-3">
           <Row>
-            <Col className="mb-5">
-              <ServiceQuerySearch />
+            <Col lg={4} className="mb-5">
+              <ServiceDetailSidebar />
             </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
-              <ServiceQueryList />
-            </Col>
-            <Col md={6} className="d-none d-md-block">
-              <ServiceQueryMap />
+            <Col lg={8}>
+              <ServiceDetailMain />
             </Col>
           </Row>
         </div>
