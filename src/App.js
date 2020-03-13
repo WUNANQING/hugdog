@@ -11,6 +11,7 @@ import Cart from './pages/Product/Cart'
 import Checkout from './pages/Product/Checkout'
 import Service from './pages/service/ServiceHome'
 import Coupon from './pages/Marketing/Coupon'
+import Order from './pages/Product/Order'
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route path="/coupon">
             <Coupon />
+          </Route>
+          <Route path="/order">
+            <Order />
           </Route>
         </Switch>
 

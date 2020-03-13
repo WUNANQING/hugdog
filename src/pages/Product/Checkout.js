@@ -17,7 +17,7 @@ const Checkout = () => {
           檢視訂單摘要：NT$100
         </Button>
         <Modal centered size="md" show={show} onHide={() => setShow(false)}>
-          <Modal.Header closeButton>
+          <Modal.Header>
             <Logo className="App-logo" alt="logo" />
           </Modal.Header>
           <Modal.Body>
@@ -135,7 +135,7 @@ const Checkout = () => {
                 }}
               >
                 付款資料
-              </div>{' '}
+              </div>
               <div
                 className="position-absolute "
                 style={{
@@ -290,7 +290,7 @@ const Checkout = () => {
                   </Form.Group>
                 </Form.Row>
                 <hr />
-                <Button variant="primary" size="lg" block href="/checkout">
+                <Button variant="primary" size="lg" block href="/Order">
                   前往結帳
                 </Button>
               </Form.Group>

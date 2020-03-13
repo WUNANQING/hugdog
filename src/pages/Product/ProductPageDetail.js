@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import $ from 'jquery'
 import {
   Container,
   Navbar,
@@ -178,15 +177,11 @@ const ProductPageDetail = () => {
               </ButtonGroup>
               <br />
               <div className="mt-3 d-flex justify-content-between">
-                <Button
-                  className="mb-md-2 btn-padding-x btn-padding-y"
-                  variant="primary "
-                  size="lg"
-                >
+                <Button className="mb-md-2 " variant="primary " size="lg">
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>{' '}
-                <ButtonGroup className="mb-md-2" size="lg">
+                <ButtonGroup className="mb-md-2" size="md">
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={e => {
