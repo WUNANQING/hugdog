@@ -40,15 +40,11 @@
 }
 
 .Member .member-sidebar {
-  transform: translate(-60px, -60px);
-
-  font-size: 20px;
-  min-width: 120px;
-  max-width: 120px;
+  transform: translateY(-30px);
+  font-size: 16px;
 }
-.member-sidebar-text {
+.Member .member-sidebar-text {
   color: black;
-  font-size: 20px;
 }
 
 .Member .member-form {
@@ -57,7 +53,6 @@
   border: 1px solid black;
   border-radius: 30px;
   margin: 10px;
-  // transform: translateX(-700px);
 }
 .Member .member-form ul {
   margin-top: 20px;
@@ -79,8 +74,4 @@
 .Member .title-box p {
   transform: translateX(20px);
 }
-.w120 {
-  width: 120px;
-}
-
 /* member-info */
