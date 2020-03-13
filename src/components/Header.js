@@ -8,7 +8,7 @@ import { IconContext } from 'react-icons'
 function Header(props) {
   return (
     <>
-      <header>
+      <header class="border-bottom">
         <Navbar bg="white" variant="light" expand="md">
           <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
           <Navbar.Brand href="/" className="mx-auto ml-md-0 mr-md-5 order-2">

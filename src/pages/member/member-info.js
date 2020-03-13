@@ -51,26 +51,18 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="Member">
+      <div className="Member container">
         <div className="member-info d-flex">
-          <div className="member-content d-flex row container">
-            <div className="member-sidebar">
+          <div className="member-content d-flex row ">
+            <div className="member-sidebar w120">
               <Nav>
                 <Nav.Link className="member-sidebar-text" href="/member">
-                  <img
-                    src={require('../../images/member/paws-m.png')}
-                    alt="Background"
-                  />
                   首頁
                 </Nav.Link>
                 <Nav.Link
                   className="member-sidebar-text"
                   href="/member/member-info"
                 >
-                  <img
-                    src={require('../../images/member/paws-m.png')}
-                    alt="Background"
-                  />
                   個人資訊
                 </Nav.Link>
 
@@ -78,30 +70,18 @@ class App extends React.Component {
                   className="member-sidebar-text"
                   href="/member/member-item"
                 >
-                  <img
-                    src={require('../../images/member/paws-m.png')}
-                    alt="Background"
-                  />
                   商品查詢
                 </Nav.Link>
                 <Nav.Link
                   className="member-sidebar-text"
                   href="/member/member-service"
                 >
-                  <img
-                    src={require('../../images/member/paws-m.png')}
-                    alt="Background"
-                  />
                   服務查詢
                 </Nav.Link>
                 <Nav.Link
                   className="member-sidebar-text"
                   href="/member/member-activity"
                 >
-                  <img
-                    src={require('../../images/member/paws-m.png')}
-                    alt="Background"
-                  />
                   活動查詢
                 </Nav.Link>
               </Nav>

@@ -105,7 +105,7 @@ function ServiceQuerySearch() {
                   <Row>
                     <Col className="search-col mb-4" md={4}>
                       <label className="title">服務地區</label>
-                      <hr className="title" />
+                      <hr />
                       <Form.Control as="select" name="cityArea">
                         <option value="">請選擇</option>
                         {cityArea.map(obj => (
@@ -117,7 +117,7 @@ function ServiceQuerySearch() {
                     </Col>
                     <Col className="search-col mb-4" md={4}>
                       <label className="title">選擇服務</label>
-                      <hr className="title" />
+                      <hr />
                       <Form.Control as="select" name="serviceType">
                         <option value="">請選擇</option>
                         {serviceType.map(obj => (
@@ -129,7 +129,7 @@ function ServiceQuerySearch() {
                     </Col>
                     <Col className="search-col mb-4" md={4}>
                       <label className="title">狗狗體型</label>
-                      <hr className="title" />
+                      <hr />
                       <Row>
                         {dogSize.map(obj => (
                           <Col md={12} lg={6} key={obj.id}>
@@ -146,7 +146,7 @@ function ServiceQuerySearch() {
                     </Col>
                     <Col className="search-col mb-4" md={4}>
                       <label className="title">評價分數</label>
-                      <hr className="title" />
+                      <hr />
                       <Form.Control as="select" name="serviceRating">
                         <option value="">請選擇</option>
                         {serviceRating.map(obj => (
@@ -158,13 +158,13 @@ function ServiceQuerySearch() {
                     </Col>
                     {/* <Col className="search-col" md={4}>
                  <label className="title">價格區間</label>
-                 <hr className="title" />
+                 <hr />
                  <input type="range" className="form-control-range" />
                  <Range />
                </Col> */}
                     <Col className="search-col mb-4" md={4}>
                       <label className="title">其他服務</label>
-                      <hr className="title" />
+                      <hr />
                       <Row>
                         {extraService.map(obj => (
                           <Col md={12} lg={6} key={obj.id}>
