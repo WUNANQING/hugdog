@@ -34,7 +34,7 @@ function Sidebar() {
               <a href="/partner">找夥伴</a>
             </li>
             <li>
-              <a href="/">寵物問答</a>
+              <a href="/question">寵物問答</a>
             </li>
             <br />
           </li>
@@ -94,7 +94,7 @@ function Sidebar() {
         </ul>
         <br />
         <div>
-          <img src="http://fakeimg.pl/240x490/282828/EAE0D0/" alt="" />
+          <img src="http://fakeimg.pl/255x490/282828/EAE0D0/" alt="" />
         </div>
       </div>
     </>

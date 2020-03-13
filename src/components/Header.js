@@ -1,5 +1,5 @@
 import React from 'react'
-import { Nav, Navbar } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { ReactComponent as Logo } from '../images/logo-dark.svg'
 // import { FiSearch, FiHeart } from 'react-icons/fi'
 import { AiOutlineUser, AiOutlineShopping } from 'react-icons/ai'
@@ -21,6 +21,11 @@ function Header(props) {
               <Nav.Link href="/service/query">找服務</Nav.Link>
               <Nav.Link href="#activities">找活動</Nav.Link>
               <Nav.Link href="/blog">找知識</Nav.Link>
+              <NavDropdown title="找知識">
+                <NavDropdown.Item href="#action/3.1">找文章</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">找夥伴</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">找答案</NavDropdown.Item>
+              </NavDropdown>
               <Nav.Link href="#qa">常見Q&A</Nav.Link>
               {/* <NavDropdown title="下拉選單" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">選單1</NavDropdown.Item>
