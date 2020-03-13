@@ -1,9 +1,10 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Button } from 'react-bootstrap'
 // import ServiceChatSidebar from '../../components/service/ServiceChat/ServiceChatSidebar'
 // import ServiceChatMain from '../../components/service/ServiceChat/ServiceChatMain'
 //引入自己的scss
 import '../../css/service/style.scss'
+import { linkTo } from '../../utils/service/ServiceFunction'
 
 function ServiceChat(props) {
   return (
@@ -11,10 +12,14 @@ function ServiceChat(props) {
       <div className="Service ServiceChat">
         <div className="container py-3">
           <Row>
-            <Col lg={4} className="mb-5">
-              chat
+            <Col className="mb-5">
+              <Button
+                variant="secondary"
+                onClick={() => linkTo('/service/booking/123')}
+              >
+                預約
+              </Button>
             </Col>
-            <Col lg={8}>chat</Col>
           </Row>
         </div>
       </div>

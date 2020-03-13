@@ -18,7 +18,7 @@ function Header(props) {
             <Nav className="mr-auto nav-menu">
               <Nav.Link href="#news">最新消息</Nav.Link>
               <Nav.Link href="productlist">找商品</Nav.Link>
-              <Nav.Link href="/service">找服務</Nav.Link>
+              <Nav.Link href="/service/query">找服務</Nav.Link>
               <Nav.Link href="#activities">找活動</Nav.Link>
               <Nav.Link href="/blog">找知識</Nav.Link>
               <Nav.Link href="#qa">常見Q&A</Nav.Link>
