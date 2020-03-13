@@ -16,7 +16,7 @@ const Cart = () => {
                 style={{
                   width: 20 + 'px',
                   height: 20 + 'px',
-                  left: (-10 / 630) * 100 + '%',
+                  left: (-10 / 647.484) * 100 + '%',
                   top: -10,
                 }}
               ></div>
@@ -25,7 +25,7 @@ const Cart = () => {
                 style={{
                   width: 20 + 'px',
                   height: 20 + 'px',
-                  left: (305 / 630) * 100 + '%',
+                  left: (313.742 / 647.484) * 100 + '%',
                   top: -10,
                 }}
               ></div>
@@ -34,7 +34,7 @@ const Cart = () => {
                 style={{
                   width: 20 + 'px',
                   height: 20 + 'px',
-                  left: (620 / 630) * 100 + '%',
+                  left: (637.484 / 647.484) * 100 + '%',
                   top: -10,
                 }}
               ></div>
@@ -47,7 +47,7 @@ const Cart = () => {
               <div
                 className="position-absolute "
                 style={{
-                  left: (-24 / 630) * 100 + '%',
+                  left: (-21.6015 / 647.484) * 100 + '%',
                   top: 10,
                 }}
               >
@@ -56,7 +56,7 @@ const Cart = () => {
               <div
                 className="position-absolute "
                 style={{
-                  left: (283 / 630) * 100 + '%',
+                  left: (294.9375 / 647.484) * 100 + '%',
                   top: 10,
                 }}
               >
@@ -65,7 +65,7 @@ const Cart = () => {
               <div
                 className="position-absolute "
                 style={{
-                  right: (-32 / 630) * 100 + '%',
+                  right: (-28.805 / 647.484) * 100 + '%',
                   top: 10,
                 }}
               >
