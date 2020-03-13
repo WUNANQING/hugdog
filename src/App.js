@@ -9,7 +9,8 @@ import ProductPageDetail from './pages/Product/ProductPageDetail'
 import Member from './pages/member/Member'
 import Cart from './pages/Product/Cart'
 import Checkout from './pages/Product/Checkout'
-import ServiceQuery from './pages/service/ServiceQuery'
+import Service from './pages/service/ServiceHome'
+import Coupon from './pages/Marketing/Coupon'
 
 function App() {
   return (
@@ -24,8 +25,8 @@ function App() {
           <Route path="/member">
             <Member />
           </Route>
-          <Route path="/service/query">
-            <ServiceQuery />
+          <Route path="/service">
+            <Service />
           </Route>
           <Route path="/blog">
             <Blog />
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/checkout">
             <Checkout />
+          </Route>
+          <Route path="/coupon">
+            <Coupon />
           </Route>
         </Switch>
 
