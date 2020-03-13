@@ -1,6 +1,7 @@
 // 修改變數專用
 //定義顏色
 $primary: #cea160;
+$danger: #dc3545;
 /* btn */
 // .btn {
 //   font-size: 0.85rem;
@@ -35,6 +36,14 @@ $primary: #cea160;
   h5,
   h6 {
     font-weight: bold;
+  }
+  .label-danger {
+    color: $danger;
+    font-weight: bold;
+  }
+  .label-danger::before {
+    content: '*';
+    display: inline-block;
   }
   .btn-primary:hover,
   .btn-primary:focus {

@@ -115,7 +115,7 @@ function ServiceBooking(props) {
                       <div className="p-sm-3 px-0">
                         <Form.Group as={Row} controlId="addr">
                           <Form.Label column sm="3">
-                            選擇服務
+                            地址
                           </Form.Label>
                           <Col sm="9">
                             <Form.Control
@@ -127,7 +127,7 @@ function ServiceBooking(props) {
                         </Form.Group>
                         <Form.Group as={Row} controlId="phone">
                           <Form.Label column sm="3">
-                            選擇時段
+                            電話
                           </Form.Label>
                           <Col sm="9">
                             <Form.Control
@@ -140,29 +140,51 @@ function ServiceBooking(props) {
                       </div>
                       <h5>狗狗資料</h5>
                       <hr className="title" />
+                      <div className="p-sm-3 px-0">
+                        <Form.Group as={Row}>
+                          <Form.Label column sm="3">
+                            <span className="label-danger">最多接待2位</span>
+                          </Form.Label>
+                          <Col sm="9"></Col>
+                        </Form.Group>
+                      </div>
                       <h5>額外需求</h5>
                       <hr className="title" />
-                      <Form.Group as={Row} controlId="phone">
-                        <Form.Label column sm="3">
-                          選擇額外需求
-                        </Form.Label>
-                        <Col sm="9">
-                          {extraService.map(obj => (
-                            <Col md={12} lg={6} key={obj.id}>
-                              <Form.Check
-                                custom
-                                name={`extraService`}
-                                type={`checkbox`}
-                                id={`extraService${obj.id}`}
-                                label={obj.name}
-                              />
-                            </Col>
-                          ))}
-                        </Col>
-                      </Form.Group>
-
+                      <div className="p-sm-3 px-0">
+                        <Form.Group as={Row}>
+                          <Form.Label column sm="3">
+                            選擇額外需求
+                          </Form.Label>
+                          <Col sm="9">
+                            {extraService.map(obj => (
+                              <Col md={12} lg={6} key={obj.id}>
+                                <Form.Check
+                                  custom
+                                  name={`extraService`}
+                                  type={`checkbox`}
+                                  id={`extraService${obj.id}`}
+                                  label={obj.name}
+                                />
+                              </Col>
+                            ))}
+                          </Col>
+                        </Form.Group>
+                      </div>
                       <h5>備註</h5>
                       <hr className="title" />
+                      <div className="p-sm-3 px-0">
+                        <Form.Group as={Row}>
+                          <Col>
+                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                              <Form.Control
+                                as="textarea"
+                                rows="3"
+                                placeholder="最多500個字"
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Form.Group>
+                      </div>
                     </div>
                   </Form>
                 </Card.Body>
