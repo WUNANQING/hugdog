@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Blog from './pages/BLOG/Blog'
+import Blog from './pages/Knowledge/Blog'
 import ProductList from './pages/Product/ProductList'
 import ProductPageDetail from './pages/Product/ProductPageDetail'
-import Member from '../src/pages/member/Member'
+import Member from './pages/member/Member'
 import ServiceHome from './pages/service/ServiceHome'
 
 function App() {
