@@ -6,7 +6,7 @@ import Footer from './components/Footer'
 import Blog from './pages/Knowledge/Blog'
 import ProductList from './pages/Product/ProductList'
 import ProductPageDetail from './pages/Product/ProductPageDetail'
-import Member from '../src/pages/member/Member'
+import Member from './pages/member/Member'
 import ServiceQuery from './pages/service/ServiceQuery'
 
 function App() {
