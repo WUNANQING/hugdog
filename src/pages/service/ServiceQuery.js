@@ -1,18 +1,28 @@
-import React from 'react'
-import { Row, Col } from 'react-bootstrap'
-import ServiceQuerySearch from '../../components/service/ServiceQuerySearch'
-import ServiceQueryList from '../../components/service/ServiceQueryList'
-import ServiceQueryMap from '../../components/service/ServiceQueryMap'
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Spinner } from 'react-bootstrap'
+import ServiceQuerySearch from '../../components/service/ServiceQuery/ServiceQuerySearch'
+import ServiceQueryList from '../../components/service/ServiceQuery/ServiceQueryList'
+import ServiceQueryMap from '../../components/service/ServiceQuery/ServiceQueryMap'
 //引入自己的scss
 import '../../css/service/style.scss'
 
-function Home(props) {
+function ServiceQuery(props) {
+  //讀取狀態
+  // const [isloaded, setIsloaded] = useState(false)
+
+  // useEffect(() => {
+  //   // setTimeout(setIsloaded(true), 3000)
+  //   setTimeout(() => {
+  //     setIsloaded(true)
+  //   }, 500)
+  // }, [])
+
   return (
     <>
-      <div className="container py-3">
-        <div className="Service ServiceQuery">
+      <div className="Service ServiceQuery">
+        <div className="container py-3">
           <Row>
-            <Col className="mb-5">
+            <Col className="mb-4">
               <ServiceQuerySearch />
             </Col>
           </Row>
@@ -25,9 +35,12 @@ function Home(props) {
             </Col>
           </Row>
         </div>
+        {/* <div className={`loading-bg ${isloaded ? 'fadeOut' : ''}`}>
+          <Spinner animation="grow" variant="secondary" className="spinner" />
+        </div> */}
       </div>
     </>
   )
 }
 
-export default Home
+export default ServiceQuery

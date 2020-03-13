@@ -18,7 +18,7 @@ import MemberInfo from './member-info'
 import MemberItem from './member-item'
 import MemberService from './member-service'
 import MemberActivity from './member-activity'
-function Member(props) {
+function Member() {
   return (
     <>
       <Switch>
