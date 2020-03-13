@@ -1,3 +1,8 @@
+$primary: #cea160;
+$font-family-base: '微軟正黑體', sans-serif;
+//按鈕樣式
+
+@import '~bootstrap/scss/bootstrap.scss';
 .marketing .nav-link {
   color: #78605c;
   background-color: #fff3e0;
@@ -44,4 +49,7 @@
   //   color: #ffffff;
   border-top: #b2a190 solid 10px;
   border-bottom: #ffffff 1px solid;
+}
+.coupon {
+  text-align: center;
 }
