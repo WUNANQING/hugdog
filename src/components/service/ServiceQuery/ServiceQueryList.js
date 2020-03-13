@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { starRating, checkIcon } from '../../../utils/service/ServiceFunction'
+import { MdStar } from 'react-icons/md'
+import { starRating } from '../../../utils/service/ServiceFunction'
 
 function ServiceQueryList() {
   const userData = [
@@ -51,21 +52,21 @@ function ServiceQueryList() {
     },
   ]
 
-  // const checkIcon = (
-  //   <div className="icon">
-  //     <img
-  //       className="img-fluid"
-  //       src={require('../../../images/service/icon/check.svg')}
-  //       alt=""
-  //     />
-  //   </div>
-  // )
+  const checkIcon = (
+    <div className="icon">
+      <img
+        className="img-fluid"
+        src={require('../../../images/service/icon/check.svg')}
+        alt=""
+      />
+    </div>
+  )
 
   //列表
   const cardList = (
     <>
       {userData.map((obj, i) => (
-        <Link to={`/service/detail/${obj.mId}`} key={i}>
+        <Link to="#" key={i}>
           <Card className="card-light card-list mb-3">
             <Card.Body className="p-3">
               <div className="d-flex">
@@ -77,11 +78,11 @@ function ServiceQueryList() {
                     alt=""
                   />
                 </figure>
-                <ul className="user-data ml-4">
-                  <li>
-                    <h5>
+                <ul className="data ml-4">
+                  <li className="name">
+                    <h5 className="font-weight-bold">
                       {obj.name}
-                      {obj.isConfirmed ? checkIcon() : ''}
+                      {obj.isConfirmed ? checkIcon : ''}
                     </h5>
                   </li>
                   <li>{obj.description}</li>
@@ -97,9 +98,11 @@ function ServiceQueryList() {
                     )}
                   </li>
                 </ul>
-                <div className="text-center ml-auto">
+                <div className="price ml-auto">
                   最低
-                  <h5 className="text-info my-2">${obj.price}</h5>
+                  <h5 className="font-weight-bold text-info my-2">
+                    ${obj.price}
+                  </h5>
                   每趟
                 </div>
               </div>

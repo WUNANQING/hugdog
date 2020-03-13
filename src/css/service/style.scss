@@ -1,7 +1,3 @@
-// 修改變數專用
-//定義顏色
-$primary: #cea160;
-$danger: #dc3545;
 /* btn */
 // .btn {
 //   font-size: 0.85rem;
@@ -26,25 +22,6 @@ $danger: #dc3545;
 // }
 //服務
 .Service {
-  * {
-    font-family: 'Roboto', 'Noto Sans TC', sans-serif;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: bold;
-  }
-  .label-danger {
-    color: $danger;
-    font-weight: bold;
-  }
-  .label-danger::before {
-    content: '*';
-    display: inline-block;
-  }
   .btn-primary:hover,
   .btn-primary:focus {
     color: #ffffff;
@@ -96,51 +73,6 @@ $danger: #dc3545;
     opacity: 0%;
     transition: 3s;
   }
-  .inline-block-icon {
-    display: inline-block;
-  }
-  .inline-block-icon img {
-    width: 16px;
-  }
-  .inline-block-icon .icon-text {
-    word-break: keep-all;
-    margin-left: 5px;
-    font-size: 0.9rem;
-  }
-  .avatar {
-    overflow: hidden;
-  }
-  .avatar img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    transition: 0.5s;
-  }
-  // ul,li
-  ul,
-  li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  ul.user-data li {
-    margin-bottom: 0.5rem;
-  }
-  ul.user-data li:last-child {
-    margin-bottom: 0;
-  }
-  // icon
-  .mdStar {
-    color: $primary;
-  }
-  .mdStarBorder {
-    color: #cccccc;
-  }
-  hr.title {
-    margin: 0rem auto 1rem 0;
-    width: 80px;
-    border-color: #cccccc;
-  }
   // 保母列表
   &.ServiceQuery {
     a .card-list {
@@ -152,84 +84,76 @@ $danger: #dc3545;
     a:hover .card-list .avatar img {
       transform: scale(1.1);
     }
-    .avatar {
+    .search-col label.title {
+      // font-size: 0.9rem;
+    }
+    .search-col hr {
+      margin: 0rem 0 1rem 0;
+      width: auto;
+      border-color: #cccccc;
+    }
+    .card-list .avatar {
+      overflow: hidden;
       width: 120px;
+      min-width: 120px;
       height: 120px;
     }
+    .card-list .avatar img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      transition: 0.5s;
+    }
+    .card-list ul.data {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .card-list ul.data li {
+      margin-bottom: 0.5rem;
+      // font-size: 0.85rem;
+    }
+    .card-list ul.data li:last-child {
+      margin-bottom: 0;
+    }
+    .card-list ul.data li.name .icon {
+      width: 16px;
+      display: inline-block;
+      margin-left: 1rem;
+    }
+    .card-list .price {
+      // font-size: 0.85rem;
+      text-align: center;
+    }
+    // .card-query.closed {
+    //   height: 0;
+    //   opacity: 0;
+    // }
+    // .card-query {
+    //   height: 100%;
+    //   overflow: hidden;
+    //   transition: 0.5s;
+    //   opacity: 1;
+    // }
+    .mdStar {
+      color: #cea160;
+    }
+    .mdStarBorder {
+      color: #cccccc;
+    }
     @media (min-width: 768px) {
+      .card-list .avatar {
+        width: 140px;
+        min-width: 140px;
+        height: 140px;
+      }
       .search-col select {
         width: auto;
       }
-      .search-col hr.title {
+      .search-col hr {
         margin: 0rem auto 1rem 0;
         width: 80px;
       }
-      .avatar {
-        width: 140px;
-        height: 140px;
-      }
     }
-  }
-  //保母內頁
-  &.ServiceDetail {
-    .avatar {
-      width: 150px;
-      height: 150px;
-    }
-    ul.comment li {
-      border-bottom: 1px solid #cccccc;
-    }
-    ul.comment li:last-child {
-      border-bottom: 1px solid transparent;
-    }
-    ul.comment .avatar {
-      width: 80px;
-      height: 80px;
-    }
-    @media (min-width: 768px) {
-      ul.comment .avatar {
-        width: 100px;
-        height: 100px;
-      }
-    }
-    .dog-size .col {
-      padding: 0.5rem;
-    }
-    .dog-size .icon {
-      height: 50px;
-      display: flex;
-    }
-    .dog-size .icon img {
-      margin: auto auto 0;
-      width: 100%;
-      height: 100%;
-    }
-    .muted {
-      opacity: 0.5;
-    }
-    .dog-size .dog-size-xs .icon img {
-      width: 50%;
-      height: 50%;
-    }
-    .dog-size .dog-size-s .icon img {
-      width: 60%;
-      height: 60%;
-    }
-    .dog-size .dog-size-m .icon img {
-      width: 80%;
-      height: 80%;
-    }
-    .carousel-status {
-      opacity: 0.8;
-    }
-    .carousel .thumb {
-      border: 3px solid transparent;
-    }
-    .carousel .thumb.selected,
-    .carousel .thumb:hover {
-      border: 3px solid $primary;
-    }
-  }
-  &.ServiceBooking {
   }
 }
