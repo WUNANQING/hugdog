@@ -290,8 +290,8 @@ const Checkout = () => {
                   </Form.Group>
                 </Form.Row>
                 <hr />
-                <Button variant="primary" size="lg" block href="/Order">
-                  前往結帳
+                <Button variant="primary" size="lg" block href="/order">
+                  確定結帳
                 </Button>
               </Form.Group>
             </Form>

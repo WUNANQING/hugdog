@@ -57,38 +57,7 @@ const ProductPageDetail = () => {
       {value}
     </Nav.Link>
   ))
-  // 螢幕縮小後變成手風琴
-  // <Accordion defaultActiveKey="0">
-  //               <Card>
-  //                 <Accordion.Toggle as={Card.Header} eventKey="0">
-  //                   商品分類
-  //                 </Accordion.Toggle>
-  //                 <Accordion.Collapse eventKey="0">
-  //                   <Card.Body>{sideBarproducyCategory}</Card.Body>
-  //                 </Accordion.Collapse>
-  //               </Card>
-  //               <Card>
-  //                 <Accordion.Toggle as={Card.Header} eventKey="1">
-  //                   品牌分類
-  //                 </Accordion.Toggle>
-  //                 <Accordion.Collapse eventKey="1">
-  //                   <Card.Body>{sideBarBrand}</Card.Body>
-  //                 </Accordion.Collapse>
-  //               </Card>
-  //               <Card>
-  //                 <Accordion.Toggle as={Card.Header} eventKey="2">
-  //                   價格範圍
-  //                 </Accordion.Toggle>
-  //                 <Accordion.Collapse eventKey="2">
-  //                   <Card.Body>
-  //                     <InputGroup>
-  //                       <FormControl className="col-md-6" />~
-  //                       <FormControl className="col-md-6" />
-  //                     </InputGroup>
-  //                   </Card.Body>
-  //                 </Accordion.Collapse>
-  //               </Card>
-  //             </Accordion>
+
   return (
     <Container>
       <Row className="my-5">
