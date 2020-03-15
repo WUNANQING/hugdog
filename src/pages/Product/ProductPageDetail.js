@@ -1,4 +1,13 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {
+  plusQuantity,
+  minusQuantity,
+  addToCart,
+  plusQuantityAsync,
+} from './actions/index'
+
 import {
   Container,
   Navbar,
@@ -20,8 +29,12 @@ import {
   MdPlaylistAdd,
 } from 'react-icons/md'
 import Breadcrumb from '../../components/Breadcrumbs'
-const ProductPageDetail = () => {
-  const [total, setTotal] = useState(1)
+
+const ProductPageDetail = props => {
+  const [myCart, setMyCart] = useState(null)
+  const addToCart = () => {
+    setMyCart(props.total)
+  }
   const producyCategory = [
     '飼料',
     '零食',
@@ -146,34 +159,48 @@ const ProductPageDetail = () => {
               </ButtonGroup>
               <br />
               <div className="mt-3 d-flex justify-content-between">
-                <Button className="mb-md-2 " variant="primary " size="lg">
+                <Button
+                  className="mb-md-2 "
+                  variant="primary "
+                  size="lg"
+                  onClick={addToCart}
+                >
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
-                </Button>{' '}
+                </Button>
+                <span>{myCart}</span>
                 <ButtonGroup className="mb-md-2" size="md">
                   <Button
                     className="border-dark bg-light text-dark"
-                    onClick={e => {
-                      total <= 1 ? setTotal(1) : setTotal(total - 1)
+                    onClick={() => {
+                      props.minusQuantity(1)
                     }}
                   >
                     -
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
-                    value={total}
+                    value={props.total}
                     type="input"
-                    min="0"
+                    min="1"
                   >
-                    {total}
+                    {props.total}
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      setTotal(total + 1)
+                      props.plusQuantity(1)
                     }}
                   >
                     +
+                  </Button>
+                  <Button
+                    className="border-dark bg-light text-dark"
+                    onClick={() => {
+                      props.plusQuantityAsync(1)
+                    }}
+                  >
+                    +1(after 3s)
                   </Button>
                 </ButtonGroup>
               </div>
@@ -344,4 +371,15 @@ const ProductPageDetail = () => {
   )
 }
 
-export default ProductPageDetail
+const mapStateToProps = store => {
+  return { total: store.counter }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    { plusQuantity, minusQuantity, addToCart, plusQuantityAsync },
+    dispatch
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPageDetail)
