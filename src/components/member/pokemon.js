@@ -22,9 +22,17 @@ class App extends React.Component {
         .removeClass('disappear')
         .addClass('appear')
       $('.coupon').css('display', 'none')
-      var $src = $('#close').attr('src')
+      const $src = $('#close').attr('src')
     })
-
+    $('.check').click(function() {
+      $('.robot-container')
+        .removeClass('disappear')
+        .addClass('appear')
+      $('.check')
+        .removeClass('appear')
+        .addClass('disappear')
+      // $(".coupon").css("display","block")
+    })
     // $(function() {
     //   $('.draggable').draggable()
     // })
@@ -111,27 +119,27 @@ class App extends React.Component {
           </div> */}
           <div className="container pokemon handle" id="container">
             <img
-              src="../../images/member/check.png"
-              alt=""
+              src={require('../../images/member/check.png')}
+              alt="Background"
               className="check disappear"
             />
-            <div className="card coupon disappear">我是折價券</div>
+            {/* <div className="card coupon disappear">我是折價券</div> */}
             <div id="draggable" className="draggable">
               <div className="robot-container a" id="a">
                 <img
-                  src="../../images/member/close.png"
-                  alt=""
+                  src={require('../../images/member/close.png')}
+                  alt="Background"
                   id="close"
                   className="close"
                 />
                 <div className="robot" id="robot">
-                  <ul className="list-group help">
+                  {/* <ul className="list-group help">
                     <a href="https://www.google.com.tw/">
                       <li class="list-group-item active">
                         請問我有什麼可以幫您的嗎?
                       </li>
                     </a>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>
