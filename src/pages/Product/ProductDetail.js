@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { plusQuantity, minusQuantity, addToCart } from './actions/index'
+import { plusQuantity, minusQuantity, getProductDetail } from './actions/index'
 import {
   Container,
   Row,
@@ -22,12 +23,12 @@ import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
 
-const ProductPageDetail = props => {
-  const [myCart, setMyCart] = useState(null)
-  const addToCart = () => {
-    setMyCart(props.total)
-  }
-
+const ProductDetail = props => {
+  const pId = props.match.params.pId ? props.match.params.pId : ''
+  useEffect(() => {
+    props.getProductDetail(pId)
+  }, [])
+  console.log(props.detail)
   return (
     <Container>
       <Row className="my-5">
@@ -41,8 +42,8 @@ const ProductPageDetail = props => {
               <Image src="https://via.placeholder.com/370" thumbnail />
             </Col>
             <Col md={4}>
-              <h3>商品名稱</h3>
-              <h4>$100</h4>
+              <h3>{props.detail.pName}</h3>
+              <h4>${props.detail.pPrice}</h4>
               <Form.Label>--尺寸</Form.Label>
               <br />
               <ButtonGroup>
@@ -96,16 +97,11 @@ const ProductPageDetail = props => {
               </ButtonGroup>
               <br />
               <div className="mt-3 d-flex justify-content-between">
-                <Button
-                  className="mb-md-2 "
-                  variant="primary "
-                  size="lg"
-                  onClick={addToCart}
-                >
+                <Button className="mb-md-2 " variant="primary " size="lg">
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
-                <span>{myCart}</span>
+
                 <ButtonGroup className="mb-md-2" size="md">
                   <Button
                     className="border-dark bg-light text-dark"
@@ -225,10 +221,10 @@ const ProductPageDetail = props => {
             </Col>
           </Row>
           <Row>
+            {/* <ProductCard />
             <ProductCard />
             <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductCard /> */}
           </Row>
         </Col>
       </Row>
@@ -237,14 +233,16 @@ const ProductPageDetail = props => {
 }
 
 const mapStateToProps = store => {
-  return { total: store.counter }
+  return { total: store.counter, detail: store.getProduct }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { plusQuantity, minusQuantity, addToCart },
+    { plusQuantity, minusQuantity, getProductDetail },
     dispatch
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductPageDetail)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ProductDetail)
+)

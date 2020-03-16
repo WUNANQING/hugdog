@@ -4,8 +4,8 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Blog from './pages/Knowledge/Blog'
-import ProductList from './pages/Product/ProductList'
-import ProductPageDetail from './pages/Product/ProductPageDetail'
+import Product from './pages/Product/Product'
+import ProductDetail from './pages/Product/ProductDetail'
 import Member from './pages/member/Member'
 import Cart from './pages/Product/Cart'
 import Checkout from './pages/Product/Checkout'
@@ -32,11 +32,11 @@ function App() {
           <Route path="/blog">
             <Blog />
           </Route>
-          <Route path="/productlist/:brand?">
-            <ProductList />
+          <Route exact path="/product">
+            <Product />
           </Route>
-          <Route path="/productpagedetail">
-            <ProductPageDetail />
+          <Route path="/product/:pId?">
+            <ProductDetail />
           </Route>
           <Route path="/cart">
             <Cart />

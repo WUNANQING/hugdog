@@ -13,8 +13,12 @@ import { rootReducer } from './pages/Product/reducers/index'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ || compose
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
-
+// const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
+// const store = createStore(rootReducer, applyMiddleware(thunk))
+const store = createStore(
+  rootReducer,
+  /* preloadedState, */ composeEnhancers(applyMiddleware(thunk))
+)
 ReactDOM.render(
   <Provider store={store}>
     <App />

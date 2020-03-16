@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
 import { Row } from 'react-bootstrap'
-import { FaPaw } from 'react-icons/fa'
+
 //redux
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { reqServerProductData } from './actions/index'
+import { getProductData } from './actions/index'
 
-const ProductList = props => {
+const Product = props => {
   useEffect(() => {
-    props.reqServerProductData()
+    props.getProductData()
   }, [])
 
   let sort = (
@@ -26,7 +28,7 @@ const ProductList = props => {
       </select>
     </div>
   )
-
+  //console.log(props.data)
   return (
     <div className="container">
       <div className="row my-5">
@@ -47,9 +49,9 @@ const ProductList = props => {
 
 //選擇對應的reducer，將其狀態淺拷貝到此元件的props
 const mapStateToProps = store => {
-  return { data: store.getProducts }
+  return { data: store.getProduct }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ reqServerProductData }, dispatch)
+  return bindActionCreators({ getProductData }, dispatch)
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Product))

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { FaPaw } from 'react-icons/fa'
-import { Col, Card } from 'react-bootstrap'
+import { Col, Card, Nav } from 'react-bootstrap'
 
 const ProductCard = props => {
   return (
@@ -22,12 +23,15 @@ const ProductCard = props => {
             <FaPaw />
           </div>
           <div className="d-md-flex justify-content-around">
-            <a href="/productpagedetail" class="btn btn-primary border p-0">
+            <Link
+              to={{ pathname: '/product/1' }}
+              className="btn btn-primary border p-0"
+            >
               查看商品
-            </a>
-            <a href="/cart" class="btn btn-primary border p-0">
+            </Link>
+            <Nav.Link href="/cart" className="btn btn-primary border p-0">
               快速結帳
-            </a>
+            </Nav.Link>
           </div>
         </Card.Body>
       </Card>

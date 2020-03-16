@@ -6,21 +6,19 @@ const counter = (state = 1, action) => {
       return state + action.quantity
     case 'MINUS_QUANTITY':
       return state === 1 ? state : state - action.quantity
-    case 'ADDTO_CART':
-      return state
     default:
       return state
   }
 }
-const getProducts = (state = [], action) => {
+const getProduct = (state = [], action) => {
   switch (action.type) {
-    case 'SHOW_PRODUCTS':
+    case 'SHOW_PRODUCT':
       return action.data
     default:
       return state
   }
 }
 
-const rootReducer = combineReducers({ counter, getProducts })
+const rootReducer = combineReducers({ counter, getProduct })
 
 export { rootReducer }
