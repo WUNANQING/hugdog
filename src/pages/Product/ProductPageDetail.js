@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { plusQuantity, minusQuantity, addToCart } from './actions/index'
 import {
   Container,
-  Navbar,
-  Nav,
   Row,
   Col,
   Image,
   ButtonGroup,
   Button,
   Form,
-  InputGroup,
-  FormControl,
   Accordion,
   Card,
 } from 'react-bootstrap'
@@ -20,99 +19,19 @@ import {
   MdPlaylistAdd,
 } from 'react-icons/md'
 import Breadcrumb from '../../components/Breadcrumbs'
-const ProductPageDetail = () => {
-  const [total, setTotal] = useState(1)
-  const producyCategory = [
-    '飼料',
-    '零食',
-    '犬用保健食品',
-    '狗罐頭/鮮食/餐盒',
-    '美容/清潔用品',
-    '狗籠/狗屋',
-    '床組',
-    '狗衣服',
-    '牽繩',
-    '胸帶',
-    '項圈',
-    '名牌/吊牌',
-    '外出提籠/推車',
-    '其他犬用品',
-  ]
-  const brand = [
-    '希爾斯',
-    'Vertri Science',
-    'Now Pets',
-    'Lintbells',
-    'Holistic',
-    'CANIDIE',
-    'HALO',
-  ]
-  const sideBarproducyCategory = producyCategory.map(value => (
-    <Nav.Link className="mb-1" key={value}>
-      {value}
-    </Nav.Link>
-  ))
-  const sideBarBrand = brand.map(value => (
-    <Nav.Link className="mb-1" key={value}>
-      {value}
-    </Nav.Link>
-  ))
-  // 螢幕縮小後變成手風琴
-  // <Accordion defaultActiveKey="0">
-  //               <Card>
-  //                 <Accordion.Toggle as={Card.Header} eventKey="0">
-  //                   商品分類
-  //                 </Accordion.Toggle>
-  //                 <Accordion.Collapse eventKey="0">
-  //                   <Card.Body>{sideBarproducyCategory}</Card.Body>
-  //                 </Accordion.Collapse>
-  //               </Card>
-  //               <Card>
-  //                 <Accordion.Toggle as={Card.Header} eventKey="1">
-  //                   品牌分類
-  //                 </Accordion.Toggle>
-  //                 <Accordion.Collapse eventKey="1">
-  //                   <Card.Body>{sideBarBrand}</Card.Body>
-  //                 </Accordion.Collapse>
-  //               </Card>
-  //               <Card>
-  //                 <Accordion.Toggle as={Card.Header} eventKey="2">
-  //                   價格範圍
-  //                 </Accordion.Toggle>
-  //                 <Accordion.Collapse eventKey="2">
-  //                   <Card.Body>
-  //                     <InputGroup>
-  //                       <FormControl className="col-md-6" />~
-  //                       <FormControl className="col-md-6" />
-  //                     </InputGroup>
-  //                   </Card.Body>
-  //                 </Accordion.Collapse>
-  //               </Card>
-  //             </Accordion>
+import ProductSidebar from './components/ProductSidebar'
+import ProductCard from './components/ProductCard'
+
+const ProductPageDetail = props => {
+  const [myCart, setMyCart] = useState(null)
+  const addToCart = () => {
+    setMyCart(props.total)
+  }
+
   return (
     <Container>
       <Row className="my-5">
-        <Col className="p-0" md={2}>
-          <Navbar className="bg-light" expand="md">
-            <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
-            <Navbar.Collapse
-              id="basic-navbar-nav"
-              className="order-4 order-md-3"
-            >
-              <Nav className="nav-menu mr-auto flex-column">
-                <h5 className="mt-1">商品分類</h5>
-                {sideBarproducyCategory}
-                <h5 className="mt-1">品牌</h5>
-                {sideBarBrand}
-                <h5 className="mt-1">價格範圍</h5>
-                <InputGroup>
-                  <FormControl className="col-md-6" />~
-                  <FormControl className="col-md-6" />
-                </InputGroup>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-        </Col>
+        <ProductSidebar />
         <Col md={10}>
           <Row className="m-2">
             <Breadcrumb />
@@ -177,31 +96,37 @@ const ProductPageDetail = () => {
               </ButtonGroup>
               <br />
               <div className="mt-3 d-flex justify-content-between">
-                <Button className="mb-md-2 " variant="primary " size="lg">
+                <Button
+                  className="mb-md-2 "
+                  variant="primary "
+                  size="lg"
+                  onClick={addToCart}
+                >
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
-                </Button>{' '}
+                </Button>
+                <span>{myCart}</span>
                 <ButtonGroup className="mb-md-2" size="md">
                   <Button
                     className="border-dark bg-light text-dark"
-                    onClick={e => {
-                      total <= 1 ? setTotal(1) : setTotal(total - 1)
+                    onClick={() => {
+                      props.minusQuantity(1)
                     }}
                   >
                     -
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
-                    value={total}
+                    value={props.total}
                     type="input"
-                    min="0"
+                    min="1"
                   >
-                    {total}
+                    {props.total}
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      setTotal(total + 1)
+                      props.plusQuantity(1)
                     }}
                   >
                     +
@@ -216,7 +141,7 @@ const ProductPageDetail = () => {
                 >
                   <MdPlaylistAdd className="mb-md-1" />
                   加入清單
-                </Button>{' '}
+                </Button>
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
@@ -300,74 +225,10 @@ const ProductPageDetail = () => {
             </Col>
           </Row>
           <Row>
-            <div className="col-md-3 mb-3">
-              <div className="card shadow-sm">
-                <a href="/productpagedetail" className="btn border p-0">
-                  <img
-                    src="https://via.placeholder.com/250x150"
-                    className="card-img-top"
-                    alt="..."
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Book</h5>
-                    <p className="card-text">商品說明</p>
-                    <p className="card-text text-danger">NTD 200元</p>
-                    <div className="d-md-flex justify-content-around"></div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-md-3 mb-3">
-              <div className="card shadow-sm">
-                <a href="/productpagedetail" className="btn border p-0">
-                  <img
-                    src="https://via.placeholder.com/250x150"
-                    className="card-img-top"
-                    alt="..."
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Book</h5>
-                    <p className="card-text">商品說明</p>
-                    <p className="card-text text-danger">NTD 200元</p>
-                    <div className="d-md-flex justify-content-around"></div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-md-3 mb-3">
-              <div className="card shadow-sm">
-                <a href="/productpagedetail" className="btn border p-0">
-                  <img
-                    src="https://via.placeholder.com/250x150"
-                    className="card-img-top"
-                    alt="..."
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Book</h5>
-                    <p className="card-text">商品說明</p>
-                    <p className="card-text text-danger">NTD 200元</p>
-                    <div className="d-md-flex justify-content-around"></div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-md-3 mb-3">
-              <div className="card shadow-sm">
-                <a href="/productpagedetail" className="btn border p-0">
-                  <img
-                    src="https://via.placeholder.com/250x150"
-                    className="card-img-top"
-                    alt="..."
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Book</h5>
-                    <p className="card-text">商品說明</p>
-                    <p className="card-text text-danger">NTD 200元</p>
-                    <div className="d-md-flex justify-content-around"></div>
-                  </div>
-                </a>
-              </div>
-            </div>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
           </Row>
         </Col>
       </Row>
@@ -375,4 +236,15 @@ const ProductPageDetail = () => {
   )
 }
 
-export default ProductPageDetail
+const mapStateToProps = store => {
+  return { total: store.counter }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    { plusQuantity, minusQuantity, addToCart },
+    dispatch
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPageDetail)

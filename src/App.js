@@ -32,7 +32,7 @@ function App() {
           <Route path="/blog">
             <Blog />
           </Route>
-          <Route path="/productlist">
+          <Route path="/productlist/:brand?">
             <ProductList />
           </Route>
           <Route path="/productpagedetail">

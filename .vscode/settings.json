@@ -1,7 +1,11 @@
 {
   "workbench.startupEditor": "newUntitledFile",
   "editor.wordWrap": "on",
+<<<<<<< HEAD
   "window.zoomLevel": 1,
+=======
+  "window.zoomLevel": 0,
+>>>>>>> 0d8dd1285f039fdef84bc0a2d72b593dfc9b41d0
   "editor.fontSize": 16,
   "workbench.iconTheme": "vscode-icons",
   "editor.formatOnSave": true,
