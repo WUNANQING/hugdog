@@ -18,40 +18,40 @@ function App() {
     <Router>
       <>
         <Header />
-
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/member">
-            <Member />
-          </Route>
-          <Route path="/service">
-            <Service />
-          </Route>
-          <Route path="/blog">
-            <Blog />
-          </Route>
-          <Route exact path="/product">
-            <Product />
-          </Route>
-          <Route path="/product/:pId?">
-            <ProductDetail />
-          </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
-          <Route path="/checkout">
-            <Checkout />
-          </Route>
-          <Route path="/coupon">
-            <Coupon />
-          </Route>
-          <Route path="/order">
-            <Order />
-          </Route>
-        </Switch>
-
+        <section className="body">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/member">
+              <Member />
+            </Route>
+            <Route path="/service">
+              <Service />
+            </Route>
+            <Route path="/blog">
+              <Blog />
+            </Route>
+            <Route exact path="/product">
+              <Product />
+            </Route>
+            <Route path="/product/:pId?">
+              <ProductDetail />
+            </Route>
+            <Route path="/cart">
+              <Cart />
+            </Route>
+            <Route path="/checkout">
+              <Checkout />
+            </Route>
+            <Route path="/coupon">
+              <Coupon />
+            </Route>
+            <Route path="/order">
+              <Order />
+            </Route>
+          </Switch>
+        </section>
         <Footer />
       </>
     </Router>
