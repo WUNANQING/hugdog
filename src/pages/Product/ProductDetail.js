@@ -52,7 +52,7 @@ const ProductDetail = props => {
               <h4>${props.detail.pPrice}</h4>
               <Form.Label>--尺寸</Form.Label>
               <br />
-              <ButtonGroup>
+              {/* <ButtonGroup>
                 <Button
                   className="rounded border-dark bg-light text-dark mx-2"
                   type="radio"
@@ -101,12 +101,12 @@ const ProductDetail = props => {
                   value="green"
                 />
               </ButtonGroup>
-              <br />
+              <br /> */}
               <div className="mt-3 d-flex justify-content-between">
                 <Button
                   className="mb-md-2 "
                   variant="primary "
-                  size="lg"
+                  size="md"
                   onClick={() => {
                     props.addItem({
                       pId: props.detail.pId,
@@ -151,7 +151,7 @@ const ProductDetail = props => {
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
-                  size="lg"
+                  size="md"
                 >
                   <MdPlaylistAdd className="mb-md-1" />
                   加入清單
@@ -159,7 +159,7 @@ const ProductDetail = props => {
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
-                  size="lg"
+                  size="md"
                 >
                   <MdShoppingCart className="mb-md-1" />
                   快速結帳
