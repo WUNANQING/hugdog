@@ -9,7 +9,7 @@ import {
   Badge,
   Image,
 } from 'react-bootstrap'
-import Sidebar from '../../components/Knowledge/Sidebar'
+import SideMenu from '../../components/Knowledge/SideMenu'
 
 import './question.scss'
 
@@ -22,9 +22,12 @@ function Question() {
       <Container>
         <Row>
           <Col xs={12} md={3}>
-            <Sidebar />
+            <SideMenu />
           </Col>
           <Col xs={12} md={8}>
+            <div>
+              <Button variant="warning">我要發問</Button>{' '}
+            </div>
             <Accordion className="Card">
               <Card className="">
                 <Card.Header className="bgColor">

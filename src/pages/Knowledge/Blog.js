@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react'
-import Sidebar from '../../components/Knowledge/Sidebar'
+import SideMenu from '../../components/Knowledge/SideMenu'
 
 function Blog() {
   return (
@@ -11,7 +11,7 @@ function Blog() {
       <div className="container">
         <div className="row">
           <div className="col-lg-4  col-xl-3">
-            <Sidebar />
+            <SideMenu />
           </div>
           <div className="col-lg-8">
             <nav className="nav">

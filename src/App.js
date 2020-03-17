@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Blog from './pages/Knowledge/Blog'
 import Article from './pages/Knowledge/Article'
+import Partner from './pages/Knowledge/Partner'
 import Question from './pages/Knowledge/Question'
 import ProductList from './pages/Product/ProductList'
 import ProductPageDetail from './pages/Product/ProductPageDetail'
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/aritcle">
             <Article />
+          </Route>
+          <Route path="/partner">
+            <Partner />
           </Route>
           <Route path="/question">
             <Question />

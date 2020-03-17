@@ -137,7 +137,7 @@ class App extends React.Component {
                           <table class="table table-borderless">
                             <tbody>
                               <tr>
-                                <td class="text-right">狗狗編號</td>
+                                <td class="text-right">個人1</td>
                                 <td>
                                   <input
                                     type="text"

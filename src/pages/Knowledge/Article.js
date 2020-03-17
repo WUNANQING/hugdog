@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Sidebar from '../../components/Knowledge/Sidebar'
+import SideMenu from '../../components/Knowledge/SideMenu'
 import { container } from 'react-bootstrap'
 import Breadcrumbs from '../../components/Breadcrumbs'
 
@@ -9,7 +9,7 @@ function Article() {
       <div className="container">
         <div className="row">
           <div className="col-lg-4  col-xl-3">
-            <Sidebar />
+            <SideMenu />
           </div>
           <div className="col-lg-8">
             <Breadcrumbs />

@@ -1,12 +1,12 @@
 import React from 'react'
 import { FaFacebookSquare, FaSearch } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
-import './sidebar.scss'
+import './sideMenu.scss'
 
-function Sidebar() {
+function SideMenu() {
   return (
     <>
-      <div>
+      <div className="container">
         <ul className="list-group list-group-flush">
           <li className="list-group-item border-0 ">
             <form className="form-inline">
@@ -101,4 +101,4 @@ function Sidebar() {
   )
 }
 
-export default Sidebar
+export default SideMenu
