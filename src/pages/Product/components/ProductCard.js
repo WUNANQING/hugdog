@@ -23,12 +23,12 @@ const ProductCard = props => {
             <FaPaw />
           </div>
           <div className="d-md-flex justify-content-around">
-            <Link
-              to={{ pathname: '/product/1' }}
+            <Nav.Link
+              href={'/product/' + props.data.pId}
               className="btn btn-primary border p-0"
             >
               查看商品
-            </Link>
+            </Nav.Link>
             <Nav.Link href="/cart" className="btn btn-primary border p-0">
               快速結帳
             </Nav.Link>

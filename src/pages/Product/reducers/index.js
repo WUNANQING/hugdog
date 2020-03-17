@@ -14,6 +14,8 @@ const getProduct = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_PRODUCT':
       return action.data
+    case 'SHOW_PRODUCT_DETAIL':
+      return action.data
     default:
       return state
   }
