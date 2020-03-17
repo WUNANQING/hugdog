@@ -17,7 +17,7 @@ function Header(props) {
           <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
             <Nav className="mr-auto nav-menu">
               <Nav.Link href="#news">最新消息</Nav.Link>
-              <Nav.Link href="/product">找商品</Nav.Link>
+              <Nav.Link href="/products">找商品</Nav.Link>
               <Nav.Link href="/service/query">找服務</Nav.Link>
               <Nav.Link href="#activities">找活動</Nav.Link>
               <Nav.Link href="/blog">找知識</Nav.Link>

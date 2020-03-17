@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Blog from './pages/Knowledge/Blog'
-import Product from './pages/Product/Product'
+import Products from './pages/Product/Products'
 import ProductDetail from './pages/Product/ProductDetail'
 import Member from './pages/member/Member'
 import Cart from './pages/Product/Cart'
@@ -32,8 +32,8 @@ function App() {
           <Route path="/blog">
             <Blog />
           </Route>
-          <Route path="/product/:pCategoryId?">
-            <Product />
+          <Route path="/products/:pages?/:pCategoryId?">
+            <Products />
           </Route>
           <Route path="/productdetail/:pId">
             <ProductDetail />

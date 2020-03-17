@@ -7,9 +7,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import $ from 'jquery'
 const Cart = props => {
-  useEffect(() => {
-    props.addItem()
-  }, [])
+  // useEffect(() => {
+  //   props.addItem()
+  // }, [])
   return (
     //   判斷式如果購物車有東西才顯示，沒有則顯示沒有東西出現選購按鈕
     <>
@@ -336,11 +336,12 @@ const Cart = props => {
 }
 const mapStateToProps = store => {
   return {
+    total: store.counter,
     cart: store.intoCart,
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ addItem }, dispatch)
+  return bindActionCreators({ plusQuantity, minusQuantity }, dispatch)
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))

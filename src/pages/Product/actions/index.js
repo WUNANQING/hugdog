@@ -15,7 +15,7 @@ export const showProduct = data => {
 
 export const getProductData = () => {
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/product`, {
+    const req = new Request(`http://localhost:6001/products`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -45,7 +45,7 @@ export const showProductDetail = data => {
 }
 export const getProductDetail = pId => {
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/product/${pId}`, {
+    const req = new Request(`http://localhost:6001/products/${pId}`, {
       method: 'GET',
       credentials: 'include',
     })
