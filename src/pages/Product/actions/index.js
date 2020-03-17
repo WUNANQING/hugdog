@@ -19,7 +19,7 @@ export const getProductData = () => {
 //跟server要商品細節
 export const getProductDetail = pId => {
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/product/1`, {
+    const req = new Request(`http://localhost:6001/product/${pId}`, {
       method: 'GET',
       credentials: 'include',
     })
