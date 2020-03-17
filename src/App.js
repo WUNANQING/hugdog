@@ -12,6 +12,7 @@ import Checkout from './pages/Product/Checkout'
 import Service from './pages/service/ServiceHome'
 import Coupon from './pages/Marketing/Coupon'
 import Order from './pages/Product/Order'
+import Activity from './pages/Activity/Activity'
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route path="/service">
               <Service />
+            </Route>
+            <Route path="/activity">
+              <Activity />
             </Route>
             <Route path="/blog">
               <Blog />
