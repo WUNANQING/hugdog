@@ -1,8 +1,8 @@
-//跟server要資料
+//Select所有商品
 export const showProduct = data => {
   return { type: 'SHOW_PRODUCT', data }
 }
-
+//跟server要資料
 export const getProductData = () => {
   return async dispatch => {
     const req = new Request(`http://localhost:6001/product`, {
@@ -15,29 +15,8 @@ export const getProductData = () => {
     dispatch(showProduct(data.product))
   }
 }
-//跟server要商品依照商品類別
-export const showProductCategory = data => {
-  return { type: 'SHOW_PRODUCT_CATEGORY', data }
-}
-export const getProductCategory = pCategoryId => {
-  return async dispatch => {
-    const req = new Request(
-      `http://localhost:6001/product/?pCategoryId=${pCategoryId}`,
-      {
-        method: 'GET',
-        credentials: 'include',
-      }
-    )
-    const res = await fetch(req)
-    const data = await res.json()
-    console.log(data) //因為是單筆因此後段預設回傳物件
-    dispatch(showProduct(data))
-  }
-}
+
 //跟server要商品細節
-export const showProductDetail = data => {
-  return { type: 'SHOW_PRODUCT_DETAIL', data }
-}
 export const getProductDetail = pId => {
   return async dispatch => {
     const req = new Request(`http://localhost:6001/product/${pId}`, {
@@ -46,7 +25,7 @@ export const getProductDetail = pId => {
     })
     const res = await fetch(req)
     const data = await res.json()
-    console.log(data) //因為是單筆因此後段預設回傳物件
+    //console.log(data) //因為是單筆因此後段預設回傳物件
     dispatch(showProduct(data))
   }
 }
