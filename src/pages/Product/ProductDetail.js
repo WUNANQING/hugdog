@@ -2,7 +2,12 @@ import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { plusQuantity, minusQuantity, getProductDetail } from './actions/index'
+import {
+  getProductDetail,
+  plusQuantity,
+  minusQuantity,
+  addItem,
+} from './actions/index'
 import {
   Container,
   Row,
@@ -28,6 +33,7 @@ const ProductDetail = props => {
   useEffect(() => {
     props.getProductDetail(pId)
   }, [])
+
   console.log(props.detail)
   return (
     <Container>
@@ -97,11 +103,23 @@ const ProductDetail = props => {
               </ButtonGroup>
               <br />
               <div className="mt-3 d-flex justify-content-between">
-                <Button className="mb-md-2 " variant="primary " size="lg">
+                <Button
+                  className="mb-md-2 "
+                  variant="primary "
+                  size="lg"
+                  onClick={() => {
+                    props.addItem({
+                      pId: props.detail.pId,
+                      pName: props.detail.pName,
+                      pPrice: props.detail.pPrice,
+                      pQuantity: props.total,
+                      pTotalPrice: eval(props.detail.pPrice * props.total),
+                    })
+                  }}
+                >
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
-
                 <ButtonGroup className="mb-md-2" size="md">
                   <Button
                     className="border-dark bg-light text-dark"
@@ -233,12 +251,16 @@ const ProductDetail = props => {
 }
 
 const mapStateToProps = store => {
-  return { total: store.counter, detail: store.getProduct }
+  return {
+    total: store.counter,
+    detail: store.getProduct,
+    cart: store.intoCart,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { plusQuantity, minusQuantity, getProductDetail },
+    { getProductDetail, plusQuantity, minusQuantity, addItem },
     dispatch
   )
 }

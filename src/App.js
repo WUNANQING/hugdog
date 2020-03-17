@@ -32,10 +32,10 @@ function App() {
           <Route path="/blog">
             <Blog />
           </Route>
-          <Route exact path="/product">
+          <Route path="/product/:pCategoryId?">
             <Product />
           </Route>
-          <Route path="/product/:pId?">
+          <Route path="/productdetail/:pId">
             <ProductDetail />
           </Route>
           <Route path="/cart">

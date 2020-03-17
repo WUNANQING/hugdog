@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap'
 import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
+import { plusQuantity, minusQuantity, addItem } from './actions/index'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import $ from 'jquery'
-const Cart = () => {
-  const [total, setTotal] = useState(1)
+const Cart = props => {
+  useEffect(() => {
+    props.addItem()
+  }, [])
   return (
     //   判斷式如果購物車有東西才顯示，沒有則顯示沒有東西出現選購按鈕
     <>
@@ -97,24 +103,24 @@ const Cart = () => {
                 <ButtonGroup className="mb-md-2">
                   <Button
                     className="border-dark bg-light text-dark"
-                    onClick={e => {
-                      total <= 1 ? setTotal(1) : setTotal(total - 1)
+                    onClick={() => {
+                      props.minusQuantity(1)
                     }}
                   >
                     -
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
-                    value={total}
+                    value={props.total}
                     type="input"
                     min="0"
                   >
-                    {total}
+                    {props.total}
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      setTotal(total + 1)
+                      props.plusQuantity(1)
                     }}
                   >
                     +
@@ -328,5 +334,13 @@ const Cart = () => {
     </>
   )
 }
+const mapStateToProps = store => {
+  return {
+    cart: store.intoCart,
+  }
+}
 
-export default Cart
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ addItem }, dispatch)
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))
