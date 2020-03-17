@@ -41,7 +41,7 @@ function Header(props) {
                   成為狗狗保母
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="#activities">找活動</Nav.Link>
+              <Nav.Link href="/activity">找活動</Nav.Link>
               <Nav.Link href="/blog">找知識</Nav.Link>
               <Nav.Link href="#qa">常見Q&A</Nav.Link>
               <Nav.Link href="/coupon">Test Coupon</Nav.Link>
