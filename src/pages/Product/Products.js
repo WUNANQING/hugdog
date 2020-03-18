@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
-import { Row } from 'react-bootstrap'
+import { Container, Row, Col, Pagination, Nav } from 'react-bootstrap'
 
 //redux
 import { connect } from 'react-redux'
@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getProductData } from './actions/index'
 
-const Product = props => {
+const Products = props => {
   useEffect(() => {
     props.getProductData()
   }, [])
@@ -28,12 +28,22 @@ const Product = props => {
       </select>
     </div>
   )
-  //console.log(props.data)
+  //分頁顯示
+  let items = []
+  for (let number = 1; number <= props.data.length; number++) {
+    items.push(<Pagination.Item key={number}>{number}</Pagination.Item>)
+  }
+  const paginationBasic = (
+    <Pagination className="d-flex justify-content-center" size="md">
+      {items}
+    </Pagination>
+  )
+  
   return (
-    <div className="container">
-      <div className="row my-5">
+    <Container>
+      <Row className="my-5">
         <ProductSidebar />
-        <div className="col-10 pl-5">
+        <Col className="pl-5">
           <Breadcrumb />
           {sort}
           <Row>
@@ -41,9 +51,10 @@ const Product = props => {
               return <ProductCard key={index} data={props.data[index]} />
             })}
           </Row>
-        </div>
-      </div>
-    </div>
+          {paginationBasic}
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
@@ -54,4 +65,6 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getProductData }, dispatch)
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Product))
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Products)
+)

@@ -23,7 +23,7 @@ const ProductCard = props => {
           </div>
           <div className="d-md-flex justify-content-around">
             <Nav.Link
-              href={'/product/' + props.data.pId}
+              href={'/productdetail/' + props.data.pId}
               className="btn btn-primary border p-0"
             >
               查看商品
