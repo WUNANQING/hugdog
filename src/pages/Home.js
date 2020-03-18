@@ -1,31 +1,34 @@
 import React from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 //引入自己的css
 // import '../css/example/style.css'
 
 function Home(props) {
   return (
     <>
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+      <div className="container pt-3 pb-5">
+        <Button variant="primary">primary</Button>
+        <Button variant="secondary">secondary</Button>
+        <Button variant="success">success</Button>
+        <Button variant="info">info</Button>
+        <Button variant="danger">danger</Button>
+        <Button variant="warning">warning</Button>
+        <Button variant="dark">dark</Button>
+        <Button variant="light">light</Button>
+        <hr />
+        <Button variant="outline-primary">outline-primary</Button>
+        <Button variant="outline-secondary">outline-secondary</Button>
+        <Button variant="outline-success">outline-success</Button>
+        <Button variant="outline-info">outline-info</Button>
+        <Button variant="outline-danger">outline-danger</Button>
+        <Button variant="outline-warning">outline-warning</Button>
+        <Button variant="outline-dark">outline-dark</Button>
+        <Button variant="outline-light">outline-light</Button>
+        <hr />
+        <Button variant="theme">theme</Button>
+        <Button variant="theme-reverse">theme-reverse</Button>
+        <Button variant="outline-theme">theme</Button>
+      </div>
     </>
   )
 }

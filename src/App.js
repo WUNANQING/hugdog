@@ -4,48 +4,66 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Blog from './pages/Knowledge/Blog'
-import Article from './pages/Knowledge/Article'
 import Partner from './pages/Knowledge/Partner'
 import Question from './pages/Knowledge/Question'
-import ProductList from './pages/Product/ProductList'
-import ProductPageDetail from './pages/Product/ProductPageDetail'
-import Member from '../src/pages/member/Member'
-import ServiceQuery from './pages/service/ServiceQuery'
+import Product from './pages/Product/Product'
+import ProductDetail from './pages/Product/ProductDetail'
+import Member from './pages/member/Member'
+import Cart from './pages/Product/Cart'
+import Checkout from './pages/Product/Checkout'
+import Service from './pages/service/ServiceHome'
+import Coupon from './pages/Marketing/Coupon'
+import Order from './pages/Product/Order'
+import Activity from './pages/Activity/Activity'
 
 function App() {
   return (
     <Router>
       <>
         <Header />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/member">
-            <Member />
-          </Route>
-          <Route path="/service/query">
-            <ServiceQuery />
-          </Route>
-          <Route path="/blog">
-            <Blog />
-          </Route>
-          <Route path="/aritcle">
-            <Article />
-          </Route>
-          <Route path="/partner">
-            <Partner />
-          </Route>
-          <Route path="/question">
-            <Question />
-          </Route>
-          <Route path="/productlist">
-            <ProductList />
-          </Route>
-          <Route path="/productpagedetail">
-            <ProductPageDetail />
-          </Route>
-        </Switch>
+        <section className="body">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/member">
+              <Member />
+            </Route>
+            <Route path="/service">
+              <Service />
+            </Route>
+            <Route path="/activity">
+              <Activity />
+            </Route>
+            <Route path="/blog">
+              <Blog />
+            </Route>
+            <Route path="/partner">
+              <Partner />
+            </Route>
+            <Route path="/question">
+              <Question />
+            </Route>
+            <Route exact path="/product">
+              <Product />
+            </Route>
+            <Route path="/product/:pId?">
+              <ProductDetail />
+            </Route>
+            <Route path="/cart">
+              <Cart />
+            </Route>
+            <Route path="/checkout">
+              <Checkout />
+            </Route>
+            <Route path="/coupon">
+              <Coupon />
+            </Route>
+            <Route path="/order">
+              <Order />
+            </Route>
+          </Switch>
+        </section>
         <Footer />
       </>
     </Router>
