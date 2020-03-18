@@ -20,13 +20,8 @@ function Header(props) {
           <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
             <Nav className="mr-auto nav-menu">
               <Nav.Link href="#news">最新消息</Nav.Link>
-              <Nav.Link
-                href="#"
-                onClick={() => {
-                  props.history.push('/products')
-                }}
-              >
-                找商品
+              <Nav.Link>
+                <Link to="/products">找商品</Link>
               </Nav.Link>
               <NavDropdown title="找服務" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/service/">

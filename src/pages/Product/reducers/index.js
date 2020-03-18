@@ -10,11 +10,18 @@ const counter = (state = 1, action) => {
       return state
   }
 }
-//商品列表和商品細節
-const getProduct = (state = [], action) => {
+//商品列表
+const getProducts = (state = [], action) => {
   switch (action.type) {
-    case 'SHOW_PRODUCT':
+    case 'SHOW_PRODUCTS':
       return action.data
+    default:
+      return state
+  }
+}
+//商品細節
+const getProductDetail = (state = [], action) => {
+  switch (action.type) {
     case 'SHOW_PRODUCT_DETAIL':
       return action.data
     default:
@@ -60,6 +67,11 @@ const saveProductToCart = (state = {}, action) => {
   }
 }
 
-const rootReducer = combineReducers({ counter, getProduct, saveProductToCart })
+const rootReducer = combineReducers({
+  counter,
+  getProducts,
+  getProductDetail,
+  saveProductToCart,
+})
 
 export { rootReducer }

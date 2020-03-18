@@ -7,15 +7,56 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import $ from 'jquery'
-const Cart = props => {
-  const [total, setTotal] = useState(1)
-
-  //取得所有購物車內的id清單
-  const idList = Object.keys(props.addCart)
-
+const Cart = () => {
+  const [mycart, setMycart] = useState([])
+  const [mycartDisplay, setMycartDisplay] = useState([])
+  //提取購物車資料
+  function getCartFromLocalStorage() {
+    const newCart = localStorage.getItem('cart') || []
+    setMycart(JSON.parse(newCart))
+  }
+  //更新商品數量
+  function updateQuantityToLocalStorage(index, quantity) {
+    let currentCart = JSON.parse(localStorage.getItem('cart')) || []
+    currentCart[index].pQuantity = currentCart[index].pQuantity - quantity
+    const newCart = currentCart
+    localStorage.setItem('cart', JSON.stringify(newCart))
+    setMycart(newCart)
+  }
+  //刪除商品
+  function deleteItem(index) {
+    let currentCart = JSON.parse(localStorage.getItem('cart')) || []
+    currentCart.splice(index, 1)
+    setMycart(currentCart)
+  }
+  //從localStorage取得購物車資料
   useEffect(() => {
-    setTotal(props.addCart[idList].qty)
+    getCartFromLocalStorage()
   }, [])
+  //購物車有變動即更改
+  useEffect(() => {
+    let newMycartDisplay = []
+    for (let i = 0; i < mycart.length; i++) {
+      const index = newMycartDisplay.findIndex(
+        item => item.pId === mycart[i].pId
+      )
+      if (index !== -1) {
+        newMycartDisplay[index].pQuantity += mycart[i].pQuantity
+      } else {
+        const newItem = { ...mycart[i] }
+        newMycartDisplay = [...newMycartDisplay, newItem]
+      }
+    }
+    setMycartDisplay(newMycartDisplay)
+  }, [mycart])
+
+  const sum = items => {
+    let total = 0
+    for (let i = 0; i < items.length; i++) {
+      total += items[i].pQuantity * items[i].pPrice
+    }
+    return total
+  }
 
   return (
     //   判斷式如果購物車有東西才顯示，沒有則顯示沒有東西出現選購按鈕
@@ -91,76 +132,78 @@ const Cart = props => {
           <Col md={12}>
             <Row className="mt-5">
               <Col>
-                <h3>
-                  以下是你購物車內的商品 NT$
-                  {eval(props.addCart[idList[0]].pPrice * total)}
-                </h3>
+                <h3>以下是你購物車內的商品 NT${sum(mycartDisplay)}</h3>
                 <hr />
               </Col>
             </Row>
-            <Row className="align-items-center">
-              <img
-                src="https://via.placeholder.com/150x150"
-                className="col-md-4"
-                alt="..."
-              />
-              <Col md={2}>
-                <h3>{props.addCart[idList[0]].pName}</h3>
-                <h4>尺寸:{props.addCart[idList[0]].size}</h4>
-                <h4>顏色:{props.addCart[idList[0]].color}</h4>
-                <h4>價格:{props.addCart[idList[0]].pPrice}</h4>
-              </Col>
-              <Col md={2}>
-                <ButtonGroup className="mb-md-2">
-                  <Button
-                    className="border-dark bg-light text-dark"
-                    onClick={e => {
-                      total <= 1 ? setTotal(1) : setTotal(total - 1)
-                    }}
-                  >
-                    -
-                  </Button>
-                  <Button
-                    className="border-dark bg-light text-dark"
-                    value={total}
-                    type="input"
-                    min="0"
-                  >
-                    {total}
-                  </Button>
-                  <Button
-                    className="border-dark bg-light text-dark"
-                    onClick={() => {
-                      setTotal(total + 1)
-                    }}
-                  >
-                    +
-                  </Button>
-                </ButtonGroup>
-              </Col>
-              <Col md={2}>
-                <h4 className="text-center">
-                  {eval(props.addCart[idList[0]].pPrice * total)}
-                </h4>
-              </Col>
-              <Col md={2}>
-                <Button className="mb-2" variant="primary" size="lg">
-                  <MdPlaylistAdd className="mb-md-1" />
-                  下次再買
-                </Button>{' '}
-                <Button className="mb-2" variant="primary" size="lg">
-                  <MdDelete className="mb-md-1" />
-                  刪除商品
-                </Button>
-              </Col>
-            </Row>
-            <hr />
+            {mycartDisplay.map((value, index) => {
+              return (
+                <Row className="align-items-center" key={value.pId}>
+                  <Col md={4} className="text-center">
+                    <img src="https://via.placeholder.com/200x200" alt="..." />
+                  </Col>
+                  <Col md={2}>
+                    <h3 className="font-weight-bold">{value.pName}</h3>
+                    <h4>數量:{value.pQuantity}</h4>
+                    <h4>價格:{value.pPrice}</h4>
+                  </Col>
+                  <Col md={2}>
+                    <ButtonGroup className="mb-md-2">
+                      <Button
+                        className="border-dark bg-light text-dark"
+                        onClick={() => {
+                          updateQuantityToLocalStorage({ index }, 1)
+                        }}
+                      >
+                        -
+                      </Button>
+                      <Button
+                        className="border-dark bg-light text-dark"
+                        value={value.pQuantity}
+                        type="input"
+                        min="0"
+                      >
+                        {value.pQuantity}
+                      </Button>
+                      <Button className="border-dark bg-light text-dark">
+                        +
+                      </Button>
+                    </ButtonGroup>
+                  </Col>
+                  <Col md={2}>
+                    <h4 className="text-center font-weight-bold">
+                      NT${value.pQuantity * value.pPrice}
+                    </h4>
+                  </Col>
+                  <Col md={2}>
+                    <Button className="mb-2" variant="primary" size="md">
+                      <MdPlaylistAdd className="mb-md-1" />
+                      下次再買
+                    </Button>
+                    <Button
+                      className="mb-2"
+                      variant="primary"
+                      size="md"
+                      onClick={() => {
+                        deleteItem(Number(index))
+                      }}
+                    >
+                      <MdDelete className="mb-md-1" />
+                      刪除商品
+                    </Button>
+                  </Col>
+                  <Col>
+                    <hr />
+                  </Col>
+                </Row>
+              )
+            })}
           </Col>
         </Row>
         <Row className="mt-1">
           <Col md={{ offset: 6 }} className="d-flex justify-content-between">
             <div>小計</div>
-            <div> {eval(props.addCart[idList[0]].pPrice * total)}</div>
+            <div>價格</div>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -197,7 +240,7 @@ const Cart = props => {
         <Row className="mt-1">
           <Col md={{ offset: 6 }} className="d-flex justify-content-between">
             <div className="font-weight-bold">你的總金額</div>
-            <div className="font-weight-bold">$100</div>
+            <div className="font-weight-bold">${sum(mycartDisplay)}</div>
           </Col>
         </Row>
         <Row className="mt-1">

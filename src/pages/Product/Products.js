@@ -10,11 +10,13 @@ import { Container, Row, Col, Pagination } from 'react-bootstrap'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getProductData } from './actions/index'
+import { getProducts } from './actions/index'
 
 const Products = props => {
+  console.log(props.list)
+
   useEffect(() => {
-    props.getProductData()
+    props.getProducts()
   }, [])
 
   let sort = (
@@ -30,7 +32,7 @@ const Products = props => {
   )
   //分頁顯示
   let items = []
-  for (let number = 1; number <= props.data.length; number++) {
+  for (let number = 1; number <= props.list.length; number++) {
     items.push(<Pagination.Item key={number}>{number}</Pagination.Item>)
   }
   const paginationBasic = (
@@ -47,9 +49,10 @@ const Products = props => {
           <Breadcrumb />
           {sort}
           <Row>
-            {props.data.map((value, index) => {
-              return <ProductCard key={index} data={props.data[index]} />
-            })}
+            {props.list &&
+              props.list.map((value, index) => {
+                return <ProductCard key={index} data={props.list[index]} />
+              })}
           </Row>
           {paginationBasic}
         </Col>
@@ -60,10 +63,10 @@ const Products = props => {
 
 //選擇對應的reducer，將其狀態淺拷貝到此元件的props
 const mapStateToProps = store => {
-  return { data: store.getProduct }
+  return { list: store.getProducts }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProductData }, dispatch)
+  return bindActionCreators({ getProducts }, dispatch)
 }
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Products)
