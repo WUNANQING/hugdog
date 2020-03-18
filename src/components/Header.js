@@ -85,8 +85,8 @@ function Header(props) {
                 <AiOutlineUser />
               </IconContext.Provider>
               <div className="dropdown-menu">
-                <Link to="#" className="dropdown-item nav-link">
-                  連結1
+                <Link to="/login" className="dropdown-item nav-link">
+                  登入
                 </Link>
                 <Link to="#" className="dropdown-item nav-link">
                   連結2

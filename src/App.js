@@ -14,7 +14,7 @@ import Coupon from './pages/Marketing/Coupon'
 import BonusPoints from './pages/Marketing/BonusPoints1'
 import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
-
+import MemberLogin from './pages/member/memberLogin'
 function App() {
   return (
     <Router>
@@ -57,6 +57,9 @@ function App() {
             </Route>
             <Route path="/order">
               <Order />
+            </Route>
+            <Route path="/login">
+              <MemberLogin />
             </Route>
           </Switch>
         </section>
