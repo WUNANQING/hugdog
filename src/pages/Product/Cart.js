@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap'
 import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
 
@@ -11,10 +12,10 @@ const Cart = props => {
 
   //取得所有購物車內的id清單
   const idList = Object.keys(props.addCart)
-  console.log(props)
-  // useEffect(() => {
-  //   setTotal(props.addCart[idList].qty)
-  // }, [])
+
+  useEffect(() => {
+    setTotal(props.addCart[idList].qty)
+  }, [])
 
   return (
     //   判斷式如果購物車有東西才顯示，沒有則顯示沒有東西出現選購按鈕
@@ -90,7 +91,10 @@ const Cart = props => {
           <Col md={12}>
             <Row className="mt-5">
               <Col>
-                <h3>以下是你購物車內的商品 NT$100</h3>
+                <h3>
+                  以下是你購物車內的商品 NT$
+                  {eval(props.addCart[idList[0]].pPrice * total)}
+                </h3>
                 <hr />
               </Col>
             </Row>
@@ -101,9 +105,10 @@ const Cart = props => {
                 alt="..."
               />
               <Col md={2}>
-                <h3></h3>
-                <h4>尺寸:</h4>
-                <h4>顏色:</h4>
+                <h3>{props.addCart[idList[0]].pName}</h3>
+                <h4>尺寸:{props.addCart[idList[0]].size}</h4>
+                <h4>顏色:{props.addCart[idList[0]].color}</h4>
+                <h4>價格:{props.addCart[idList[0]].pPrice}</h4>
               </Col>
               <Col md={2}>
                 <ButtonGroup className="mb-md-2">
@@ -134,7 +139,9 @@ const Cart = props => {
                 </ButtonGroup>
               </Col>
               <Col md={2}>
-                <h4 className="text-center">$100</h4>
+                <h4 className="text-center">
+                  {eval(props.addCart[idList[0]].pPrice * total)}
+                </h4>
               </Col>
               <Col md={2}>
                 <Button className="mb-2" variant="primary" size="lg">
@@ -153,7 +160,7 @@ const Cart = props => {
         <Row className="mt-1">
           <Col md={{ offset: 6 }} className="d-flex justify-content-between">
             <div>小計</div>
-            <div>$100</div>
+            <div> {eval(props.addCart[idList[0]].pPrice * total)}</div>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -195,9 +202,11 @@ const Cart = props => {
         </Row>
         <Row className="mt-1">
           <Col md={{ offset: 9 }}>
-            <Button variant="primary" size="lg" block href="/checkout">
-              前往結帳
-            </Button>
+            <Link to="/checkout">
+              <Button variant="primary" size="lg" block>
+                前往結帳
+              </Button>
+            </Link>
           </Col>
         </Row>
         <Row className="mt-5">
@@ -344,7 +353,6 @@ const Cart = props => {
 const mapStateToProps = store => {
   return {
     total: store.counter,
-    detail: store.getProduct,
     addCart: store.saveProductToCart,
   }
 }

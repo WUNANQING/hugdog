@@ -46,20 +46,20 @@ export const getProductDetail = pId => {
 //加入購物車，傳入商品細節內容，用物件儲存
 export const saveProductSizeToCart = size => ({
   type: 'SAVE_SIZE',
-  size,
+  size, //==size:['pId',size]
 })
 
 export const saveProductColorToCart = color => ({
   type: 'SAVE_COLOR',
-  color,
+  color, //==color:['pId',color]
 })
 
 export const saveProductQTYToCart = qty => ({
   type: 'SAVE_QTY',
-  qty,
+  qty, //==qty:['pId',qty]
 })
 
 export const saveProductToCart = product => ({
   type: 'SAVE_PRODUCT',
-  product,
+  product, //==product:['pId','pName','total',true]
 })

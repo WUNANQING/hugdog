@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
-import { Container, Row, Col, Pagination, Nav } from 'react-bootstrap'
+import { Container, Row, Col, Pagination } from 'react-bootstrap'
 
 //redux
 import { connect } from 'react-redux'
@@ -38,7 +38,7 @@ const Products = props => {
       {items}
     </Pagination>
   )
-  
+
   return (
     <Container>
       <Row className="my-5">

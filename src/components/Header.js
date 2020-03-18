@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from '../images/logo-dark.svg'
 import { AiOutlineUser, AiOutlineShopping } from 'react-icons/ai'
 import { FaDog } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
+import { withRouter } from 'react-router-dom'
 
 function Header(props) {
   return (
@@ -19,7 +20,14 @@ function Header(props) {
           <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
             <Nav className="mr-auto nav-menu">
               <Nav.Link href="#news">最新消息</Nav.Link>
-              <Nav.Link href="products">找商品</Nav.Link>
+              <Nav.Link
+                href="#"
+                onClick={() => {
+                  props.history.push('/products')
+                }}
+              >
+                找商品
+              </Nav.Link>
               <NavDropdown title="找服務" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/service/">
                   什麼是保母服務
@@ -102,7 +110,14 @@ function Header(props) {
                 <FiHeart />
               </IconContext.Provider>
             </Nav.Link> */}
-            <Nav.Link href="/cart">
+
+            {/* Nav.Link不會記錄router的三個屬性 export default withRouter(Header)*/}
+            <Nav.Link
+              href="#"
+              onClick={() => {
+                props.history.push('/cart')
+              }}
+            >
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <AiOutlineShopping />
               </IconContext.Provider>
@@ -114,4 +129,4 @@ function Header(props) {
   )
 }
 
-export default Header
+export default withRouter(Header)

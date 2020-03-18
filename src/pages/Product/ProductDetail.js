@@ -138,6 +138,7 @@ const ProductDetail = props => {
                     const data = [
                       props.detail.pId,
                       props.detail.pName,
+                      props.detail.pPrice,
                       props.total,
                       true,
                     ]
