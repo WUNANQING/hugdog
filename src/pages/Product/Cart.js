@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap'
+import {
+  Container,
+  Row,
+  Col,
+  ButtonGroup,
+  Button,
+  Card,
+  Nav,
+} from 'react-bootstrap'
 import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
 
 import { withRouter } from 'react-router-dom'
@@ -10,29 +18,43 @@ import $ from 'jquery'
 const Cart = () => {
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
+
   //提取購物車資料
   function getCartFromLocalStorage() {
     const newCart = localStorage.getItem('cart') || []
     setMycart(JSON.parse(newCart))
   }
+
   //更新商品數量
-  function updateQuantityToLocalStorage(index, quantity) {
+  function updateQuantityToLocalStorage(e, index, quantity) {
     let currentCart = JSON.parse(localStorage.getItem('cart')) || []
-    currentCart[index].pQuantity = currentCart[index].pQuantity - quantity
+    if (e.target.id === '-') {
+      if (currentCart[index].pQuantity - quantity === 0) {
+        currentCart[index].pQuantity = 1
+      } else {
+        currentCart[index].pQuantity = currentCart[index].pQuantity - quantity
+      }
+    } else {
+      currentCart[index].pQuantity = currentCart[index].pQuantity + quantity
+    }
+
     const newCart = currentCart
     localStorage.setItem('cart', JSON.stringify(newCart))
     setMycart(newCart)
   }
+
   //刪除商品
   function deleteItem(index) {
     let currentCart = JSON.parse(localStorage.getItem('cart')) || []
     currentCart.splice(index, 1)
+    localStorage.setItem('cart', JSON.stringify(currentCart))
     setMycart(currentCart)
   }
   //從localStorage取得購物車資料
   useEffect(() => {
     getCartFromLocalStorage()
   }, [])
+
   //購物車有變動即更改
   useEffect(() => {
     let newMycartDisplay = []
@@ -132,7 +154,15 @@ const Cart = () => {
           <Col md={12}>
             <Row className="mt-5">
               <Col>
-                <h3>以下是你購物車內的商品 NT${sum(mycartDisplay)}</h3>
+                {mycartDisplay.length === 0 ? (
+                  <>
+                    <h3>購物車內沒有任何商品</h3>
+                    <Button>繼續選購</Button>
+                    <img src="#" />
+                  </>
+                ) : (
+                  <h3>以下是你購物車內的商品 NT${sum(mycartDisplay)}</h3>
+                )}
                 <hr />
               </Col>
             </Row>
@@ -151,8 +181,9 @@ const Cart = () => {
                     <ButtonGroup className="mb-md-2">
                       <Button
                         className="border-dark bg-light text-dark"
-                        onClick={() => {
-                          updateQuantityToLocalStorage({ index }, 1)
+                        id="-"
+                        onClick={e => {
+                          updateQuantityToLocalStorage(e, index, 1)
                         }}
                       >
                         -
@@ -161,11 +192,16 @@ const Cart = () => {
                         className="border-dark bg-light text-dark"
                         value={value.pQuantity}
                         type="input"
-                        min="0"
                       >
                         {value.pQuantity}
                       </Button>
-                      <Button className="border-dark bg-light text-dark">
+                      <Button
+                        className="border-dark bg-light text-dark"
+                        id="+"
+                        onClick={e => {
+                          updateQuantityToLocalStorage(e, index, 1)
+                        }}
+                      >
                         +
                       </Button>
                     </ButtonGroup>
@@ -185,7 +221,7 @@ const Cart = () => {
                       variant="primary"
                       size="md"
                       onClick={() => {
-                        deleteItem(Number(index))
+                        deleteItem(index)
                       }}
                     >
                       <MdDelete className="mb-md-1" />
