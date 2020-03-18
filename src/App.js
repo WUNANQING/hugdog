@@ -11,6 +11,7 @@ import Cart from './pages/Product/Cart'
 import Checkout from './pages/Product/Checkout'
 import Service from './pages/service/ServiceHome'
 import Coupon from './pages/Marketing/Coupon'
+import BonusPoints from './pages/Marketing/BonusPoints1'
 import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
 
@@ -50,6 +51,9 @@ function App() {
             </Route>
             <Route path="/coupon">
               <Coupon />
+            </Route>
+            <Route path="/bonuspoints">
+              <BonusPoints />
             </Route>
             <Route path="/order">
               <Order />

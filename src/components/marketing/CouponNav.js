@@ -9,7 +9,7 @@ function CouponNav(props) {
   return (
     <>
       <div className="marketing">
-        <head className="border-bottom mb-3 justify-content-center d-flex">
+        <div className="border-bottom mb-3 justify-content-center d-flex">
           <Nav bg="white" variant="light" expand="md">
             <Nav className="mr-auto nav-menu">
               <Nav.Link href="/coupon">優惠卷輸入</Nav.Link>
@@ -19,7 +19,7 @@ function CouponNav(props) {
               <div className="marketing-nav"></div>
             </Nav>
           </Nav>
-        </head>
+        </div>
       </div>
     </>
   )
