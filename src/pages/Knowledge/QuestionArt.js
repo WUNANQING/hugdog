@@ -10,44 +10,15 @@ import {
   Image,
 } from 'react-bootstrap'
 
-import Swal from 'sweetalert2'
-import SideMenu from '../../components/Knowledge/SideMenu'
-
-import '../../components/Knowledge/knowledge.scss'
-
-function Question() {
-  const Swal = require('sweetalert2')
-
-  function post() {
-    Swal.fire({
-      title: '問什麼呢?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '確定',
-      cancelButtonText: '取消',
-    }).then(result => {
-      if (result.value) {
-        Swal.fire({
-          title: '報名成功!',
-          icon: 'success',
-        })
-      }
-    })
-  }
+function QuestionArt() {
   return (
     <>
       <div className="banner"></div>
       <Container>
         <div>
-          <Button
-            className="askquestion"
-            variant="warning"
-            onClick={() => post()}
-          >
+          <Button className="askquestion" variant="warning">
             我要發問
-          </Button>
+          </Button>{' '}
         </div>
         <Row>
           <Col xs={12} md={6}>
@@ -165,12 +136,12 @@ function Question() {
                   </div>
                 </Card.Body>
                 {/* <Accordion.Collapse eventKey="0">
-                  <Card.Footer>
-                    <Card.Text>
-                      貓的注射疫苗臨床上以三合一（或五合一）以及狂犬病疫苗為主，近來也有開發出無佐劑的四合一（含白血病）疫苗，但單價較高一些。至於每年是否都該追加補強的問題，醫師只能告訴你，疫苗每次注射效力只能維持一年，至於是否會被疾病感染，就要看是否有傳染途徑的存在了。
-                    </Card.Text>
-                  </Card.Footer>
-                </Accordion.Collapse> */}
+                    <Card.Footer>
+                      <Card.Text>
+                        貓的注射疫苗臨床上以三合一（或五合一）以及狂犬病疫苗為主，近來也有開發出無佐劑的四合一（含白血病）疫苗，但單價較高一些。至於每年是否都該追加補強的問題，醫師只能告訴你，疫苗每次注射效力只能維持一年，至於是否會被疾病感染，就要看是否有傳染途徑的存在了。
+                      </Card.Text>
+                    </Card.Footer>
+                  </Accordion.Collapse> */}
               </Card>
             </Accordion>
           </Col>
@@ -180,4 +151,4 @@ function Question() {
   )
 }
 
-export default Question
+export default QuestionArt

@@ -12,27 +12,54 @@ import {
   Image,
 } from 'react-bootstrap'
 
-import Nowon from './Nowon'
+import PartnerNowon from './PartnerNowon'
+import PartnerClosed from './PartnerClosed'
+import '../../components/Knowledge/knowledge.scss'
 
-import Sonnet from './Nowon'
 // import { Container } from 'react-bootstrap/lib/Tab'
 
 function Partner() {
   return (
     <>
       <div className="banner"></div>
-      <div>
+      <Container>
         <Row>
-          <Tabs defaultActiveKey="open" id="uncontrolled-tab-example">
-            <Tab eventKey="open" title="進行中">
-              <Sonnet />
-            </Tab>
-            <Tab eventKey="closed" title="已結束">
-              <Sonnet />
-            </Tab>
-          </Tabs>
+          <Col xs={12} md={12}>
+            <Tabs defaultActiveKey="open" id="uncontrolled-tab-example">
+              <Tab eventKey="open" title="進行中">
+                <Row>
+                  <Col xs={12} md={6}>
+                    <PartnerNowon />
+                    <PartnerNowon />
+                    <PartnerNowon />
+                  </Col>
+
+                  <Col xs={12} md={6}>
+                    <PartnerNowon />
+                    <PartnerNowon />
+                    <PartnerNowon />
+                  </Col>
+                </Row>
+              </Tab>
+              <Tab eventKey="Closed" title="已結束">
+                <Row>
+                  <Col xs={12} md={6}>
+                    <PartnerClosed />
+                    <PartnerClosed />
+                    <PartnerClosed />
+                  </Col>
+
+                  <Col xs={12} md={6}>
+                    <PartnerClosed />
+                    <PartnerClosed />
+                    <PartnerClosed />
+                  </Col>
+                </Row>
+              </Tab>
+            </Tabs>
+          </Col>
         </Row>
-      </div>
+      </Container>
     </>
   )
 }
