@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap'
 import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
-import { plusQuantity, minusQuantity, addItem } from './actions/index'
+
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+
 import $ from 'jquery'
 const Cart = props => {
+  const [total, setTotal] = useState(1)
+
+  //取得所有購物車內的id清單
+  const idList = Object.keys(props.addCart)
+  console.log(props)
   // useEffect(() => {
-  //   props.addItem()
+  //   setTotal(props.addCart[idList].qty)
   // }, [])
+
   return (
     //   判斷式如果購物車有東西才顯示，沒有則顯示沒有東西出現選購按鈕
     <>
@@ -95,32 +101,32 @@ const Cart = props => {
                 alt="..."
               />
               <Col md={2}>
-                <h3>商品名稱</h3>
-                <h4>尺寸:小</h4>
-                <h4>顏色:紅</h4>
+                <h3></h3>
+                <h4>尺寸:</h4>
+                <h4>顏色:</h4>
               </Col>
               <Col md={2}>
                 <ButtonGroup className="mb-md-2">
                   <Button
                     className="border-dark bg-light text-dark"
-                    onClick={() => {
-                      props.minusQuantity(1)
+                    onClick={e => {
+                      total <= 1 ? setTotal(1) : setTotal(total - 1)
                     }}
                   >
                     -
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
-                    value={props.total}
+                    value={total}
                     type="input"
                     min="0"
                   >
-                    {props.total}
+                    {total}
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      props.plusQuantity(1)
+                      setTotal(total + 1)
                     }}
                   >
                     +
@@ -334,14 +340,13 @@ const Cart = props => {
     </>
   )
 }
+
 const mapStateToProps = store => {
   return {
     total: store.counter,
-    cart: store.intoCart,
+    detail: store.getProduct,
+    addCart: store.saveProductToCart,
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ plusQuantity, minusQuantity }, dispatch)
-}
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))
+export default withRouter(connect(mapStateToProps)(Cart))

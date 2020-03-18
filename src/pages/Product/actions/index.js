@@ -26,19 +26,6 @@ export const getProductData = () => {
   }
 }
 
-//跟server要商品資料(依照類別)
-// export const getProductByCategory = pCategoryId => {
-//   return async dispatch => {
-//     const req = new Request(`http://localhost:6001/product/${pCategoryId}`, {
-//       method: 'GET',
-//       credentials: 'include',
-//     })
-//     const res = await fetch(req)
-//     const data = await res.json()
-//     dispatch(showProduct(data.product))
-//   }
-// }
-
 //跟server要商品細節
 export const showProductDetail = data => {
   return { type: 'SHOW_PRODUCT_DETAIL', data }
@@ -57,7 +44,22 @@ export const getProductDetail = pId => {
 }
 
 //加入購物車，傳入商品細節內容，用物件儲存
-export const addItem = data => {
-  console.log(data)
-  return { type: 'ADD_ITEM', data }
-}
+export const saveProductSizeToCart = size => ({
+  type: 'SAVE_SIZE',
+  size,
+})
+
+export const saveProductColorToCart = color => ({
+  type: 'SAVE_COLOR',
+  color,
+})
+
+export const saveProductQTYToCart = qty => ({
+  type: 'SAVE_QTY',
+  qty,
+})
+
+export const saveProductToCart = product => ({
+  type: 'SAVE_PRODUCT',
+  product,
+})

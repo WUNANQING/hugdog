@@ -33,13 +33,12 @@ const Products = props => {
   for (let number = 1; number <= props.data.length; number++) {
     items.push(<Pagination.Item key={number}>{number}</Pagination.Item>)
   }
-
   const paginationBasic = (
     <Pagination className="d-flex justify-content-center" size="md">
       {items}
     </Pagination>
   )
-  //console.log(props.data)
+  
   return (
     <Container>
       <Row className="my-5">

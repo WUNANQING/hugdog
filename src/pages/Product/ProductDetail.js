@@ -6,7 +6,10 @@ import {
   getProductDetail,
   plusQuantity,
   minusQuantity,
-  addItem,
+  saveProductSizeToCart,
+  saveProductColorToCart,
+  saveProductQTYToCart,
+  saveProductToCart,
 } from './actions/index'
 import {
   Container,
@@ -52,12 +55,16 @@ const ProductDetail = props => {
               <h4>${props.detail.pPrice}</h4>
               <Form.Label>--尺寸</Form.Label>
               <br />
-              {/* <ButtonGroup>
+              <ButtonGroup>
                 <Button
                   className="rounded border-dark bg-light text-dark mx-2"
                   type="radio"
                   name="radio"
                   defaultValue="sm"
+                  onClick={() => {
+                    const data = [props.detail.pId, 'sm']
+                    props.saveProductSizeToCart(data)
+                  }}
                 >
                   小
                 </Button>
@@ -66,6 +73,10 @@ const ProductDetail = props => {
                   type="radio"
                   name="radio"
                   defaultValue="md"
+                  onClick={() => {
+                    const data = [props.detail.pId, 'md']
+                    props.saveProductSizeToCart(data)
+                  }}
                 >
                   中
                 </Button>
@@ -74,6 +85,10 @@ const ProductDetail = props => {
                   type="radio"
                   name="radio"
                   defaultValue="lg"
+                  onClick={() => {
+                    const data = [props.detail.pId, 'lg']
+                    props.saveProductSizeToCart(data)
+                  }}
                 >
                   大
                 </Button>
@@ -87,34 +102,46 @@ const ProductDetail = props => {
                   type="radio"
                   name="radio"
                   value="blue"
+                  onClick={() => {
+                    const data = [props.detail.pId, 'blue']
+                    props.saveProductColorToCart(data)
+                  }}
                 />
                 <Button
                   className="rounded btn-danger mx-2"
                   type="radio"
                   name="radio"
                   value="red"
+                  onClick={() => {
+                    const data = [props.detail.pId, 'red']
+                    props.saveProductColorToCart(data)
+                  }}
                 />
                 <Button
                   className="rounded btn-info mx-2"
                   type="radio"
                   name="radio"
                   value="green"
+                  onClick={() => {
+                    const data = [props.detail.pId, 'green']
+                    props.saveProductColorToCart(data)
+                  }}
                 />
               </ButtonGroup>
-              <br /> */}
+              <br />
               <div className="mt-3 d-flex justify-content-between">
                 <Button
                   className="mb-md-2 "
                   variant="primary "
                   size="md"
                   onClick={() => {
-                    props.addItem({
-                      pId: props.detail.pId,
-                      pName: props.detail.pName,
-                      pPrice: props.detail.pPrice,
-                      pQuantity: props.total,
-                      pTotalPrice: eval(props.detail.pPrice * props.total),
-                    })
+                    const data = [
+                      props.detail.pId,
+                      props.detail.pName,
+                      props.total,
+                      true,
+                    ]
+                    props.saveProductToCart(data)
                   }}
                 >
                   <MdAddShoppingCart className="mb-1" />
@@ -152,6 +179,15 @@ const ProductDetail = props => {
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
                   size="md"
+                  onClick={() => {
+                    const data = [
+                      props.detail.pId,
+                      props.detail.pName,
+                      props.total,
+                      true,
+                    ]
+                    props.saveProductToCart(data)
+                  }}
                 >
                   <MdPlaylistAdd className="mb-md-1" />
                   加入清單
@@ -160,6 +196,15 @@ const ProductDetail = props => {
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
                   size="md"
+                  onClick={() => {
+                    const data = [
+                      props.detail.pId,
+                      props.detail.pName,
+                      props.total,
+                      true,
+                    ]
+                    props.saveProductToCart(data)
+                  }}
                 >
                   <MdShoppingCart className="mb-md-1" />
                   快速結帳
@@ -254,13 +299,21 @@ const mapStateToProps = store => {
   return {
     total: store.counter,
     detail: store.getProduct,
-    cart: store.intoCart,
+    addCart: store.saveProductToCart,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { getProductDetail, plusQuantity, minusQuantity, addItem },
+    {
+      getProductDetail,
+      plusQuantity,
+      minusQuantity,
+      saveProductSizeToCart,
+      saveProductColorToCart,
+      saveProductQTYToCart,
+      saveProductToCart,
+    },
     dispatch
   )
 }
