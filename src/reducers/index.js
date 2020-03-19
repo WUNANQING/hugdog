@@ -31,6 +31,7 @@ const getProducts = (state = [], action) => {
       return state
   }
 }
+
 //商品細節
 const getProductDetail = (state = [], action) => {
   switch (action.type) {
@@ -42,11 +43,23 @@ const getProductDetail = (state = [], action) => {
 }
 //商品reducers
 
+const getDog = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_DOG': {
+      console.log(action.data)
+      return action.data
+    }
+
+    default:
+      return state
+  }
+
 const rootReducer = combineReducers({
   getMember,
   counter,
   getProducts,
   getProductDetail,
+  getDog,
 })
 
 export { rootReducer }

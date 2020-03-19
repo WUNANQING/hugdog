@@ -68,3 +68,19 @@
     }
   }
 }
+.alertBox {
+  width: 600px;
+  height: 50px;
+  text-align: center;
+  transform: translateY(-20px);
+  transition: 1s;
+  font-size: 20px;
+}
+.appear {
+  display: inline-block;
+  transition: 1s;
+}
+.disappear {
+  display: none;
+  transition: 1s;
+}
