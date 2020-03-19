@@ -30,12 +30,17 @@ import ProductCard from './components/ProductCard'
 const ProductDetail = props => {
   const [mycart, setMycart] = useState([])
   const pId = props.match.params.pId ? props.match.params.pId : ''
+
   //更新購物車
   function updateCartToLocalStorage(item) {
     const currentCart = JSON.parse(localStorage.getItem('cart')) || []
-    const newCart = [...currentCart, item]
-    localStorage.setItem('cart', JSON.stringify(newCart))
-    setMycart(newCart)
+    if ([...currentCart].find(value => value.pId === item.pId)) {
+      alert('已加入購物車')
+    } else {
+      const newCart = [...currentCart, item]
+      localStorage.setItem('cart', JSON.stringify(newCart))
+      setMycart(newCart)
+    }
   }
 
   useEffect(() => {
