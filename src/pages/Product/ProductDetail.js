@@ -58,11 +58,13 @@ const ProductDetail = props => {
             <Breadcrumb />
           </Row>
           <Row className="mb-5">
-            <Col md={5}>
+            <Col md={5} className="text-center">
               <Image src="https://via.placeholder.com/370" thumbnail />
             </Col>
             <Col md={4}>
               <h3>{props.detail.pName}</h3>
+              <br />
+              <h6>{props.detail.pInfo}</h6>
               <br />
               <h4>${props.detail.pPrice}</h4>
               <br />
