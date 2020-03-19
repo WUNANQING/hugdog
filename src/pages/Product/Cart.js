@@ -151,8 +151,12 @@ const Cart = () => {
                 <>
                   <h3>購物車內沒有任何商品</h3>
                   <hr />
-                  <Button>繼續選購</Button>
                   <img src="#" alt="..." />
+                  <Link to="/products">
+                    <Button variant="primary" size="md">
+                      前往結帳
+                    </Button>
+                  </Link>
                 </>
               ) : (
                 <h3>以下是你購物車內的商品 NT${sum(mycartDisplay)}</h3>
@@ -230,58 +234,65 @@ const Cart = () => {
           })}
         </Col>
       </Row>
-      <Row className="mt-1">
-        <Col md={{ offset: 6 }} className="d-flex justify-content-between">
-          <div>小計</div>
-          <div>價格</div>
-        </Col>
-      </Row>
-      <Row className="mt-3">
-        <Col md={{ offset: 6 }} className="d-flex justify-content-between">
-          <div>運費</div>
-          <div>免額外運費</div>
-        </Col>
-      </Row>
-      <Row className="mt-3">
-        <Col md={{ offset: 6 }}>
-          <Button
-            className="bg-transparent border-0 text-dark p-0"
-            onClick={e => {
-              $('#coupon')
-                .toggle()
-                .focus()
-              if ($(e.target).hasClass('text-dark')) {
-                $(e.target)
-                  .removeClass('text-dark')
-                  .addClass('text-primary')
-              } else {
-                $(e.target)
-                  .removeClass('text-primary')
-                  .addClass('text-dark')
-              }
-            }}
-          >
-            促銷代碼或優惠券
-          </Button>
-          <input id="coupon" type="text" className="b-0" />
-          <hr />
-        </Col>
-      </Row>
-      <Row className="mt-1">
-        <Col md={{ offset: 6 }} className="d-flex justify-content-between">
-          <div className="font-weight-bold">你的總金額</div>
-          <div className="font-weight-bold">${sum(mycartDisplay)}</div>
-        </Col>
-      </Row>
-      <Row className="mt-1">
-        <Col md={{ offset: 9 }}>
-          <Link to="/checkout">
-            <Button variant="primary" size="lg" block>
-              前往結帳
-            </Button>
-          </Link>
-        </Col>
-      </Row>
+      {mycartDisplay.length === 0 ? (
+        ''
+      ) : (
+        <>
+          <Row className="mt-1">
+            <Col md={{ offset: 6 }} className="d-flex justify-content-between">
+              <div>小計</div>
+              <div>NT${sum(mycart)}</div>
+            </Col>
+          </Row>
+          <Row className="mt-3">
+            <Col md={{ offset: 6 }} className="d-flex justify-content-between">
+              <div>運費</div>
+              <div>免額外運費</div>
+            </Col>
+          </Row>
+          <Row className="mt-3">
+            <Col md={{ offset: 6 }}>
+              <Button
+                className="bg-transparent border-0 text-dark p-0"
+                onClick={e => {
+                  $('#coupon')
+                    .toggle()
+                    .focus()
+                  if ($(e.target).hasClass('text-dark')) {
+                    $(e.target)
+                      .removeClass('text-dark')
+                      .addClass('text-primary')
+                  } else {
+                    $(e.target)
+                      .removeClass('text-primary')
+                      .addClass('text-dark')
+                  }
+                }}
+              >
+                促銷代碼或優惠券
+              </Button>
+              <input id="coupon" type="text" className="b-0" />
+              <hr />
+            </Col>
+          </Row>
+          <Row className="mt-1">
+            <Col md={{ offset: 6 }} className="d-flex justify-content-between">
+              <div className="font-weight-bold">你的總金額</div>
+              <div className="font-weight-bold">NT${sum(mycartDisplay)}</div>
+            </Col>
+          </Row>
+          <Row className="mt-1">
+            <Col md={{ offset: 9 }}>
+              <Link to="/checkout">
+                <Button variant="primary" size="lg" block>
+                  前往結帳
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+        </>
+      )}
+
       <Row className="mt-5">
         <Col>
           <h3>追加購買</h3>
