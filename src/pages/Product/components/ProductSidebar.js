@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Col, Nav, Navbar, InputGroup, FormControl } from 'react-bootstrap'
 const ProductSidebar = () => {
   const productCategory = [
@@ -27,17 +28,17 @@ const ProductSidebar = () => {
     'HALO',
   ]
   const productCategorysidebar = productCategory.map((value, index) => (
-    <Nav.Link
-      className="mb-1"
-      key={value}
-      href={'/products/' + eval(index + 1)}
-    >
-      {value}
+    <Nav.Link>
+      <Link className="mb-1" key={value} to={'/products/' + eval(index + 1)}>
+        {value}
+      </Link>
     </Nav.Link>
   ))
   const productBrandSidebar = productBrand.map(value => (
-    <Nav.Link className="mb-1" key={value} href={'/products/' + value}>
-      {value}
+    <Nav.Link>
+      <Link className="mb-1" key={value} to={'/products/' + value}>
+        {value}
+      </Link>
     </Nav.Link>
   ))
   return (
