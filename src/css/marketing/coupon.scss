@@ -2,6 +2,10 @@ $primary: #cea160;
 $font-family-base: '微軟正黑體', sans-serif;
 //按鈕樣式
 
+<<<<<<< HEAD
+// @import '~bootstrap/scss/bootstrap.scss';
+=======
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 .marketing .nav-link {
   color: #78605c;
   background-color: #fff3e0;
@@ -17,7 +21,11 @@ $font-family-base: '微軟正黑體', sans-serif;
 }
 .marketing-nav {
   background-color: #fff3e0;
+<<<<<<< HEAD
+  width: 45vw;
+=======
   width: 30vw;
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
   border: #858585 solid 1px;
 }
 .marketing .coupon-box {
@@ -49,6 +57,11 @@ $font-family-base: '微軟正黑體', sans-serif;
   border-top: #b2a190 solid 10px;
   border-bottom: #ffffff 1px solid;
 }
+<<<<<<< HEAD
+.coupon {
+  text-align: center;
+}
+=======
 .couponlistnav .CouponListNavAC.active {
   border-top: #b2a190 solid 10px;
   border-bottom: #ffffff 1px solid;
@@ -66,3 +79,4 @@ $font-family-base: '微軟正黑體', sans-serif;
 .CouponList3.active {
   display: table;
 }
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303

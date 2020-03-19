@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+import React, { useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { plusQuantity, minusQuantity, getProductDetail } from './actions/index'
+=======
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -8,6 +15,7 @@ import {
   plusQuantity,
   minusQuantity,
 } from './actions/index'
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 import {
   Container,
   Row,
@@ -15,6 +23,10 @@ import {
   Image,
   ButtonGroup,
   Button,
+<<<<<<< HEAD
+  Form,
+=======
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
   Accordion,
   Card,
 } from 'react-bootstrap'
@@ -28,6 +40,12 @@ import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
 
 const ProductDetail = props => {
+<<<<<<< HEAD
+  const pId = props.match.params.pId ? props.match.params.pId : ''
+  useEffect(() => {
+    props.getProductDetail(pId)
+  }, [])
+=======
   const [mycart, setMycart] = useState([])
   const pId = props.match.params.pId ? props.match.params.pId : ''
 
@@ -48,6 +66,7 @@ const ProductDetail = props => {
     props.getProductDetail(pId)
   }, [])
 
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
   console.log(props.detail)
   return (
     <Container>
@@ -58,11 +77,76 @@ const ProductDetail = props => {
             <Breadcrumb />
           </Row>
           <Row className="mb-5">
+<<<<<<< HEAD
+            <Col md={5}>
+=======
             <Col md={5} className="text-center">
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
               <Image src="https://via.placeholder.com/370" thumbnail />
             </Col>
             <Col md={4}>
               <h3>{props.detail.pName}</h3>
+<<<<<<< HEAD
+              <h4>${props.detail.pPrice}</h4>
+              <Form.Label>--尺寸</Form.Label>
+              <br />
+              <ButtonGroup>
+                <Button
+                  className="rounded border-dark bg-light text-dark mx-2"
+                  type="radio"
+                  name="radio"
+                  defaultValue="sm"
+                >
+                  小
+                </Button>
+                <Button
+                  className="rounded border-dark bg-light text-dark mx-2"
+                  type="radio"
+                  name="radio"
+                  defaultValue="md"
+                >
+                  中
+                </Button>
+                <Button
+                  className="rounded border-dark bg-light text-dark mx-2"
+                  type="radio"
+                  name="radio"
+                  defaultValue="lg"
+                >
+                  大
+                </Button>
+              </ButtonGroup>
+              <br />
+              <Form.Label className="mt-2">--顏色</Form.Label>
+              <br />
+              <ButtonGroup>
+                <Button
+                  className="rounded btn-primary mx-2"
+                  type="radio"
+                  name="radio"
+                  value="blue"
+                />
+                <Button
+                  className="rounded btn-danger mx-2"
+                  type="radio"
+                  name="radio"
+                  value="red"
+                />
+                <Button
+                  className="rounded btn-info mx-2"
+                  type="radio"
+                  name="radio"
+                  value="green"
+                />
+              </ButtonGroup>
+              <br />
+              <div className="mt-3 d-flex justify-content-between">
+                <Button className="mb-md-2 " variant="primary " size="lg">
+                  <MdAddShoppingCart className="mb-1" />
+                  加入購物車
+                </Button>
+
+=======
               <br />
               <h6>{props.detail.pInfo}</h6>
               <br />
@@ -85,6 +169,7 @@ const ProductDetail = props => {
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                 <ButtonGroup className="mb-md-2" size="md">
                   <Button
                     className="border-dark bg-light text-dark"
@@ -116,7 +201,11 @@ const ProductDetail = props => {
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
+<<<<<<< HEAD
+                  size="lg"
+=======
                   size="md"
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                 >
                   <MdPlaylistAdd className="mb-md-1" />
                   加入清單
@@ -124,7 +213,11 @@ const ProductDetail = props => {
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
+<<<<<<< HEAD
+                  size="lg"
+=======
                   size="md"
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                 >
                   <MdShoppingCart className="mb-md-1" />
                   快速結帳
@@ -204,10 +297,17 @@ const ProductDetail = props => {
             </Col>
           </Row>
           <Row>
+<<<<<<< HEAD
+            {/* <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard /> */}
+=======
             {props.list &&
               props.list.map((value, index) => {
                 return <ProductCard key={index} data={props.list[index]} />
               })}
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
           </Row>
         </Col>
       </Row>
@@ -216,16 +316,24 @@ const ProductDetail = props => {
 }
 
 const mapStateToProps = store => {
+<<<<<<< HEAD
+  return { total: store.counter, detail: store.getProduct }
+=======
   return {
     list: store.getProducts,
     total: store.counter,
     detail: store.getProductDetail,
   }
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
+<<<<<<< HEAD
+    { plusQuantity, minusQuantity, getProductDetail },
+=======
     { getProducts, getProductDetail, plusQuantity, minusQuantity },
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
     dispatch
   )
 }

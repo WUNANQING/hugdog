@@ -1,0 +1,39 @@
+//blog css
+.banner {
+  width: 100%;
+  height: 500px;
+  background-image: url(../../images/knowledge/bannerv2.jpg);
+  background-size: cover;
+}
+
+.blog-post {
+  padding: 10px;
+}
+
+//question css
+
+.banner {
+  margin: 20px, 0;
+}
+.bgColor {
+  background-color: #b8b4b8;
+}
+.askquestion {
+  margin: 10px;
+  justify-content: center;
+}
+
+//parter css
+
+.partnercard {
+  width: '30rem';
+  margin: 10px;
+
+  .carddate {
+    margin: 2px, 15px, 0, 5px;
+  }
+
+  div {
+    // justify-self: right;
+  }
+}

@@ -1,9 +1,17 @@
+<<<<<<< HEAD
+import React from 'react'
+=======
 import React, { useEffect } from 'react'
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 import { Nav, Navbar, Form, Button, Col, Row, Table } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 // import { FiSearch, FiHeart } from 'react-icons/fi'
 // import { GiTicket } from 'react-icons/gi'
 // import { IconContext } from 'react-icons'
+<<<<<<< HEAD
+import '../../css/marketing/coupon.scss'
+function CouponList(props) {
+=======
 import $ from 'jquery'
 import '../../css/marketing/coupon.scss'
 function CouponList(props) {
@@ -54,10 +62,26 @@ function CouponList(props) {
         .removeClass('active')
     })
   }, [])
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
   return (
     <>
       <div className="container">
         <div className="couponlistnav">
+<<<<<<< HEAD
+          <head-nav className="border-bottom mb-3 justify-content-around d-flex">
+            <Nav bg="white" variant="light" expand="md">
+              <Nav className="mr-auto nav-menu">
+                <Nav.Link href="#news">未使用</Nav.Link>
+                <Nav.Link href="#newds">已使用</Nav.Link>
+                <Nav.Link href="#newdss">以過期</Nav.Link>
+              </Nav>
+            </Nav>
+            <div></div>
+            <div></div>
+          </head-nav>
+          <div className="coupon">
+            <Table striped bordered hover variant="light">
+=======
           <head-nav className="border-bottom mb-3 ">
             <Nav bg="white" variant="light" expand="md">
               <Nav className="mr-auto nav-menu">
@@ -171,6 +195,7 @@ function CouponList(props) {
               variant="light"
               className="CouponList3"
             >
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
               <thead>
                 <tr>
                   <th>編號</th>

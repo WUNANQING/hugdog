@@ -1,10 +1,16 @@
+<<<<<<< HEAD
+import React, { useState } from 'react'
+=======
 import React, { useState, useEffect } from 'react'
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap'
 import { ReactComponent as Logo } from '../../images/logo-dark.svg'
 
 const Checkout = () => {
   function Receipt() {
     const [show, setShow] = useState(false)
+<<<<<<< HEAD
+=======
     const [mycart, setMycart] = useState([])
 
     //提取購物車資料
@@ -33,6 +39,7 @@ const Checkout = () => {
       (new Date().getMonth() + 1) +
       '/' +
       new Date().getDate()
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 
     return (
       <>
@@ -42,7 +49,11 @@ const Checkout = () => {
           size="lg"
           onClick={() => setShow(true)}
         >
+<<<<<<< HEAD
+          檢視訂單摘要：NT$100
+=======
           檢視訂單摘要：NT${sum(mycart)}
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
         </Button>
         <Modal centered size="md" show={show} onHide={() => setShow(false)}>
           <Modal.Header>
@@ -57,6 +68,22 @@ const Checkout = () => {
                 </Col>
               </Row>
               <Row className="show-grid">
+<<<<<<< HEAD
+                <Col>時間:2020-01-03</Col>
+              </Row>
+              <hr className="mt-1" />
+              <Row className="show-grid">
+                <Col>商品名稱:狗飼料</Col>
+              </Row>
+              <Row className="show-grid">
+                <Col>
+                  <div className="d-flex justify-content-between">
+                    <div>價格*數量</div>
+                    <div>小計:100</div>
+                  </div>
+                </Col>
+              </Row>
+=======
                 <Col>時間:{time}</Col>
               </Row>
               <hr className="mt-1" />
@@ -84,6 +111,7 @@ const Checkout = () => {
                   </>
                 )
               })}
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
               <Row className="show-grid">
                 <Col>
                   <div className="d-flex justify-content-between">
@@ -97,7 +125,11 @@ const Checkout = () => {
                 <Col>
                   <div className="d-flex justify-content-between">
                     <div>合計</div>
+<<<<<<< HEAD
+                    <div>總計:0</div>
+=======
                     <div>總計:{sum(mycart)}</div>
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                   </div>
                 </Col>
               </Row>
@@ -228,6 +260,8 @@ const Checkout = () => {
                     <option>縣/市</option>
                     <option>基隆市</option>
                     <option>臺北市</option>
+<<<<<<< HEAD
+=======
                     <option>新北市</option>
                     <option>臺北市</option>
                     <option>臺北市</option>
@@ -235,6 +269,7 @@ const Checkout = () => {
                     <option>臺北市</option>
                     <option>臺北市</option>
                     <option>臺北市</option>
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} xs={12} md={5}>
