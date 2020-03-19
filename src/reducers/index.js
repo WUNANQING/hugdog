@@ -20,6 +20,17 @@ const getMember = (state = [], action) => {
       return state
   }
 }
+const getDog = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_DOG': {
+      console.log(action.data)
+      return action.data
+    }
+
+    default:
+      return state
+  }
+}
 const getProduct = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_PRODUCT':
@@ -71,6 +82,7 @@ const rootReducer = combineReducers({
   getProduct,
   saveProductToCart,
   getMember,
+  getDog,
 })
 
 export { rootReducer }
