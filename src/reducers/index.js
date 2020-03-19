@@ -53,7 +53,7 @@ const getDog = (state = [], action) => {
     default:
       return state
   }
-}
+
 const rootReducer = combineReducers({
   getMember,
   counter,
