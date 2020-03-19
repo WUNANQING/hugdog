@@ -10,25 +10,25 @@ const counter = (state = 1, action) => {
       return state
   }
 }
-<<<<<<< HEAD
+
 const getProduct = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_PRODUCT':
-=======
+
 //商品列表
 const getProducts = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_PRODUCTS':
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
+
       return action.data
     default:
       return state
   }
 }
-<<<<<<< HEAD
+
 
 const rootReducer = combineReducers({ counter, getProduct })
-=======
+
 //商品細節
 const getProductDetail = (state = [], action) => {
   switch (action.type) {
@@ -82,6 +82,6 @@ const rootReducer = combineReducers({
   getProducts,
   getProductDetail,
 })
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
+
 
 export { rootReducer }
