@@ -32,6 +32,7 @@ const Products = props => {
   )
   //props.list==[{...}, {....},{...}]陣列內儲存商品的資料
   //分頁顯示
+
   let items = []
   for (let number = 1; number <= props.list.length; number++) {
     items.push(<Pagination.Item key={number}>{number}</Pagination.Item>)
