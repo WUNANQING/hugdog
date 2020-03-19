@@ -42,14 +42,14 @@ class App extends React.Component {
       $('.coupon').toggle('disappear')
     })
 
-    const speed = '5'
-    $('#speed').val(
-      '您的位置為: (' +
-        $('.box').css('top') +
-        ' ,' +
-        $('.box').css('left') +
-        ')'
-    )
+    // const speed = '5'
+    // $('#speed').val(
+    //   '您的位置為: (' +
+    //     $('.box').css('top') +
+    //     ' ,' +
+    //     $('.box').css('left') +
+    //     ')'
+    // )
     $(document).ready(function() {
       animateDiv()
     })
