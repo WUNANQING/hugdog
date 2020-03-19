@@ -35,7 +35,7 @@ const DogInfo = props => {
     <div class="tab-content content" id="content1">
       <div>
         <h3>
-          我的優惠
+          最愛保姆
           <br />
         </h3>
         <div class="row">
