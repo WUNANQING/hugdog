@@ -41,7 +41,7 @@ function Partner() {
                   </Col>
                 </Row>
               </Tab>
-              <Tab eventKey="Closed" title="已結束">
+              <Tab eventKey="Closed" title="預告">
                 <Row>
                   <Col xs={12} md={6}>
                     <PartnerClosed />

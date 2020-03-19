@@ -30,9 +30,11 @@ function PartnerClosed() {
           <Card.Text>
             針對毛孩教養時發生的日常行為問題，特別開設「正向行為禮貌養成班」，協助飼主引導毛孩學會基礎服從指令
           </Card.Text>
-          <Button variant="outline-primary" disabled>
-            已截止
-          </Button>
+          <div className="text-right">
+            <Button variant="outline-primary" disabled>
+              尚未開始報名
+            </Button>
+          </div>
         </Card.Body>
       </Card>
     </>
