@@ -15,7 +15,6 @@ import BonusPoints from './pages/Marketing/BonusPoints1'
 import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
 import MemberLogin from './pages/member/memberLogin'
-import MemberRegister from './pages/member/member-register'
 function App() {
   return (
     <Router>
@@ -61,9 +60,6 @@ function App() {
             </Route>
             <Route path="/login">
               <MemberLogin />
-            </Route>
-            <Route path="/register">
-              <MemberRegister />
             </Route>
           </Switch>
         </section>
