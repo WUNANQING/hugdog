@@ -4,7 +4,8 @@ import $ from 'jquery'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getMemberData } from './actions/index'
+import { getMemberData, getMemberDetail } from './actions/index'
+import Breadcrumb from '../../components/Breadcrumbs'
 import {
   Form,
   FormControl,
@@ -19,55 +20,68 @@ import MemberSidebar from '../../components/member/member-sidebar'
 import '../../css/member/member-login.scss'
 
 const MemberLogin = props => {
-  const mId = props.data[0] ? props.data[0].mId : ''
-  const mAccount = props.data[0] ? props.data[0].mAccount : ''
-  const mPassword = props.data[0] ? props.data[0].mPassword : ''
+  // const mId = props.data[0] ? props.data[0].mId : ''
+  // const mAccount = props.data[0] ? props.data[0].mAccount : ''
+  // const mPassword = props.data[0] ? props.data[0].mPassword : ''
+  // const mName = props.match.params.mName ? props.match.params.mName : ''
   $('.login-btn').click(function() {
     console.log('輸入帳號: ' + $('#exampleInputAccount1').val())
     console.log('輸入密碼: ' + $('#exampleInputPassword1').val())
-    console.log('帳號: ' + mAccount)
-    console.log('密碼: ' + mPassword)
-    if (
-      $('#exampleInputAccount1').val() === mAccount &&
-      $('#exampleInputPassword1').val() === mPassword
-    ) {
-      console.log('正確')
-      $('.alertBox')
-        .removeClass('disappear')
-        .addClass('appear')
-        .text('登入成功', 2000)
-      window.location.replace('http://localhost:3000/member/')
-    }
-    if ($('#exampleInputAccount1').val() === '') {
-      // alert('帳號不能為空白')
-      $('.alertBox')
-        .removeClass('disappear')
-        .addClass('appear')
-        .text('帳號不能為空白')
-    }
-    // if ($('#exampleInputAccount1').length < 3) {
-    //   alert('帳號要大於三位')
-    // }
-    if ($('#exampleInputPassword1').val() === '') {
-      // alert('密碼不能為空白')
-      $('.alertBox')
-        .removeClass('disappear')
-        .addClass('appear')
-        .text('密碼不能為空白')
-    }
-    // if ($('#exampleInputPassword1').length < 3) {
-    //   alert('密碼要大於三位')
-    // }
-    else {
-      console.log('不正確')
-      // alert('帳號或密碼錯誤')
-      $('.alertBox')
-        .removeClass('disappear')
-        .addClass('appear')
-        .text('帳號或密碼錯誤')
+    // console.log('帳號: ' + mAccount)
+    // console.log('密碼: ' + mPassword)
+
+    // console.log(mName)
+    for (let i = 0; i <= props.data.length; i++) {
+      var mId = props.data[i] ? props.data[i].mId : ''
+      var mAccount = props.data[i] ? props.data[i].mAccount : ''
+      var mPassword = props.data[i] ? props.data[i].mPassword : ''
+      // console.log(props.data[i].mId)
+      if (
+        $('#exampleInputAccount1').val() === mAccount &&
+        $('#exampleInputPassword1').val() === mPassword
+      ) {
+        console.log('正確')
+        $('.alertBox')
+          .removeClass('disappear')
+          .addClass('appear')
+          .text('登入成功', 2000)
+        // window.location.replace('http://localhost:3000/member/')
+        const member = props.data[i]
+        console.log('memberID:  ' + member.mId)
+        console.log('memberNAME:  ' + member.mName)
+      }
+      if ($('#exampleInputAccount1').val() === '') {
+        // alert('帳號不能為空白')
+        $('.alertBox')
+          .removeClass('disappear')
+          .addClass('appear')
+          .text('帳號不能為空白')
+      }
+      // if ($('#exampleInputAccount1').length < 3) {
+      //   alert('帳號要大於三位')
+      // }
+      if ($('#exampleInputPassword1').val() === '') {
+        // alert('密碼不能為空白')
+        $('.alertBox')
+          .removeClass('disappear')
+          .addClass('appear')
+          .text('密碼不能為空白')
+      }
+      // if ($('#exampleInputPassword1').length < 3) {
+      //   alert('密碼要大於三位')
+      // }
+      else {
+        console.log('不正確')
+        // alert('帳號或密碼錯誤')
+        $('.alertBox')
+          .removeClass('disappear')
+          .addClass('appear')
+          .text('帳號或密碼錯誤')
+      }
     }
   })
   useEffect(() => {
+    // props.getMemberDetail(mId)
     props.getMemberData()
 
     $('.show').click(function() {
@@ -84,8 +98,6 @@ const MemberLogin = props => {
     const password = $('#exampleInputPassword1').val()
   }, [])
 
-  const memberData = props.data
-  // console.log(memberData)
   return (
     <>
       <div className="container">
@@ -145,7 +157,7 @@ const MemberLogin = props => {
                   <p>還沒有註冊帳號?</p>
                 </div>
                 <div>
-                  <Link class=" " to="/register">
+                  <Link class="" to="/register">
                     <p>立即註冊→</p>
                   </Link>
                 </div>
@@ -158,9 +170,9 @@ const MemberLogin = props => {
   )
 }
 const mapStateToProps = store => {
-  return { data: store.getMember }
+  return { data: store.getMember, detail: store.getMemberDetail }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getMemberData }, dispatch)
+  return bindActionCreators({ getMemberData, getMemberDetail }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MemberLogin)

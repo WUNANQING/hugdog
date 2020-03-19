@@ -10,15 +10,25 @@ const counter = (state = 1, action) => {
       return state
   }
 }
+
+const getProduct = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_PRODUCT':
+
 //商品列表
 const getProducts = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_PRODUCTS':
+
       return action.data
     default:
       return state
   }
 }
+
+
+const rootReducer = combineReducers({ counter, getProduct })
+
 //商品細節
 const getProductDetail = (state = [], action) => {
   switch (action.type) {
@@ -72,5 +82,6 @@ const rootReducer = combineReducers({
   getProducts,
   getProductDetail,
 })
+
 
 export { rootReducer }
