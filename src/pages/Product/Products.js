@@ -4,19 +4,17 @@ import { withRouter } from 'react-router-dom'
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
-import { Container, Row, Col, Pagination } from 'react-bootstrap'
+import { Container, Row, Col, Pagination, Nav } from 'react-bootstrap'
 
 //redux
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getProducts } from './actions/index'
+import { getProductData } from './actions/index'
 
 const Products = props => {
-  //console.log(props.list)確認是否抓到store的reducers回傳的狀態
-
   useEffect(() => {
-    props.getProducts()
+    props.getProductData()
   }, [])
 
   let sort = (
@@ -32,7 +30,7 @@ const Products = props => {
   )
   //分頁顯示
   let items = []
-  for (let number = 1; number <= props.list.length; number++) {
+  for (let number = 1; number <= props.data.length; number++) {
     items.push(<Pagination.Item key={number}>{number}</Pagination.Item>)
   }
   const paginationBasic = (
@@ -40,7 +38,7 @@ const Products = props => {
       {items}
     </Pagination>
   )
-
+  
   return (
     <Container>
       <Row className="my-5">
@@ -49,10 +47,9 @@ const Products = props => {
           <Breadcrumb />
           {sort}
           <Row>
-            {props.list &&
-              props.list.map((value, index) => {
-                return <ProductCard key={index} data={props.list[index]} />
-              })}
+            {props.data.map((value, index) => {
+              return <ProductCard key={index} data={props.data[index]} />
+            })}
           </Row>
           {paginationBasic}
         </Col>
@@ -63,10 +60,10 @@ const Products = props => {
 
 //選擇對應的reducer，將其狀態淺拷貝到此元件的props
 const mapStateToProps = store => {
-  return { list: store.getProducts }
+  return { data: store.getProduct }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProducts }, dispatch)
+  return bindActionCreators({ getProductData }, dispatch)
 }
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Products)

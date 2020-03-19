@@ -9,11 +9,11 @@ export const minusQuantity = quantity => ({
 })
 
 //跟server要商品資料(全部)
-export const showProducts = data => {
-  return { type: 'SHOW_PRODUCTS', data }
+export const showProduct = data => {
+  return { type: 'SHOW_PRODUCT', data }
 }
 
-export const getProducts = () => {
+export const getProductData = () => {
   return async dispatch => {
     const req = new Request(`http://localhost:6001/products`, {
       method: 'GET',
@@ -22,7 +22,7 @@ export const getProducts = () => {
     const res = await fetch(req)
     const data = await res.json()
     //console.log(data.product) //後端將資料儲存在物件中key=product，因此需要用成員運算子{product:[{...},{...}]}
-    dispatch(showProducts(data.product))
+    dispatch(showProduct(data.product))
   }
 }
 
@@ -42,3 +42,24 @@ export const getProductDetail = pId => {
     dispatch(showProductDetail(data))
   }
 }
+
+//加入購物車，傳入商品細節內容，用物件儲存
+export const saveProductSizeToCart = size => ({
+  type: 'SAVE_SIZE',
+  size,
+})
+
+export const saveProductColorToCart = color => ({
+  type: 'SAVE_COLOR',
+  color,
+})
+
+export const saveProductQTYToCart = qty => ({
+  type: 'SAVE_QTY',
+  qty,
+})
+
+export const saveProductToCart = product => ({
+  type: 'SAVE_PRODUCT',
+  product,
+})

@@ -1,6 +1,4 @@
-import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import { FaPaw } from 'react-icons/fa'
 import { Col, Card, Nav } from 'react-bootstrap'
 
@@ -24,18 +22,14 @@ const ProductCard = props => {
             <FaPaw />
           </div>
           <div className="d-md-flex justify-content-around">
-            <Nav.Link>
-              <Link
-                to={'/productdetail/' + props.data.pId}
-                className="btn btn-primary border p-0"
-              >
-                查看商品
-              </Link>
+            <Nav.Link
+              href={'/productdetail/' + props.data.pId}
+              className="btn btn-primary border p-0"
+            >
+              查看商品
             </Nav.Link>
-            <Nav.Link>
-              <Link to="/cart" className="btn btn-primary border p-0">
-                快速結帳
-              </Link>
+            <Nav.Link href="/cart" className="btn btn-primary border p-0">
+              快速結帳
             </Nav.Link>
           </div>
         </Card.Body>
@@ -44,4 +38,4 @@ const ProductCard = props => {
   )
 }
 
-export default withRouter(ProductCard)
+export default ProductCard
