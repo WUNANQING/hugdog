@@ -42,7 +42,7 @@ const ProductDetail = props => {
   useEffect(() => {
     props.getProductDetail(pId)
     props.getProducts()
-  }, [])
+  }, [props.match.params.pId])
 
   return (
     <Container>
