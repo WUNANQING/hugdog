@@ -28,50 +28,49 @@ const getProductDetail = (state = [], action) => {
       return state
   }
 }
-//購物車列表
-const saveProductToCart = (state = {}, action) => {
-  switch (action.type) {
-    case 'SAVE_SIZE':
-      return {
-        ...state, //size:['pId',size]
-        [action.size[0]]: { ...state[action.size[0]], size: action.size[1] }, //=={['pId']:{pId:'pId',size:'size'}}
-      }
-    case 'SAVE_COLOR':
-      return {
-        ...state,
-        [action.color[0]]: {
-          ...state[action.color[0]],
-          color: action.color[1], //==color:['pId',color]
-        },
-      }
-    case 'SAVE_QTY':
-      return {
-        ...state,
-        [action.qty[0]]: { ...state[action.qty[0]], qty: action.qty[1] }, //==qty:['pId',qty]
-      }
-    case 'SAVE_PRODUCT':
-      return {
-        //==product:['pId','pName','total',true]
-        // == {['pId']:{pId;'pId', pName:'pName', qty:'qty', isAddcart: true}}
-        ...state,
-        [action.product[0]]: {
-          ...state[action.product[0]],
-          pName: action.product[1],
-          pPrice: action.product[2],
-          qty: action.product[3],
-          isAddCart: action.product[4],
-        },
-      }
-    default:
-      return state
-  }
-}
+//購物車列表先不用
+// const saveProductToCart = (state = {}, action) => {
+//   switch (action.type) {
+//     case 'SAVE_SIZE':
+//       return {
+//         ...state, //size:['pId',size]
+//         [action.size[0]]: { ...state[action.size[0]], size: action.size[1] }, //=={['pId']:{pId:'pId',size:'size'}}
+//       }
+//     case 'SAVE_COLOR':
+//       return {
+//         ...state,
+//         [action.color[0]]: {
+//           ...state[action.color[0]],
+//           color: action.color[1], //==color:['pId',color]
+//         },
+//       }
+//     case 'SAVE_QTY':
+//       return {
+//         ...state,
+//         [action.qty[0]]: { ...state[action.qty[0]], qty: action.qty[1] }, //==qty:['pId',qty]
+//       }
+//     case 'SAVE_PRODUCT':
+//       return {
+//         //==product:['pId','pName','total',true]
+//         // == {['pId']:{pId;'pId', pName:'pName', qty:'qty', isAddcart: true}}
+//         ...state,
+//         [action.product[0]]: {
+//           ...state[action.product[0]],
+//           pName: action.product[1],
+//           pPrice: action.product[2],
+//           qty: action.product[3],
+//           isAddCart: action.product[4],
+//         },
+//       }
+//     default:
+//       return state
+//   }
+// }
 
 const rootReducer = combineReducers({
   counter,
   getProducts,
   getProductDetail,
-  saveProductToCart,
 })
 
 export { rootReducer }

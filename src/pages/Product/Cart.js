@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  Container,
-  Row,
-  Col,
-  ButtonGroup,
-  Button,
-  Card,
-  Nav,
-} from 'react-bootstrap'
+import { Container, Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap'
 import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
 
 import { withRouter } from 'react-router-dom'

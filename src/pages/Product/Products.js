@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux'
 import { getProducts } from './actions/index'
 
 const Products = props => {
-  console.log(props.list)
+  //console.log(props.list)確認是否抓到store的reducers回傳的狀態
 
   useEffect(() => {
     props.getProducts()

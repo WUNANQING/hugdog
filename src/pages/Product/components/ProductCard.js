@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { FaPaw } from 'react-icons/fa'
@@ -44,4 +44,4 @@ const ProductCard = props => {
   )
 }
 
-export default ProductCard
+export default withRouter(ProductCard)

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap'
 import { ReactComponent as Logo } from '../../images/logo-dark.svg'
-import { useStore } from 'react-redux'
 
 const Checkout = () => {
   function Receipt() {
@@ -27,6 +26,13 @@ const Checkout = () => {
       }
       return total
     }
+    //訂單時間
+    const time =
+      new Date().getFullYear() +
+      '/' +
+      (new Date().getMonth() + 1) +
+      '/' +
+      new Date().getDate()
 
     return (
       <>
@@ -51,7 +57,7 @@ const Checkout = () => {
                 </Col>
               </Row>
               <Row className="show-grid">
-                <Col>時間:2020-01-03</Col>
+                <Col>時間:{time}</Col>
               </Row>
               <hr className="mt-1" />
               {mycart.map((value, index) => {
@@ -91,7 +97,7 @@ const Checkout = () => {
                 <Col>
                   <div className="d-flex justify-content-between">
                     <div>合計</div>
-                    <div>總計:0</div>
+                    <div>總計:{sum(mycart)}</div>
                   </div>
                 </Col>
               </Row>
@@ -221,6 +227,13 @@ const Checkout = () => {
                   <Form.Control name="county" as="select" size="lg">
                     <option>縣/市</option>
                     <option>基隆市</option>
+                    <option>臺北市</option>
+                    <option>新北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
                     <option>臺北市</option>
                   </Form.Control>
                 </Form.Group>
