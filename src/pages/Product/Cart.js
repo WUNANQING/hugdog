@@ -25,8 +25,11 @@ const Cart = () => {
   }
   //刪除商品
   function deleteItem(index) {
+    console.log(index)
     let currentCart = JSON.parse(localStorage.getItem('cart')) || []
     currentCart.splice(index, 1)
+    // console.log(currentCart2)
+    localStorage.setItem('cart', JSON.stringify(currentCart))
     setMycart(currentCart)
   }
   //從localStorage取得購物車資料
@@ -185,7 +188,7 @@ const Cart = () => {
                       variant="primary"
                       size="md"
                       onClick={() => {
-                        deleteItem(Number(index))
+                        deleteItem(index)
                       }}
                     >
                       <MdDelete className="mb-md-1" />
