@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
 import {
   Form,
@@ -10,17 +10,12 @@ import {
 } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../css/member/member-info.scss'
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: 'WTF',
-      text: '222',
-    }
-    console.log('constrctor')
-  }
-
-  componentDidMount() {
+import Coupon from '../../components/member/member-item/coupon'
+import Cart from '../../components/member/member-item/cart'
+import Favorite from '../../components/member/member-item/favorite'
+import Order from '../../components/member/member-item/order'
+const MemberInfo = props => {
+  useEffect(() => {
     //需要搭配箭頭函式才能使用list
     $('.nav-item').click(function() {
       let effect = $(this).data('effect')
@@ -56,6 +51,7 @@ class App extends React.Component {
         .find('a')
         .addClass('active')
     })
+<<<<<<< HEAD
   }
   render() {
     return (
@@ -641,11 +637,77 @@ class App extends React.Component {
                 </div>
               </div>
             </div>
+=======
+  }, [])
+  return (
+    <div className="Member container">
+      <div className="member-info d-flex">
+        <div className="member-content d-flex row ">
+          <div className="member-sidebar w120">
+            <Nav>
+              <Nav.Link className="member-sidebar-text" href="/member">
+                首頁
+              </Nav.Link>
+              <Nav.Link
+                className="member-sidebar-text"
+                href="/member/member-info"
+              >
+                個人資訊
+              </Nav.Link>
+
+              <Nav.Link
+                className="member-sidebar-text"
+                href="/member/member-item"
+              >
+                商品查詢
+              </Nav.Link>
+              <Nav.Link
+                className="member-sidebar-text"
+                href="/member/member-service"
+              >
+                服務查詢
+              </Nav.Link>
+              <Nav.Link
+                className="member-sidebar-text"
+                href="/member/member-activity"
+              >
+                活動查詢
+              </Nav.Link>
+            </Nav>
+          </div>
+          <div class=" wrapper">
+            <ul class="nav nav-tabs">
+              <li class="nav-item" id="pokemon1" data-effect="show1">
+                <Link class="nav-link active" to="#">
+                  我的優惠
+                </Link>
+              </li>
+              <li class="nav-item" id="pokemon2" data-effect="show2">
+                <Link class="nav-link" to="#">
+                  我的訂單
+                </Link>
+              </li>
+              <li class="nav-item" id="pokemon3" data-effect="show3">
+                <Link class="nav-link" to="#">
+                  我的最愛
+                </Link>
+              </li>
+              <li class="nav-item" id="pokemon4" data-effect="show4">
+                <Link class="nav-link" to="#">
+                  購物車
+                </Link>
+              </li>
+            </ul>
+            <Coupon />
+            <Order />
+            <Favorite />
+            <Cart />
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default App
+export default MemberInfo

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
 import {
   Form,
@@ -10,17 +10,11 @@ import {
 } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../css/member/member-info.scss'
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: 'WTF',
-      text: '222',
-    }
-    console.log('constrctor')
-  }
-
-  componentDidMount() {
+import Comment from '../../components/member/member-service/comment'
+import FavoriteNanny from '../../components/member/member-service/favoriteNanny'
+import ServiceOrder from '../../components/member/member-service/serviceOrder'
+const MemberInfo = props => {
+  useEffect(() => {
     //需要搭配箭頭函式才能使用list
     $('.nav-item').click(function() {
       let effect = $(this).data('effect')
@@ -30,16 +24,19 @@ class App extends React.Component {
           $('#content1').fadeIn()
           $('#content2').fadeOut()
           $('#content3').fadeOut()
+
           break
         case 'show2':
           $('#content1').fadeOut()
           $('#content2').fadeIn()
           $('#content3').fadeOut()
+
           break
         case 'show3':
           $('#content1').fadeOut()
           $('#content2').fadeOut()
           $('#content3').fadeIn()
+
           break
       }
       $('.nav-link').removeClass('active')
@@ -47,6 +44,7 @@ class App extends React.Component {
         .find('a')
         .addClass('active')
     })
+<<<<<<< HEAD
   }
   render() {
     return (
@@ -496,11 +494,72 @@ class App extends React.Component {
                 </div>
               </div>
             </div>
+=======
+  }, [])
+  return (
+    <div className="Member container">
+      <div className="member-info d-flex">
+        <div className="member-content d-flex row ">
+          <div className="member-sidebar w120">
+            <Nav>
+              <Nav.Link className="member-sidebar-text" href="/member">
+                首頁
+              </Nav.Link>
+              <Nav.Link
+                className="member-sidebar-text"
+                href="/member/member-info"
+              >
+                個人資訊
+              </Nav.Link>
+
+              <Nav.Link
+                className="member-sidebar-text"
+                href="/member/member-item"
+              >
+                商品查詢
+              </Nav.Link>
+              <Nav.Link
+                className="member-sidebar-text"
+                href="/member/member-service"
+              >
+                服務查詢
+              </Nav.Link>
+              <Nav.Link
+                className="member-sidebar-text"
+                href="/member/member-activity"
+              >
+                活動查詢
+              </Nav.Link>
+            </Nav>
+          </div>
+          <div class=" wrapper">
+            <ul class="nav nav-tabs">
+              <li class="nav-item" id="pokemon1" data-effect="show1">
+                <Link class="nav-link active" to="#">
+                  保姆訂單查詢
+                </Link>
+              </li>
+              <li class="nav-item" id="pokemon2" data-effect="show2">
+                <Link class="nav-link" to="#">
+                  最愛保姆
+                </Link>
+              </li>
+              <li class="nav-item" id="pokemon3" data-effect="show3">
+                <Link class="nav-link" to="#">
+                  評論紀錄
+                </Link>
+              </li>
+            </ul>
+
+            <FavoriteNanny />
+            <ServiceOrder />
+            <Comment />
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default App
+export default MemberInfo

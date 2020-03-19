@@ -42,6 +42,7 @@ class App extends React.Component {
       $('.coupon').toggle('disappear')
     })
 
+<<<<<<< HEAD
     const speed = '5'
     $('#speed').val(
       '您的位置為: (' +
@@ -50,6 +51,16 @@ class App extends React.Component {
         $('.box').css('left') +
         ')'
     )
+=======
+    // const speed = '5'
+    // $('#speed').val(
+    //   '您的位置為: (' +
+    //     $('.box').css('top') +
+    //     ' ,' +
+    //     $('.box').css('left') +
+    //     ')'
+    // )
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
     $(document).ready(function() {
       animateDiv()
     })

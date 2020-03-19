@@ -114,7 +114,11 @@ function Member() {
           </div>
         </div>
       </Switch>
+<<<<<<< HEAD
       <Pokemon />
+=======
+      {/* <Pokemon /> */}
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
     </>
   )
 }

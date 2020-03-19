@@ -1,10 +1,45 @@
+<<<<<<< HEAD
 import React, { useState } from 'react'
+=======
+import React, { useState, useEffect } from 'react'
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap'
 import { ReactComponent as Logo } from '../../images/logo-dark.svg'
 
 const Checkout = () => {
   function Receipt() {
     const [show, setShow] = useState(false)
+<<<<<<< HEAD
+=======
+    const [mycart, setMycart] = useState([])
+
+    //提取購物車資料
+    function getCartFromLocalStorage() {
+      const newCart = localStorage.getItem('cart') || []
+      setMycart(JSON.parse(newCart))
+    }
+
+    //從localStorage取得購物車資料
+    useEffect(() => {
+      getCartFromLocalStorage()
+    }, [])
+
+    //計算總價
+    const sum = items => {
+      let total = 0
+      for (let i = 0; i < items.length; i++) {
+        total += items[i].pQuantity * items[i].pPrice
+      }
+      return total
+    }
+    //訂單時間
+    const time =
+      new Date().getFullYear() +
+      '/' +
+      (new Date().getMonth() + 1) +
+      '/' +
+      new Date().getDate()
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 
     return (
       <>
@@ -14,7 +49,11 @@ const Checkout = () => {
           size="lg"
           onClick={() => setShow(true)}
         >
+<<<<<<< HEAD
           檢視訂單摘要：NT$100
+=======
+          檢視訂單摘要：NT${sum(mycart)}
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
         </Button>
         <Modal centered size="md" show={show} onHide={() => setShow(false)}>
           <Modal.Header>
@@ -29,6 +68,7 @@ const Checkout = () => {
                 </Col>
               </Row>
               <Row className="show-grid">
+<<<<<<< HEAD
                 <Col>時間:2020-01-03</Col>
               </Row>
               <hr className="mt-1" />
@@ -43,6 +83,35 @@ const Checkout = () => {
                   </div>
                 </Col>
               </Row>
+=======
+                <Col>時間:{time}</Col>
+              </Row>
+              <hr className="mt-1" />
+              {mycart.map((value, index) => {
+                return (
+                  <>
+                    <Row className="show-grid">
+                      <Col>商品名稱:{value.pName}</Col>
+                    </Row>
+                    <Row className="show-grid">
+                      <Col>
+                        <div className="d-flex justify-content-between">
+                          <div>
+                            價格*數量
+                            <br />
+                            {value.pQuantity} * {value.pPrice}
+                          </div>
+                          <div>
+                            <br />
+                            小計:{value.pQuantity * value.pPrice}
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
+                  </>
+                )
+              })}
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
               <Row className="show-grid">
                 <Col>
                   <div className="d-flex justify-content-between">
@@ -56,7 +125,11 @@ const Checkout = () => {
                 <Col>
                   <div className="d-flex justify-content-between">
                     <div>合計</div>
+<<<<<<< HEAD
                     <div>總計:0</div>
+=======
+                    <div>總計:{sum(mycart)}</div>
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                   </div>
                 </Col>
               </Row>
@@ -187,6 +260,16 @@ const Checkout = () => {
                     <option>縣/市</option>
                     <option>基隆市</option>
                     <option>臺北市</option>
+<<<<<<< HEAD
+=======
+                    <option>新北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
+                    <option>臺北市</option>
+>>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} xs={12} md={5}>
