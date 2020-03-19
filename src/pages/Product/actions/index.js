@@ -26,7 +26,6 @@ export const showProducts = data => {
 export const getProducts = () => {
   return async dispatch => {
     const req = new Request(`http://localhost:6001/products`, {
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
       method: 'GET',
       credentials: 'include',
     })
