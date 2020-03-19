@@ -13,8 +13,6 @@ import { bindActionCreators } from 'redux'
 import { getProducts } from './actions/index'
 
 const Products = props => {
-  //console.log(props.list)確認是否抓到store的reducers回傳的狀態
-
   useEffect(() => {
     props.getProducts()
   }, [])
@@ -30,8 +28,6 @@ const Products = props => {
       </select>
     </div>
   )
-  //props.list==[{...}, {....},{...}]陣列內儲存商品的資料
-  //分頁顯示
 
   let items = []
   for (let number = 1; number <= props.list.length; number++) {
