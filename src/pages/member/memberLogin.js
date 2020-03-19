@@ -145,7 +145,7 @@ const MemberLogin = props => {
                   <p>還沒有註冊帳號?</p>
                 </div>
                 <div>
-                  <Link class=" ">
+                  <Link class="" to="/register">
                     <p>立即註冊→</p>
                   </Link>
                 </div>

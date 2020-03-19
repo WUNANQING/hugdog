@@ -91,8 +91,8 @@ function Header(props) {
                 <Link to="/login" className="dropdown-item nav-link">
                   登入
                 </Link>
-                <Link to="#" className="dropdown-item nav-link">
-                  連結2
+                <Link to="/member" className="dropdown-item nav-link">
+                  會員頁測試
                 </Link>
                 <div className="dropdown-divider" role="separator"></div>
                 <Link to="#" className="dropdown-item nav-link">
