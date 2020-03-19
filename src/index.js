@@ -9,7 +9,7 @@ import App from './App'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import { rootReducer } from './pages/Product/reducers/index'
+import { rootReducer } from './reducers/index'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
