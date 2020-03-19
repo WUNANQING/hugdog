@@ -20,13 +20,9 @@ function Header(props) {
           <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
             <Nav className="mr-auto nav-menu">
               <Nav.Link href="#news">最新消息</Nav.Link>
-<<<<<<< HEAD
-              <Nav.Link href="productlist">找商品</Nav.Link>
-=======
               <Nav.Link>
                 <Link to="/products">找商品</Link>
               </Nav.Link>
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
               <NavDropdown title="找服務" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/service/">
                   什麼是保母服務
@@ -49,15 +45,7 @@ function Header(props) {
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="/activity">找活動</Nav.Link>
-<<<<<<< HEAD
-              <NavDropdown title="找知識">
-                <NavDropdown.Item href="/blog">找文章</NavDropdown.Item>
-                <NavDropdown.Item href="/partner">找夥伴</NavDropdown.Item>
-                <NavDropdown.Item href="/question">找答案</NavDropdown.Item>
-              </NavDropdown>
-=======
               <Nav.Link href="/blog">找知識</Nav.Link>
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
               <Nav.Link href="#qa">常見Q&A</Nav.Link>
               <Nav.Link href="/coupon">Test Coupon</Nav.Link>
             </Nav>
@@ -100,19 +88,11 @@ function Header(props) {
                 <AiOutlineUser />
               </IconContext.Provider>
               <div className="dropdown-menu">
-<<<<<<< HEAD
-                <Link to="#" className="dropdown-item nav-link">
-                  連結1
-                </Link>
-                <Link to="#" className="dropdown-item nav-link">
-                  連結2
-=======
                 <Link to="/login" className="dropdown-item nav-link">
                   登入
                 </Link>
                 <Link to="/member" className="dropdown-item nav-link">
                   會員頁測試
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                 </Link>
                 <div className="dropdown-divider" role="separator"></div>
                 <Link to="#" className="dropdown-item nav-link">

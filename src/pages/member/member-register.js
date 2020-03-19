@@ -45,128 +45,83 @@ const MemberLogin = props => {
               <div class="col-md-8">
                 <div class="card card-width">
                   <div class="card-body">
-                    <form
-                      name="myForm"
-                      method="POST"
-                      action="dog-updateEdit.php"
-                      enctype="multipart/form-data"
-                    >
-                      <table class="table table-borderless">
-                        <tbody>
-                          <tr>
-                            <td class="text-right">會員編號</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="dId"
-                                value={mId}
-                                class="form-control"
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-right">會員姓名</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="dName"
-                                value={mName}
-                                class="form-control"
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-right">會員帳號</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="mId"
-                                value={mAccount}
-                                class="form-control"
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-right">會員密碼</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="dGender"
-                                value={mPassword}
-                                class="form-control"
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-right">會員性別</td>
-                            <td>
-                              <input
-                                placeholder="歲"
-                                type="text"
-                                name="dYear"
-                                value={mGender}
-                                class="form-control"
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-right">會員生日</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="dWeight"
-                                class="form-control"
-                                value={mBday}
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-right">會員電話</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="dInfo"
-                                class="form-control"
-                                value={mPhone}
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-right">會員信箱</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="dInfo"
-                                class="form-control"
-                                value={mEmail}
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="text-right">會員地址</td>
-                            <td>
-                              <input
-                                type="text"
-                                name="dInfo"
-                                class="form-control"
-                                value={mAddress}
-                              />
-                            </td>
-                          </tr>
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <td class="" colspan="6">
-                              <button
-                                href="./member-updateEdit.php"
-                                class="btn btn-sm btn-danger"
-                              >
-                                <i class="fa fa-trash"></i> 修改
-                              </button>
-                            </td>
-                          </tr>
-                        </tfoot>
-                      </table>
+                  <form>
+                      <div class="form-group">
+                        <label>姓名</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputName"
+                          placeholder="請輸入姓名"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>帳號</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputAccount"
+                          placeholder="請輸入帳號"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>密碼</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputPassword"
+                          placeholder="請輸入密碼"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>性別</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputGender"
+                          placeholder="請選擇性別"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>生日</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputBday"
+                          placeholder="請輸入生日"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>電話</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputPhone"
+                          placeholder="請輸入電話"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>信箱</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputEmail"
+                          placeholder="請輸入信箱"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>地址</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputAddress"
+                          placeholder="請輸入地址"
+                        />
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">
+                        送出
+                      </button>
                     </form>
                   </div>
                 </div>

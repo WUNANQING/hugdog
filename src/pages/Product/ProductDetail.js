@@ -1,21 +1,8 @@
-<<<<<<< HEAD
-import React, { useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { plusQuantity, minusQuantity, getProductDetail } from './actions/index'
-=======
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  getProducts,
-  getProductDetail,
-  plusQuantity,
-  minusQuantity,
-} from './actions/index'
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
+import { getProducts, getProductDetail } from './actions/index'
 import {
   Container,
   Row,
@@ -23,10 +10,6 @@ import {
   Image,
   ButtonGroup,
   Button,
-<<<<<<< HEAD
-  Form,
-=======
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
   Accordion,
   Card,
 } from 'react-bootstrap'
@@ -40,12 +23,7 @@ import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
 
 const ProductDetail = props => {
-<<<<<<< HEAD
-  const pId = props.match.params.pId ? props.match.params.pId : ''
-  useEffect(() => {
-    props.getProductDetail(pId)
-  }, [])
-=======
+  const [total, setTotal] = useState(1)
   const [mycart, setMycart] = useState([])
   const pId = props.match.params.pId ? props.match.params.pId : ''
 
@@ -62,12 +40,10 @@ const ProductDetail = props => {
   }
 
   useEffect(() => {
-    props.getProducts()
     props.getProductDetail(pId)
+    props.getProducts()
   }, [])
 
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
-  console.log(props.detail)
   return (
     <Container>
       <Row className="my-5">
@@ -77,80 +53,15 @@ const ProductDetail = props => {
             <Breadcrumb />
           </Row>
           <Row className="mb-5">
-<<<<<<< HEAD
-            <Col md={5}>
-=======
             <Col md={5} className="text-center">
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
               <Image src="https://via.placeholder.com/370" thumbnail />
             </Col>
             <Col md={4}>
-              <h3>{props.detail.pName}</h3>
-<<<<<<< HEAD
-              <h4>${props.detail.pPrice}</h4>
-              <Form.Label>--尺寸</Form.Label>
+              <h3>{props.detail[0] ? props.detail[0].pName : ''}</h3>
               <br />
-              <ButtonGroup>
-                <Button
-                  className="rounded border-dark bg-light text-dark mx-2"
-                  type="radio"
-                  name="radio"
-                  defaultValue="sm"
-                >
-                  小
-                </Button>
-                <Button
-                  className="rounded border-dark bg-light text-dark mx-2"
-                  type="radio"
-                  name="radio"
-                  defaultValue="md"
-                >
-                  中
-                </Button>
-                <Button
-                  className="rounded border-dark bg-light text-dark mx-2"
-                  type="radio"
-                  name="radio"
-                  defaultValue="lg"
-                >
-                  大
-                </Button>
-              </ButtonGroup>
+              <h6>{props.detail[0] ? props.detail[0].pInfo : ''}</h6>
               <br />
-              <Form.Label className="mt-2">--顏色</Form.Label>
-              <br />
-              <ButtonGroup>
-                <Button
-                  className="rounded btn-primary mx-2"
-                  type="radio"
-                  name="radio"
-                  value="blue"
-                />
-                <Button
-                  className="rounded btn-danger mx-2"
-                  type="radio"
-                  name="radio"
-                  value="red"
-                />
-                <Button
-                  className="rounded btn-info mx-2"
-                  type="radio"
-                  name="radio"
-                  value="green"
-                />
-              </ButtonGroup>
-              <br />
-              <div className="mt-3 d-flex justify-content-between">
-                <Button className="mb-md-2 " variant="primary " size="lg">
-                  <MdAddShoppingCart className="mb-1" />
-                  加入購物車
-                </Button>
-
-=======
-              <br />
-              <h6>{props.detail.pInfo}</h6>
-              <br />
-              <h4>${props.detail.pPrice}</h4>
+              <h4>${props.detail[0] ? props.detail[0].pPrice : ''}</h4>
               <br />
               <div className="mt-3 d-flex justify-content-between">
                 <Button
@@ -159,38 +70,36 @@ const ProductDetail = props => {
                   size="md"
                   onClick={() => {
                     updateCartToLocalStorage({
-                      pId: props.detail.pId,
-                      pName: props.detail.pName,
-                      pQuantity: props.total,
-                      pPrice: props.detail.pPrice,
+                      pId: props.detail[0].pId,
+                      pName: props.detail[0].pName,
+                      pQuantity: total,
+                      pPrice: props.detail[0].pPrice,
                     })
                   }}
                 >
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                 <ButtonGroup className="mb-md-2" size="md">
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      props.minusQuantity(1)
+                      setTotal(total - 1)
                     }}
                   >
                     -
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
-                    value={props.total}
                     type="input"
                     min="1"
                   >
-                    {props.total}
+                    {total}
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      props.plusQuantity(1)
+                      setTotal(total + 1)
                     }}
                   >
                     +
@@ -201,11 +110,7 @@ const ProductDetail = props => {
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
-<<<<<<< HEAD
-                  size="lg"
-=======
                   size="md"
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                 >
                   <MdPlaylistAdd className="mb-md-1" />
                   加入清單
@@ -213,11 +118,7 @@ const ProductDetail = props => {
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
-<<<<<<< HEAD
-                  size="lg"
-=======
                   size="md"
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
                 >
                   <MdShoppingCart className="mb-md-1" />
                   快速結帳
@@ -297,17 +198,10 @@ const ProductDetail = props => {
             </Col>
           </Row>
           <Row>
-<<<<<<< HEAD
-            {/* <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard /> */}
-=======
             {props.list &&
               props.list.map((value, index) => {
                 return <ProductCard key={index} data={props.list[index]} />
               })}
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
           </Row>
         </Col>
       </Row>
@@ -316,26 +210,14 @@ const ProductDetail = props => {
 }
 
 const mapStateToProps = store => {
-<<<<<<< HEAD
-  return { total: store.counter, detail: store.getProduct }
-=======
   return {
     list: store.getProducts,
-    total: store.counter,
     detail: store.getProductDetail,
   }
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-<<<<<<< HEAD
-    { plusQuantity, minusQuantity, getProductDetail },
-=======
-    { getProducts, getProductDetail, plusQuantity, minusQuantity },
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
-    dispatch
-  )
+  return bindActionCreators({ getProducts, getProductDetail }, dispatch)
 }
 
 export default withRouter(

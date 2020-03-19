@@ -1,8 +1,5 @@
 import React from 'react'
-<<<<<<< HEAD
-=======
 import { Link } from 'react-router-dom'
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
 import { Col, Nav, Navbar, InputGroup, FormControl } from 'react-bootstrap'
 const ProductSidebar = () => {
   const productCategory = [
@@ -30,16 +27,6 @@ const ProductSidebar = () => {
     'CANIDIE',
     'HALO',
   ]
-<<<<<<< HEAD
-  const productCategorysidebar = productCategory.map(value => (
-    <Nav.Link className="mb-1" key={value} href={'/productlist/' + value}>
-      {value}
-    </Nav.Link>
-  ))
-  const productBrandSidebar = productBrand.map(value => (
-    <Nav.Link className="mb-1" key={value} href={'/productlist/' + value}>
-      {value}
-=======
   const productCategorysidebar = productCategory.map((value, index) => (
     <Nav.Link>
       <Link className="mb-1" key={value} to={'/products/' + eval(index + 1)}>
@@ -52,7 +39,6 @@ const ProductSidebar = () => {
       <Link className="mb-1" key={value} to={'/products/' + value}>
         {value}
       </Link>
->>>>>>> 7c189a2f189ff98cbc977b25f4a1973f2c81e303
     </Nav.Link>
   ))
   return (
