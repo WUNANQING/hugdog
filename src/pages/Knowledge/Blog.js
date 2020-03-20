@@ -1,41 +1,27 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react'
-import {
-  Container,
-  Row,
-  Col,
-  Accordion,
-  Card,
-  Button,
-  Badge,
-  Image,
-} from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Container } from 'react-bootstrap'
 
 import BlogArt from './BlogArt'
 import '../../components/Knowledge/knowledge.scss'
+import Blogheader from './Blogheader'
+import Search from '../../components/Knowledge/Search'
 
 function Blog() {
   return (
     <>
+      <Blogheader />
+
       <Container>
-        <nav className="nav">
+        <br />
+        <nav className="nav d-flex justify-content-between">
           <a className="nav-link" href="#">
-            首頁
+            首頁 / blog
           </a>
-          <a className="nav-link" href="#">
-            / Blog
-          </a>
+          <Search />
         </nav>
-        <div class="blog-post">
-          <br />
-          <BlogArt />
-        </div>
-        <hr />
-        <div>
-          <BlogArt />
-        </div>
-        <hr />
-        <div>
+
+        {/* 文章 */}
+        <div className="article mr-3">
           <BlogArt />
         </div>
 

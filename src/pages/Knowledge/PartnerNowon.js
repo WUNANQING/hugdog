@@ -1,6 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
-
 import { Card, Button } from 'react-bootstrap'
 import { IconContext } from 'react-icons'
 import { FaRegCalendarAlt } from 'react-icons/fa'
@@ -26,7 +26,7 @@ function PartnerNowon() {
         </Card.Header>
         <Card.Img
           variant="top"
-          src="http://fakeimg.pl/1300x400/eeeeee/EAE0D0/"
+          src={require('../../images/knowledge/0601.jpg')}
         />
         <Card.Body>
           <div className="">
@@ -36,7 +36,11 @@ function PartnerNowon() {
             </span>
           </div>
           <br />
-          <Card.Title>基礎正向行為養成班／輕鬆打造快樂狗生活</Card.Title>
+          <Card.Title>
+            <Link to="partner/article">
+              基礎正向行為養成班／輕鬆打造快樂狗生活
+            </Link>
+          </Card.Title>
           <Card.Text>
             <p>
               針對毛孩教養時發生的日常行為問題，特別開設「正向行為禮貌養成班」，協助飼主引導毛孩學會基礎服從指令

@@ -46,9 +46,15 @@ function Header(props) {
               </NavDropdown>
               <Nav.Link href="/activity">找活動</Nav.Link>
               <NavDropdown title="找知識">
-                <NavDropdown.Item href="/blog">找文章</NavDropdown.Item>
-                <NavDropdown.Item href="/partner">找夥伴</NavDropdown.Item>
-                <NavDropdown.Item href="/question">找答案</NavDropdown.Item>
+                <NavDropdown.Item href="/knowledge/blog">
+                  找文章
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/knowledge/partner">
+                  找夥伴
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/knowledge/question">
+                  找答案
+                </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="#qa">常見Q&A</Nav.Link>
               <Nav.Link href="/coupon">Test Coupon</Nav.Link>

@@ -2,12 +2,18 @@
 .banner {
   width: 100%;
   height: 500px;
-  background-image: url(../../images/knowledge/bannerv2.jpg);
+  background-image: url(../../images/knowledge/banner.jpg);
   background-size: cover;
 }
 
-.blog-post {
+.article {
   padding: 10px;
+}
+
+//blogheader css
+.carouselImg {
+  width: 100vh;
+  height: 85vh;
 }
 
 //question css

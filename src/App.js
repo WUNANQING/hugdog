@@ -37,13 +37,13 @@ function App() {
             <Route path="/activity">
               <Activity />
             </Route>
-            <Route path="/blog">
+            <Route path="/knowledge/blog">
               <Blog />
             </Route>
-            <Route path="/partner">
+            <Route path="/knowledge/partner">
               <Partner />
             </Route>
-            <Route path="/question">
+            <Route path="/knowledge/question">
               <Question />
             </Route>
             <Route path="/products/:pages?/:pCategoryId?">
