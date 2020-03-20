@@ -8,24 +8,12 @@ import { AiOutlineUser, AiOutlineShopping } from 'react-icons/ai'
 import { FaDog } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 import { withRouter } from 'react-router-dom'
-
-//新增cookie
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date()
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
-  var expires = 'expires=' + d.toUTCString()
-  document.cookie = cname + '=' + cvalue + '; ' + expires
-}
-function clearCookie(name) {
-  setCookie(name, '', -1)
-}
-function myrefresh() {
-  window.location.reload()
-}
-setTimeout('myrefresh()', 2000) //指定1秒刷新一次
+var i = parseInt(localStorage.getItem('mId') - 1)
 $('#logout').click(function() {
   // clearAllCookie()
-  clearCookie('mId')
+  localStorage.removeItem('mName')
+  localStorage.clear()
+  window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {
   return (
@@ -67,8 +55,12 @@ function Header(props) {
               <Nav.Link href="/blog">找知識</Nav.Link>
               <Nav.Link href="#qa">常見Q&A</Nav.Link>
               <Nav.Link href="/coupon">Test Coupon</Nav.Link>
+              {/* <h3 className="text-right">
+                {localStorage.getItem('mName')}你好
+              </h3> */}
             </Nav>
           </Navbar.Collapse>
+
           <Nav className="nav-icon order-3 order-md-4">
             <div className="nav-link">
               <div className="icon icon-unread">
@@ -76,6 +68,7 @@ function Header(props) {
                   <FaDog />
                 </IconContext.Provider>
               </div>
+
               <div className="dropdown-menu">
                 <div className="dropdown-item text-center">OOO 您好</div>
                 <div className="dropdown-divider" role="separator"></div>
@@ -102,12 +95,13 @@ function Header(props) {
                 </Link>
               </div>
             </div>
+
             <div className="nav-link">
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <AiOutlineUser />
               </IconContext.Provider>
               <div className="dropdown-menu">
-                {document.cookie === '' ? (
+                {localStorage.getItem('mId') === '0' ? (
                   <Link to="/login" className="dropdown-item nav-link">
                     登入
                   </Link>
@@ -131,7 +125,6 @@ function Header(props) {
                 <FiHeart />
               </IconContext.Provider>
             </Nav.Link> */}
-
             {/* Nav.Link不會記錄router的三個屬性 export default withRouter(Header)*/}
             <Nav.Link
               href="#"
