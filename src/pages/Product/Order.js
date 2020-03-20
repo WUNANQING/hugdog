@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { MdShoppingCart, MdBookmarkBorder } from 'react-icons/md'
-const Order = () => {
+const Order = props => {
   return (
     <Container>
       <Row>
@@ -247,4 +248,4 @@ const Order = () => {
   )
 }
 
-export default Order
+export default withRouter(Order)
