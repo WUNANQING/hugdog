@@ -18,16 +18,19 @@ import '../../../css/member/member-info.scss'
 
 const MemberInfo = props => {
   //會員基本資料
-  const mId = props.data[0] ? props.data[0].mId : ''
-  const mName = props.data[0] ? props.data[0].mName : ''
-  const mAccount = props.data[0] ? props.data[0].mAccount : ''
-  const mPassword = props.data[0] ? props.data[0].mPassword : ''
-  const mImg = props.data[0] ? props.data[0].mImg : ''
-  const mGender = props.data[0] ? props.data[0].mGender : ''
-  const mBday = props.data[0] ? props.data[0].mBday : ''
-  const mPhone = props.data[0] ? props.data[0].mPhone : ''
-  const mEmail = props.data[0] ? props.data[0].mEmail : ''
-  const mAddress = props.data[0] ? props.data[0].mAddress : ''
+
+  var i = parseInt(document.cookie.slice(4)) - 1
+  // var i = parseInt(document.cookie) - 1
+  const mId = props.data[i] ? props.data[i].mId : ''
+  const mName = props.data[i] ? props.data[i].mName : ''
+  const mAccount = props.data[i] ? props.data[i].mAccount : ''
+  const mPassword = props.data[i] ? props.data[i].mPassword : ''
+  const mImg = props.data[i] ? props.data[i].mImg : ''
+  const mGender = props.data[i] ? props.data[i].mGender : ''
+  const mBday = props.data[i] ? props.data[i].mBday : ''
+  const mPhone = props.data[i] ? props.data[i].mPhone : ''
+  const mEmail = props.data[i] ? props.data[i].mEmail : ''
+  const mAddress = props.data[i] ? props.data[i].mAddress : ''
   //狗狗基本資料
 
   useEffect(() => {

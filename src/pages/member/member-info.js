@@ -19,17 +19,54 @@ import DogInfo from '../../components/member/member-info/dog-info'
 import Memberinfo from '../../components/member/member-info/member-info'
 const MemberInfo = props => {
   //會員基本資料
-  const mId = props.data[0] ? props.data[0].mId : ''
-  const mName = props.data[0] ? props.data[0].mName : ''
-  const mAccount = props.data[0] ? props.data[0].mAccount : ''
-  const mPassword = props.data[0] ? props.data[0].mPassword : ''
-  const mImg = props.data[0] ? props.data[0].mImg : ''
-  const mGender = props.data[0] ? props.data[0].mGender : ''
-  const mBday = props.data[0] ? props.data[0].mBday : ''
-  const mPhone = props.data[0] ? props.data[0].mPhone : ''
-  const mEmail = props.data[0] ? props.data[0].mEmail : ''
-  const mAddress = props.data[0] ? props.data[0].mAddress : ''
+
+  var i = document.cookie + 1
+  const mId = props.data[i] ? props.data[i].mId : ''
+  const mName = props.data[i] ? props.data[i].mName : ''
+  const mAccount = props.data[i] ? props.data[i].mAccount : ''
+  const mPassword = props.data[i] ? props.data[i].mPassword : ''
+  const mImg = props.data[i] ? props.data[i].mImg : ''
+  const mGender = props.data[i] ? props.data[i].mGender : ''
+  const mBday = props.data[i] ? props.data[i].mBday : ''
+  const mPhone = props.data[i] ? props.data[i].mPhone : ''
+  const mEmail = props.data[i] ? props.data[i].mEmail : ''
+  const mAddress = props.data[i] ? props.data[i].mAddress : ''
   //狗狗基本資料
+  // function clearAllCookie() {
+  //   var keys = document.cookie.match(/[^ =;]+(?=\=)/g)
+  //   if (keys) {
+  //     for (var i = keys.length; i--; )
+  //       document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+  //   }
+  // }
+  //新增cookie
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date()
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+    var expires = 'expires=' + d.toUTCString()
+    document.cookie = cname + '=' + cvalue + '; ' + expires
+  }
+  function clearCookie(name) {
+    setCookie(name, '', -1)
+  }
+  function deleteAllCookies() {
+    var cookies = document.cookie.split(';')
+
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i]
+      var eqPos = cookie.indexOf('=')
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT'
+    }
+  }
+  //清除cookie
+  function clearAllCookie() {
+    var keys = document.cookie.match(/[^ =;]+(?=\=)/g)
+    if (keys) {
+      for (var i = keys.length; i--; )
+        document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+    }
+  }
 
   useEffect(() => {
     props.getMemberData()
@@ -58,7 +95,15 @@ const MemberInfo = props => {
         .find('a')
         .addClass('active')
     })
-  }, [])
+    $('#logout').click(function() {
+      // clearAllCookie()
+      clearCookie('mId')
+    })
+    $('#loglog').click(function() {
+      // clearCookie('mId')
+      clearCookie('mId')
+    })
+  }, [document.cookie])
 
   return (
     <div className="Member container">
@@ -94,6 +139,15 @@ const MemberInfo = props => {
               >
                 活動查詢
               </Nav.Link>
+              <Nav.Link
+                className="member-sidebar-text logout"
+                href="/login"
+                id="logout"
+                // onClick={() => clearAllCookie()}
+              >
+                登出
+              </Nav.Link>
+              <button id="loglog">123</button>
             </Nav>
           </div>
           <div class=" wrapper">
