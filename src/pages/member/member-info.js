@@ -1,5 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
+//redux
+import { connect } from 'react-redux'
+//action
+import { bindActionCreators } from 'redux'
+import { getMemberData } from './actions/index'
 import {
   Form,
   FormControl,
@@ -10,19 +15,61 @@ import {
 } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../css/member/member-info.scss'
-import MemberSidebar from '../../components/member/member-sidebar'
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: 'WTF',
-      text: '222',
+import DogInfo from '../../components/member/member-info/dog-info'
+import Memberinfo from '../../components/member/member-info/member-info'
+const MemberInfo = props => {
+  //會員基本資料
+
+  var i = document.cookie + 1
+  const mId = props.data[i] ? props.data[i].mId : ''
+  const mName = props.data[i] ? props.data[i].mName : ''
+  const mAccount = props.data[i] ? props.data[i].mAccount : ''
+  const mPassword = props.data[i] ? props.data[i].mPassword : ''
+  const mImg = props.data[i] ? props.data[i].mImg : ''
+  const mGender = props.data[i] ? props.data[i].mGender : ''
+  const mBday = props.data[i] ? props.data[i].mBday : ''
+  const mPhone = props.data[i] ? props.data[i].mPhone : ''
+  const mEmail = props.data[i] ? props.data[i].mEmail : ''
+  const mAddress = props.data[i] ? props.data[i].mAddress : ''
+  //狗狗基本資料
+  // function clearAllCookie() {
+  //   var keys = document.cookie.match(/[^ =;]+(?=\=)/g)
+  //   if (keys) {
+  //     for (var i = keys.length; i--; )
+  //       document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+  //   }
+  // }
+  //新增cookie
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date()
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+    var expires = 'expires=' + d.toUTCString()
+    document.cookie = cname + '=' + cvalue + '; ' + expires
+  }
+  function clearCookie(name) {
+    setCookie(name, '', -1)
+  }
+  function deleteAllCookies() {
+    var cookies = document.cookie.split(';')
+
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i]
+      var eqPos = cookie.indexOf('=')
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT'
     }
-    console.log('constrctor')
+  }
+  //清除cookie
+  function clearAllCookie() {
+    var keys = document.cookie.match(/[^ =;]+(?=\=)/g)
+    if (keys) {
+      for (var i = keys.length; i--; )
+        document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+    }
   }
 
-  componentDidMount() {
-    //需要搭配箭頭函式才能使用list
+  useEffect(() => {
+    props.getMemberData()
     $('.nav-item').click(function() {
       let effect = $(this).data('effect')
       console.log(effect)
@@ -48,337 +95,94 @@ class App extends React.Component {
         .find('a')
         .addClass('active')
     })
-  }
-  render() {
-    return (
-      <div className="Member container">
-        <div className="member-info d-flex">
-          <div className="member-content d-flex row ">
-            <div className="member-sidebar w120">
-              <Nav>
-                <Nav.Link className="member-sidebar-text" href="/member">
-                  首頁
-                </Nav.Link>
-                <Nav.Link
-                  className="member-sidebar-text"
-                  href="/member/member-info"
-                >
-                  個人資訊
-                </Nav.Link>
+    $('#logout').click(function() {
+      // clearAllCookie()
+      clearCookie('mId')
+    })
+    $('#loglog').click(function() {
+      // clearCookie('mId')
+      clearCookie('mId')
+    })
+  }, [document.cookie])
 
-                <Nav.Link
-                  className="member-sidebar-text"
-                  href="/member/member-item"
-                >
-                  商品查詢
-                </Nav.Link>
-                <Nav.Link
-                  className="member-sidebar-text"
-                  href="/member/member-service"
-                >
-                  服務查詢
-                </Nav.Link>
-                <Nav.Link
-                  className="member-sidebar-text"
-                  href="/member/member-activity"
-                >
-                  活動查詢
-                </Nav.Link>
-              </Nav>
-            </div>
-            <div class=" wrapper">
-              <ul class="nav nav-tabs">
-                <li class="nav-item" id="pokemon1" data-effect="show1">
-                  <Link class="nav-link active" to="#">
-                    個人資訊
-                  </Link>
-                </li>
-                <li class="nav-item" id="pokemon2" data-effect="show2">
-                  <Link class="nav-link" to="#">
-                    狗狗資訊
-                  </Link>
-                </li>
-              </ul>
-              <div class="tab-content content" id="content1">
-                <div>
-                  <h3>
-                    個人資訊
-                    <br />
-                  </h3>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="card card-width">
-                        <div class="card-body">
-                          <form
-                            name="myForm"
-                            method="POST"
-                            action="dog-updateEdit.php"
-                            enctype="multipart/form-data"
-                          >
-                            <table class="table table-borderless">
-                              <tbody>
-                                <tr>
-                                  <td class="text-right">狗狗編號</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dId"
-                                      value="1"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗姓名</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dName"
-                                      value="Sunny"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">主人編號</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="mId"
-                                      value="m001"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗性別</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dGender"
-                                      value="girl"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗年紀</td>
-                                  <td>
-                                    <input
-                                      placeholder="歲"
-                                      type="text"
-                                      name="dYear"
-                                      value="6"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                  <td>
-                                    <input
-                                      placeholder="月"
-                                      type="text"
-                                      name="dMonth"
-                                      value="2"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗體重</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dWeight"
-                                      class="form-control"
-                                      value="4"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗資訊</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dInfo"
-                                      class="form-control"
-                                      value=""
-                                    />
-                                  </td>
-                                </tr>
-                              </tbody>
-                              <tfoot>
-                                <tr>
-                                  <td class="" colspan="6">
-                                    <button
-                                      href="./member-updateEdit.php"
-                                      class="btn btn-sm btn-danger"
-                                    >
-                                      <i class="fa fa-trash"></i> 修改
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <br />
-                  <br />
+  return (
+    <>
+      {document.cookie === '' ? (
+        <h1>請登入</h1>
+      ) : (
+        <>
+          <div className="Member container">
+            <div className="member-info d-flex">
+              <div className="member-content d-flex row ">
+                <div className="member-sidebar w120">
+                  <Nav>
+                    <Nav.Link className="member-sidebar-text" href="/member">
+                      首頁
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-info"
+                    >
+                      個人資訊
+                    </Nav.Link>
+
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-item"
+                    >
+                      商品查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-service"
+                    >
+                      服務查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-activity"
+                    >
+                      活動查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text logout"
+                      href="/login"
+                      id="logout"
+                      // onClick={() => clearAllCookie()}
+                    >
+                      登出
+                    </Nav.Link>
+                    <button id="loglog">123</button>
+                  </Nav>
                 </div>
-                <div>
-                  <img src="images/001.png" alt="" />
-                </div>
-              </div>
-              <div class="tab-content content" id="content2">
-                <div>
-                  <h3>
-                    狗狗資訊 <br />
-                  </h3>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="card card-width">
-                        <div class="card-body">
-                          <form
-                            name="myForm"
-                            method="POST"
-                            action="dog-updateEdit.php"
-                            enctype="multipart/form-data"
-                          >
-                            <table class="table table-borderless">
-                              <tbody>
-                                <tr>
-                                  <td class="text-right">狗狗編號</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dId"
-                                      value="1"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗姓名</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dName"
-                                      value="Sunny"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">主人編號</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="mId"
-                                      value="m001"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗性別</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dGender"
-                                      value="girl"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗年紀</td>
-                                  <td>
-                                    <input
-                                      placeholder="歲"
-                                      type="text"
-                                      name="dYear"
-                                      value="6"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                  <td>
-                                    <input
-                                      placeholder="月"
-                                      type="text"
-                                      name="dMonth"
-                                      value="2"
-                                      class="form-control"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗體重</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dWeight"
-                                      class="form-control"
-                                      value="4"
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="text-right">狗狗資訊</td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="dInfo"
-                                      class="form-control"
-                                      value=""
-                                    />
-                                  </td>
-                                </tr>
-                              </tbody>
-                              <tfoot>
-                                <tr>
-                                  <td class="" colspan="6">
-                                    <button
-                                      href="./member-updateEdit.php"
-                                      class="btn btn-sm btn-danger"
-                                    >
-                                      <i class="fa fa-trash"></i> 修改
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <br />
-                  <br />
-                </div>
-                <div>
-                  <img src="images/004.png" alt="" />
-                </div>
-              </div>
-              <div class="tab-content border content" id="content3">
-                <div>
-                  <h3>
-                    小龜寶可夢 <br />
-                  </h3>
-                  甲殼的作用不僅是用來保護自己，圓潤的外形和表面的溝槽會減少水的阻力，使牠能夠快速地游泳。
-                  <br />
-                  <br />
-                </div>
-                <div>
-                  <img src="images/007.png" alt="" />
+                <div class=" wrapper">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item" id="pokemon1" data-effect="show1">
+                      <Link class="nav-link active" to="#">
+                        個人資訊
+                      </Link>
+                    </li>
+                    <li class="nav-item" id="pokemon2" data-effect="show2">
+                      <Link class="nav-link" to="#">
+                        狗狗資訊
+                      </Link>
+                    </li>
+                  </ul>
+                  <Memberinfo />
+                  <DogInfo />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    )
-  }
+        </>
+      )}
+    </>
+  )
 }
-
-export default App
+const mapStateToProps = store => {
+  return { data: store.getMember }
+}
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getMemberData }, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MemberInfo)

@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../images/logo-dark.svg'
@@ -6,7 +7,26 @@ import { ReactComponent as Logo } from '../images/logo-dark.svg'
 import { AiOutlineUser, AiOutlineShopping } from 'react-icons/ai'
 import { FaDog } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
+import { withRouter } from 'react-router-dom'
 
+//新增cookie
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date()
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+  var expires = 'expires=' + d.toUTCString()
+  document.cookie = cname + '=' + cvalue + '; ' + expires
+}
+function clearCookie(name) {
+  setCookie(name, '', -1)
+}
+function myrefresh() {
+  window.location.reload()
+}
+setTimeout('myrefresh()', 2000) //指定1秒刷新一次
+$('#logout').click(function() {
+  // clearAllCookie()
+  clearCookie('mId')
+})
 function Header(props) {
   return (
     <>
@@ -19,7 +39,9 @@ function Header(props) {
           <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
             <Nav className="mr-auto nav-menu">
               <Nav.Link href="#news">最新消息</Nav.Link>
-              <Nav.Link href="productlist">找商品</Nav.Link>
+              <Nav.Link>
+                <Link to="/products">找商品</Link>
+              </Nav.Link>
               <NavDropdown title="找服務" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/service/">
                   什麼是保母服務
@@ -85,11 +107,18 @@ function Header(props) {
                 <AiOutlineUser />
               </IconContext.Provider>
               <div className="dropdown-menu">
-                <Link to="#" className="dropdown-item nav-link">
-                  連結1
-                </Link>
-                <Link to="#" className="dropdown-item nav-link">
-                  連結2
+                {document.cookie === '' ? (
+                  <Link to="/login" className="dropdown-item nav-link">
+                    登入
+                  </Link>
+                ) : (
+                  <Link to="/login" className="dropdown-item nav-link logout">
+                    登出
+                  </Link>
+                )}
+
+                <Link to="/member" className="dropdown-item nav-link">
+                  會員頁測試
                 </Link>
                 <div className="dropdown-divider" role="separator"></div>
                 <Link to="#" className="dropdown-item nav-link">
@@ -102,7 +131,14 @@ function Header(props) {
                 <FiHeart />
               </IconContext.Provider>
             </Nav.Link> */}
-            <Nav.Link href="/cart">
+
+            {/* Nav.Link不會記錄router的三個屬性 export default withRouter(Header)*/}
+            <Nav.Link
+              href="#"
+              onClick={() => {
+                props.history.push('/cart')
+              }}
+            >
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <AiOutlineShopping />
               </IconContext.Provider>
@@ -114,4 +150,4 @@ function Header(props) {
   )
 }
 
-export default Header
+export default withRouter(Header)

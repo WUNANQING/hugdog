@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { plusQuantity, minusQuantity, getProductDetail } from './actions/index'
+import { getProducts, getProductDetail } from './actions/index'
 import {
   Container,
   Row,
@@ -10,7 +10,6 @@ import {
   Image,
   ButtonGroup,
   Button,
-  Form,
   Accordion,
   Card,
 } from 'react-bootstrap'
@@ -24,11 +23,27 @@ import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
 
 const ProductDetail = props => {
+  const [total, setTotal] = useState(1)
+  const [mycart, setMycart] = useState([])
   const pId = props.match.params.pId ? props.match.params.pId : ''
+
+  //更新購物車
+  function updateCartToLocalStorage(item) {
+    const currentCart = JSON.parse(localStorage.getItem('cart')) || []
+    if ([...currentCart].find(value => value.pId === item.pId)) {
+      alert('已加入購物車')
+    } else {
+      const newCart = [...currentCart, item]
+      localStorage.setItem('cart', JSON.stringify(newCart))
+      setMycart(newCart)
+    }
+  }
+
   useEffect(() => {
     props.getProductDetail(pId)
-  }, [])
-  console.log(props.detail)
+    props.getProducts()
+  }, [props.match.params.pId])
+
   return (
     <Container>
       <Row className="my-5">
@@ -38,91 +53,53 @@ const ProductDetail = props => {
             <Breadcrumb />
           </Row>
           <Row className="mb-5">
-            <Col md={5}>
+            <Col md={5} className="text-center">
               <Image src="https://via.placeholder.com/370" thumbnail />
             </Col>
             <Col md={4}>
-              <h3>{props.detail.pName}</h3>
-              <h4>${props.detail.pPrice}</h4>
-              <Form.Label>--尺寸</Form.Label>
+              <h3>{props.detail[0] ? props.detail[0].pName : ''}</h3>
               <br />
-              <ButtonGroup>
-                <Button
-                  className="rounded border-dark bg-light text-dark mx-2"
-                  type="radio"
-                  name="radio"
-                  defaultValue="sm"
-                >
-                  小
-                </Button>
-                <Button
-                  className="rounded border-dark bg-light text-dark mx-2"
-                  type="radio"
-                  name="radio"
-                  defaultValue="md"
-                >
-                  中
-                </Button>
-                <Button
-                  className="rounded border-dark bg-light text-dark mx-2"
-                  type="radio"
-                  name="radio"
-                  defaultValue="lg"
-                >
-                  大
-                </Button>
-              </ButtonGroup>
+              <h6>{props.detail[0] ? props.detail[0].pInfo : ''}</h6>
               <br />
-              <Form.Label className="mt-2">--顏色</Form.Label>
-              <br />
-              <ButtonGroup>
-                <Button
-                  className="rounded btn-primary mx-2"
-                  type="radio"
-                  name="radio"
-                  value="blue"
-                />
-                <Button
-                  className="rounded btn-danger mx-2"
-                  type="radio"
-                  name="radio"
-                  value="red"
-                />
-                <Button
-                  className="rounded btn-info mx-2"
-                  type="radio"
-                  name="radio"
-                  value="green"
-                />
-              </ButtonGroup>
+              <h4>${props.detail[0] ? props.detail[0].pPrice : ''}</h4>
               <br />
               <div className="mt-3 d-flex justify-content-between">
-                <Button className="mb-md-2 " variant="primary " size="lg">
+                <Button
+                  className="mb-md-2 "
+                  variant="primary "
+                  size="md"
+                  onClick={() => {
+                    updateCartToLocalStorage({
+                      pId: props.detail[0].pId,
+                      pName: props.detail[0].pName,
+                      pQuantity: total,
+                      pPrice: props.detail[0].pPrice,
+                    })
+                  }}
+                >
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
-
                 <ButtonGroup className="mb-md-2" size="md">
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      props.minusQuantity(1)
+                      setTotal(total - 1)
                     }}
                   >
                     -
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
-                    value={props.total}
                     type="input"
                     min="1"
                   >
-                    {props.total}
+                    {total}
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      props.plusQuantity(1)
+                      setTotal(total + 1)
                     }}
                   >
                     +
@@ -133,7 +110,7 @@ const ProductDetail = props => {
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
-                  size="lg"
+                  size="md"
                 >
                   <MdPlaylistAdd className="mb-md-1" />
                   加入清單
@@ -141,7 +118,7 @@ const ProductDetail = props => {
                 <Button
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
-                  size="lg"
+                  size="md"
                 >
                   <MdShoppingCart className="mb-md-1" />
                   快速結帳
@@ -221,10 +198,10 @@ const ProductDetail = props => {
             </Col>
           </Row>
           <Row>
-            {/* <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard /> */}
+            {props.list &&
+              props.list.map((value, index) => {
+                return <ProductCard key={index} data={props.list[index]} />
+              })}
           </Row>
         </Col>
       </Row>
@@ -233,14 +210,14 @@ const ProductDetail = props => {
 }
 
 const mapStateToProps = store => {
-  return { total: store.counter, detail: store.getProduct }
+  return {
+    list: store.getProducts,
+    detail: store.getProductDetail,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { plusQuantity, minusQuantity, getProductDetail },
-    dispatch
-  )
+  return bindActionCreators({ getProducts, getProductDetail }, dispatch)
 }
 
 export default withRouter(

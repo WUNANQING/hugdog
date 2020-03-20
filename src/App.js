@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Blog from './pages/Knowledge/Blog'
-import Product from './pages/Product/Product'
+import Products from './pages/Product/Products'
 import ProductDetail from './pages/Product/ProductDetail'
 import Member from './pages/member/Member'
 import Cart from './pages/Product/Cart'
@@ -14,7 +14,8 @@ import Coupon from './pages/Marketing/Coupon'
 import BonusPoints from './pages/Marketing/BonusPoints1'
 import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
-
+import MemberLogin from './pages/member/memberLogin'
+import MemberRegister from './pages/member/member-register'
 function App() {
   return (
     <Router>
@@ -37,10 +38,10 @@ function App() {
             <Route path="/blog">
               <Blog />
             </Route>
-            <Route exact path="/product">
-              <Product />
+            <Route path="/products/:page?/:pCategoryId?">
+              <Products />
             </Route>
-            <Route path="/product/:pId?">
+            <Route path="/productdetail/:pId">
               <ProductDetail />
             </Route>
             <Route path="/cart">
@@ -57,6 +58,12 @@ function App() {
             </Route>
             <Route path="/order">
               <Order />
+            </Route>
+            <Route path="/login">
+              <MemberLogin />
+            </Route>
+            <Route path="/register">
+              <MemberRegister />
             </Route>
           </Switch>
         </section>
