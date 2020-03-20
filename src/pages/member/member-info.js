@@ -106,69 +106,77 @@ const MemberInfo = props => {
   }, [document.cookie])
 
   return (
-    <div className="Member container">
-      <div className="member-info d-flex">
-        <div className="member-content d-flex row ">
-          <div className="member-sidebar w120">
-            <Nav>
-              <Nav.Link className="member-sidebar-text" href="/member">
-                首頁
-              </Nav.Link>
-              <Nav.Link
-                className="member-sidebar-text"
-                href="/member/member-info"
-              >
-                個人資訊
-              </Nav.Link>
+    <>
+      {document.cookie === '' ? (
+        <h1>請登入</h1>
+      ) : (
+        <>
+          <div className="Member container">
+            <div className="member-info d-flex">
+              <div className="member-content d-flex row ">
+                <div className="member-sidebar w120">
+                  <Nav>
+                    <Nav.Link className="member-sidebar-text" href="/member">
+                      首頁
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-info"
+                    >
+                      個人資訊
+                    </Nav.Link>
 
-              <Nav.Link
-                className="member-sidebar-text"
-                href="/member/member-item"
-              >
-                商品查詢
-              </Nav.Link>
-              <Nav.Link
-                className="member-sidebar-text"
-                href="/member/member-service"
-              >
-                服務查詢
-              </Nav.Link>
-              <Nav.Link
-                className="member-sidebar-text"
-                href="/member/member-activity"
-              >
-                活動查詢
-              </Nav.Link>
-              <Nav.Link
-                className="member-sidebar-text logout"
-                href="/login"
-                id="logout"
-                // onClick={() => clearAllCookie()}
-              >
-                登出
-              </Nav.Link>
-              <button id="loglog">123</button>
-            </Nav>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-item"
+                    >
+                      商品查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-service"
+                    >
+                      服務查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-activity"
+                    >
+                      活動查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text logout"
+                      href="/login"
+                      id="logout"
+                      // onClick={() => clearAllCookie()}
+                    >
+                      登出
+                    </Nav.Link>
+                    <button id="loglog">123</button>
+                  </Nav>
+                </div>
+                <div class=" wrapper">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item" id="pokemon1" data-effect="show1">
+                      <Link class="nav-link active" to="#">
+                        個人資訊
+                      </Link>
+                    </li>
+                    <li class="nav-item" id="pokemon2" data-effect="show2">
+                      <Link class="nav-link" to="#">
+                        狗狗資訊
+                      </Link>
+                    </li>
+                  </ul>
+                  <Memberinfo />
+                  <DogInfo />
+                </div>
+              </div>
+            </div>
           </div>
-          <div class=" wrapper">
-            <ul class="nav nav-tabs">
-              <li class="nav-item" id="pokemon1" data-effect="show1">
-                <Link class="nav-link active" to="#">
-                  個人資訊
-                </Link>
-              </li>
-              <li class="nav-item" id="pokemon2" data-effect="show2">
-                <Link class="nav-link" to="#">
-                  狗狗資訊
-                </Link>
-              </li>
-            </ul>
-            <Memberinfo />
-            <DogInfo />
-          </div>
-        </div>
-      </div>
-    </div>
+        </>
+      )}
+    </>
   )
 }
 const mapStateToProps = store => {

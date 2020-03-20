@@ -19,11 +19,7 @@ import '../../css/member/member-info.scss'
 import MemberSidebar from '../../components/member/member-sidebar'
 import '../../css/member/member-login.scss'
 import { doc } from 'prettier'
-const defaultLoginInfo = {
-  username: '',
-  token: false,
-  ident: false,
-}
+
 const MemberLogin = props => {
   $('.login-btn').click(function() {
     console.log('輸入帳號: ' + $('#exampleInputAccount1').val())
@@ -103,8 +99,8 @@ const MemberLogin = props => {
   useEffect(() => {
     // props.getMemberDetail(mId)
     props.getMemberData()
-
-    //設置cookie
+    // window.location.reload()
+    //第一种只刷新一次
 
     $('.show').click(function() {
       $('.show').addClass('active')
@@ -119,7 +115,7 @@ const MemberLogin = props => {
     const account = $('#exampleInputAccount1').val()
     const password = $('#exampleInputPassword1').val()
   }, [document.cookie])
-
+  //    {document.cookie === '' ? ():()
   return (
     <>
       {document.cookie === '' ? (
