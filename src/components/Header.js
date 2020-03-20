@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../images/logo-dark.svg'
@@ -8,6 +9,24 @@ import { FaDog } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 import { withRouter } from 'react-router-dom'
 
+//新增cookie
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date()
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+  var expires = 'expires=' + d.toUTCString()
+  document.cookie = cname + '=' + cvalue + '; ' + expires
+}
+function clearCookie(name) {
+  setCookie(name, '', -1)
+}
+function myrefresh() {
+  window.location.reload()
+}
+setTimeout('myrefresh()', 2000) //指定1秒刷新一次
+$('#logout').click(function() {
+  // clearAllCookie()
+  clearCookie('mId')
+})
 function Header(props) {
   return (
     <>
@@ -98,9 +117,16 @@ function Header(props) {
                 <AiOutlineUser />
               </IconContext.Provider>
               <div className="dropdown-menu">
-                <Link to="/login" className="dropdown-item nav-link">
-                  登入
-                </Link>
+                {document.cookie === '' ? (
+                  <Link to="/login" className="dropdown-item nav-link">
+                    登入
+                  </Link>
+                ) : (
+                  <Link to="/login" className="dropdown-item nav-link logout">
+                    登出
+                  </Link>
+                )}
+
                 <Link to="/member" className="dropdown-item nav-link">
                   會員頁測試
                 </Link>

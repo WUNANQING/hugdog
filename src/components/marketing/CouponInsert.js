@@ -26,8 +26,8 @@ function CouponInsert(props) {
                   <Form.Control type="code" placeholder="優惠碼輸入" />
                 </Col>
                 <Form.Text className="text-muted"></Form.Text>
-                <Col md="auto">
-                  <Button variant="primary" type="submit">
+                <Col md="auto" className="">
+                  <Button className="CouponBtn" variant="primary" type="submit">
                     領取
                   </Button>
                 </Col>

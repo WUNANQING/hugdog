@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  getProducts,
-  getProductDetail,
-  plusQuantity,
-  minusQuantity,
-} from './actions/index'
+import { getProducts, getProductDetail } from './actions/index'
 import {
   Container,
   Row,
@@ -28,6 +23,7 @@ import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
 
 const ProductDetail = props => {
+  const [total, setTotal] = useState(1)
   const [mycart, setMycart] = useState([])
   const pId = props.match.params.pId ? props.match.params.pId : ''
 
@@ -44,11 +40,10 @@ const ProductDetail = props => {
   }
 
   useEffect(() => {
-    props.getProducts()
     props.getProductDetail(pId)
-  }, [])
+    props.getProducts()
+  }, [props.match.params.pId])
 
-  console.log(props.detail)
   return (
     <Container>
       <Row className="my-5">
@@ -62,11 +57,11 @@ const ProductDetail = props => {
               <Image src="https://via.placeholder.com/370" thumbnail />
             </Col>
             <Col md={4}>
-              <h3>{props.detail.pName}</h3>
+              <h3>{props.detail[0] ? props.detail[0].pName : ''}</h3>
               <br />
-              <h6>{props.detail.pInfo}</h6>
+              <h6>{props.detail[0] ? props.detail[0].pInfo : ''}</h6>
               <br />
-              <h4>${props.detail.pPrice}</h4>
+              <h4>${props.detail[0] ? props.detail[0].pPrice : ''}</h4>
               <br />
               <div className="mt-3 d-flex justify-content-between">
                 <Button
@@ -75,10 +70,10 @@ const ProductDetail = props => {
                   size="md"
                   onClick={() => {
                     updateCartToLocalStorage({
-                      pId: props.detail.pId,
-                      pName: props.detail.pName,
-                      pQuantity: props.total,
-                      pPrice: props.detail.pPrice,
+                      pId: props.detail[0].pId,
+                      pName: props.detail[0].pName,
+                      pQuantity: total,
+                      pPrice: props.detail[0].pPrice,
                     })
                   }}
                 >
@@ -89,23 +84,22 @@ const ProductDetail = props => {
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      props.minusQuantity(1)
+                      setTotal(total - 1)
                     }}
                   >
                     -
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
-                    value={props.total}
                     type="input"
                     min="1"
                   >
-                    {props.total}
+                    {total}
                   </Button>
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      props.plusQuantity(1)
+                      setTotal(total + 1)
                     }}
                   >
                     +
@@ -218,16 +212,12 @@ const ProductDetail = props => {
 const mapStateToProps = store => {
   return {
     list: store.getProducts,
-    total: store.counter,
     detail: store.getProductDetail,
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { getProducts, getProductDetail, plusQuantity, minusQuantity },
-    dispatch
-  )
+  return bindActionCreators({ getProducts, getProductDetail }, dispatch)
 }
 
 export default withRouter(

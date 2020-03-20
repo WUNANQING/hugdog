@@ -21,8 +21,7 @@ export const getProducts = () => {
     })
     const res = await fetch(req)
     const data = await res.json()
-    //console.log(data.product) //後端將資料儲存在物件中key=product，因此需要用成員運算子{product:[{...},{...}]}
-    dispatch(showProducts(data.product))
+    dispatch(showProducts(data))
   }
 }
 
@@ -38,7 +37,7 @@ export const getProductDetail = pId => {
     })
     const res = await fetch(req)
     const data = await res.json()
-    //console.log(data) //因為是單筆因此後段預設回傳物件
+    console.log(data)
     dispatch(showProductDetail(data))
   }
 }
