@@ -15,6 +15,7 @@ const Checkout = props => {
     mobile: '',
     cardNumber: '',
     owner: '',
+    cart: localStorage.getItem('cart'),
   }
   //寫入表單資訊
   function getformInfo(e, info) {
@@ -308,10 +309,11 @@ const Checkout = props => {
                   variant="primary"
                   size="lg"
                   block
-                  type="submit"
+                  // type="submit"
                   onClick={() => {
                     postOrder(buyerInfo)
-                    props.history.push('/order')
+                    localStorage.setItem('cart', JSON.stringify([]))
+                    // props.history.push(`/order${}`)
                   }}
                 >
                   確定結帳
