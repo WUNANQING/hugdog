@@ -109,7 +109,7 @@ function CouponList(props) {
               <Nav className="mr-auto nav-menu">
                 <Nav.Link className="CouponListNavAC1 active">未使用</Nav.Link>
                 <Nav.Link className="CouponListNavAC2">已使用</Nav.Link>
-                <Nav.Link className="CouponListNavAC3">以過期</Nav.Link>
+                <Nav.Link className="CouponListNavAC3">已過期</Nav.Link>
               </Nav>
             </Nav>
           </head-nav>
