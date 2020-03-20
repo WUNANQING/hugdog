@@ -47,7 +47,9 @@ function Member() {
                   alt="Background"
                 ></img>
               </div>
-              <div className="head-text">歡迎使用HugDog會員頁面</div>
+              <div className="head-text">
+                {localStorage.getItem('mName')}，歡迎使用HugDog會員頁面
+              </div>
             </div>
             <div className="member-content d-flex container">
               <div className="member-sidebar">

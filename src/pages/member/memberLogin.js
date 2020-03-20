@@ -21,6 +21,7 @@ import '../../css/member/member-login.scss'
 import { doc } from 'prettier'
 
 const MemberLogin = props => {
+  localStorage.setItem('mId', 0)
   $('.login-btn').click(function() {
     console.log('輸入帳號: ' + $('#exampleInputAccount1').val())
     console.log('輸入密碼: ' + $('#exampleInputPassword1').val())
@@ -31,6 +32,7 @@ const MemberLogin = props => {
     // console.log(mName)
     for (let i = 0; i <= props.data.length; i++) {
       var mId = props.data[i] ? props.data[i].mId : ''
+      var mName = props.data[i] ? props.data[i].mName : ''
       var mAccount = props.data[i] ? props.data[i].mAccount : ''
       var mPassword = props.data[i] ? props.data[i].mPassword : ''
       //新增cookie
@@ -65,6 +67,8 @@ const MemberLogin = props => {
         // setCookie('mId', mId)
         document.cookie = `mId=${mId}; path=/member`
         // document.cookie = mId
+        localStorage.setItem('mId', mId)
+        localStorage.setItem('mName', mName)
       }
       if ($('#exampleInputAccount1').val() === '') {
         // alert('帳號不能為空白')
@@ -118,7 +122,7 @@ const MemberLogin = props => {
   //    {document.cookie === '' ? ():()
   return (
     <>
-      {document.cookie === '' ? (
+      {localStorage.getItem('mId') === '0' ? (
         <div className="container">
           <div className=" login-container">
             <div className="login">

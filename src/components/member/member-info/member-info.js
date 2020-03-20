@@ -18,8 +18,8 @@ import '../../../css/member/member-info.scss'
 
 const MemberInfo = props => {
   //會員基本資料
-
-  var i = parseInt(document.cookie.slice(4)) - 1
+  var i = parseInt(localStorage.getItem('mId') - 1)
+  // var i = parseInt(document.cookie.slice(4)) - 1
   // var i = parseInt(document.cookie) - 1
   const mId = props.data[i] ? props.data[i].mId : ''
   const mName = props.data[i] ? props.data[i].mName : ''

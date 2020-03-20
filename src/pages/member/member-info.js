@@ -97,11 +97,16 @@ const MemberInfo = props => {
     })
     $('#logout').click(function() {
       // clearAllCookie()
-      clearCookie('mId')
+      // clearCookie('mId')
+      // localStorage.clear()
+      localStorage.setItem('mId', 0)
+      localStorage.removeItem('mName')
+      window.location.replace('http://localhost:3000/login/')
     })
     $('#loglog').click(function() {
       // clearCookie('mId')
       clearCookie('mId')
+      // localStorage.clear()
     })
   }, [document.cookie])
 
@@ -144,14 +149,14 @@ const MemberInfo = props => {
                     >
                       活動查詢
                     </Nav.Link>
-                    <Nav.Link
+                    <button
                       className="member-sidebar-text logout"
                       href="/login"
                       id="logout"
                       // onClick={() => clearAllCookie()}
                     >
                       登出
-                    </Nav.Link>
+                    </button>
                     <button id="loglog">123</button>
                   </Nav>
                 </div>
