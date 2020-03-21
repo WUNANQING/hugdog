@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap'
 import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
-
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-
 import $ from 'jquery'
+
 const Cart = () => {
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
+
+  //跳轉Cart頁先抓localStorage的key是否有cart,有就抓沒有就設立空陣列;否則頁面會無法render
+  localStorage.getItem('cart')
+    ? localStorage.getItem('cart')
+    : localStorage.setItem('cart', JSON.stringify([]))
 
   //提取購物車資料
   function getCartFromLocalStorage() {

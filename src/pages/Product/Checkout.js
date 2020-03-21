@@ -57,7 +57,7 @@ const Checkout = props => {
 
   //建立訂單
   async function postOrder(form) {
-    const req = new Request('http://localhost:6001/orders/post', {
+    const req = new Request('http://localhost:6001/order/post', {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({

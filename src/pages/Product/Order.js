@@ -9,7 +9,7 @@ const Order = props => {
   const orderId = props.match.params.orderId ? props.match.params.orderId : ''
   //設定從資料庫抓取訂單細節的方法
   async function getOrderDetail(orderId) {
-    const req = new Request(`http://localhost:6001/orders/${orderId}`, {
+    const req = new Request(`http://localhost:6001/order/${orderId}`, {
       method: 'GET',
       credentials: 'include',
     })
