@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { MdShoppingCart, MdBookmarkBorder } from 'react-icons/md'
-const Order = () => {
+const Order = props => {
+  //設定訂單狀態
+  const [order, setOrder] = useState([])
+  //設定orderId的來源
+  const orderId = props.match.params.orderId ? props.match.params.orderId : ''
+  //設定從資料庫抓取訂單細節的方法
+  async function getOrderDetail(orderId) {
+    const req = new Request(`http://localhost:6001/orders/${orderId}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const detail = await res.json()
+    setOrder(detail)
+  }
+  //設定生命週期方法useEffect===ComponnentDidMount
+  useEffect(() => {
+    getOrderDetail(orderId)
+  }, [])
+
   return (
     <Container>
       <Row>
@@ -247,4 +267,4 @@ const Order = () => {
   )
 }
 
-export default Order
+export default withRouter(Order)

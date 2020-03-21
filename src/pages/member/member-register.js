@@ -45,7 +45,7 @@ const MemberLogin = props => {
               <div class="col-md-8">
                 <div class="card card-width">
                   <div class="card-body">
-                  <form>
+                    <form>
                       <div class="form-group">
                         <label>姓名</label>
                         <input
@@ -61,6 +61,7 @@ const MemberLogin = props => {
                           type="text"
                           class="form-control"
                           id="exampleInputAccount"
+                          name="exampleInputAccount"
                           placeholder="請輸入帳號"
                         />
                       </div>
@@ -70,6 +71,7 @@ const MemberLogin = props => {
                           type="text"
                           class="form-control"
                           id="exampleInputPassword"
+                          name="exampleInputPassword"
                           placeholder="請輸入密碼"
                         />
                       </div>
@@ -79,6 +81,7 @@ const MemberLogin = props => {
                           type="text"
                           class="form-control"
                           id="exampleInputGender"
+                          name="exampleInputGender"
                           placeholder="請選擇性別"
                         />
                       </div>
@@ -88,6 +91,7 @@ const MemberLogin = props => {
                           type="text"
                           class="form-control"
                           id="exampleInputBday"
+                          name="exampleInputBday"
                           placeholder="請輸入生日"
                         />
                       </div>
@@ -97,6 +101,7 @@ const MemberLogin = props => {
                           type="text"
                           class="form-control"
                           id="exampleInputPhone"
+                          name="exampleInputPhone"
                           placeholder="請輸入電話"
                         />
                       </div>
@@ -106,6 +111,7 @@ const MemberLogin = props => {
                           type="text"
                           class="form-control"
                           id="exampleInputEmail"
+                          name="exampleInputEmail"
                           placeholder="請輸入信箱"
                         />
                       </div>
@@ -115,6 +121,7 @@ const MemberLogin = props => {
                           type="text"
                           class="form-control"
                           id="exampleInputAddress"
+                          name="exampleInputAddress"
                           placeholder="請輸入地址"
                         />
                       </div>

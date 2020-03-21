@@ -13,12 +13,6 @@ function Breadcrumb(props) {
           <li className="list-group-item border-0 p-0">
             {props.location.pathname}
           </li>
-          {/* <li className="list-group-item border-0 p-0">
-            {props.location.pathname}
-          </li> */}
-          {/* <li className="list-group-item border-0 p-0">
-            {props.location.pathname}
-          </li> */}
         </ul>
       </nav>
     </>

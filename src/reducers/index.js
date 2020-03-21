@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { getCoupons } from './marketingReducer'
+import { getCoupons, insertCoupon } from './marketingReducer'
 
 // 會員reducers
 const getMember = (state = [], action) => {
@@ -88,6 +88,7 @@ const rootReducer = combineReducers({
   getCoupons,
   getBlog,
   getBlogArticle,
+  insertCoupon,
 })
 
 export { rootReducer }
