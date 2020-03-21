@@ -56,6 +56,29 @@ const getDog = (state = [], action) => {
       return state
   }
 }
+
+//knowledge reducers
+//blog
+
+const getBlog = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_BLOG':
+      return action.data
+    default:
+      return state
+  }
+}
+
+const getBlogArticle = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_BLOG_ARTICLE':
+      return action.data
+    default:
+      return state
+  }
+}
+
+//knowledge end
 const rootReducer = combineReducers({
   getMember,
   counter,
@@ -63,6 +86,8 @@ const rootReducer = combineReducers({
   getProductDetail,
   getDog,
   getCoupons,
+  getBlog,
+  getBlogArticle,
 })
 
 export { rootReducer }

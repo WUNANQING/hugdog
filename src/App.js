@@ -18,6 +18,7 @@ import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
 import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
+import BlogArticle from './pages/Knowledge/Article'
 function App() {
   return (
     <Router>
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path="/knowledge/blog">
               <Blog />
+            </Route>
+            <Route path="/knowledge/blog/:aTitle">
+              <BlogArticle />
             </Route>
             <Route path="/knowledge/partner">
               <Partner />
