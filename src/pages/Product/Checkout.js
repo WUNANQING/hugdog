@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import ProductReceipt from './components/ProductReceipt'
 const Checkout = props => {
+  //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
+  const mId = localStorage.getItem('mId')
   //表單資訊
   const buyerInfo = {
     lastName: '',

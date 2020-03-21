@@ -3,7 +3,7 @@ import $ from 'jquery'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../images/logo-dark.svg'
-// import { FiSearch, FiHeart } from 'react-icons/fi'
+import { FiHeart } from 'react-icons/fi'
 import { AiOutlineUser, AiOutlineShopping } from 'react-icons/ai'
 import { FaDog } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
@@ -118,19 +118,19 @@ function Header(props) {
                 </Link>
               </div>
             </div>
-            {/* <Nav.Link href="#">
+            <Nav.Link href="#">
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <FiHeart />
               </IconContext.Provider>
-            </Nav.Link> */}
+            </Nav.Link>
             {/* Nav.Link不會記錄router的三個屬性 export default withRouter(Header)*/}
-            <Nav.Link
-              href="/cart"
-              // onClick={() => {
-              //   props.history.push('/cart')
-              // }}
-            >
+            <Nav.Link href="/cart">
               <IconContext.Provider value={{ size: '1.5rem' }}>
+                {/* <span className="badge badge-danger">
+                  {JSON.parse(localStorage.getItem('cart')).length === 0
+                    ? ''
+                    : JSON.parse(localStorage.getItem('cart')).length}
+                </span> */}
                 <AiOutlineShopping />
               </IconContext.Provider>
             </Nav.Link>

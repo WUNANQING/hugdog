@@ -5,6 +5,8 @@ import { MdShoppingCart, MdBookmarkBorder } from 'react-icons/md'
 const Order = props => {
   //設定訂單狀態
   const [order, setOrder] = useState([])
+  //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
+  const mId = localStorage.getItem('mId')
   //設定orderId的來源
   const orderId = props.match.params.orderId ? props.match.params.orderId : ''
   //設定從資料庫抓取訂單細節的方法

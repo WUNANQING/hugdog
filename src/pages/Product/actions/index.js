@@ -12,8 +12,8 @@ export const minusQuantity = quantity => ({
 export const showProducts = data => {
   return { type: 'SHOW_PRODUCTS', data }
 }
-// 若無分頁要給預設為1
-export const getProducts = (page = 1) => {
+//
+export const getProducts = page => {
   return async dispatch => {
     const req = new Request(`http://localhost:6001/products/${page}`, {
       method: 'GET',
@@ -29,10 +29,13 @@ export const getProducts = (page = 1) => {
 export const getProductsCategory = cName => {
   console.log(cName)
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/products/?cName=${cName}}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const req = new Request(
+      `http://localhost:6001/products/category?cName=${cName}}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
     const res = await fetch(req)
     const data = await res.json()
     dispatch(showProducts(data))

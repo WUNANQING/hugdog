@@ -13,11 +13,13 @@ import { getProducts, getProductsCategory } from './actions/index'
 const Products = props => {
   //在App.js設定動態參數
   //設page為URL動態參數page的值
-  //設動態參數cName,vName為queryString方式搜尋;在子元件ProductSidebar設定路由為?cName=商品類別和?vName＝廠商名
+  //在子元件ProductSidebar設定路由為?cName=商品類別和?vName＝廠商名(不需要在App.js設定動態參數)
   //在網址列會顯示?cName=商品類別或vName=廠商名
-  const page = props.match.params.page
+  // 一開始找商品無分頁得傳姪否則無法顯示
+  const page = props.match.params.page || ''
   const cName = new URLSearchParams(props.location.search).get('cName')
   const vName = new URLSearchParams(props.location.search).get('vName')
+
   useEffect(() => {
     props.getProducts(page)
     // cName && props.getProductsCategory(cName)
