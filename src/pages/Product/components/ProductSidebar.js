@@ -27,12 +27,12 @@ const ProductSidebar = () => {
     'HALO',
   ]
   const productCategorysidebar = productCategory.map((value, index) => (
-    <Nav.Link key={value} href={'/products/' + eval(index + 1)}>
+    <Nav.Link key={value} href={'/products/?cName=' + value}>
       {value}
     </Nav.Link>
   ))
   const productBrandSidebar = productBrand.map(value => (
-    <Nav.Link key={value} href={'/products/' + value}>
+    <Nav.Link key={value} href={'/products/?vName=' + value}>
       {value}
     </Nav.Link>
   ))
