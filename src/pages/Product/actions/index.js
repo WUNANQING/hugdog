@@ -14,7 +14,6 @@ export const showProducts = data => {
 }
 // 若無分頁要給預設為1
 export const getProducts = (page = 1) => {
-  console.log(page)
   return async dispatch => {
     const req = new Request(`http://localhost:6001/products/${page}`, {
       method: 'GET',
@@ -26,7 +25,19 @@ export const getProducts = (page = 1) => {
     dispatch(showProducts(data))
   }
 }
-
+//跟server要商品種類
+export const getProductsCategory = cName => {
+  console.log(cName)
+  return async dispatch => {
+    const req = new Request(`http://localhost:6001/products/?cName=${cName}}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    dispatch(showProducts(data))
+  }
+}
 //跟server要商品細節
 export const showProductDetail = data => {
   return { type: 'SHOW_PRODUCT_DETAIL', data }
