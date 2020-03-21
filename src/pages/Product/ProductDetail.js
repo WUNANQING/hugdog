@@ -198,9 +198,9 @@ const ProductDetail = props => {
             </Col>
           </Row>
           <Row>
-            {props.list &&
-              props.list.map((value, index) => {
-                return <ProductCard key={index} data={props.list[index]} />
+            {props.list.rows &&
+              props.list.rows.map((value, index) => {
+                return <ProductCard key={index} data={props.list.rows[index]} />
               })}
           </Row>
         </Col>

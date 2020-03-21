@@ -12,15 +12,17 @@ export const minusQuantity = quantity => ({
 export const showProducts = data => {
   return { type: 'SHOW_PRODUCTS', data }
 }
-
-export const getProducts = () => {
+// 若無分頁要給預設為1
+export const getProducts = (page = 1) => {
+  console.log(page)
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/products`, {
+    const req = new Request(`http://localhost:6001/products/${page}`, {
       method: 'GET',
       credentials: 'include',
     })
     const res = await fetch(req)
     const data = await res.json()
+    // console.log(data)
     dispatch(showProducts(data))
   }
 }
@@ -31,13 +33,16 @@ export const showProductDetail = data => {
 }
 export const getProductDetail = pId => {
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/products/${pId}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const req = new Request(
+      `http://localhost:6001/products/productDetail/${pId}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
     const res = await fetch(req)
     const data = await res.json()
-    console.log(data)
+    // console.log('detail', data)
     dispatch(showProductDetail(data))
   }
 }

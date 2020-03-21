@@ -13,9 +13,11 @@ const Checkout = props => {
     zip: '',
     email: '',
     mobile: '',
+    card: '',
     cardNumber: '',
     owner: '',
     cart: localStorage.getItem('cart'),
+    mId: '',
   }
   //寫入表單資訊
   function getformInfo(e, info) {
@@ -43,6 +45,9 @@ const Checkout = props => {
         break
       case 'mobile':
         buyerInfo.mobile = e.currentTarget.value
+        break
+      case 'card':
+        buyerInfo.card = e.currentTarget.id
         break
       case 'cardNumber':
         buyerInfo.cardNumber = e.currentTarget.value
@@ -269,6 +274,24 @@ const Checkout = props => {
               <hr />
               <br />
               <Form.Group>
+                <div className="mb-3">
+                  <Form.Check
+                    inline
+                    name="card"
+                    label="MasterCard"
+                    type="radio"
+                    id="MasterCard"
+                    onChange={e => getformInfo(e, 'card')}
+                  />
+                  <Form.Check
+                    inline
+                    name="card"
+                    label="VISA"
+                    type="radio"
+                    id="VISA"
+                    onChange={e => getformInfo(e, 'card')}
+                  />
+                </div>
                 <Form.Control
                   name="cardNumber"
                   size="lg"
@@ -309,7 +332,7 @@ const Checkout = props => {
                   variant="primary"
                   size="lg"
                   block
-                  // type="submit"
+                  type="submit"
                   onClick={() => {
                     postOrder(buyerInfo)
                     localStorage.setItem('cart', JSON.stringify([]))

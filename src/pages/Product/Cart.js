@@ -158,7 +158,7 @@ const Cart = () => {
                   <img src="#" alt="..." />
                   <Link to="/products">
                     <Button variant="primary" size="md">
-                      前往結帳
+                      前往選購
                     </Button>
                   </Link>
                 </>
