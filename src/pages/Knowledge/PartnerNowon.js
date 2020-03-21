@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Col } from 'react-bootstrap'
 import { IconContext } from 'react-icons'
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { FiClock } from 'react-icons/fi'
 import { MdLocationOn } from 'react-icons/md'
 import $ from 'jquery'
 
-function PartnerNowon() {
+function PartnerNowon(props) {
   return (
     <>
       <Card className="partnercard" style={{ width: '33rem' }}>
@@ -16,34 +16,32 @@ function PartnerNowon() {
           <IconContext.Provider value={{ size: '1.2rem' }}>
             <div class="d-inlined-inline-block">
               <FaRegCalendarAlt />
-              <span className="carddate"> 活動日期：2020/05/07</span>
+              <span className="carddate"> 活動日期：{props.data.pDate}</span>
             </div>
             <div class="d-inline-block">
               <FiClock />
-              <span className="cardtime"> 時間：15:00-16:00</span>
+              <span className="cardtime"> 時間：{props.data.pTime}</span>
             </div>
           </IconContext.Provider>
         </Card.Header>
         <Card.Img
           variant="top"
-          src={require('../../images/knowledge/0601.jpg')}
+          src={require('../../images/knowledge/' + props.data.pId + '.jpg')}
+          alt=""
         />
         <Card.Body>
           <div className="">
             <MdLocationOn />
-            <span className="cardtime">
-              活動地點：台北市中山區吉林路26巷26號2F
-            </span>
+            <span className="cardtime">活動地點：{props.data.pLocation}</span>
           </div>
           <br />
           <Card.Title>
-            <Link to="partner/article">
-              基礎正向行為養成班／輕鬆打造快樂狗生活
-            </Link>
+            <Link to="partner/article">{props.data.pTitle}</Link>
           </Card.Title>
           <Card.Text>
+            <p>{props.data.pDes}</p>
             <p>
-              針對毛孩教養時發生的日常行為問題，特別開設「正向行為禮貌養成班」，協助飼主引導毛孩學會基礎服從指令
+              <Linkb to="partner/article">看更多...</Linkb>
             </p>
           </Card.Text>
           <div className="text-right">

@@ -77,6 +77,43 @@ const getBlogArticle = (state = [], action) => {
       return state
   }
 }
+// partner
+const getPartner = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_PARTNER':
+      return action.data
+    default:
+      return state
+  }
+}
+
+const getPartnerDetail = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_PARTNER_DETAIL':
+      return action.data
+    default:
+      return state
+  }
+}
+
+// Qestion
+const getQuestion = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_QUESTION':
+      return action.data
+    default:
+      return state
+  }
+}
+
+const getQuestionDetail = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_QUESTION_DETAIL':
+      return action.data
+    default:
+      return state
+  }
+}
 
 //knowledge end
 const rootReducer = combineReducers({
@@ -88,6 +125,10 @@ const rootReducer = combineReducers({
   getCoupons,
   getBlog,
   getBlogArticle,
+  getPartner,
+  getPartnerDetail,
+  getQuestion,
+  getQuestionDetail,
   insertCoupon,
 })
 

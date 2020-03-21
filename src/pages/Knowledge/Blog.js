@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getBlog } from './actions/index'
 
-import BlogArt from './BlogArt'
+import BlogPost from './Blogpost'
 import '../../components/Knowledge/knowledge.scss'
 import Blogheader from './Blogheader'
 import Search from '../../components/Knowledge/Search'
@@ -19,7 +19,7 @@ const Blog = props => {
     props.getBlog()
   }, [])
 
-  console.log(Blog)
+  // console.log(Blog)
 
   const pages = (
     <nav aria-label="Page navigation example">
@@ -69,23 +69,25 @@ const Blog = props => {
         </nav>
 
         {/* 文章 */}
-        <Row className="article mr-3">
-          {/* <div className="article mr-3"> */}
-          {props.article &&
-            props.article.map((value, index) => {
-              return <BlogArt key={index} data={props.article[index]} />
-            })}
-          {/* </div> */}
-        </Row>
+        <div className="wrap">
+          <Row className="article mr-3">
+            {/* <div className="article mr-3"> */}
+            {props.post &&
+              props.post.map((value, index) => {
+                return <BlogPost key={index} data={props.post[index]} />
+              })}
+            {/* </div> */}
+          </Row>
 
-        {pages}
+          {pages}
+        </div>
       </Container>
     </>
   )
 }
 
 const mapStateToProps = store => {
-  return { article: store.getBlog }
+  return { post: store.getBlog }
 }
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getBlog }, dispatch)
