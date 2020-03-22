@@ -23,6 +23,7 @@ const MemberRegister = props => {
     mName: '',
     mAccount: '',
     mPassword: '',
+    mImg: '',
     mGender: '',
     mBday: '',
     mPhone: '',
@@ -39,6 +40,9 @@ const MemberRegister = props => {
         memberInfo.mAccount = e.currentTarget.value
         break
       case 'mPassword':
+        memberInfo.mPassword = e.currentTarget.value
+        break
+      case 'mImg':
         memberInfo.mPassword = e.currentTarget.value
         break
       case 'mGender':
@@ -64,7 +68,7 @@ const MemberRegister = props => {
   //建立會員資料
   //建立訂單
   async function insertMember(form) {
-    const req = new Request('http://localhost:6001/orders/insert', {
+    const req = new Request('http://localhost:6001/member/insert', {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({
