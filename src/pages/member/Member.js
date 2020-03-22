@@ -86,35 +86,49 @@ function Member() {
               </div>
 
               <div className="member-form-container d-flex container">
-                <div className="member-form">
-                  <div className="title-box">
-                    <p>個人資訊</p>
+                <div>
+                  <div className="member-form">
+                    <div className="title-box">
+                      <p>個人資訊</p>
+                    </div>
+                    <ul>
+                      <li> 個人資料修改</li>
+                      <li> 狗狗資料修改</li>
+                    </ul>
                   </div>
-                  <ul>
-                    <li> 個人資料修改</li>
-                    <li> 狗狗資料修改</li>
-                  </ul>
+                  <div className="member-form">
+                    <div className="title-box">
+                      <p>商品查詢</p>
+                    </div>
+                    <ul>
+                      <li> 我的優惠</li>
+                      <li> 我的訂單</li>
+                      <li> 我的最愛</li>
+                      <li> 購物車</li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="member-form">
-                  <div className="title-box">
-                    <p>商品查詢</p>
+                <div>
+                  <div className="member-form">
+                    <div className="title-box">
+                      <p>服務查詢</p>
+                    </div>
+                    <ul>
+                      <li>保姆訂單查詢</li>
+                      <li> 評論紀錄</li>
+                      <li> 最愛保姆</li>
+                    </ul>
                   </div>
-                  <ul>
-                    <li> 我的優惠</li>
-                    <li> 我的訂單</li>
-                    <li> 我的最愛</li>
-                    <li> 購物車</li>
-                  </ul>
-                </div>
-                <div className="member-form">
-                  <div className="title-box">
-                    <p>服務查詢</p>
+                  <div className="member-form">
+                    <div className="title-box">
+                      <p>服務查詢</p>
+                    </div>
+                    <ul>
+                      <li>保姆訂單查詢</li>
+                      <li> 評論紀錄</li>
+                      <li> 最愛保姆</li>
+                    </ul>
                   </div>
-                  <ul>
-                    <li>保姆訂單查詢</li>
-                    <li> 評論紀錄</li>
-                    <li> 最愛保姆</li>
-                  </ul>
                 </div>
               </div>
             </div>

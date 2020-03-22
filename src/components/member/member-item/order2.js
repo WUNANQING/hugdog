@@ -4,7 +4,7 @@ import $ from 'jquery'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getMemberData } from '../../../pages/member/actions/index'
+import { getMemberOrderData } from '../../../pages/member/actions/index'
 import {
   Form,
   FormControl,
@@ -16,57 +16,33 @@ import {
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../../css/member/member-info.scss'
 
-const MemberInfo = props => {
-  //會員基本資料
-  var i = parseInt(localStorage.getItem('mId') - 1)
-  // var i = parseInt(document.cookie.slice(4)) - 1
-  // var i = parseInt(document.cookie) - 1
-  const mId = props.data[i] ? props.data[i].mId : ''
-  const mName = props.data[i] ? props.data[i].mName : ''
-  const mAccount = props.data[i] ? props.data[i].mAccount : ''
-  const mPassword = props.data[i] ? props.data[i].mPassword : ''
-  const mImg = props.data[i] ? props.data[i].mImg : ''
-  const mGender = props.data[i] ? props.data[i].mGender : ''
-  const mBday = props.data[i] ? props.data[i].mBday : ''
-  const mPhone = props.data[i] ? props.data[i].mPhone : ''
-  const mEmail = props.data[i] ? props.data[i].mEmail : ''
-  const mAddress = props.data[i] ? props.data[i].mAddress : ''
+const MemberOrderInfo = props => {
   //狗狗基本資料
-  console.log(props.data)
+  // var mId = []
+  // var j = parseInt(localStorage.getItem('mId') - 1)
+  // for (let n = 0; n <= props.data.length; n++) {
+  //   if (j === props.data[n].mId) {
+  //     mId += props.data[n].mId
+  //   }
+  // }
+  // console.log('mId: ', mId)
+  var i = localStorage.getItem('mId')
+  const name = props.data[i] ? props.data[i].name : ''
+  const address = props.data[i] ? props.data[i].address : ''
+  const card = props.data[i] ? props.data[i].card : ''
+  const cart = props.data[i] ? props.data[i].cart : ''
+  const created_at = props.data[i] ? props.data[i].created_at : ''
+  const mId = props.data[i] ? props.data[i].mId : ''
+
   useEffect(() => {
-    props.getMemberData()
-    $('.nav-item').click(function() {
-      let effect = $(this).data('effect')
-      console.log(effect)
-      switch (effect) {
-        case 'show1':
-          $('#content1').fadeIn()
-          $('#content2').fadeOut()
-          $('#content3').fadeOut()
-          break
-        case 'show2':
-          $('#content1').fadeOut()
-          $('#content2').fadeIn()
-          $('#content3').fadeOut()
-          break
-        case 'show3':
-          $('#content1').fadeOut()
-          $('#content2').fadeOut()
-          $('#content3').fadeIn()
-          break
-      }
-      $('.nav-link').removeClass('active')
-      $(this)
-        .find('a')
-        .addClass('active')
-    })
+    props.getMemberOrderData()
   }, [])
 
   return (
-    <div class="tab-content content" id="content1">
+    <div class="tab-content content" id="content2">
       <div>
         <h3>
-          個人資訊
+          訂單查詢
           <br />
         </h3>
         <div class="row">
@@ -82,102 +58,89 @@ const MemberInfo = props => {
                   <table class="table table-borderless">
                     <tbody>
                       <tr>
-                        <td class="text-right">會員編號</td>
+                        <td class="text-right"></td>
                         <td>
                           <input
                             type="text"
                             name="dId"
-                            value={mId}
+                            value="2222"
                             class="form-control"
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td class="text-right">會員姓名</td>
+                        <td class="text-right">狗狗姓名</td>
                         <td>
                           <input
                             type="text"
                             name="dName"
-                            value={mName}
+                            value="Sunny"
                             class="form-control"
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td class="text-right">會員帳號</td>
+                        <td class="text-right">主人編號</td>
                         <td>
                           <input
                             type="text"
                             name="mId"
-                            value={mAccount}
+                            value="m001"
                             class="form-control"
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td class="text-right">會員密碼</td>
+                        <td class="text-right">狗狗性別</td>
                         <td>
                           <input
                             type="text"
                             name="dGender"
-                            value={mPassword}
+                            value="girl"
                             class="form-control"
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td class="text-right">會員性別</td>
+                        <td class="text-right">狗狗年紀</td>
                         <td>
                           <input
                             placeholder="歲"
                             type="text"
                             name="dYear"
-                            value={mGender}
+                            value="6"
+                            class="form-control"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            placeholder="月"
+                            type="text"
+                            name="dMonth"
+                            value="2"
                             class="form-control"
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td class="text-right">會員生日</td>
+                        <td class="text-right">狗狗體重</td>
                         <td>
                           <input
                             type="text"
                             name="dWeight"
                             class="form-control"
-                            value={mBday}
+                            value="4"
                           />
                         </td>
                       </tr>
                       <tr>
-                        <td class="text-right">會員電話</td>
+                        <td class="text-right">狗狗資訊</td>
                         <td>
                           <input
                             type="text"
                             name="dInfo"
                             class="form-control"
-                            value={mPhone}
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-right">會員信箱</td>
-                        <td>
-                          <input
-                            type="text"
-                            name="dInfo"
-                            class="form-control"
-                            value={mEmail}
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-right">會員地址</td>
-                        <td>
-                          <input
-                            type="text"
-                            name="dInfo"
-                            class="form-control"
-                            value={mAddress}
+                            value=""
                           />
                         </td>
                       </tr>
@@ -210,9 +173,9 @@ const MemberInfo = props => {
   )
 }
 const mapStateToProps = store => {
-  return { data: store.getMember }
+  return { data: store.getMemberOrder }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getMemberData }, dispatch)
+  return bindActionCreators({ getMemberOrderData }, dispatch)
 }
-export default connect(mapStateToProps, mapDispatchToProps)(MemberInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(MemberOrderInfo)

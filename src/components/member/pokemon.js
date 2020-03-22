@@ -123,7 +123,7 @@ class App extends React.Component {
               alt="Background"
               className="check disappear"
             />
-            {/* <div className="card coupon disappear">我是折價券</div> */}
+            <div className="card coupon disappear">我是折價券</div>
             <div id="draggable" className="draggable">
               <div className="robot-container a" id="a">
                 <img
@@ -133,13 +133,13 @@ class App extends React.Component {
                   className="close"
                 />
                 <div className="robot" id="robot">
-                  {/* <ul className="list-group help">
+                  <ul className="list-group help">
                     <a href="https://www.google.com.tw/">
                       <li class="list-group-item active">
                         請問我有什麼可以幫您的嗎?
                       </li>
                     </a>
-                  </ul> */}
+                  </ul>
                 </div>
               </div>
             </div>
