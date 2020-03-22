@@ -23,7 +23,7 @@ import Pokemon from '../../components/member/pokemon'
 function Member() {
   return (
     <>
-      {document.cookie === '' ? (
+      {localStorage.getItem('mId') === 0 ? (
         <h1>請登入</h1>
       ) : (
         <Switch>
