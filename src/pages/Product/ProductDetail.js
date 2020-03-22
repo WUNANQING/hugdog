@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getProducts, getProductDetail } from './actions/index'
@@ -20,7 +20,7 @@ import {
 } from 'react-icons/md'
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
-import ProductCard from './components/ProductCard'
+import ProductCardSmall from './components/ProductCardSmall'
 
 const ProductDetail = props => {
   const [total, setTotal] = useState(1)
@@ -42,10 +42,9 @@ const ProductDetail = props => {
   useEffect(() => {
     props.getProductDetail(pId)
     props.getProducts()
-  }, [
-    props.match.params.pId || JSON.parse(localStorage.getItem('cart')).length,
-  ])
-
+  }, [props.match.params.pId])
+  //設定猜你喜歡只列出4項
+  let arr = props.list.rows && props.list.rows.slice(0, 4)
   return (
     <Container>
       <Row className="my-5">
@@ -222,14 +221,20 @@ const ProductDetail = props => {
             <Col>
               <div className="mt-5 d-md-flex justify-content-between">
                 <p>猜你喜歡</p>
-                <a href="#product">查看更多></a>
+                <Link to="/products">查看更多></Link>
               </div>
             </Col>
           </Row>
           <Row>
+            {/* {}裡面不能下if判斷式？ */}
+            {/* {if(props.list.rows){props.list.rows.map((value, index) => {
+              return <ProductCard key={index} data={props.list.rows[index]} />
+            })}} */}
             {props.list.rows &&
-              props.list.rows.map((value, index) => {
-                return <ProductCard key={index} data={props.list.rows[index]} />
+              arr.map((value, index) => {
+                return (
+                  <ProductCardSmall key={index} data={props.list.rows[index]} />
+                )
               })}
           </Row>
         </Col>

@@ -6,7 +6,7 @@ import { Col, Card, Nav, Button } from 'react-bootstrap'
 
 const ProductCard = props => {
   return (
-    <Col md={4} className="mb-3">
+    <Col md={3} className="mb-3">
       <Card className="shadow-sm">
         <img
           src="https://via.placeholder.com/250x150"

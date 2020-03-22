@@ -5,8 +5,11 @@ import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
+import ProductCardSmall from './components/ProductCardSmall'
+import { getProducts } from './actions/index'
+import { bindActionCreators } from 'redux'
 
-const Cart = () => {
+const Cart = props => {
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
 
@@ -78,6 +81,8 @@ const Cart = () => {
     }
     return total
   }
+  //設定猜你喜歡只列出4項商品(未完成;無法重新render更新顯示數量;以及按了快速結帳會消失隱藏)
+  let arr = props.list.rows && props.list.rows.slice(0, 4)
 
   return (
     <Container>
@@ -304,115 +309,12 @@ const Cart = () => {
         </Col>
       </Row>
       <Row>
-        <Col md={3} className="mb-3">
-          <Card className="shadow-sm">
-            <img
-              src="https://via.placeholder.com/250x150"
-              className="card-img-top"
-              alt="..."
-            />
-            <Card.Body className="text-center">
-              <Card.Title>Book</Card.Title>
-              <Card.Text>商品說明</Card.Text>
-              <Card.Text className="d-md-flex justify-content-between">
-                <del className="cart-text">NTD 200元</del>
-                <Card.Text
-                  className="text-danger"
-                  style={{ textDecoration: 'underline' }}
-                >
-                  NTD 1000元
-                </Card.Text>
-              </Card.Text>
-              <Button className="mb-md-2" variant="primary" size="md">
-                <MdAddShoppingCart className="mb-1" />
-                加入購物車
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={3} className="mb-3">
-          <Card className="shadow-sm">
-            <img
-              src="https://via.placeholder.com/250x150"
-              className="card-img-top"
-              alt="..."
-            />
-            <Card.Body className="text-center">
-              <Card.Title>Book</Card.Title>
-              <Card.Text>商品說明</Card.Text>
-              <Card.Text className="d-md-flex justify-content-between">
-                <del className="cart-text">NTD 200元</del>
-                <Card.Text
-                  className="text-danger"
-                  style={{ textDecoration: 'underline' }}
-                >
-                  NTD 1000元
-                </Card.Text>
-              </Card.Text>
-              <Button className="mb-md-2" variant="primary" size="md">
-                <MdAddShoppingCart className="mb-1" />
-                加入購物車
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={3} className="mb-3">
-          <Card className="shadow-sm">
-            <img
-              src="https://via.placeholder.com/250x150"
-              className="card-img-top"
-              alt="..."
-            />
-            <Card.Body className="text-center">
-              <Card.Title>Book</Card.Title>
-              <Card.Text>商品說明</Card.Text>
-              <Card.Text className="d-md-flex justify-content-between">
-                <del className="cart-text">NTD 200元</del>
-                <Card.Text
-                  className="text-danger"
-                  style={{ textDecoration: 'underline' }}
-                >
-                  NTD 1000元
-                </Card.Text>
-              </Card.Text>
-              <Button className="mb-md-2" variant="primary" size="md">
-                <MdAddShoppingCart className="mb-1" />
-                加入購物車
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={3} className="mb-3">
-          <Card className="shadow-sm">
-            <img
-              src="https://via.placeholder.com/250x150"
-              className="card-img-top"
-              alt="..."
-            />
-            <Card.Body className="text-center">
-              <Card.Title>Book</Card.Title>
-              <Card.Text>商品說明</Card.Text>
-              <Card.Text className="d-md-flex justify-content-between">
-                <del className="cart-text">NTD 200元</del>
-                <Card.Text
-                  className="text-danger"
-                  style={{ textDecoration: 'underline' }}
-                >
-                  NTD 1000元
-                </Card.Text>
-              </Card.Text>
-              <Button
-                className="mb-md-2"
-                variant="primary"
-                size="md"
-                onClick={() => alert('hello')}
-              >
-                <MdAddShoppingCart className="mb-1" />
-                加入購物車
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
+        {props.list.rows &&
+          arr.map((value, index) => {
+            return (
+              <ProductCardSmall key={index} data={props.list.rows[index]} />
+            )
+          })}
       </Row>
       <Row className="mt-5">
         <Col>
@@ -439,9 +341,11 @@ const Cart = () => {
 
 const mapStateToProps = store => {
   return {
-    total: store.counter,
-    addCart: store.saveProductToCart,
+    list: store.getProducts,
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Cart))
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getProducts }, dispatch)
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))
