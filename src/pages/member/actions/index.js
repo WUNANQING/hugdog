@@ -30,6 +30,33 @@ export const getMemberDetail = mId => {
     dispatch(showMemberDetail(data))
   }
 }
+//新增會員
+// export const userRegister = userData => ({
+//   type: 'USER_REGISTER',
+//   data: userData,
+// })
+// export const userRegisterAsync = (userData, callback) => {
+//   return async dispatch => {
+//     const request = new Request('http://localhost:6001/member/insert', {
+//       method: 'POST',
+//       body: JSON.stringify(userData),
+//       headers: new Headers({
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       }),
+//     })
+
+//     // console.log(JSON.stringify(userData))
+
+//     const response = await fetch(request)
+//     const data = await response.json()
+//     console.log(data)
+
+//     // 設定資料
+//     dispatch(userRegister(data))
+//     callback()
+//   }
+// }
 export const showDog = data => {
   return { type: 'SHOW_DOG', data }
 }
