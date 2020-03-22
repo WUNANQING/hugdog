@@ -1,6 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../images/logo-dark.svg'
 import { FiHeart } from 'react-icons/fi'
@@ -124,16 +124,47 @@ function Header(props) {
               </IconContext.Provider>
             </Nav.Link>
             {/* Nav.Link不會記錄router的三個屬性 export default withRouter(Header)*/}
-            <Nav.Link href="/cart">
-              <IconContext.Provider value={{ size: '1.5rem' }}>
-                {/* <span className="badge badge-danger">
-                  {JSON.parse(localStorage.getItem('cart')).length === 0
-                    ? ''
-                    : JSON.parse(localStorage.getItem('cart')).length}
-                </span> */}
-                <AiOutlineShopping />
-              </IconContext.Provider>
-            </Nav.Link>
+            <Nav className="nav-icon order-3 order-md-4">
+              <div className="nav-link">
+                <div className="icon icon-unread">
+                  <IconContext.Provider value={{ size: '1.5rem' }}>
+                    <AiOutlineShopping />
+                  </IconContext.Provider>
+                </div>
+                <div className="dropdown-menu">
+                  <Link to="/cart" className="dropdown-item text-center">
+                    您的購物車
+                  </Link>
+                  <div className="dropdown-divider" role="separator"></div>
+
+                  <Link className="dropdown-item nav-link">
+                    {JSON.parse(localStorage.getItem('cart')) === null ||
+                    JSON.parse(localStorage.getItem('cart')).length === 0 ? (
+                      <div className="text-center">
+                        <span>購物車沒有商品</span>
+                        <br />
+                        <Link to="/products" className="p-0">
+                          <Button className="text-center p-1">去選購吧</Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <span>有</span>
+                        <span className="badge badge-danger m-0">
+                          {JSON.parse(localStorage.getItem('cart')).length}
+                        </span>
+                        <spna>項商品</spna>
+                        <br />
+                        <br />
+                        <Link to="/cart" className="p-0">
+                          <Button className="text-center p-1">去結帳吧</Button>
+                        </Link>
+                      </div>
+                    )}
+                  </Link>
+                </div>
+              </div>
+            </Nav>
           </Nav>
         </Navbar>
       </header>
