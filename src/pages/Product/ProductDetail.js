@@ -121,6 +121,33 @@ const ProductDetail = props => {
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
                   size="md"
+                  onClick={() => {
+                    let item = {
+                      pId: props.detail[0].pId,
+                      pName: props.detail[0].pName,
+                      pQuantity: 1,
+                      pPrice: props.detail[0].pPrice,
+                    }
+                    let cart = []
+                    cart.push(item)
+
+                    if (localStorage.getItem('cart') === null) {
+                      localStorage.setItem('cart', JSON.stringify(cart))
+                    } else {
+                      let currentCart = JSON.parse(localStorage.getItem('cart'))
+                      if (
+                        [...currentCart].find(
+                          value => value.pId === props.detail[0].pId
+                        )
+                      ) {
+                        alert('已加入購物車')
+                      } else {
+                        const newCart = [...currentCart, item]
+                        localStorage.setItem('cart', JSON.stringify(newCart))
+                      }
+                    }
+                    props.history.push('/cart')
+                  }}
                 >
                   <MdShoppingCart className="mb-md-1" />
                   快速結帳

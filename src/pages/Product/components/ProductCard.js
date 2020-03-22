@@ -42,11 +42,23 @@ const ProductCard = props => {
                   }
                   let cart = []
                   cart.push(item)
+
                   if (localStorage.getItem('cart') === null) {
                     localStorage.setItem('cart', JSON.stringify(cart))
                   } else {
-                    let cuurentCart = JSON.parse(localStorage.getItem('cart'))
+                    let currentCart = JSON.parse(localStorage.getItem('cart'))
+                    if (
+                      [...currentCart].find(
+                        value => value.pId === props.data.pId
+                      )
+                    ) {
+                      return alert('已加入購物車')
+                    } else {
+                      const newCart = [...currentCart, item]
+                      localStorage.setItem('cart', JSON.stringify(newCart))
+                    }
                   }
+                  props.history.push('/cart')
                 }}
               >
                 快速結帳
