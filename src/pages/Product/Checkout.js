@@ -19,7 +19,7 @@ const Checkout = props => {
     cardNumber: '',
     owner: '',
     cart: localStorage.getItem('cart'),
-    mId: '',
+    mId: mId,
   }
   //寫入表單資訊
   function getformInfo(e, info) {

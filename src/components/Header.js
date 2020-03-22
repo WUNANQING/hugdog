@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
 import { Nav, Navbar, NavDropdown, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -16,6 +16,8 @@ $('#logout').click(function() {
   window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {
+  //購物車加入一項商品,根據localStorage的cart的陣列長度變動,重新render商品數量狀態
+
   return (
     <>
       <header className="sticky-top">
