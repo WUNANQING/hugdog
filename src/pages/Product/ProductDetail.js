@@ -38,11 +38,13 @@ const ProductDetail = props => {
       setMycart(newCart)
     }
   }
-
+  //即時更新商品數量(未完成)
   useEffect(() => {
     props.getProductDetail(pId)
     props.getProducts()
-  }, [props.match.params.pId])
+  }, [
+    props.match.params.pId || JSON.parse(localStorage.getItem('cart')).length,
+  ])
 
   return (
     <Container>
@@ -198,9 +200,9 @@ const ProductDetail = props => {
             </Col>
           </Row>
           <Row>
-            {props.list &&
-              props.list.map((value, index) => {
-                return <ProductCard key={index} data={props.list[index]} />
+            {props.list.rows &&
+              props.list.rows.map((value, index) => {
+                return <ProductCard key={index} data={props.list.rows[index]} />
               })}
           </Row>
         </Col>

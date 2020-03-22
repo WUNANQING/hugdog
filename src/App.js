@@ -38,7 +38,7 @@ function App() {
             <Route path="/blog">
               <Blog />
             </Route>
-            <Route path="/products/:page?/:pCategoryId?">
+            <Route path="/products/:page?">
               <Products />
             </Route>
             <Route path="/productdetail/:pId">
@@ -56,7 +56,7 @@ function App() {
             <Route path="/bonuspoints">
               <BonusPoints />
             </Route>
-            <Route path="/order">
+            <Route path="/order/:orderId?">
               <Order />
             </Route>
             <Route path="/login">

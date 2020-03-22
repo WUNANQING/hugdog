@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { FaPaw } from 'react-icons/fa'
-import { Col, Card, Nav } from 'react-bootstrap'
+import { Col, Card, Nav, Button } from 'react-bootstrap'
 
 const ProductCard = props => {
   return (
@@ -25,17 +25,33 @@ const ProductCard = props => {
           </div>
           <div className="d-md-flex justify-content-around">
             <Nav.Link>
-              <Link
-                to={'/productdetail/' + props.data.pId}
-                className="btn btn-primary border p-0"
-              >
-                查看商品
+              <Link to={'/productdetail/' + props.data.pId} className="p-0">
+                <Button className="text-center p-1">查看商品</Button>
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="/cart" className="btn btn-primary border p-0">
+              {/* <Link to="/cart" className="p-0"> */}
+              <Button
+                className="text-center p-1"
+                onClick={() => {
+                  let item = {
+                    pId: props.data.pId,
+                    pName: props.data.pName,
+                    pQuantity: 1,
+                    pPrice: props.data.pPrice,
+                  }
+                  let cart = []
+                  cart.push(item)
+                  if (localStorage.getItem('cart') === null) {
+                    localStorage.setItem('cart', JSON.stringify(cart))
+                  } else {
+                    let cuurentCart = JSON.parse(localStorage.getItem('cart'))
+                  }
+                }}
+              >
                 快速結帳
-              </Link>
+              </Button>
+              {/* </Link> */}
             </Nav.Link>
           </div>
         </Card.Body>

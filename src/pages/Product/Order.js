@@ -5,22 +5,34 @@ import { MdShoppingCart, MdBookmarkBorder } from 'react-icons/md'
 const Order = props => {
   //設定訂單狀態
   const [order, setOrder] = useState([])
+  //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
+  const mId = localStorage.getItem('mId')
   //設定orderId的來源
   const orderId = props.match.params.orderId ? props.match.params.orderId : ''
   //設定從資料庫抓取訂單細節的方法
   async function getOrderDetail(orderId) {
-    const req = new Request(`http://localhost:6001/orders/${orderId}`, {
+    const req = new Request(`http://localhost:6001/order/${orderId}`, {
       method: 'GET',
       credentials: 'include',
     })
     const res = await fetch(req)
     const detail = await res.json()
+    console.log(detail)
     setOrder(detail)
   }
   //設定生命週期方法useEffect===ComponnentDidMount
   useEffect(() => {
     getOrderDetail(orderId)
   }, [])
+
+  //計算總價
+  const sum = items => {
+    let total = 0
+    for (let i = 0; i < items.length; i++) {
+      total += items[i].pQuantity * items[i].pPrice
+    }
+    return total
+  }
 
   return (
     <Container>
@@ -94,92 +106,44 @@ const Order = props => {
         <Col className="d-flex justify-content-between align-items-end">
           <h4>你的訂單明細</h4>
           <div>
-            <div>訂單編號:123456789</div>
-            <div>訂單下達日期:2020/03/13</div>
+            <div>訂單編號:{order[0] ? order[0].id : ''}</div>
+            <div>
+              訂單下達日期:
+              {order[0] ? order[0].created_at : ''}
+            </div>
           </div>
         </Col>
       </Row>
       <hr className="mt-1" />
-      <Row className="align-items-center">
-        <Col xs={6} sm={6} md={6} lg={3}>
-          <img src="https://via.placeholder.com/250" alt="..." />
-        </Col>
-        <Col xs={6} sm={6} md={6} lg={2} className="pl-5 pr-0">
-          <h3>商品名稱</h3>
-          <h4>尺寸:小</h4>
-          <h4>顏色:紅</h4>
-          <h4>數量:1</h4>
-          <h4>價格:$100</h4>
-        </Col>
-        <Col xs={12} sm={12} md={12} lg={7}>
-          <Row className="m-0">
-            <Col xs={12} className="mt-5 p-0 d-flex justify-content-center">
-              <Col xs={8} className="border position-relative">
-                <div
-                  className="rounded bg-primary position-absolute rounded-circle"
-                  style={{
-                    width: 20 + 'px',
-                    height: 20 + 'px',
-                    left: -2.5 + '%',
-                    top: -10,
-                  }}
-                ></div>
-                <div
-                  className="rounded bg-dark position-absolute rounded-circle"
-                  style={{
-                    width: 20 + 'px',
-                    height: 20 + 'px',
-                    left: (201.656 / 423.312) * 100 + '%',
-                    top: -10,
-                  }}
-                ></div>
-                <div
-                  className="rounded bg-dark position-absolute rounded-circle"
-                  style={{
-                    width: 20 + 'px',
-                    height: 20 + 'px',
-                    left: 97.5 + '%',
-                    top: -10,
-                  }}
-                ></div>
-              </Col>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} className="d-flex p-0 justify-content-center">
-              <Col xs={7} className="position-relative">
-                <div
-                  className="position-absolute "
-                  style={{
-                    left: (-50 / 423.312) * 100 + '%',
-                    top: 10,
-                  }}
-                >
-                  下達訂單
-                </div>
-                <div
-                  className="position-absolute "
-                  style={{
-                    left: (187.656 / 423.312) * 100 + '%',
-                    top: 10,
-                  }}
-                >
-                  運送中
-                </div>
-                <div
-                  className="position-absolute "
-                  style={{
-                    right: (-42 / 423.312) * 100 + '%',
-                    top: 10,
-                  }}
-                >
-                  已取貨
-                </div>
-              </Col>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+
+      {order[0]
+        ? JSON.parse(order[0].cart).map((value, index) => {
+            return (
+              <>
+                <Row key={index} className="align-items-center">
+                  <Col xs={6} sm={6} md={6} lg={3}>
+                    <img src="https://via.placeholder.com/250" alt="..." />
+                  </Col>
+                  <Col xs={6} sm={6} md={6} lg={9}>
+                    <Row className="justify-content-around align-items-center">
+                      <Col xs={12} sm={12} md={12} lg={3} className="pl-5 pr-0">
+                        <h3>{value.pName}</h3>
+                      </Col>
+                      <Col xs={12} sm={12} md={12} lg={3} className="pl-5 pr-0">
+                        <h4>數量:{value.pQuantity}</h4>
+                        <h4>價格:${value.pPrice}</h4>
+                      </Col>
+                      <Col xs={12} sm={12} md={12} lg={3} className="pl-5 pr-0">
+                        <h4>小計:{value.pQuantity * value.pPrice}</h4>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+                <hr />
+              </>
+            )
+          })
+        : ''}
       <Row className="mt-5">
         <Col>
           <h4>收件人明細</h4>
@@ -187,18 +151,31 @@ const Order = props => {
       </Row>
       <hr className="mt-1" />
       <Row>
-        <Col xs={12} sm={12} md>
-          <p>收件人</p>
-          <p className="ml-4 font-weight-bold">王小明</p>
+        <Col xs={4} sm={4} md={8}>
+          <Row className="justify-content-around">
+            <Col xs={12} sm={12} md>
+              <p>收件人</p>
+              <p className="ml-4 font-weight-bold">
+                {order[0] ? order[0].name : ''}
+              </p>
+            </Col>
+            <Col xs={12} sm={12} md>
+              <p>收件地址</p>
+              <p className="ml-4 font-weight-bold">
+                {order[0] ? order[0].zip : ''}
+                {order[0] ? order[0].address : ''}
+              </p>
+            </Col>
+          </Row>
         </Col>
-        <Col xs={12} sm={12} md>
-          <p>收件地址</p>
-          <p className="ml-4 font-weight-bold">433台中市沙鹿區向上路666號</p>
-        </Col>
-        <Col xs={12} sm={12} md>
+        <Col xs={8} sm={8} md={4}>
           <p>聯絡資訊</p>
-          <p className="ml-4 font-weight-bold">信箱：</p>
-          <p className="ml-4 font-weight-bold">手機：</p>
+          <p className="ml-4 font-weight-bold">
+            信箱：{order[0] ? order[0].email : ''}
+          </p>
+          <p className="ml-4 font-weight-bold">
+            手機：{order[0] ? order[0].mobile : ''}
+          </p>
         </Col>
       </Row>
       <Row className="mt-5">
@@ -215,8 +192,13 @@ const Order = props => {
       </Row>
       <Row>
         <Col xs={12} sm={12} md={5} className="d-flex justify-content-between">
-          <p className="ml-4 font-weight-bold">王小明</p>
-          <p className="font-weight-bold">＊＊＊＊1234</p>
+          <p className="ml-4 font-weight-bold">
+            {order[0] ? order[0].owner : ''}
+          </p>
+          <p className="font-weight-bold">{order[0] ? order[0].card : ''}</p>
+          <p className="font-weight-bold">
+            {order[0] ? order[0].cardNumber : ''}
+          </p>
         </Col>
       </Row>
       <Row>
@@ -227,7 +209,7 @@ const Order = props => {
           className="mt-3 d-flex justify-content-between"
         >
           <span>小計</span>
-          <span>NT$100</span>
+          <span>NT${sum(order[0] ? JSON.parse(order[0].cart) : 0)}</span>
         </Col>
       </Row>
       <Row>
@@ -243,7 +225,9 @@ const Order = props => {
           className="mt-3 d-flex justify-content-between"
         >
           <p className="font-weight-bold">總計</p>
-          <p className="font-weight-bold">NT$100</p>
+          <p className="font-weight-bold">
+            NT${sum(order[0] ? JSON.parse(order[0].cart) : 0)}
+          </p>
         </Col>
       </Row>
       <Row>
@@ -251,12 +235,12 @@ const Order = props => {
           <Button className="mb-md-2" variant="primary" size="lg" href="#">
             <MdBookmarkBorder className="mb-md-1" />
             檢視訂單
-          </Button>{' '}
+          </Button>
           <Button
             className="mb-md-2"
             variant="primary"
             size="lg"
-            href="/productlist"
+            href="/products"
           >
             <MdShoppingCart className="mb-md-1" />
             繼續選購
