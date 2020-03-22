@@ -11,7 +11,7 @@ function Breadcrumb(props) {
             <Link to="/">Home</Link>
           </li>
           <li className="list-group-item border-0 p-0">
-            {props.location.pathname}
+            <Link to={props.history}>{props.location.pathname}</Link>
           </li>
         </ul>
       </nav>

@@ -24,12 +24,12 @@ const ProductCard = props => {
             <FaPaw />
           </div>
           <div className="d-md-flex justify-content-around">
-            <Nav.Link>
+            <Nav.Link className="p-0">
               <Link to={'/productdetail/' + props.data.pId} className="p-0">
                 <Button className="text-center p-1">查看商品</Button>
               </Link>
             </Nav.Link>
-            <Nav.Link>
+            <Nav.Link className="p-0">
               <Link to="/cart" className="p-0">
                 <Button
                   className="text-center p-1"

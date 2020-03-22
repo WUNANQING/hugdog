@@ -197,7 +197,9 @@ const ProductDetail = props => {
                     商品說明
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey="0">
-                    <Card.Body>Hello! I'm the body</Card.Body>
+                    <Card.Body>
+                      {props.detail[0] ? props.detail[0].pInfo : ''}
+                    </Card.Body>
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
