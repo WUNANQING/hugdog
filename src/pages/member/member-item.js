@@ -61,13 +61,14 @@ const MemberInfo = props => {
               <Nav.Link className="member-sidebar-text" href="/member">
                 首頁
               </Nav.Link>
+              <Nav.Link className="member-sidebar-text w46"></Nav.Link>
+
               <Nav.Link
                 className="member-sidebar-text"
                 href="/member/member-info"
               >
                 個人資訊
               </Nav.Link>
-
               <Nav.Link
                 className="member-sidebar-text"
                 href="/member/member-item"
