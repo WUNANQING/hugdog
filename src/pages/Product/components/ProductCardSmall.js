@@ -2,14 +2,14 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { FaPaw } from 'react-icons/fa'
-import { Col, Card, Nav, Button } from 'react-bootstrap'
+import { Col, Card, Nav, Button, Image } from 'react-bootstrap'
 
 const ProductCard = props => {
   return (
     <Col md={3} className="mb-3">
       <Card className="shadow-sm">
-        <img
-          src="https://via.placeholder.com/250x150"
+        <Image
+          src={require('../../../images/product/' + props.data.pImg + '.jpg')}
           className="card-img-top"
           alt="..."
         />
@@ -39,6 +39,7 @@ const ProductCard = props => {
                       pName: props.data.pName,
                       pQuantity: 1,
                       pPrice: props.data.pPrice,
+                      pImg: props.data.pImg,
                     }
                     let cart = []
                     cart.push(item)

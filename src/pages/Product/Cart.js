@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap'
+import {
+  Container,
+  Row,
+  Col,
+  ButtonGroup,
+  Button,
+  Image,
+} from 'react-bootstrap'
 import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -177,7 +184,10 @@ const Cart = props => {
             return (
               <Row className="align-items-center" key={value.pId}>
                 <Col md={4} className="text-center">
-                  <img src="https://via.placeholder.com/200x200" alt="..." />
+                  <Image
+                    src={require('../../images/product/' + value.pImg + '.jpg')}
+                    alt="..."
+                  />
                 </Col>
                 <Col md={2}>
                   <h3 className="font-weight-bold">{value.pName}</h3>

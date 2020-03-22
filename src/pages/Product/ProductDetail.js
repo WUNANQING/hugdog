@@ -55,7 +55,16 @@ const ProductDetail = props => {
           </Row>
           <Row className="mb-5">
             <Col md={5} className="text-center">
-              <Image src="https://via.placeholder.com/370" thumbnail />
+              {props.detail[0] ? (
+                <Image
+                  src={require('../../images/product/' +
+                    props.detail[0].pImg +
+                    '.jpg')}
+                  thumbnail
+                />
+              ) : (
+                ''
+              )}
             </Col>
             <Col md={4}>
               <h3>{props.detail[0] ? props.detail[0].pName : ''}</h3>
@@ -75,6 +84,7 @@ const ProductDetail = props => {
                       pName: props.detail[0].pName,
                       pQuantity: total,
                       pPrice: props.detail[0].pPrice,
+                      pImg: props.detail[0].pImg,
                     })
                   }}
                 >
@@ -126,6 +136,7 @@ const ProductDetail = props => {
                       pName: props.detail[0].pName,
                       pQuantity: 1,
                       pPrice: props.detail[0].pPrice,
+                      pImg: props.detail[0].pImg,
                     }
                     let cart = []
                     cart.push(item)
