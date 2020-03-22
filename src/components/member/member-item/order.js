@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
 import { getMemberOrderDataDetail } from '../../../pages/member/actions/index'
-
+import orderDetail from './orderDetail'
 import {
   Form,
   FormControl,
@@ -23,40 +23,38 @@ const MemberOrderInfo = props => {
   var mId = localStorage.getItem('mId')
   var orderData = []
   var total = []
-  const orderDetail = props => {
-    for (let i = 0; i <= props.data.length; i++) {
-      const name = props.data[i] ? props.data[i].name : ''
-      const address = props.data[i] ? props.data[i].address : ''
-      const card = props.data[i] ? props.data[i].card : ''
-      const cart = props.data[i] ? props.data[i].cart : ''
-      const mobile = props.data[i] ? props.data[i].mobile : ''
-      orderData.push({
-        name,
-        address,
-        card,
-        mobile,
-      })
-      const orderDataTotal = orderData.map(a => a)
-      total = orderDataTotal
-      // console.log('total: ', total)
-      // console.log('data: ', orderData)
-      // console.log('dataTotal', orderDataTotal)
-      // console.log('name: ', name)
-      // console.log('address: ', address)
-      // console.log('card: ', card)
-      // console.log('mobile: ', mobile)
-      console.log('cart', cart)
-    }
+  const orderDetail = props => {}
+  for (let i = 0; i <= props.data.length; i++) {
+    const name = props.data[i] ? props.data[i].name : ''
+    const address = props.data[i] ? props.data[i].address : ''
+    const card = props.data[i] ? props.data[i].card : ''
+    const cart = props.data[i] ? props.data[i].cart : ''
+    const mobile = props.data[i] ? props.data[i].mobile : ''
+    orderData.push({
+      name,
+      address,
+      card,
+      mobile,
+    })
+    const orderDataTotal = orderData.map(a => a)
+    total = orderDataTotal
+    // console.log('total: ', total)
     // console.log('data: ', orderData)
-
-    console.log('dataTotal', total[0])
-    console.log('dataTotal', total[0].name)
-    console.log('dataTotal', total[1])
-    // console.log('dataTotal', total[1].mobile)
-    // console.log('dataTotal: ', orderDataTotal.name)
-    // console.log('mId: ', mId)
+    // console.log('dataTotal', orderDataTotal)
+    // console.log('name: ', name)
+    // console.log('address: ', address)
+    // console.log('card: ', card)
+    // console.log('mobile: ', mobile)
+    console.log('cart', cart)
   }
+  // console.log('data: ', orderData)
 
+  console.log('dataTotal', total[0])
+  console.log('dataTotal', total[0].name)
+  console.log('dataTotal', total[1])
+  // console.log('dataTotal', total[1].mobile)
+  // console.log('dataTotal: ', orderDataTotal.name)
+  // console.log('mId: ', mId)
   useEffect(() => {
     props.getMemberOrderDataDetail(mId)
   }, [])
@@ -84,17 +82,13 @@ const MemberOrderInfo = props => {
                   </thead>
 
                   <tbody>
-                    {orderDetail}
+                    {/* {orderDetail} */}
                     <tr>
                       <th scope="row">1</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                      <td>@fat</td>
-                      {/* <td>{total[0].name}</td>
+                      <td>{total[0].name}</td>
                       <td>{total[0].address}</td>
                       <td>{total[0].card}</td>
-                      <td>{total[0].mobile}</td> */}
+                      <td>{total[0].mobile}</td>
                     </tr>
                     <tr>
                       <th scope="row">2</th>
