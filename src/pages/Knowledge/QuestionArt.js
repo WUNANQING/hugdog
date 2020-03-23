@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Container,
   Row,
@@ -10,6 +10,8 @@ import {
   Image,
   Figure,
 } from 'react-bootstrap'
+
+// const [open, setOpen] = useState(false)
 
 function QuestionArt() {
   return (
@@ -40,7 +42,12 @@ function QuestionArt() {
                   </Card.Text>
 
                   <div className="text-right">
-                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                    <Accordion.Toggle
+                      as={Button}
+                      variant="link"
+                      eventKey="0"
+                      // onClick={() => setOpen(!open)}
+                    >
                       <h5>
                         <Badge variant="primary">已回答</Badge>
                       </h5>
@@ -88,13 +95,6 @@ function QuestionArt() {
                     </Accordion.Toggle>
                   </div>
                 </Card.Body>
-                {/* <Accordion.Collapse eventKey="0">
-                    <Card.Footer>
-                      <Card.Text>
-                        貓的注射疫苗臨床上以三合一（或五合一）以及狂犬病疫苗為主，近來也有開發出無佐劑的四合一（含白血病）疫苗，但單價較高一些。至於每年是否都該追加補強的問題，醫師只能告訴你，疫苗每次注射效力只能維持一年，至於是否會被疾病感染，就要看是否有傳染途徑的存在了。
-                      </Card.Text>
-                    </Card.Footer>
-                  </Accordion.Collapse> */}
               </Card>
             </Accordion>
           </Col>

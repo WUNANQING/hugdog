@@ -36,7 +36,7 @@ function Question() {
         if (result.value) {
           const answers = JSON.stringify(result.value)
           Swal.fire({
-            title: '發問成功！',
+            title: '發問成功',
             icon: 'success',
           })
           // Swal.fire({
@@ -52,8 +52,8 @@ function Question() {
   }
   return (
     <>
-      <div className="banner"></div>
-      <Container>
+      <div className="knowledgebanner"></div>
+      <Container className="question">
         <div>
           <Button
             className="askquestion"
