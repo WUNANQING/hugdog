@@ -8,7 +8,7 @@ import {
   Button,
   Image,
 } from 'react-bootstrap'
-import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
+import { MdPlaylistAdd, MdDelete } from 'react-icons/md'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
