@@ -1,52 +1,104 @@
 //文章
-export const showArticle = date => {
-  return { type: 'SHOW_ARTICLE', data }
+export const showBlog = data => {
+  return { type: 'SHOW_BLOG', data }
 }
+
+//要全部資料
+export const getBlog = () => {
+  return async dispatch => {
+    const req = new Request('http://localhost:6001/knowledge/blog', {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log(data)
+    dispatch(showBlog(data))
+  }
+}
+
+//詳細資訊
+export const showBlogArticle = data => {
+  return { type: 'SHOW_BLOG_ARTICLE', data }
+}
+export const getBlogArticle = aTitle => {
+  return async dispatch => {
+    const req = new Request(`http://localhost:6001/knowledge/blog/${aTitle}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log(data)
+    dispatch(showBlogArticle(data))
+  }
+}
+
 //Question
-export const showQuestion = date => {
-  return { type: 'SHOW_QUESTION', data }
+export const showQuestion = data => {
+  return { type: 'SHOW_QUESTIONS', data }
+}
+//要全部資料
+export const getQuestion = () => {
+  return async dispatch => {
+    const req = new Request('http://localhost:6001/knowledge/question', {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    dispatch(showQuestion(data))
+  }
 }
 
-//講座
+//詳細資訊
+export const showQuestionDetail = data => {
+  return { type: 'SHOW_QUESTION_DETAIL', data }
+}
+export const getQuestionDetail = qId => {
+  return async dispatch => {
+    const req = new Request(`http://localhost:6001/knowledge/question/${qId}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log(data)
+    dispatch(showQuestionDetail(data))
+  }
+}
+
+//partner
 export const showPartner = data => {
-  return { type: 'SHOW_Partner', data }
+  return { type: 'SHOW_PARTNER', data }
 }
 
-//要資料--文章
-export const getArticleData = () => {
+//要全部
+export const getPartner = () => {
   return async dispatch => {
-    const req = new Request('http://localhost:6001/knowledge', {
+    const req = new Request('http://localhost:6001/knowledge/partner', {
       method: 'GET',
       credentials: 'include',
     })
     const res = await fetch(req)
     const data = await res.json()
-    dispatch(showArticle(data.article))
+    dispatch(showPartner(data))
   }
 }
 
-//要資料--問答
-export const getQuestionData = () => {
-  return async dispatch => {
-    const req = new Request('http://localhost:6001/question', {
-      method: 'GET',
-      credentials: 'include',
-    })
-    const res = await fetch(req)
-    const data = await res.json()
-    dispatch(showQuestion(data.article))
-  }
+//詳細資訊
+export const showPartnerDetail = data => {
+  return { type: 'SHOW_PARTNER_DETAIL', data }
 }
-
-//要資料--Partner
-export const getPartnerData = () => {
+export const getPartnerDetail = pId => {
   return async dispatch => {
-    const req = new Request('http://localhost:6001/partner', {
+    const req = new Request(`http://localhost:6001/knowledge/partner/${pId}`, {
       method: 'GET',
       credentials: 'include',
     })
     const res = await fetch(req)
     const data = await res.json()
-    dispatch(showPartner(data.partner))
+    console.log(data)
+    dispatch(showPartnerDetail(data))
   }
 }

@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Blog from './pages/Knowledge/Blog'
+import Partner from './pages/Knowledge/Partner'
+import Question from './pages/Knowledge/Question'
 import Products from './pages/Product/Products'
 import ProductDetail from './pages/Product/ProductDetail'
 import Member from './pages/member/Member'
@@ -16,6 +18,7 @@ import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
 import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
+// import BlogArticle from './pages/Knowledge/BlogArticle'
 function App() {
   return (
     <Router>
@@ -35,8 +38,17 @@ function App() {
             <Route path="/activity">
               <Activity />
             </Route>
-            <Route path="/blog">
+            <Route path="/knowledge/blog">
               <Blog />
+            </Route>
+            {/* <Route path="/knowledge/blog/:aTitle">
+              <BlogArticle />
+            </Route> */}
+            <Route path="/knowledge/partner">
+              <Partner />
+            </Route>
+            <Route path="/knowledge/question">
+              <Question />
             </Route>
             <Route path="/products/:page?">
               <Products />
