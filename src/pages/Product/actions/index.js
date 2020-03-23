@@ -26,16 +26,13 @@ export const getProducts = page => {
   }
 }
 //跟server要商品種類
-export const getProductsCategory = cName => {
-  console.log(cName)
+export const getProductsCategory = cId => {
+  console.log(cId)
   return async dispatch => {
-    const req = new Request(
-      `http://localhost:6001/products/category?cName=${cName}}`,
-      {
-        method: 'GET',
-        credentials: 'include',
-      }
-    )
+    const req = new Request(`http://localhost:6001/products?cId=${cId}}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
     const res = await fetch(req)
     const data = await res.json()
     dispatch(showProducts(data))
