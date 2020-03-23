@@ -79,16 +79,7 @@ const DogInfo = props => {
                     </thead>
                     <tbody>{dogList}</tbody>
                     <tfoot>
-                      <tr>
-                        <td class="" colspan="6">
-                          <button
-                            href="./member-updateEdit.php"
-                            class="btn btn-sm btn-danger"
-                          >
-                            <i class="fa fa-trash"></i> 修改
-                          </button>
-                        </td>
-                      </tr>
+                      <tr></tr>
                     </tfoot>
                   </table>
                 </form>
