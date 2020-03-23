@@ -73,7 +73,14 @@ const getDog = (state = [], action) => {
       return state
   }
 }
-
+const getDogDetail = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_DOG_DETAIL':
+      return action.data
+    default:
+      return state
+  }
+}
 //knowledge reducers
 //blog
 
@@ -149,6 +156,7 @@ const rootReducer = combineReducers({
   insertCoupon,
   getMemberOrder,
   getMemberOrderDetail,
+  getDogDetail,
 })
 
 export { rootReducer }

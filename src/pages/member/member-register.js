@@ -87,7 +87,7 @@ const MemberRegister = props => {
         <div class="tab-content content" id="content1">
           <div>
             <h3>
-              會員註冊123
+              會員註冊
               <br />
             </h3>
             <div class="row">
