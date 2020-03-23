@@ -47,12 +47,12 @@ export const formServerCouponsALL = () => {
     dispatch(showCoupons(data))
   }
 }
-export const userRegister = userData => ({
+export const insertCoupon = userData => ({
   type: 'USER_REGISTER',
   data: userData,
 })
 //補:檢查填寫格式
-export const userRegisterAsync = (userData, callback) => {
+export const insertCouponAsync = (userData, callback) => {
   return async dispatch => {
     const request = new Request('http://localhost:5500/member/insert', {
       method: 'POST',
@@ -70,7 +70,7 @@ export const userRegisterAsync = (userData, callback) => {
     console.log(data)
 
     // 設定資料
-    dispatch(userRegister(data))
+    dispatch(insertCoupon(data))
     callback()
   }
 }

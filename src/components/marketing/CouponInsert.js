@@ -14,7 +14,7 @@ import '../../css/marketing/coupon.scss'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { formServerCouponsWE } from '../../actions/marketingActions'
+import { insertCouponAsync } from '../../actions/marketingActions'
 
 function CouponInsert(props) {
   const [couponCode, setCouponCode] = useState('')
@@ -97,7 +97,7 @@ const mapStateToProps = store => {
 
 //action
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ formServerCouponsWE }, dispatch)
+  return bindActionCreators({ insertCouponAsync }, dispatch)
 }
 
 export default withRouter(
