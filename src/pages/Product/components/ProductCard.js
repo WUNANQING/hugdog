@@ -19,11 +19,11 @@ const ProductCard = props => {
         <Card.Body className="card-body">
           <Card.Title>{props.data.pName}</Card.Title>
           <Card.Text
-          // style={{
-          //   whiteSpace: 'nowrap',
-          //   overflow: 'hidden',
-          //   textOverflow: 'ellipsis',
-          // }}
+            style={{
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
           >
             {props.data.pInfo}
           </Card.Text>
