@@ -15,3 +15,12 @@ export const insertCoupon = (state = [], action) => {
       return state
   }
 }
+
+export const member = (state = { isAuth: false }, action) => {
+  switch (action.type) {
+    case 'USER_REGISTER':
+      return { ...action.data, isAuth: true }
+    default:
+      return state
+  }
+}
