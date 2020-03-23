@@ -8,11 +8,13 @@ const ProductCard = props => {
   return (
     <Col md={4} className="mb-3">
       <Card className="shadow-sm">
-        <Image
-          src={require('../../../images/product/' + props.data.pImg + '.jpg')}
-          className="card-img-top"
-          alt="..."
-        />
+        <Link to={'/productdetail/' + props.data.pId} className="p-0">
+          <Image
+            src={require('../../../images/product/' + props.data.pImg + '.jpg')}
+            className="card-img-top"
+            alt="..."
+          />
+        </Link>
         <Card.Body className="card-body">
           <Card.Title>{props.data.pName}</Card.Title>
           <Card.Text>{props.data.pInfo}</Card.Text>

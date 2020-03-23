@@ -338,7 +338,7 @@ const Checkout = props => {
                   onClick={() => {
                     postOrder(buyerInfo)
                     localStorage.setItem('cart', JSON.stringify([]))
-                    // props.history.push(`/order${}`)
+                    // props.history.push(`/order/${mId}`)
                   }}
                 >
                   確定結帳
