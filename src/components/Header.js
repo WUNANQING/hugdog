@@ -12,7 +12,8 @@ var i = parseInt(localStorage.getItem('mId') - 1)
 $('#logout').click(function() {
   // clearAllCookie()
   localStorage.removeItem('mName')
-  localStorage.clear()
+  localStorage.setItem('mId', '0')
+  localStorage.setItem('mImg', 'M030')
   window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {

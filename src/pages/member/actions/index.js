@@ -112,9 +112,10 @@ export const getDogData = () => {
 export const showDogDetail = data => {
   return { type: 'SHOW_DOG_DETAIL', data }
 }
-export const getDogDetail = dId => {
+export const getDogDetail = mId => {
+  mId = localStorage.getItem('mId')
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/dog/${dId}`, {
+    const req = new Request(`http://localhost:6001/dog/${mId}`, {
       method: 'GET',
       credentials: 'include',
     })
