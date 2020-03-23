@@ -168,7 +168,7 @@ const Cart = props => {
                 <>
                   <h3>購物車內沒有任何商品</h3>
                   <hr />
-                  <img
+                  <Image
                     src={require('../../images/product/dog-ad.jpg')}
                     alt="..."
                   />

@@ -7,11 +7,9 @@ const Order = props => {
   const [order, setOrder] = useState([])
   //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
   const mId = localStorage.getItem('mId')
-  //設定orderId的來源
-  const orderId = props.match.params.orderId ? props.match.params.orderId : ''
   //設定從資料庫抓取訂單細節的方法
-  async function getOrderDetail(orderId) {
-    const req = new Request(`http://localhost:6001/order/${orderId}`, {
+  async function getOrderDetail(mId) {
+    const req = new Request(`http://localhost:6001/order/${mId}`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -22,7 +20,7 @@ const Order = props => {
   }
   //設定生命週期方法useEffect===ComponnentDidMount
   useEffect(() => {
-    getOrderDetail(orderId)
+    getOrderDetail(mId)
   }, [])
 
   //計算總價
@@ -122,7 +120,13 @@ const Order = props => {
               <>
                 <Row key={index} className="align-items-center">
                   <Col xs={6} sm={6} md={6} lg={3}>
-                    <img src="https://via.placeholder.com/250" alt="..." />
+                    <img
+                      src={require('../../images/product/' +
+                        value.pImg +
+                        '.jpg')}
+                      className="card-img-top"
+                      alt="..."
+                    />
                   </Col>
                   <Col xs={6} sm={6} md={6} lg={9}>
                     <Row className="justify-content-around align-items-center">

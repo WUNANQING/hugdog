@@ -159,7 +159,7 @@ const Checkout = props => {
             <h3>輸入姓名與地址</h3>
             <hr />
             <br />
-            <Form name="checkout">
+            <Form name="checkout" action="http://localhost:3000/order/">
               <Form.Row>
                 <Form.Group as={Col} xs={12} md={6}>
                   <Form.Control
@@ -338,7 +338,6 @@ const Checkout = props => {
                   onClick={() => {
                     postOrder(buyerInfo)
                     localStorage.setItem('cart', JSON.stringify([]))
-                    // props.history.push(`/order/${mId}`)
                   }}
                 >
                   確定結帳
