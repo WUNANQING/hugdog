@@ -43,7 +43,10 @@ function Member() {
             <div className="member-bg">
               <div className="head">
                 <img
-                  src={require('../../images/member/head.png')}
+                  // src={require('../../images/member/member-img/+.jpg')}
+                  src={require('../../images/member/member-img/' +
+                    localStorage.getItem('mImg').toLowerCase() +
+                    '.jpg')}
                   alt="Background"
                 ></img>
               </div>

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import {
   Container,
@@ -12,46 +13,47 @@ import {
   Image,
 } from 'react-bootstrap'
 
+//redux
+import { connect } from 'react-redux'
+//action
+import { bindActionCreators } from 'redux'
+import { getPartner } from './actions/index'
+
 import PartnerNowon from './PartnerNowon'
 import PartnerClosed from './PartnerClosed'
 import '../../components/Knowledge/knowledge.scss'
 
 // import { Container } from 'react-bootstrap/lib/Tab'
 
-function Partner() {
+function Partner(props) {
+  useEffect(() => {
+    console.log(props)
+    props.getPartner()
+  }, [])
   return (
     <>
-      <div className="banner"></div>
-      <Container>
+      <div className="knowledgebanner"></div>
+      <Container className="partner">
         <Row>
           <Col xs={12} md={12}>
             <Tabs defaultActiveKey="open" id="uncontrolled-tab-example">
               <Tab eventKey="open" title="進行中">
-                <Row>
-                  <Col xs={12} md={6}>
-                    <PartnerNowon />
-                    <PartnerNowon />
-                    <PartnerNowon />
-                  </Col>
-
-                  <Col xs={12} md={6}>
-                    <PartnerNowon />
-                    <PartnerNowon />
-                    <PartnerNowon />
-                  </Col>
+                <Row xs={12} md={6}>
+                  {props.post &&
+                    props.post.map((value, index) => {
+                      return (
+                        <PartnerNowon key={index} data={props.post[index]} />
+                      )
+                    })}
                 </Row>
               </Tab>
               <Tab eventKey="Closed" title="預告">
                 <Row>
                   <Col xs={12} md={6}>
                     <PartnerClosed />
-                    <PartnerClosed />
-                    <PartnerClosed />
                   </Col>
 
                   <Col xs={12} md={6}>
-                    <PartnerClosed />
-                    <PartnerClosed />
                     <PartnerClosed />
                   </Col>
                 </Row>
@@ -64,4 +66,10 @@ function Partner() {
   )
 }
 
-export default Partner
+const mapStateToProps = store => {
+  return { post: store.getPartner }
+}
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getPartner }, dispatch)
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Partner))
