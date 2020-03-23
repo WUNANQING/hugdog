@@ -35,6 +35,7 @@ const MemberLogin = props => {
       var mName = props.data[i] ? props.data[i].mName : ''
       var mAccount = props.data[i] ? props.data[i].mAccount : ''
       var mPassword = props.data[i] ? props.data[i].mPassword : ''
+      var mImg = props.data[i] ? props.data[i].mImg : ''
       //新增cookie
       function setCookie(cname, cvalue, exdays) {
         var d = new Date()
@@ -69,6 +70,7 @@ const MemberLogin = props => {
         // document.cookie = mId
         localStorage.setItem('mId', mId)
         localStorage.setItem('mName', mName)
+        localStorage.setItem('mImg', mImg)
       }
       if ($('#exampleInputAccount1').val() === '') {
         // alert('帳號不能為空白')
