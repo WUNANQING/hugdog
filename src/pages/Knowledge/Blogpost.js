@@ -5,7 +5,7 @@ import $ from 'jquery'
 
 const BlogArt = props => {
   $(function() {
-    var len = 50 // 超過50個字以"..."取代
+    var len = 70 // 超過50個字以"..."取代
     $('.JQellipsis').each(function(i) {
       if ($(this).text().length > len) {
         $(this).attr('title', $(this).text())
@@ -18,9 +18,16 @@ const BlogArt = props => {
     })
   })
 
+  const BlogType = [
+    { id: 1, name: '健康與生活' },
+    { id: 2, name: '疫苗與用藥' },
+    { id: 3, name: '營養與處方' },
+    { id: 4, name: '美容與保養' },
+  ]
+
   return (
     <>
-      <Col xs={12} className="mb-5">
+      <Col xs={12} className="">
         <div className="wrap">
           {/* // item1 */}
           <div className="item">
@@ -32,14 +39,18 @@ const BlogArt = props => {
                   '.jpg')}
                 alt=""
               />
-              <p>datatime</p>
             </div>
 
             <div className="txt">
+              <p>{props.data.dDate}</p>
               <Link to={'/knowledge/blog/' + props.data.aTitle}>
-                <h2>{props.data.aTitle}</h2>
+                <h3>{props.data.aTitle}</h3>
               </Link>
               <p className="JQellipsis">{props.data.aDes} </p>
+              <br />
+              <Link to="/knowledge/blog/">
+                <h6 className="text-right">看更多...</h6>
+              </Link>
             </div>
           </div>
           {/* // item 2 

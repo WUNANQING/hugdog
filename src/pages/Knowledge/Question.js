@@ -19,22 +19,36 @@ function Question() {
   const Swal = require('sweetalert2')
 
   function post() {
-    Swal.fire({
-      title: '問什麼呢?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+    Swal.mixin({
+      input: 'text',
       confirmButtonText: '確定',
       cancelButtonText: '取消',
-    }).then(result => {
-      if (result.value) {
-        Swal.fire({
-          title: '報名成功!',
-          icon: 'success',
-        })
-      }
+      showCancelButton: true,
+      progressSteps: ['發問'],
     })
+      .queue([
+        {
+          title: '我要發問',
+          text: '請輸入您的問題',
+        },
+      ])
+      .then(result => {
+        if (result.value) {
+          const answers = JSON.stringify(result.value)
+          Swal.fire({
+            title: '發問成功！',
+            icon: 'success',
+          })
+          // Swal.fire({
+          //   title: 'All done!',
+          //   html: `
+          //   Your answers:
+          //   <pre><code>${answers}</code></pre>
+          // `,
+          //   confirmButtonText: 'Lovely!',
+          // })
+        }
+      })
   }
   return (
     <>

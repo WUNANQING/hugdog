@@ -59,7 +59,7 @@ const Blog = props => {
   return (
     <>
       {/* <Blogheader /> */}
-      <Banner />
+      {/* <Banner /> */}
 
       <Container>
         <br />
@@ -72,7 +72,7 @@ const Blog = props => {
 
         {/* 文章 */}
         <div className="wrap">
-          <Row className="article mr-3 ">
+          <Row className="article mr-3">
             {/* <div className="article mr-3"> */}
             {props.post &&
               props.post.map((value, index) => {

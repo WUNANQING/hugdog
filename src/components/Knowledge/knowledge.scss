@@ -23,15 +23,15 @@ body {
 .item {
   display: flex;
   align-items: center;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
   font-family: 'Noto Sans TC', sans-serif;
-  h2 {
-    font-weight: 900;
+  h3 {
+    font-weight: 800;
     margin-bottom: 1em;
   }
   p {
     font-weight: 300;
-    line-height: 1.6;
+    // line-height: 1;
   }
 
   .pic {
@@ -46,7 +46,7 @@ body {
   .txt {
     width: 55%;
     flex-shrink: 0;
-    padding: 50px 30px;
+    padding: 20px 20px;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
@@ -60,7 +60,7 @@ body {
 }
 
 .article {
-  padding: 10px;
+  padding: 5px;
 }
 
 //blogheader css
