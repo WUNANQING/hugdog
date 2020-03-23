@@ -18,9 +18,7 @@ $('#logout').click(function() {
 })
 function Header(props) {
   //購物車加入一項商品,根據localStorage的cart的陣列長度變動,重新render商品數量狀態
-  // useEffect(() => {
-  //   setInterval(() => {retun}, 700), []
-  // })
+  //
   return (
     <>
       <header className="sticky-top">

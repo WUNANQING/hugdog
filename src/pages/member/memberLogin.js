@@ -18,7 +18,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../css/member/member-info.scss'
 import MemberSidebar from '../../components/member/member-sidebar'
 import '../../css/member/member-login.scss'
-import { doc } from 'prettier'
+// import { doc } from 'prettier'
 
 const MemberLogin = props => {
   localStorage.setItem('mId', 0)

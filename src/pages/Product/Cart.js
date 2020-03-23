@@ -79,7 +79,7 @@ const Cart = props => {
       }
     }
     setMycartDisplay(newMycartDisplay)
-  }, [mycart.length])
+  }, [mycart])
 
   //計算總價
   const sum = items => {

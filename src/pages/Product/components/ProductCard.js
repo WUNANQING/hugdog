@@ -27,14 +27,20 @@ const ProductCard = props => {
           >
             {props.data.pInfo}
           </Card.Text>
-          <Card.Text className="text-danger">
+          <Card.Text
+            as="h4"
+            className="text-danger text-center font-weight-bold"
+          >
             NTD {props.data.pPrice}元
           </Card.Text>
-          <div className="d-md-flex justify-content-around mb-3">
-            <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />
+          <div className="d-flex justify-content-around mb-3">
+            <FaPaw className="text-danger" />
+            <FaPaw />
+            <FaPaw />
+            <FaPaw />
             <FaPaw />
           </div>
-          <div className="d-md-flex justify-content-around">
+          <div className="d-flex justify-content-around">
             <Nav.Link>
               <Button
                 className="text-center p-1"

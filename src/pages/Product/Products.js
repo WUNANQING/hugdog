@@ -22,7 +22,6 @@ const Products = props => {
 
   useEffect(() => {
     props.getProducts(page)
-    // cName && props.getProductsCategory(cName)
   }, [])
 
   let sort = (
@@ -70,7 +69,7 @@ const Products = props => {
     <Container>
       <Row className="my-5">
         <ProductSidebar />
-        <Col className="pl-5">
+        <Col md={10}>
           <Breadcrumb />
           {sort}
           <Row>

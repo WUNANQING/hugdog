@@ -55,7 +55,7 @@ const ProductSidebar = () => {
     </Nav.Link>
   ))
   return (
-    <Col className="p-0" md={2}>
+    <Col md={2}>
       <Navbar className="bg-light" expand="md">
         <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
         <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
