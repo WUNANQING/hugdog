@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import ProductReceipt from './components/ProductReceipt'
@@ -77,7 +78,12 @@ const Checkout = props => {
     const order = await res.json()
     await console.log(order)
   }
-
+  function jump() {
+    postOrder(buyerInfo)
+    localStorage.setItem('cart', JSON.stringify([]))
+    // props.history.push(`/order${}`)
+    window.location.replace('http://localhost:3000/order/')
+  }
   return (
     <>
       <Container>
@@ -159,7 +165,7 @@ const Checkout = props => {
             <h3>輸入姓名與地址</h3>
             <hr />
             <br />
-            <Form name="checkout">
+            <Form name="checkout" action="http://localhost:3000/order/">
               <Form.Row>
                 <Form.Group as={Col} xs={12} md={6}>
                   <Form.Control
@@ -339,7 +345,9 @@ const Checkout = props => {
                     postOrder(buyerInfo)
                     localStorage.setItem('cart', JSON.stringify([]))
                     // props.history.push(`/order${}`)
+                    window.location.replace('http://localhost:3000/order/')
                   }}
+                  // onClick={jump}
                 >
                   確定結帳
                 </Button>
