@@ -22,7 +22,6 @@ import { doc } from 'prettier'
 
 const MemberLogin = props => {
   localStorage.setItem('mId', 0)
-  localStorage.setItem('mImg', 0)
   $('.login-btn').click(function() {
     console.log('輸入帳號: ' + $('#exampleInputAccount1').val())
     console.log('輸入密碼: ' + $('#exampleInputPassword1').val())
@@ -72,9 +71,6 @@ const MemberLogin = props => {
         localStorage.setItem('mId', mId)
         localStorage.setItem('mName', mName)
         localStorage.setItem('mImg', mImg)
-        if (localStorage.getItem('mImg') === '') {
-          localStorage.setItem('mImg', 'M030')
-        }
       }
       if ($('#exampleInputAccount1').val() === '') {
         // alert('帳號不能為空白')
