@@ -45,12 +45,12 @@ const ProductSidebar = () => {
     'arrr',
   ]
   const productCategorysidebar = productCategory.map((value, index) => (
-    <Nav.Link key={value} href={'/products/category?cId=' + eval(index + 1)}>
+    <Nav.Link key={value} href={'/products?cId=' + eval(index + 1)}>
       {value}
     </Nav.Link>
   ))
   const productBrandSidebar = productBrand.map((value, index) => (
-    <Nav.Link key={value} href={'/products/vendor?Id=' + eval(index + 1)}>
+    <Nav.Link key={value} href={'/products?vId=' + eval(index + 1)}>
       {value}
     </Nav.Link>
   ))

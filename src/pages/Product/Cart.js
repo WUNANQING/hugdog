@@ -8,7 +8,7 @@ import {
   Button,
   Image,
 } from 'react-bootstrap'
-import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
+import { MdPlaylistAdd, MdDelete } from 'react-icons/md'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
@@ -17,6 +17,7 @@ import { getProducts } from './actions/index'
 import { bindActionCreators } from 'redux'
 
 const Cart = props => {
+  //下面追加購買按“立即結帳"立刻儲存在localStorage卻無法讓頁面更新;追加購買產品卡片會立即不見
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
 
@@ -78,7 +79,7 @@ const Cart = props => {
       }
     }
     setMycartDisplay(newMycartDisplay)
-  }, [mycart])
+  }, [mycart.length])
 
   //計算總價
   const sum = items => {
@@ -167,9 +168,12 @@ const Cart = props => {
                 <>
                   <h3>購物車內沒有任何商品</h3>
                   <hr />
-                  <img src="#" alt="..." />
+                  <Image
+                    src={require('../../images/product/dog-ad.jpg')}
+                    alt="..."
+                  />
                   <Link to="/products">
-                    <Button variant="primary" size="md">
+                    <Button variant="primary" size="lg">
                       前往選購
                     </Button>
                   </Link>
@@ -184,10 +188,15 @@ const Cart = props => {
             return (
               <Row className="align-items-center" key={value.pId}>
                 <Col md={4} className="text-center">
-                  <Image
-                    src={require('../../images/product/' + value.pImg + '.jpg')}
-                    alt="..."
-                  />
+                  <Link to={'/productdetail/' + value.pId} className="p-0">
+                    <Image
+                      src={require('../../images/product/' +
+                        value.pImg +
+                        '.jpg')}
+                      className="card-img-top"
+                      alt="..."
+                    />
+                  </Link>
                 </Col>
                 <Col md={2}>
                   <h3 className="font-weight-bold">{value.pName}</h3>

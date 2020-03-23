@@ -3,8 +3,9 @@ import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { FaPaw } from 'react-icons/fa'
 import { Col, Card, Nav, Button, Image } from 'react-bootstrap'
+import '../../../css/product/productCard.scss'
 
-const ProductCard = props => {
+const ProductCardSmall = props => {
   return (
     <Col md={3} className="mb-3">
       <Card className="shadow-sm">
@@ -34,32 +35,41 @@ const ProductCard = props => {
                 <Button
                   className="text-center p-1"
                   onClick={() => {
-                    let item = {
-                      pId: props.data.pId,
-                      pName: props.data.pName,
-                      pQuantity: 1,
-                      pPrice: props.data.pPrice,
-                      pImg: props.data.pImg,
-                    }
-                    let cart = []
-                    cart.push(item)
-
-                    if (localStorage.getItem('cart') === null) {
-                      localStorage.setItem('cart', JSON.stringify(cart))
-                    } else {
-                      let currentCart = JSON.parse(localStorage.getItem('cart'))
-                      if (
-                        [...currentCart].find(
-                          value => value.pId === props.data.pId
-                        )
-                      ) {
-                        return alert('已加入購物車')
-                      } else {
-                        const newCart = [...currentCart, item]
-                        localStorage.setItem('cart', JSON.stringify(newCart))
+                    if (
+                      localStorage.getItem('mId') &&
+                      localStorage.getItem('mId') !== '0'
+                    ) {
+                      let item = {
+                        pId: props.data.pId,
+                        pName: props.data.pName,
+                        pQuantity: 1,
+                        pPrice: props.data.pPrice,
+                        pImg: props.data.pImg,
                       }
+                      let cart = []
+                      cart.push(item)
+
+                      if (localStorage.getItem('cart') === null) {
+                        localStorage.setItem('cart', JSON.stringify(cart))
+                      } else {
+                        let currentCart = JSON.parse(
+                          localStorage.getItem('cart')
+                        )
+                        if (
+                          [...currentCart].find(
+                            value => value.pId === props.data.pId
+                          )
+                        ) {
+                          return alert('已加入購物車')
+                        } else {
+                          const newCart = [...currentCart, item]
+                          localStorage.setItem('cart', JSON.stringify(newCart))
+                        }
+                      }
+                      props.history.push('/cart')
+                    } else {
+                      return alert('尚未登入')
                     }
-                    props.history.push('/cart')
                   }}
                 >
                   快速結帳
@@ -73,4 +83,4 @@ const ProductCard = props => {
   )
 }
 
-export default withRouter(ProductCard)
+export default withRouter(ProductCardSmall)
