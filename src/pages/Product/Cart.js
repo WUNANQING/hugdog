@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 import ProductCardSmall from './components/ProductCardSmall'
-import { getProducts } from './actions/index'
+import { getProducts, count } from './actions/index'
 import { bindActionCreators } from 'redux'
 
 const Cart = props => {
@@ -247,6 +247,7 @@ const Cart = props => {
                     variant="primary"
                     size="md"
                     onClick={() => {
+                      props.count(mycart)
                       deleteItem(index)
                     }}
                   >
@@ -365,6 +366,6 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProducts }, dispatch)
+  return bindActionCreators({ getProducts, count }, dispatch)
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))

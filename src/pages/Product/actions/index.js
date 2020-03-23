@@ -26,10 +26,22 @@ export const getProducts = page => {
   }
 }
 //跟server要商品種類
-export const getProductsCategory = cId => {
-  console.log(cId)
+export const getCategory = cId => {
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/products?cId=${cId}}`, {
+    const req = new Request(`http://localhost:6001/products?cId=${cId}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('商品種類', data)
+    dispatch(showProducts(data))
+  }
+}
+//跟server要廠商種類
+export const getVendor = vId => {
+  return async dispatch => {
+    const req = new Request(`http://localhost:6001/products?vId=${vId}`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -57,3 +69,8 @@ export const getProductDetail = pId => {
     dispatch(showProductDetail(data))
   }
 }
+//即時更新購物車數量
+export const count = quantity => ({
+  type: 'COUNT_QUANTITY',
+  quantity,
+})

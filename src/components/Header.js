@@ -8,6 +8,7 @@ import { AiOutlineUser, AiOutlineShopping } from 'react-icons/ai'
 import { FaDog } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 var i = parseInt(localStorage.getItem('mId') - 1)
 $('#logout').click(function() {
   // clearAllCookie()
@@ -17,8 +18,7 @@ $('#logout').click(function() {
   window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {
-  //購物車加入一項商品,根據localStorage的cart的陣列長度變動,重新render商品數量狀態
-  //
+  useEffect(() => {}, [props.qty])
   return (
     <>
       <header className="sticky-top">
@@ -184,5 +184,9 @@ function Header(props) {
     </>
   )
 }
-
-export default withRouter(Header)
+const mapStateToProps = store => {
+  return {
+    qty: store.getQuantity,
+  }
+}
+export default withRouter(connect(mapStateToProps, null)(Header))

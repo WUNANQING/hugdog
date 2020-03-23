@@ -8,7 +8,7 @@ import { Container, Row, Col, Pagination } from 'react-bootstrap'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getProducts, getProductsCategory } from './actions/index'
+import { getProducts } from './actions/index'
 
 const Products = props => {
   //在App.js設定動態參數
@@ -28,8 +28,8 @@ const Products = props => {
     <div className="d-md-flex justify-content-md-between align-items-center my-3">
       <span>共有{props.list.totalRows}項商品</span>
       <select>
-        <option>依上架時間(近期-早期)</option>
-        <option>依上架時間(早期-近期)</option>
+        <option value="DESC">依上架時間(近期-早期)</option>
+        <option value="ASC">依上架時間(早期-近期)</option>
         <option>依價格高低(高價-低價)</option>
         <option>依價格高低(低價-高價)</option>
       </select>
@@ -90,7 +90,7 @@ const mapStateToProps = store => {
   return { list: store.getProducts }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProducts, getProductsCategory }, dispatch)
+  return bindActionCreators({ getProducts }, dispatch)
 }
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Products)

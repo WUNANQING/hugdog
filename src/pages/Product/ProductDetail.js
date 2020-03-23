@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getProducts, getProductDetail } from './actions/index'
+import { getProducts, getProductDetail, count } from './actions/index'
 import {
   Container,
   Row,
@@ -101,6 +101,7 @@ const ProductDetail = props => {
                       localStorage.getItem('mId') &&
                       localStorage.getItem('mId') !== '0'
                     ) {
+                      props.count(mycart)
                       updateCartToLocalStorage({
                         pId: props.detail[0].pId,
                         pName: props.detail[0].pName,
@@ -196,6 +197,7 @@ const ProductDetail = props => {
                         ) {
                           alert('已加入購物車')
                         } else {
+                          props.count(mycart)
                           const newCart = [...currentCart, item]
                           localStorage.setItem('cart', JSON.stringify(newCart))
                         }
@@ -311,7 +313,7 @@ const mapStateToProps = store => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProducts, getProductDetail }, dispatch)
+  return bindActionCreators({ getProducts, getProductDetail, count }, dispatch)
 }
 
 export default withRouter(

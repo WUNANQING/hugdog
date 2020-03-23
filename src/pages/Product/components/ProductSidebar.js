@@ -1,12 +1,19 @@
 import React from 'react'
 import { Col, Nav, Navbar, InputGroup, FormControl } from 'react-bootstrap'
-const ProductSidebar = () => {
+import { withRouter } from 'react-router-dom'
+//redux
+import { connect } from 'react-redux'
+//action
+import { bindActionCreators } from 'redux'
+import { getCategory, getVendor } from '../actions/index'
+const ProductSidebar = props => {
   const productCategory = [
     '飼料',
     '零食',
     '犬用保健食品',
     '狗罐頭/鮮食/餐盒',
     '美容/清潔用品',
+    '犬用玩具',
     '狗籠/狗屋',
     '床組',
     '狗衣服',
@@ -44,13 +51,25 @@ const ProductSidebar = () => {
     'Nutram 紐頓',
     'arrr',
   ]
+  //在商品細節無法立刻跳轉
   const productCategorysidebar = productCategory.map((value, index) => (
-    <Nav.Link key={value} href={'/products?cId=' + eval(index + 1)}>
+    <Nav.Link
+      key={value}
+      onClick={() => {
+        props.history.push('/products')
+        props.getCategory(eval(index + 1))
+      }}
+    >
       {value}
     </Nav.Link>
   ))
   const productBrandSidebar = productBrand.map((value, index) => (
-    <Nav.Link key={value} href={'/products?vId=' + eval(index + 1)}>
+    <Nav.Link
+      key={value}
+      onClick={() => {
+        props.getVendor(eval(index + 1))
+      }}
+    >
       {value}
     </Nav.Link>
   ))
@@ -75,5 +94,8 @@ const ProductSidebar = () => {
     </Col>
   )
 }
-
-export default ProductSidebar
+//若不在此元件儲存狀態得放置null
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getCategory, getVendor }, dispatch)
+}
+export default withRouter(connect(null, mapDispatchToProps)(ProductSidebar))
