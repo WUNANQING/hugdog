@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { Card, Button, Row, Col } from 'react-bootstrap'
 import { IconContext } from 'react-icons'
 import { FaRegCalendarAlt } from 'react-icons/fa'
@@ -26,12 +27,26 @@ function PartnerClosed() {
           src="http://fakeimg.pl/1300x400/eeeeee/EAE0D0/"
         />
         <Card.Body>
-          <Card.Title>基礎正向行為養成班／輕鬆打造快樂狗生活</Card.Title>
+          <Card.Title>
+            <Link to>基礎正向行為養成班／輕鬆打造快樂狗生活</Link>
+          </Card.Title>
           <Card.Text>
             針對毛孩教養時發生的日常行為問題，特別開設「正向行為禮貌養成班」，協助飼主引導毛孩學會基礎服從指令
           </Card.Text>
           <div className="text-right">
-            <Button variant="outline-primary" disabled>
+            <Button
+              className="justify-right"
+              variant="outline-primary"
+              onClick={function() {
+                Swal.fire({
+                  title: '尚未開始報名',
+                  icon: 'warning',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: '確定',
+                })
+              }}
+            >
               尚未開始報名
             </Button>
           </div>
