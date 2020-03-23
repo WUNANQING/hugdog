@@ -10,6 +10,23 @@ const getMember = (state = [], action) => {
       return state
   }
 }
+// 會員訂單reducers
+const getMemberOrder = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_MEMBER_ORDER':
+      return action.data
+    default:
+      return state
+  }
+}
+const getMemberOrderDetail = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_MEMBER_ORDER_DETAIL':
+      return action.data
+    default:
+      return state
+  }
+}
 //會員reducers
 
 //商品reducers
@@ -130,6 +147,8 @@ const rootReducer = combineReducers({
   getQuestion,
   getQuestionDetail,
   insertCoupon,
+  getMemberOrder,
+  getMemberOrderDetail,
 })
 
 export { rootReducer }

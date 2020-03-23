@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import ProductReceipt from './components/ProductReceipt'
 const Checkout = props => {
+  //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
+  const mId = localStorage.getItem('mId')
   //表單資訊
   const buyerInfo = {
     lastName: '',
@@ -13,9 +15,11 @@ const Checkout = props => {
     zip: '',
     email: '',
     mobile: '',
+    card: '',
     cardNumber: '',
     owner: '',
     cart: localStorage.getItem('cart'),
+    mId: mId,
   }
   //寫入表單資訊
   function getformInfo(e, info) {
@@ -44,6 +48,9 @@ const Checkout = props => {
       case 'mobile':
         buyerInfo.mobile = e.currentTarget.value
         break
+      case 'card':
+        buyerInfo.card = e.currentTarget.id
+        break
       case 'cardNumber':
         buyerInfo.cardNumber = e.currentTarget.value
         break
@@ -57,7 +64,7 @@ const Checkout = props => {
 
   //建立訂單
   async function postOrder(form) {
-    const req = new Request('http://localhost:6001/orders/post', {
+    const req = new Request('http://localhost:6001/order/post', {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({
@@ -269,6 +276,24 @@ const Checkout = props => {
               <hr />
               <br />
               <Form.Group>
+                <div className="mb-3">
+                  <Form.Check
+                    inline
+                    name="card"
+                    label="MasterCard"
+                    type="radio"
+                    id="MasterCard"
+                    onChange={e => getformInfo(e, 'card')}
+                  />
+                  <Form.Check
+                    inline
+                    name="card"
+                    label="VISA"
+                    type="radio"
+                    id="VISA"
+                    onChange={e => getformInfo(e, 'card')}
+                  />
+                </div>
                 <Form.Control
                   name="cardNumber"
                   size="lg"
@@ -309,7 +334,7 @@ const Checkout = props => {
                   variant="primary"
                   size="lg"
                   block
-                  // type="submit"
+                  type="submit"
                   onClick={() => {
                     postOrder(buyerInfo)
                     localStorage.setItem('cart', JSON.stringify([]))

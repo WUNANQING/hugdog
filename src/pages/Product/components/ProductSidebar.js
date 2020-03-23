@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Col, Nav, Navbar, InputGroup, FormControl } from 'react-bootstrap'
 const ProductSidebar = () => {
   const productCategory = [
@@ -19,26 +18,40 @@ const ProductSidebar = () => {
     '其他犬用品',
   ]
   const productBrand = [
-    '希爾斯',
-    'Vertri Science',
-    'Now Pets',
+    'EZDOG',
+    '飛萊希',
+    'SPUTNIK-EX',
+    'tails&me',
+    'IBIYAYA',
+    'pet gear',
+    '希爾思',
+    'Furhaven',
+    'BigBarker',
+    'PETMAKER',
+    'Pawhut',
+    'Petmate',
+    'MidWestHom',
+    'Petsfit',
+    'Ruff Ruff',
+    'ALLSTARDOG',
+    'Vetri Scie',
+    'NOW PETS',
     'Lintbells',
-    'Holistic',
-    'CANIDIE',
-    'HALO',
+    'Holistic B',
+    'CANIDAE 卡比',
+    'HALO 嘿囉',
+    'Farmina法米納',
+    'Nutram 紐頓',
+    'arrr',
   ]
   const productCategorysidebar = productCategory.map((value, index) => (
-    <Nav.Link>
-      <Link className="mb-1" key={value} to={'/products/' + eval(index + 1)}>
-        {value}
-      </Link>
+    <Nav.Link key={value} href={'/products/category?cId=' + eval(index + 1)}>
+      {value}
     </Nav.Link>
   ))
-  const productBrandSidebar = productBrand.map(value => (
-    <Nav.Link>
-      <Link className="mb-1" key={value} to={'/products/' + value}>
-        {value}
-      </Link>
+  const productBrandSidebar = productBrand.map((value, index) => (
+    <Nav.Link key={value} href={'/products/vendor?Id=' + eval(index + 1)}>
+      {value}
     </Nav.Link>
   ))
   return (

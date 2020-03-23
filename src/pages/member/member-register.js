@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 import $ from 'jquery'
 //redux
 import { connect } from 'react-redux'
@@ -16,29 +17,77 @@ import {
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 import MemberSidebar from '../../components/member/member-sidebar'
+const MemberRegister = props => {
+  //會員註冊資訊
+  const memberInfo = {
+    mName: '',
+    mAccount: '',
+    mPassword: '',
+    mImg: '',
+    mGender: '',
+    mBday: '',
+    mPhone: '',
+    mEmail: '',
+    mAddress: '',
+  }
+  //寫入會員資訊
+  function getformInfo(e, info) {
+    switch (info) {
+      case 'mName':
+        memberInfo.mName = e.currentTarget.value
+        break
+      case 'mAccount':
+        memberInfo.mAccount = e.currentTarget.value
+        break
+      case 'mPassword':
+        memberInfo.mPassword = e.currentTarget.value
+        break
+      case 'mImg':
+        memberInfo.mPassword = e.currentTarget.value
+        break
+      case 'mGender':
+        memberInfo.mGender = e.currentTarget.value
+        break
+      case 'mBday':
+        memberInfo.mBday = e.currentTarget.value
+        break
+      case 'mPhone':
+        memberInfo.mPhone = e.currentTarget.value
+        break
+      case 'mEmail':
+        memberInfo.mEmail = e.currentTarget.value
+        break
+      case 'mAddress':
+        memberInfo.mAddress = e.currentTarget.value
+        break
 
-const MemberLogin = props => {
-  const mId = props.data[0] ? props.data[0].mId : ''
-  const mName = props.data[0] ? props.data[0].mName : ''
-  const mAccount = props.data[0] ? props.data[0].mAccount : ''
-  const mPassword = props.data[0] ? props.data[0].mPassword : ''
-  const mImg = props.data[0] ? props.data[0].mImg : ''
-  const mGender = props.data[0] ? props.data[0].mGender : ''
-  const mBday = props.data[0] ? props.data[0].mBday : ''
-  const mPhone = props.data[0] ? props.data[0].mPhone : ''
-  const mEmail = props.data[0] ? props.data[0].mEmail : ''
-  const mAddress = props.data[0] ? props.data[0].mAddress : ''
-
-  useEffect(() => {
-    props.getMemberData()
-  }, [])
+      default:
+        break
+    }
+  }
+  //建立會員資料
+  //建立訂單
+  async function insertMember(form) {
+    const req = new Request('http://localhost:6001/member/insert', {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(form),
+    })
+    const res = await fetch(req)
+    const order = await res.json()
+    await console.log(order)
+  }
   return (
     <>
       <div className="container">
         <div class="tab-content content" id="content1">
           <div>
             <h3>
-              會員註冊
+              會員註冊123
               <br />
             </h3>
             <div class="row">
@@ -51,8 +100,10 @@ const MemberLogin = props => {
                         <input
                           type="text"
                           class="form-control"
-                          id="exampleInputName"
+                          id="mName"
+                          name="mName"
                           placeholder="請輸入姓名"
+                          onChange={e => getformInfo(e, 'mName')}
                         />
                       </div>
                       <div class="form-group">
@@ -60,8 +111,9 @@ const MemberLogin = props => {
                         <input
                           type="text"
                           class="form-control"
-                          id="exampleInputAccount"
-                          name="exampleInputAccount"
+                          id="mAccount"
+                          name="mAccount"
+                          onChange={e => getformInfo(e, 'mAccount')}
                           placeholder="請輸入帳號"
                         />
                       </div>
@@ -70,8 +122,9 @@ const MemberLogin = props => {
                         <input
                           type="text"
                           class="form-control"
-                          id="exampleInputPassword"
-                          name="exampleInputPassword"
+                          id="mPassword"
+                          name="mPassword"
+                          onChange={e => getformInfo(e, 'mPassword')}
                           placeholder="請輸入密碼"
                         />
                       </div>
@@ -80,8 +133,9 @@ const MemberLogin = props => {
                         <input
                           type="text"
                           class="form-control"
-                          id="exampleInputGender"
-                          name="exampleInputGender"
+                          id="mGender"
+                          name="mGender"
+                          onChange={e => getformInfo(e, 'mGender')}
                           placeholder="請選擇性別"
                         />
                       </div>
@@ -90,8 +144,9 @@ const MemberLogin = props => {
                         <input
                           type="text"
                           class="form-control"
-                          id="exampleInputBday"
-                          name="exampleInputBday"
+                          id="mBday"
+                          name="mBday"
+                          onChange={e => getformInfo(e, 'mBday')}
                           placeholder="請輸入生日"
                         />
                       </div>
@@ -100,8 +155,9 @@ const MemberLogin = props => {
                         <input
                           type="text"
                           class="form-control"
-                          id="exampleInputPhone"
-                          name="exampleInputPhone"
+                          id="mPhone"
+                          name="mPhone"
+                          onChange={e => getformInfo(e, 'mPhone')}
                           placeholder="請輸入電話"
                         />
                       </div>
@@ -110,8 +166,9 @@ const MemberLogin = props => {
                         <input
                           type="text"
                           class="form-control"
-                          id="exampleInputEmail"
-                          name="exampleInputEmail"
+                          id="mEmail"
+                          name="mEmail"
+                          onChange={e => getformInfo(e, 'mEmail')}
                           placeholder="請輸入信箱"
                         />
                       </div>
@@ -120,13 +177,20 @@ const MemberLogin = props => {
                         <input
                           type="text"
                           class="form-control"
-                          id="exampleInputAddress"
-                          name="exampleInputAddress"
+                          id="mAddress"
+                          name="mAddress"
+                          onChange={e => getformInfo(e, 'mAddress')}
                           placeholder="請輸入地址"
                         />
                       </div>
 
-                      <button type="submit" class="btn btn-primary">
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        onClick={() => {
+                          insertMember(memberInfo)
+                        }}
+                      >
                         送出
                       </button>
                     </form>
@@ -145,10 +209,5 @@ const MemberLogin = props => {
     </>
   )
 }
-const mapStateToProps = store => {
-  return { data: store.getMember }
-}
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getMemberData }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(MemberLogin)
+
+export default withRouter(MemberRegister)

@@ -32,7 +32,7 @@ const MemberInfo = props => {
   const mEmail = props.data[i] ? props.data[i].mEmail : ''
   const mAddress = props.data[i] ? props.data[i].mAddress : ''
   //狗狗基本資料
-
+  console.log(props.data)
   useEffect(() => {
     props.getMemberData()
     $('.nav-item').click(function() {

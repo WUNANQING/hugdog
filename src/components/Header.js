@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../images/logo-dark.svg'
-// import { FiSearch, FiHeart } from 'react-icons/fi'
+import { FiHeart } from 'react-icons/fi'
 import { AiOutlineUser, AiOutlineShopping } from 'react-icons/ai'
 import { FaDog } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
@@ -16,6 +16,8 @@ $('#logout').click(function() {
   window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {
+  //購物車加入一項商品,根據localStorage的cart的陣列長度變動,重新render商品數量狀態
+
   return (
     <>
       <header className="sticky-top">
@@ -128,22 +130,53 @@ function Header(props) {
                 </Link>
               </div>
             </div>
-            {/* <Nav.Link href="#">
+            <Nav.Link href="#">
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <FiHeart />
               </IconContext.Provider>
-            </Nav.Link> */}
-            {/* Nav.Link不會記錄router的三個屬性 export default withRouter(Header)*/}
-            <Nav.Link
-              href="/cart"
-              // onClick={() => {
-              //   props.history.push('/cart')
-              // }}
-            >
-              <IconContext.Provider value={{ size: '1.5rem' }}>
-                <AiOutlineShopping />
-              </IconContext.Provider>
             </Nav.Link>
+            {/* Nav.Link不會記錄router的三個屬性 export default withRouter(Header)*/}
+            <Nav className="nav-icon order-3 order-md-4">
+              <div className="nav-link">
+                <div className="icon icon-unread">
+                  <IconContext.Provider value={{ size: '1.5rem' }}>
+                    <AiOutlineShopping />
+                  </IconContext.Provider>
+                </div>
+                <div className="dropdown-menu">
+                  <Link to="/cart" className="dropdown-item text-center">
+                    您的購物車
+                  </Link>
+                  <div className="dropdown-divider" role="separator"></div>
+
+                  <Link className="dropdown-item nav-link">
+                    {JSON.parse(localStorage.getItem('cart')) === null ||
+                    JSON.parse(localStorage.getItem('cart')).length === 0 ? (
+                      <div className="text-center">
+                        <span>購物車沒有商品</span>
+                        <br />
+                        <Link to="/products" className="p-0">
+                          <Button className="text-center p-1">去選購吧</Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <span>有</span>
+                        <span className="badge badge-danger m-0">
+                          {JSON.parse(localStorage.getItem('cart')).length}
+                        </span>
+                        <spna>項商品</spna>
+                        <br />
+                        <br />
+                        <Link to="/cart" className="p-0">
+                          <Button className="text-center p-1">去結帳吧</Button>
+                        </Link>
+                      </div>
+                    )}
+                  </Link>
+                </div>
+              </div>
+            </Nav>
           </Nav>
         </Navbar>
       </header>

@@ -20,6 +20,22 @@ const getMember = (state = [], action) => {
       return state
   }
 }
+const getMemberOrder = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_MEMBER_ORDER':
+      return action.data
+    default:
+      return state
+  }
+}
+const getMemberOrderDataDetail = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_MEMBER_ORDER_DETAIL':
+      return action.data
+    default:
+      return state
+  }
+}
 const getDog = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_DOG':
@@ -28,5 +44,11 @@ const getDog = (state = [], action) => {
       return state
   }
 }
-const rootReducer = combineReducers({ counter, getMember, getDog })
+const rootReducer = combineReducers({
+  counter,
+  getMember,
+  getDog,
+  getMemberOrder,
+  getMemberOrderDataDetail,
+})
 export { rootReducer }

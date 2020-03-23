@@ -105,7 +105,7 @@ const MemberLogin = props => {
     props.getMemberData()
     // window.location.reload()
     //第一种只刷新一次
-
+    //mousedown,mouseup
     $('.show').click(function() {
       $('.show').addClass('active')
       $('.hide').removeClass('active')

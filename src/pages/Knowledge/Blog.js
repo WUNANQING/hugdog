@@ -11,6 +11,7 @@ import { getBlog } from './actions/index'
 import BlogPost from './Blogpost'
 import '../../components/Knowledge/knowledge.scss'
 import Blogheader from './Blogheader'
+import Banner from '../../components/Knowledge/banner'
 import Search from '../../components/Knowledge/Search'
 
 const Blog = props => {
@@ -57,7 +58,8 @@ const Blog = props => {
   // console.log(props)
   return (
     <>
-      <Blogheader />
+      {/* <Blogheader /> */}
+      <Banner />
 
       <Container>
         <br />
@@ -70,7 +72,7 @@ const Blog = props => {
 
         {/* 文章 */}
         <div className="wrap">
-          <Row className="article mr-3">
+          <Row className="article mr-3 ">
             {/* <div className="article mr-3"> */}
             {props.post &&
               props.post.map((value, index) => {

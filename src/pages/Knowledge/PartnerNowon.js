@@ -41,7 +41,7 @@ function PartnerNowon(props) {
           <Card.Text>
             <p>{props.data.pDes}</p>
             <p>
-              <Linkb to="partner/article">看更多...</Linkb>
+              <Link to="partner/article">看更多...</Link>
             </p>
           </Card.Text>
           <div className="text-right">

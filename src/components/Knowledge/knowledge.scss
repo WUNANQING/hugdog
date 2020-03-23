@@ -11,68 +11,52 @@
 //   padding: 0;
 //   list-style: none;
 // }
+body {
+  padding: 100px 0;
+  // background: linear-gradient(20deg, #3d5493, #1aa2a0) fixed center center /
+  // 100% 100%;
+}
 // .wrap {
-//   height: 100vh;
-//   display: flex;
-//   align-items: center;
-//   background: linear-gradient(-30deg, #fdaecb, #e7597f, #fe8556);
+//   width: 1200px;
+//   margin: auto;
 // }
-.wrap {
-  width: 1200px;
-  margin: auto;
+.item {
   display: flex;
-  flex-wrap: wrap;
-  .nav {
-    justify-content: space-between;
+  align-items: center;
+  margin-bottom: 70px;
+  font-family: 'Noto Sans TC', sans-serif;
+  h2 {
+    font-weight: 900;
+    margin-bottom: 1em;
+  }
+  p {
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .pic {
+    width: 55%;
+    flex-shrink: 0;
+    img {
+      width: 100%;
+      vertical-align: middle;
+    }
+  }
+
+  .txt {
+    width: 55%;
+    flex-shrink: 0;
+    padding: 50px 30px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
   }
 }
-.item {
-  // width: 368px;
-  height: 300px;
-  margin: 0 15px;
-  display: flex;
-  background-color: #fff;
-  border: 1px solid #888;
-  // box-shadow: 0 10px 30px rgba(160, 0, 0, 0.5);
-  font-family: 'Noto Sans TC', sans-serif;
+.item > :first-child {
+  margin-right: -10%;
 }
-.item .pic {
-  width: 50%;
-}
-.item .pic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.item .txt {
-  width: 50%;
-  padding: 20px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-.item .txt h2 {
-  font-weight: 500;
-  margin-bottom: 0.4em;
-}
-.item .txt p {
-  font-weight: 300;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.item .txt .btn {
-  line-height: 1.5em;
-  border: 1px solid #ccc;
-  padding: 0 1em;
-  align-self: flex-end;
-  text-decoration: none;
-  border-radius: 200px;
-  margin-top: auto;
-  color: #aaa;
-}
-.item .txt .btn:hover {
-  background-color: #ccc;
-  color: #fff;
+.item:nth-child(1) .txt {
+  background-color: rgba(206, 205, 204, 0.8);
 }
 
 .article {
