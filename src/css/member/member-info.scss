@@ -1,7 +1,7 @@
 .Member {
   .member-info {
     height: 900px;
-    transform: translateX(180px);
+    transform: translateX(-20px);
     /* margin-top: 100px; */
     /* background: url(../../images/member/member-bg-50.png) rgba(255, 255, 255, 0.3)
       no-repeat top; */
@@ -84,4 +84,10 @@
   height: 12px;
   width: 130px;
   cursor: auto;
+}
+.order_none {
+  display: none;
+}
+.order_show {
+  cursor: pointer;
 }
