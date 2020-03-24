@@ -3,7 +3,7 @@ import $ from 'jquery'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import ProductReceipt from './components/ProductReceipt'
-const Checkout = props => {
+const Checkout = (props) => {
   // 設定mId的來源,抓到mId去檢索會員的最新訂單:目前直接用表單的action跳轉;送出按鈕使用props.history.location.push()似乎不行
   const mId = localStorage.getItem('mId')
   //表單資訊
@@ -78,12 +78,7 @@ const Checkout = props => {
     const order = await res.json()
     await console.log(order)
   }
-  function jump() {
-    postOrder(buyerInfo)
-    localStorage.setItem('cart', JSON.stringify([]))
-    // props.history.push(`/order${}`)
-    window.location.replace('http://localhost:3000/order/')
-  }
+
   return (
     <>
       <Container>
@@ -165,7 +160,7 @@ const Checkout = props => {
             <h3>輸入姓名與地址</h3>
             <hr />
             <br />
-            <Form name="checkout" action="http://localhost:3000/order/">
+            <Form name="checkout">
               <Form.Row>
                 <Form.Group as={Col} xs={12} md={6}>
                   <Form.Control
@@ -173,7 +168,7 @@ const Checkout = props => {
                     size="lg"
                     type="text"
                     placeholder="姓氏"
-                    onChange={e => getformInfo(e, 'lastName')}
+                    onChange={(e) => getformInfo(e, 'lastName')}
                   />
                 </Form.Group>
                 <Form.Group as={Col} xs={12} md={6}>
@@ -182,7 +177,7 @@ const Checkout = props => {
                     size="lg"
                     type="text"
                     placeholder="名字"
-                    onChange={e => getformInfo(e, 'firstName')}
+                    onChange={(e) => getformInfo(e, 'firstName')}
                   />
                 </Form.Group>
               </Form.Row>
@@ -192,7 +187,7 @@ const Checkout = props => {
                     name="county"
                     as="select"
                     size="lg"
-                    onChange={e => getformInfo(e, 'county')}
+                    onChange={(e) => getformInfo(e, 'county')}
                   >
                     <option>縣/市</option>
                     <option value="基隆市">基隆市</option>
@@ -225,7 +220,7 @@ const Checkout = props => {
                     size="lg"
                     type="text"
                     placeholder="地址"
-                    onChange={e => getformInfo(e, 'address')}
+                    onChange={(e) => getformInfo(e, 'address')}
                   />
                 </Form.Group>
                 <Form.Group as={Col} xs={12} md={5}>
@@ -234,7 +229,7 @@ const Checkout = props => {
                     size="lg"
                     type="text"
                     placeholder="附加詳細地址(選填)"
-                    onChange={e => getformInfo(e, 'detailedAddress')}
+                    onChange={(e) => getformInfo(e, 'detailedAddress')}
                   />
                 </Form.Group>
               </Form.Row>
@@ -244,7 +239,7 @@ const Checkout = props => {
                 size="lg"
                 type="text"
                 placeholder="郵遞區號"
-                onChange={e => getformInfo(e, 'zip')}
+                onChange={(e) => getformInfo(e, 'zip')}
               />
               <br />
               <Form.Control
@@ -266,7 +261,7 @@ const Checkout = props => {
                   size="lg"
                   type="email"
                   placeholder="電子郵件地址"
-                  onChange={e => getformInfo(e, 'email')}
+                  onChange={(e) => getformInfo(e, 'email')}
                 />
                 <br />
                 <Form.Control
@@ -274,7 +269,7 @@ const Checkout = props => {
                   size="lg"
                   type="text"
                   placeholder="行動電話號碼"
-                  onChange={e => getformInfo(e, 'mobile')}
+                  onChange={(e) => getformInfo(e, 'mobile')}
                 />
                 <br />
               </Form.Group>
@@ -289,7 +284,7 @@ const Checkout = props => {
                     label="MasterCard"
                     type="radio"
                     id="MasterCard"
-                    onChange={e => getformInfo(e, 'card')}
+                    onChange={(e) => getformInfo(e, 'card')}
                   />
                   <Form.Check
                     inline
@@ -297,7 +292,7 @@ const Checkout = props => {
                     label="VISA"
                     type="radio"
                     id="VISA"
-                    onChange={e => getformInfo(e, 'card')}
+                    onChange={(e) => getformInfo(e, 'card')}
                   />
                 </div>
                 <Form.Control
@@ -305,7 +300,7 @@ const Checkout = props => {
                   size="lg"
                   type="text"
                   placeholder="信用卡/金融卡卡號"
-                  onChange={e => getformInfo(e, 'cardNumber')}
+                  onChange={(e) => getformInfo(e, 'cardNumber')}
                 ></Form.Control>
                 <br />
                 <Form.Row>
@@ -331,7 +326,7 @@ const Checkout = props => {
                       size="lg"
                       type="text"
                       placeholder="卡片持有人"
-                      onChange={e => getformInfo(e, 'owner')}
+                      onChange={(e) => getformInfo(e, 'owner')}
                     />
                   </Form.Group>
                 </Form.Row>
@@ -344,10 +339,8 @@ const Checkout = props => {
                   onClick={() => {
                     postOrder(buyerInfo)
                     localStorage.setItem('cart', JSON.stringify([]))
-                    // props.history.location.push(`/order/${mId}`)
-                    // props.history.push(`/order${}`)
+                    props.history.push(`/order/${mId}`)
                   }}
-
                 >
                   確定結帳
                 </Button>

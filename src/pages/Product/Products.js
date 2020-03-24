@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
@@ -8,31 +8,53 @@ import { Container, Row, Col, Pagination } from 'react-bootstrap'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getProducts, getProductsCategory } from './actions/index'
+import { getProducts, getCategory, getVendor } from './actions/index'
 
-const Products = props => {
+const Products = (props) => {
   //在App.js設定動態參數
   //設page為URL動態參數page的值
   //在子元件ProductSidebar設定路由為?cName=商品類別和?vName＝廠商名(不需要在App.js設定動態參數)
   //在網址列會顯示?cName=商品類別或vName=廠商名
   // 一開始找商品無分頁得傳姪否則無法顯示
   const page = props.match.params.page || ''
-  const cName = new URLSearchParams(props.location.search).get('cName')
-  const vName = new URLSearchParams(props.location.search).get('vName')
+  const [order, setOrder] = useState('')
 
   useEffect(() => {
-    props.getProducts(page)
-    // cName && props.getProductsCategory(cName)
+    if (props.location.search) {
+      if (new URLSearchParams(props.location.search).get('cId')) {
+        props.getCategory(page, order)
+      } else {
+        props.getVendor(page, order)
+      }
+    } else {
+      props.getProducts(page)
+    }
   }, [])
 
   let sort = (
     <div className="d-md-flex justify-content-md-between align-items-center my-3">
       <span>共有{props.list.totalRows}項商品</span>
-      <select>
-        <option>依上架時間(近期-早期)</option>
-        <option>依上架時間(早期-近期)</option>
-        <option>依價格高低(高價-低價)</option>
-        <option>依價格高低(低價-高價)</option>
+      <select
+        onChange={(e) => {
+          let orderBy = e.currentTarget.value
+          //若有cId就依照cId的商品去排序;若有vId就照vId的商品去排序;若沒就照全部商品
+          if (new URLSearchParams(props.location.search).get('cId')) {
+            setOrder(orderBy)
+            props.getCategory(page, orderBy)
+          } else if (new URLSearchParams(props.location.search).get('vId')) {
+            setOrder(orderBy)
+            props.getVendor(page, orderBy)
+          } else {
+            setOrder(orderBy)
+            props.history.push('/products?orderBy=' + e.currentTarget.value)
+            props.getProducts(page, e.currentTarget.value)
+          }
+        }}
+      >
+        <option value="timeDesc">依上架時間(近期-早期)</option>
+        <option value="timeAsc">依上架時間(早期-近期)</option>
+        <option value="priceDesc">依價格高低(高價-低價)</option>
+        <option value="priceAsc">依價格高低(低價-高價)</option>
       </select>
     </div>
   )
@@ -41,7 +63,22 @@ const Products = props => {
   let pages = []
   for (let number = 1; number <= props.list.totalPages; number++) {
     pages.push(
-      <Pagination.Item href={'/products/' + number} key={number}>
+      <Pagination.Item
+        key={number}
+        //分頁記錄order值才能有用
+        onClick={() => {
+          if (new URLSearchParams(props.location.search).get('cId')) {
+            props.history.push('/products/' + number + props.location.search)
+            props.getCategory(number, order)
+          } else if (new URLSearchParams(props.location.search).get('vId')) {
+            props.history.push('/products/' + number + props.location.search)
+            props.getCategory(number, order)
+          } else {
+            props.history.push('/products/' + number)
+            props.getProducts(number, order)
+          }
+        }}
+      >
         {number}
       </Pagination.Item>
     )
@@ -70,7 +107,7 @@ const Products = props => {
     <Container>
       <Row className="my-5">
         <ProductSidebar />
-        <Col className="pl-5">
+        <Col md={10}>
           <Breadcrumb />
           {sort}
           <Row>
@@ -87,11 +124,11 @@ const Products = props => {
 }
 
 //選擇對應的reducer，將其狀態淺拷貝到此元件的props
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return { list: store.getProducts }
 }
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProducts, getProductsCategory }, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getProducts, getCategory, getVendor }, dispatch)
 }
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Products)
