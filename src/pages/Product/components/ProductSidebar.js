@@ -1,12 +1,19 @@
 import React from 'react'
-import { Col, Nav, Navbar, InputGroup, FormControl } from 'react-bootstrap'
+import {
+  Col,
+  Nav,
+  Navbar,
+  InputGroup,
+  FormControl,
+  Form,
+} from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 //redux
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
 import { getCategory, getVendor } from '../actions/index'
-const ProductSidebar = props => {
+const ProductSidebar = (props) => {
   const productCategory = [
     '飼料',
     '零食',
@@ -67,6 +74,7 @@ const ProductSidebar = props => {
     <Nav.Link
       key={value}
       onClick={() => {
+        props.history.push('/products')
         props.getVendor(eval(index + 1))
       }}
     >
@@ -85,17 +93,39 @@ const ProductSidebar = props => {
             {productBrandSidebar}
             <h5 className="mt-1">價格範圍</h5>
             <InputGroup>
-              <FormControl className="col-md-6" />~
-              <FormControl className="col-md-6" />
+              <FormControl
+                className="col-md-6 p-0"
+                onChange={(e) => {
+                  console.log(e.currentTarget.value)
+                }}
+              />
+              <span className="align-self-center">－</span>
+              <FormControl
+                className="col-md-6 p-0"
+                onChange={(e) => {
+                  console.log(e.currentTarget.value)
+                }}
+              />
             </InputGroup>
+            <Form.Label>價格範圍</Form.Label>
+            <FormControl
+              className="p-0"
+              type="range"
+              min="0"
+              max="20000"
+              onChange={(e) => {
+                console.log(e.currentTarget.value)
+              }}
+            />
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     </Col>
   )
 }
+
 //若不在此元件儲存狀態得放置null
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getCategory, getVendor }, dispatch)
 }
 export default withRouter(connect(null, mapDispatchToProps)(ProductSidebar))

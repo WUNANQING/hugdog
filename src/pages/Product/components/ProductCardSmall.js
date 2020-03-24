@@ -3,9 +3,10 @@ import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { FaPaw } from 'react-icons/fa'
 import { Col, Card, Nav, Button, Image } from 'react-bootstrap'
+import { count } from '../actions/index'
 import '../../../css/product/productCard.scss'
 
-const ProductCardSmall = props => {
+const ProductCardSmall = (props) => {
   return (
     <Col md={3} className="mb-3">
       <Card className="shadow-sm">
@@ -61,7 +62,7 @@ const ProductCardSmall = props => {
                       let currentCart = JSON.parse(localStorage.getItem('cart'))
                       if (
                         [...currentCart].find(
-                          value => value.pId === props.data.pId
+                          (value) => value.pId === props.data.pId
                         )
                       ) {
                         return alert('已加入購物車')

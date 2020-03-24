@@ -16,7 +16,7 @@ import ProductCardSmall from './components/ProductCardSmall'
 import { getProducts, count } from './actions/index'
 import { bindActionCreators } from 'redux'
 
-const Cart = props => {
+const Cart = (props) => {
   //下面追加購買按“立即結帳"立刻儲存在localStorage卻無法讓頁面更新;追加購買產品卡片會立即不見
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
@@ -69,7 +69,7 @@ const Cart = props => {
     let newMycartDisplay = []
     for (let i = 0; i < mycart.length; i++) {
       const index = newMycartDisplay.findIndex(
-        item => item.pId === mycart[i].pId
+        (item) => item.pId === mycart[i].pId
       )
       if (index !== -1) {
         newMycartDisplay[index].pQuantity += mycart[i].pQuantity
@@ -82,7 +82,7 @@ const Cart = props => {
   }, [mycart])
 
   //計算總價
-  const sum = items => {
+  const sum = (items) => {
     let total = 0
     for (let i = 0; i < items.length; i++) {
       total += items[i].pQuantity * items[i].pPrice
@@ -208,7 +208,7 @@ const Cart = props => {
                     <Button
                       className="border-dark bg-light text-dark"
                       id="-"
-                      onClick={e => {
+                      onClick={(e) => {
                         updateQuantityToLocalStorage(e, index, 1)
                       }}
                     >
@@ -224,7 +224,7 @@ const Cart = props => {
                     <Button
                       className="border-dark bg-light text-dark"
                       id="+"
-                      onClick={e => {
+                      onClick={(e) => {
                         updateQuantityToLocalStorage(e, index, 1)
                       }}
                     >
@@ -283,10 +283,8 @@ const Cart = props => {
             <Col md={{ offset: 6 }}>
               <Button
                 className="bg-transparent border-0 text-dark p-0"
-                onClick={e => {
-                  $('#coupon')
-                    .toggle()
-                    .focus()
+                onClick={(e) => {
+                  $('#coupon').toggle().focus()
                   if ($(e.target).hasClass('text-dark')) {
                     $(e.target)
                       .removeClass('text-dark')
@@ -359,13 +357,13 @@ const Cart = props => {
   )
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     list: store.getProducts,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getProducts, count }, dispatch)
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))

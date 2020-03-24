@@ -1,20 +1,19 @@
 //商品數量
-export const plusQuantity = quantity => ({
+export const plusQuantity = (quantity) => ({
   type: 'PLUS_QUANTITY',
   quantity,
 })
-export const minusQuantity = quantity => ({
+export const minusQuantity = (quantity) => ({
   type: 'MINUS_QUANTITY',
   quantity,
 })
 
 //跟server要商品資料(全部)
-export const showProducts = data => {
+export const showProducts = (data) => {
   return { type: 'SHOW_PRODUCTS', data }
 }
-//
-export const getProducts = page => {
-  return async dispatch => {
+export const getProducts = (page, order) => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/products/${page}`, {
       method: 'GET',
       credentials: 'include',
@@ -26,8 +25,8 @@ export const getProducts = page => {
   }
 }
 //跟server要商品種類
-export const getCategory = cId => {
-  return async dispatch => {
+export const getCategory = (cId) => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/products?cId=${cId}`, {
       method: 'GET',
       credentials: 'include',
@@ -39,8 +38,8 @@ export const getCategory = cId => {
   }
 }
 //跟server要廠商種類
-export const getVendor = vId => {
-  return async dispatch => {
+export const getVendor = (vId) => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/products?vId=${vId}`, {
       method: 'GET',
       credentials: 'include',
@@ -51,11 +50,11 @@ export const getVendor = vId => {
   }
 }
 //跟server要商品細節
-export const showProductDetail = data => {
+export const showProductDetail = (data) => {
   return { type: 'SHOW_PRODUCT_DETAIL', data }
 }
-export const getProductDetail = pId => {
-  return async dispatch => {
+export const getProductDetail = (pId) => {
+  return async (dispatch) => {
     const req = new Request(
       `http://localhost:6001/products/productDetail/${pId}`,
       {
@@ -70,7 +69,7 @@ export const getProductDetail = pId => {
   }
 }
 //即時更新購物車數量
-export const count = quantity => ({
+export const count = (quantity) => ({
   type: 'COUNT_QUANTITY',
   quantity,
 })

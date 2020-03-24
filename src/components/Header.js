@@ -10,7 +10,7 @@ import { IconContext } from 'react-icons'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 var i = parseInt(localStorage.getItem('mId') - 1)
-$('#logout').click(function() {
+$('#logout').click(function () {
   // clearAllCookie()
   localStorage.removeItem('mName')
   localStorage.setItem('mId', '0')
@@ -184,7 +184,7 @@ function Header(props) {
     </>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     qty: store.getQuantity,
   }
