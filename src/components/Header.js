@@ -12,12 +12,15 @@ var i = parseInt(localStorage.getItem('mId') - 1)
 $('#logout').click(function() {
   // clearAllCookie()
   localStorage.removeItem('mName')
-  localStorage.clear()
+  localStorage.setItem('mId', '0')
+  localStorage.setItem('mImg', 'M030')
   window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {
   //購物車加入一項商品,根據localStorage的cart的陣列長度變動,重新render商品數量狀態
-
+  // useEffect(() => {
+  //   setInterval(() => {retun}, 700), []
+  // })
   return (
     <>
       <header className="sticky-top">

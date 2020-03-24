@@ -1,18 +1,14 @@
 import React, { useState } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import {
-  Container,
-  Row,
   Col,
-  Accordion,
+  Collapse,
   Card,
   Button,
   Badge,
   Image,
   Figure,
 } from 'react-bootstrap'
-
-// const [open, setOpen] = useState(false)
 
 function QuestionArt(props) {
   let showQuestionType = ''
@@ -26,63 +22,83 @@ function QuestionArt(props) {
     showQuestionType = '其他'
   }
 
+  const [open, setOpen] = useState(false)
+
   return (
     <>
-      <Accordion className="Card m-2" style={{ width: '33rem' }}>
-        <Card className="">
-          <Card.Header
-            className="light"
-            // style={{ background: 'orange', }}
-          >
-            <Card.Title as="h4" className="d-flex">
-              <Figure className="d-flex align-items-start flex-column bd-highlight mb-3">
-                <Image
-                  className="questionImg"
-                  src={require('../../images/knowledge/question/' +
-                    props.data.qId +
-                    '.jpg')}
-                  alt=""
-                  roundedCircle
-                />
-                <Card.Subtitle className="align-self-center mt-3">
-                  <strong> {props.data.mName}</strong>
-                </Card.Subtitle>
-              </Figure>
-              <div className="align-self-center ml-2">{props.data.qTitle}</div>
-              <Badge>{showQuestionType}</Badge>
-            </Card.Title>
-          </Card.Header>
-          <Card.Body>
-            <Card.Text>{props.data.qDes}</Card.Text>
-
-            <div className="text-right">
-              <Accordion.Toggle
-                as={Button}
-                variant="link"
-                eventKey="0"
-                // onClick={() => setOpen(!open)}
-              >
-                <h5>
-                  <Badge variant="primary">已回答</Badge>
-                </h5>
-              </Accordion.Toggle>
+      <Col>
+        {/* <div className="bg-light p-1 m-1"> */}
+        <div className="mb-3 bg-light p-3" style={{ width: '33rem' }}>
+          <div className="d-flex">
+            <div>
+              <Image
+                className="questionImg m-1"
+                src={require('../../images/knowledge/question/' +
+                  props.data.qId +
+                  '.jpg')}
+                alt=""
+                roundedCircle
+              />
             </div>
-          </Card.Body>
+            <div>
+              <h6 className="m-3">
+                發問飼主：<strong> {props.data.mName}</strong>{' '}
+              </h6>
+              <h6 className="m-3">
+                寵物年紀：<strong>5</strong> 歲
+              </h6>
+            </div>
+          </div>
+          <div className="text-right mr-3">
+            <h5>
+              <Badge variant="secondary" className="">
+                {showQuestionType}
+              </Badge>
+            </h5>
+          </div>
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                <strong>{props.data.qTitle}</strong>
+              </Card.Title>
 
-          <Accordion.Collapse eventKey="0">
-            <Card.Footer>
-              <Card.Text>
-                <p className="text-left">{props.data.qAns}</p>
-                <Image
-                  src="http://fakeimg.pl/50x50/20b2aa/EAE0D0/"
-                  roundedCircle
-                />
-              </Card.Text>
-            </Card.Footer>
-          </Accordion.Collapse>
-        </Card>
-      </Accordion>
-      <br />
+              <Card.Text>{props.data.qDes}</Card.Text>
+              <div className="text-right">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => setOpen(!open)}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={open}
+                >
+                  看回答
+                </Button>
+              </div>
+              <Collapse in={open}>
+                <div id="example-collapse-text" className="mt-2 p-2">
+                  <hr />
+                  <div className="d-flex">
+                    <div>
+                      <p className="m-3 text-primary">{props.data.qAns}</p>
+                    </div>
+                    <div>
+                      <Image
+                        className="questionImg m-1"
+                        src={require('../../images/knowledge/question/' +
+                          props.data.qId +
+                          '.jpg')}
+                        alt=""
+                        roundedCircle
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Collapse>
+            </Card.Body>
+          </Card>
+        </div>
+        {/* </div> */}
+      </Col>
     </>
   )
 }

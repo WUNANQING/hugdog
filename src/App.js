@@ -68,7 +68,7 @@ function App() {
             <Route path="/bonuspoints">
               <BonusPoints />
             </Route>
-            <Route path="/order/:orderId?">
+            <Route path="/order/:mId?">
               <Order />
             </Route>
             <Route path="/login">

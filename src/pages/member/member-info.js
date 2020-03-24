@@ -101,6 +101,7 @@ const MemberInfo = props => {
       // localStorage.clear()
       localStorage.setItem('mId', 0)
       localStorage.removeItem('mName')
+      localStorage.setItem('cart', [])
       window.location.replace('http://localhost:3000/login/')
     })
     $('#loglog').click(function() {

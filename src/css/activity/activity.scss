@@ -29,10 +29,11 @@
 
   .icon-dropdown-menu {
     margin: 0px auto;
-    background-color: azure;
+    background-color: rgb(235, 235, 235);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     display: none;
-    transition: 0.3s;
-    height: 200px;
+    transition: 3s;
+    height: 150px;
     width: 500px;
     z-index: 2;
     left: 27%;

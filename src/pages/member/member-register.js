@@ -32,6 +32,7 @@ const MemberRegister = props => {
   }
   //寫入會員資訊
   function getformInfo(e, info) {
+    console.log(e.currentTarget.value)
     switch (info) {
       case 'mName':
         memberInfo.mName = e.currentTarget.value
@@ -68,6 +69,7 @@ const MemberRegister = props => {
   //建立會員資料
   //建立訂單
   async function insertMember(form) {
+    console.log(JSON.stringify(form))
     const req = new Request('http://localhost:6001/member/insert', {
       method: 'POST',
       credentials: 'include',
@@ -87,7 +89,7 @@ const MemberRegister = props => {
         <div class="tab-content content" id="content1">
           <div>
             <h3>
-              會員註冊123
+              會員註冊
               <br />
             </h3>
             <div class="row">
@@ -130,19 +132,23 @@ const MemberRegister = props => {
                       </div>
                       <div class="form-group">
                         <label>性別</label>
-                        <input
+                        <select
                           type="text"
                           class="form-control"
                           id="mGender"
                           name="mGender"
                           onChange={e => getformInfo(e, 'mGender')}
                           placeholder="請選擇性別"
-                        />
+                        >
+                          <option value="">請選擇</option>
+                          <option value="male">male</option>
+                          <option value="female">female</option>
+                        </select>
                       </div>
                       <div class="form-group">
                         <label>生日</label>
                         <input
-                          type="text"
+                          type="date"
                           class="form-control"
                           id="mBday"
                           name="mBday"
@@ -164,7 +170,7 @@ const MemberRegister = props => {
                       <div class="form-group">
                         <label>信箱</label>
                         <input
-                          type="text"
+                          type="email"
                           class="form-control"
                           id="mEmail"
                           name="mEmail"
