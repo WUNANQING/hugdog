@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-  Col,
-  Nav,
-  Navbar,
-  InputGroup,
-  FormControl,
-  Form,
-} from 'react-bootstrap'
+import { Col, Nav, Navbar } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 //redux
 import { connect } from 'react-redux'
@@ -63,26 +56,27 @@ const ProductSidebar = (props) => {
     <Nav.Link
       key={value}
       onClick={() => {
-        props.history.push('/products')
-        props.getCategory(eval(index + 1))
+        props.history.push('/products?cId=' + eval(index + 1))
+        props.getCategory(props.match.params.page || '')
       }}
     >
       {value}
     </Nav.Link>
   ))
+
   const productBrandSidebar = productBrand.map((value, index) => (
     <Nav.Link
       key={value}
       onClick={() => {
-        props.history.push('/products')
-        props.getVendor(eval(index + 1))
+        props.history.push('/products?vId=' + eval(index + 1))
+        props.getVendor(props.match.params.page || '')
       }}
     >
       {value}
     </Nav.Link>
   ))
   return (
-    <Col md={2}>
+    <Col md={2} className="border-light" style={{ borderStyle: 'double' }}>
       <Navbar expand="md">
         <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
         <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
@@ -91,32 +85,6 @@ const ProductSidebar = (props) => {
             {productCategorysidebar}
             <h5 className="mt-1">品牌</h5>
             {productBrandSidebar}
-            <h5 className="mt-1">價格範圍</h5>
-            <InputGroup>
-              <FormControl
-                className="col-md-6 p-0"
-                onChange={(e) => {
-                  console.log(e.currentTarget.value)
-                }}
-              />
-              <span className="align-self-center">－</span>
-              <FormControl
-                className="col-md-6 p-0"
-                onChange={(e) => {
-                  console.log(e.currentTarget.value)
-                }}
-              />
-            </InputGroup>
-            <Form.Label>價格範圍</Form.Label>
-            <FormControl
-              className="p-0"
-              type="range"
-              min="0"
-              max="20000"
-              onChange={(e) => {
-                console.log(e.currentTarget.value)
-              }}
-            />
           </Nav>
         </Navbar.Collapse>
       </Navbar>

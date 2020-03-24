@@ -62,7 +62,7 @@ const Cart = (props) => {
   //從localStorage取得購物車資料
   useEffect(() => {
     getCartFromLocalStorage()
-  }, [])
+  }, [props.qty])
 
   //購物車有變動即更改
   useEffect(() => {
@@ -186,7 +186,7 @@ const Cart = (props) => {
           </Row>
           {mycartDisplay.map((value, index) => {
             return (
-              <Row className="align-items-center" key={value.pId}>
+              <Row className="item align-items-center" key={value.pId}>
                 <Col md={4} className="text-center">
                   <Link to={'/productdetail/' + value.pId} className="p-0">
                     <Image
@@ -246,9 +246,10 @@ const Cart = (props) => {
                     className="mb-2"
                     variant="primary"
                     size="md"
-                    onClick={() => {
+                    onClick={(e) => {
                       props.count(mycart)
                       deleteItem(index)
+                      $(e.currentTarget).parentsUntil('.item').fadeOut()
                     }}
                   >
                     <MdDelete className="mb-md-1" />
@@ -360,6 +361,7 @@ const Cart = (props) => {
 const mapStateToProps = (store) => {
   return {
     list: store.getProducts,
+    qty: store.getQuantity,
   }
 }
 

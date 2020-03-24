@@ -12,38 +12,47 @@ export const minusQuantity = (quantity) => ({
 export const showProducts = (data) => {
   return { type: 'SHOW_PRODUCTS', data }
 }
-export const getProducts = (page, order) => {
+export const getProducts = (page, orderBy = 'DESC') => {
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/products/${page}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const req = new Request(
+      `http://localhost:6001/products/${page}?orderBy=${orderBy}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
     const res = await fetch(req)
     const data = await res.json()
-    // console.log(data)
     dispatch(showProducts(data))
   }
 }
 //跟server要商品種類
-export const getCategory = (cId) => {
+export const getCategory = (page, orderBy = 'DESC') => {
+  let cId = window.location.search
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/products?cId=${cId}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const req = new Request(
+      `http://localhost:6001/products/${page}${cId}&orderBy=${orderBy}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
     const res = await fetch(req)
     const data = await res.json()
-    console.log('商品種類', data)
     dispatch(showProducts(data))
   }
 }
 //跟server要廠商種類
-export const getVendor = (vId) => {
+export const getVendor = (page, orderBy = 'DESC') => {
+  let vId = window.location.search
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/products?vId=${vId}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const req = new Request(
+      `http://localhost:6001/products/${page}${vId}&orderBy=${orderBy}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
     const res = await fetch(req)
     const data = await res.json()
     dispatch(showProducts(data))

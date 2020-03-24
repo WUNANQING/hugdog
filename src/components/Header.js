@@ -136,14 +136,23 @@ function Header(props) {
                 <FiHeart />
               </IconContext.Provider>
             </Nav.Link>
-            {/* Nav.Link不會記錄router的三個屬性 export default withRouter(Header)*/}
             <Nav className="nav-icon order-3 order-md-4">
               <div className="nav-link">
-                <div className="icon icon-unread">
-                  <IconContext.Provider value={{ size: '1.5rem' }}>
-                    <AiOutlineShopping />
-                  </IconContext.Provider>
-                </div>
+                {JSON.parse(localStorage.getItem('cart')) === null ||
+                JSON.parse(localStorage.getItem('cart')).length === 0 ? (
+                  <div className="icon">
+                    <IconContext.Provider value={{ size: '1.5rem' }}>
+                      <AiOutlineShopping />
+                    </IconContext.Provider>
+                  </div>
+                ) : (
+                  <div className="icon icon-unread">
+                    <IconContext.Provider value={{ size: '1.5rem' }}>
+                      <AiOutlineShopping />
+                    </IconContext.Provider>
+                  </div>
+                )}
+
                 <div className="dropdown-menu">
                   <Link to="/cart" className="dropdown-item text-center">
                     您的購物車
@@ -166,7 +175,7 @@ function Header(props) {
                         <span className="badge badge-danger m-0">
                           {JSON.parse(localStorage.getItem('cart')).length}
                         </span>
-                        <spna>項商品</spna>
+                        <span>項商品</span>
                         <br />
                         <br />
                         <Link to="/cart" className="p-0">

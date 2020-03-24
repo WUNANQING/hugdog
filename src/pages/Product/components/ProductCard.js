@@ -5,20 +5,21 @@ import { FaPaw } from 'react-icons/fa'
 import { Col, Card, Image, Nav, Button } from 'react-bootstrap'
 import '../../../css/product/productCard.scss'
 
-const ProductCard = props => {
+const ProductCard = (props) => {
   return (
     <Col md={4} className="mb-3">
       <Card>
         <Link to={'/productdetail/' + props.data.pId} className="p-0">
           <Image
             src={require('../../../images/product/' + props.data.pImg + '.jpg')}
-            className="card-img-top"
+            className="card-img-top mt-3"
             alt="..."
           />
         </Link>
         <Card.Body className="card-body">
-          <Card.Title>{props.data.pName}</Card.Title>
+          <Card.Title className="text-center">{props.data.pName}</Card.Title>
           <Card.Text
+            className="text-center"
             style={{
               whiteSpace: 'nowrap',
               overflow: 'hidden',
@@ -40,6 +41,7 @@ const ProductCard = props => {
             <FaPaw />
             <FaPaw />
           </div>
+          <p className="text-center">上架時間 {props.data.created_at}</p>
           <div className="d-flex justify-content-around">
             <Nav.Link>
               <Button
@@ -75,7 +77,7 @@ const ProductCard = props => {
                       let currentCart = JSON.parse(localStorage.getItem('cart'))
                       if (
                         [...currentCart].find(
-                          value => value.pId === props.data.pId
+                          (value) => value.pId === props.data.pId
                         )
                       ) {
                         return alert('已加入購物車')
