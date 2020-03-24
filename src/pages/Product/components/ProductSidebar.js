@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getCategory, getVendor } from '../actions/index'
+import { getProducts, getCategory, getVendor } from '../actions/index'
 const ProductSidebar = (props) => {
   const productCategory = [
     '飼料',
@@ -51,7 +51,7 @@ const ProductSidebar = (props) => {
     'Nutram 紐頓',
     'arrr',
   ]
-  //在商品細節無法立刻跳轉
+
   const productCategorysidebar = productCategory.map((value, index) => (
     <Nav.Link
       key={value}
@@ -81,9 +81,19 @@ const ProductSidebar = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
         <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
           <Nav className="nav-menu mr-auto flex-column">
-            <h5 className="mt-1">商品分類</h5>
+            <Nav.Link
+              as="h4"
+              className="mt-1 p-0"
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                props.history.push('/products')
+                props.getProducts(props.match.params.page || '')
+              }}
+            >
+              商品分類
+            </Nav.Link>
             {productCategorysidebar}
-            <h5 className="mt-1">品牌</h5>
+            <h4 className="mt-1">品牌</h4>
             {productBrandSidebar}
           </Nav>
         </Navbar.Collapse>
@@ -94,6 +104,6 @@ const ProductSidebar = (props) => {
 
 //若不在此元件儲存狀態得放置null
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getCategory, getVendor }, dispatch)
+  return bindActionCreators({ getProducts, getCategory, getVendor }, dispatch)
 }
 export default withRouter(connect(null, mapDispatchToProps)(ProductSidebar))

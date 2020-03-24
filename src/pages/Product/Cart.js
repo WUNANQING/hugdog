@@ -12,7 +12,7 @@ import { MdPlaylistAdd, MdDelete } from 'react-icons/md'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-import ProductCardSmall from './components/ProductCardSmall'
+import ProductCardSmallSale from './components/ProductCardSmallSale'
 import { getProducts, count } from './actions/index'
 import { bindActionCreators } from 'redux'
 
@@ -62,6 +62,7 @@ const Cart = (props) => {
   //從localStorage取得購物車資料
   useEffect(() => {
     getCartFromLocalStorage()
+    props.getProducts(Math.floor(Math.random() * 19) + 1)
   }, [props.qty])
 
   //購物車有變動即更改
@@ -90,7 +91,8 @@ const Cart = (props) => {
     return total
   }
   //設定猜你喜歡只列出4項商品(未完成;無法重新render更新顯示數量;以及按了快速結帳會消失隱藏)
-  let arr = props.list.rows && props.list.rows.slice(0, 4)
+  let random = Math.floor(Math.random() * 20) - 5
+  let arr = props.list.rows && props.list.rows.slice(random, random + 4)
 
   return (
     <Container>
@@ -330,9 +332,7 @@ const Cart = (props) => {
       <Row>
         {props.list.rows &&
           arr.map((value, index) => {
-            return (
-              <ProductCardSmall key={index} data={props.list.rows[index]} />
-            )
+            return <ProductCardSmallSale key={index} data={arr[index]} />
           })}
       </Row>
       <Row className="mt-5">
