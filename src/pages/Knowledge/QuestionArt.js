@@ -9,6 +9,9 @@ import {
   Image,
   Figure,
 } from 'react-bootstrap'
+import { FaDog } from 'react-icons/fa'
+import { GiDogBowl } from 'react-icons/gi'
+import { TiPipette } from 'react-icons/ti'
 
 function QuestionArt(props) {
   let showQuestionColor = ''
@@ -17,7 +20,7 @@ function QuestionArt(props) {
   } else if (props.data.qClassify === 'b') {
     showQuestionColor = 'info'
   } else {
-    showQuestionColor = 'warning'
+    showQuestionColor = 'danger text-white'
   }
 
   let showQuestionType = ''
@@ -29,6 +32,15 @@ function QuestionArt(props) {
     showQuestionType = '營養與處方'
   } else {
     showQuestionType = '其他'
+  }
+
+  let showPic = ''
+  if (props.data.qClassify === 'a') {
+    showPic = <FaDog />
+  } else if (props.data.qClassify === 'b') {
+    showPic = <TiPipette />
+  } else {
+    showPic = <GiDogBowl />
   }
 
   const [open, setOpen] = useState(false)
@@ -58,12 +70,13 @@ function QuestionArt(props) {
               </h6>
             </div>
           </div>
-          <div className="text-right mr-3">
-            <h5>
-              <Badge variant={showQuestionColor} className="">
-                {showQuestionType}
+          <div className="text-right mr-2">
+            <h6>
+              {''}
+              <Badge variant={showQuestionColor} className="p-2">
+                {showPic} {''} {showQuestionType}
               </Badge>
-            </h5>
+            </h6>
           </div>
           <Card>
             <Card.Body>

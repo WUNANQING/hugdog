@@ -63,15 +63,14 @@ function Question(props) {
       event.preventDefault()
       event.stopPropagation()
     }
-    // else {
-    //   setShow(false)
-    //   // setTimeout(() => {
-    //   post()
-    //   // }, 00)
-    // }
     setValidated(true)
   }
-  //ToggleButtonGroup
+
+  //分類篩選
+  const [classify, setClassify] = useState('')
+  function changeClassify(newClassify) {
+    setClassify(newClassify)
+  }
 
   return (
     <>
@@ -89,17 +88,40 @@ function Question(props) {
               我要發問
             </Button>
             <div>
-              <p>問題分類</p>
               <div className="d-flex">
-                <Button size="sm" variant="success" className="mr-1">
+                <Button
+                  size="sm"
+                  variant="primary"
+                  className="mr-1"
+                  onClick={() => changeClassify('')}
+                >
+                  全部問題
+                  <span className="sr-only">unread messages</span>
+                </Button>
+                <Button
+                  size="sm"
+                  variant="success"
+                  className="mr-1"
+                  onClick={() => changeClassify('a')}
+                >
                   <FaDog /> 行為
                   <span className="sr-only">unread messages</span>
                 </Button>
-                <Button size="sm" variant="info" className="mr-1">
+                <Button
+                  size="sm"
+                  variant="info"
+                  className="mr-1"
+                  onClick={() => changeClassify('b')}
+                >
                   <TiPipette /> 照護
                   <span className="sr-only">unread messages</span>
                 </Button>
-                <Button size="sm" variant="warning" className="mr-1 text-white">
+                <Button
+                  size="sm"
+                  variant="danger"
+                  className="mr-1 text-white"
+                  onClick={() => changeClassify('c')}
+                >
                   <GiDogBowl /> 飲食
                   <span className="sr-only">unread messages</span>
                 </Button>
@@ -188,7 +210,21 @@ function Question(props) {
               <Row xs={12} md={6} className="justify-content-right">
                 {props.post &&
                   props.post.map((value, index) => {
-                    return <QuestionArt key={index} data={props.post[index]} />
+                    if (classify) {
+                      if (props.post[index].qClassify === classify) {
+                        return (
+                          <QuestionArt
+                            key={index}
+                            data={props.post[index]}
+                            changeClassify={props.post.qClassify}
+                          />
+                        )
+                      }
+                    } else {
+                      return (
+                        <QuestionArt key={index} data={props.post[index]} />
+                      )
+                    }
                   })}
               </Row>
             </Col>
