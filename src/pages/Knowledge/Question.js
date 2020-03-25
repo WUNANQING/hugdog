@@ -1,20 +1,20 @@
 import React, { useEffect, useState, Feedback } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import {
   Container,
-  Collapse,
   Row,
   Col,
-  Card,
   Form,
   Button,
   Modal,
-  Image,
   FormCheck,
-  InputGroup,
+  Badge,
   FormControl,
 } from 'react-bootstrap'
 import { MdPets } from 'react-icons/md'
+import { FaDog } from 'react-icons/fa'
+import { GiDogBowl } from 'react-icons/gi'
+import { TiPipette } from 'react-icons/ti'
 //redux
 import { connect } from 'react-redux'
 //action
@@ -71,28 +71,41 @@ function Question(props) {
     // }
     setValidated(true)
   }
+  //ToggleButtonGroup
 
   return (
     <>
       <div className="knowledgebanner"></div>
       <Container className="question">
         <div>
-          {/* <Button
-            className="askquestion"
-            variant="warning"
-            onClick={() => post()}
-          >
-            我要發問
-          </Button> */}
-          <Button
-            className="askquestion"
-            variant="primary"
-            onClick={handleShow}
-            aria-controls="example-collapse-text"
-            // aria-expanded={open}
-          >
-            我要發問
-          </Button>
+          <div className="mt-2 mb-3 align-items-center justify-content-between d-flex">
+            <Button
+              className="askquestion"
+              variant="primary"
+              onClick={handleShow}
+              aria-controls="example-collapse-text"
+              // aria-expanded={open}
+            >
+              我要發問
+            </Button>
+            <div>
+              <p>問題分類</p>
+              <div className="d-flex">
+                <Button size="sm" variant="success" className="mr-1">
+                  <FaDog /> 行為
+                  <span className="sr-only">unread messages</span>
+                </Button>
+                <Button size="sm" variant="info" className="mr-1">
+                  <TiPipette /> 照護
+                  <span className="sr-only">unread messages</span>
+                </Button>
+                <Button size="sm" variant="warning" className="mr-1 text-white">
+                  <GiDogBowl /> 飲食
+                  <span className="sr-only">unread messages</span>
+                </Button>
+              </div>
+            </div>
+          </div>
 
           <Modal
             show={show}
@@ -116,47 +129,32 @@ function Question(props) {
                     {/* <option>{props.data.qName}</option> */}
                   </Form.Control>
                 </Form.Group>
-                {/* <Form.Group id="formGridCheckbox" as={Row}>
-                  <Form.Label column="sm" lg={3}>
-                    請選擇問題分類：
-                  </Form.Label>
-                  <FormControl required>
-                    <Col className="d-flex" sm={9}>
-                      <Form.Check
-                        className="m-2"
-                        type="checkbox"
-                        id=""
-                        label="行為"
-                      />
-                      <Form.Check
-                        className="m-2"
-                        type="checkbox"
-                        id=""
-                        label="照護"
-                        feedback=""
-                      />
-                      <Form.Check
-                        className="m-2"
-                        type="checkbox"
-                        id=""
-                        label="飲食"
-                      />
-                    </Col>
-                  </FormControl>
-                </Form.Group> */}
+                <Form.Row>
+                  <Form.Group
+                    as={Col}
+                    controlId="exampleForm.ControlSelect1 typeselect"
+                  >
+                    <Form.Control as="select" required>
+                      <option>請選擇類型</option>
+                      <option>行為</option>
+                      <option>照護</option>
+                      <option>飲食</option>
+                    </Form.Control>
+                  </Form.Group>
 
-                {/* <Form.Group as={Row}>
-                  <Col sm={10}></Col>
-                </Form.Group> */}
+                  <Form.Group
+                    as={Col}
+                    controlId="exampleForm.ControlSelect2 typeselect"
+                  >
+                    <Form.Control as="select" required>
+                      <option>請選擇類別</option>
+                      <option>行為</option>
+                      <option>照護</option>
+                      <option>飲食</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Form.Row>
 
-                <Form.Group controlId="exampleForm.ControlSelect2 typeselect">
-                  <Form.Control as="select" required>
-                    <option>請選擇類別</option>
-                    <option>行為</option>
-                    <option>照護</option>
-                    <option>飲食</option>
-                  </Form.Control>
-                </Form.Group>
                 <Form.Group controlId="exampleForm.ControlInput1">
                   <Form.Control
                     type="email"
@@ -187,7 +185,7 @@ function Question(props) {
         <div>
           <Row>
             <Col xs={12} md={12}>
-              <Row xs={12} md={6}>
+              <Row xs={12} md={6} className="justify-content-right">
                 {props.post &&
                   props.post.map((value, index) => {
                     return <QuestionArt key={index} data={props.post[index]} />

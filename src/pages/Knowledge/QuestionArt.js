@@ -11,6 +11,15 @@ import {
 } from 'react-bootstrap'
 
 function QuestionArt(props) {
+  let showQuestionColor = ''
+  if (props.data.qClassify === 'a') {
+    showQuestionColor = 'success'
+  } else if (props.data.qClassify === 'b') {
+    showQuestionColor = 'info'
+  } else {
+    showQuestionColor = 'warning'
+  }
+
   let showQuestionType = ''
   if (props.data.qType === '1') {
     showQuestionType = '食慾/精神不濟'
@@ -28,7 +37,7 @@ function QuestionArt(props) {
     <>
       <Col>
         {/* <div className="bg-light p-1 m-1"> */}
-        <div className="mb-3 bg-light p-3" style={{ width: '33rem' }}>
+        <div className="mb-3 mt-2 bg-light p-3" style={{ width: '33rem' }}>
           <div className="d-flex">
             <div>
               <Image
@@ -45,13 +54,13 @@ function QuestionArt(props) {
                 發問飼主：<strong> {props.data.mName}</strong>{' '}
               </h6>
               <h6 className="m-3">
-                寵物年紀：<strong>5</strong> 歲
+                寵物年紀：<strong>{props.data.qAge}</strong> 歲
               </h6>
             </div>
           </div>
           <div className="text-right mr-3">
             <h5>
-              <Badge variant="secondary" className="">
+              <Badge variant={showQuestionColor} className="">
                 {showQuestionType}
               </Badge>
             </h5>
@@ -64,15 +73,21 @@ function QuestionArt(props) {
 
               <Card.Text>{props.data.qDes}</Card.Text>
               <div className="text-right">
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => setOpen(!open)}
-                  aria-controls="example-collapse-text"
-                  aria-expanded={open}
-                >
-                  看回答
-                </Button>
+                {props.data.qAns === '' ? (
+                  <Button variant="secondary" size="sm" disabled>
+                    未回答
+                  </Button>
+                ) : (
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => setOpen(!open)}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open}
+                  >
+                    看回答
+                  </Button>
+                )}
               </div>
               <Collapse in={open}>
                 <div id="example-collapse-text" className="mt-2 p-2">
@@ -84,9 +99,7 @@ function QuestionArt(props) {
                     <div>
                       <Image
                         className="questionImg m-1"
-                        src={require('../../images/knowledge/question/' +
-                          props.data.qId +
-                          '.jpg')}
+                        src={require('../../images/knowledge/question/dr001.jpg')}
                         alt=""
                         roundedCircle
                       />
