@@ -8,15 +8,16 @@ import {
   Button,
   Image,
 } from 'react-bootstrap'
-import { MdPlaylistAdd, MdDelete, MdAddShoppingCart } from 'react-icons/md'
+import { MdPlaylistAdd, MdDelete } from 'react-icons/md'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-import ProductCardSmall from './components/ProductCardSmall'
-import { getProducts } from './actions/index'
+import ProductCardSmallSale from './components/ProductCardSmallSale'
+import { getProducts, count } from './actions/index'
 import { bindActionCreators } from 'redux'
 
-const Cart = props => {
+const Cart = (props) => {
+  //下面追加購買按“立即結帳"立刻儲存在localStorage卻無法讓頁面更新;追加購買產品卡片會立即不見
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
 
@@ -61,14 +62,15 @@ const Cart = props => {
   //從localStorage取得購物車資料
   useEffect(() => {
     getCartFromLocalStorage()
-  }, [])
+    props.getProducts(Math.floor(Math.random() * 19) + 1)
+  }, [props.qty])
 
   //購物車有變動即更改
   useEffect(() => {
     let newMycartDisplay = []
     for (let i = 0; i < mycart.length; i++) {
       const index = newMycartDisplay.findIndex(
-        item => item.pId === mycart[i].pId
+        (item) => item.pId === mycart[i].pId
       )
       if (index !== -1) {
         newMycartDisplay[index].pQuantity += mycart[i].pQuantity
@@ -81,7 +83,7 @@ const Cart = props => {
   }, [mycart])
 
   //計算總價
-  const sum = items => {
+  const sum = (items) => {
     let total = 0
     for (let i = 0; i < items.length; i++) {
       total += items[i].pQuantity * items[i].pPrice
@@ -89,7 +91,8 @@ const Cart = props => {
     return total
   }
   //設定猜你喜歡只列出4項商品(未完成;無法重新render更新顯示數量;以及按了快速結帳會消失隱藏)
-  let arr = props.list.rows && props.list.rows.slice(0, 4)
+  let random = Math.floor(Math.random() * 20) - 5
+  let arr = props.list.rows && props.list.rows.slice(random, random + 4)
 
   return (
     <Container>
@@ -167,9 +170,12 @@ const Cart = props => {
                 <>
                   <h3>購物車內沒有任何商品</h3>
                   <hr />
-                  <img src="#" alt="..." />
+                  <Image
+                    src={require('../../images/product/dog-ad.jpg')}
+                    alt="..."
+                  />
                   <Link to="/products">
-                    <Button variant="primary" size="md">
+                    <Button variant="primary" size="lg">
                       前往選購
                     </Button>
                   </Link>
@@ -182,12 +188,17 @@ const Cart = props => {
           </Row>
           {mycartDisplay.map((value, index) => {
             return (
-              <Row className="align-items-center" key={value.pId}>
+              <Row className="item align-items-center" key={value.pId}>
                 <Col md={4} className="text-center">
-                  <Image
-                    src={require('../../images/product/' + value.pImg + '.jpg')}
-                    alt="..."
-                  />
+                  <Link to={'/productdetail/' + value.pId} className="p-0">
+                    <Image
+                      src={require('../../images/product/' +
+                        value.pImg +
+                        '.jpg')}
+                      className="card-img-top"
+                      alt="..."
+                    />
+                  </Link>
                 </Col>
                 <Col md={2}>
                   <h3 className="font-weight-bold">{value.pName}</h3>
@@ -199,7 +210,7 @@ const Cart = props => {
                     <Button
                       className="border-dark bg-light text-dark"
                       id="-"
-                      onClick={e => {
+                      onClick={(e) => {
                         updateQuantityToLocalStorage(e, index, 1)
                       }}
                     >
@@ -215,7 +226,7 @@ const Cart = props => {
                     <Button
                       className="border-dark bg-light text-dark"
                       id="+"
-                      onClick={e => {
+                      onClick={(e) => {
                         updateQuantityToLocalStorage(e, index, 1)
                       }}
                     >
@@ -237,8 +248,10 @@ const Cart = props => {
                     className="mb-2"
                     variant="primary"
                     size="md"
-                    onClick={() => {
+                    onClick={(e) => {
+                      props.count(mycart)
                       deleteItem(index)
+                      $(e.currentTarget).parentsUntil('.item').fadeOut()
                     }}
                   >
                     <MdDelete className="mb-md-1" />
@@ -273,10 +286,8 @@ const Cart = props => {
             <Col md={{ offset: 6 }}>
               <Button
                 className="bg-transparent border-0 text-dark p-0"
-                onClick={e => {
-                  $('#coupon')
-                    .toggle()
-                    .focus()
+                onClick={(e) => {
+                  $('#coupon').toggle().focus()
                   if ($(e.target).hasClass('text-dark')) {
                     $(e.target)
                       .removeClass('text-dark')
@@ -321,9 +332,7 @@ const Cart = props => {
       <Row>
         {props.list.rows &&
           arr.map((value, index) => {
-            return (
-              <ProductCardSmall key={index} data={props.list.rows[index]} />
-            )
+            return <ProductCardSmallSale key={index} data={arr[index]} />
           })}
       </Row>
       <Row className="mt-5">
@@ -349,13 +358,14 @@ const Cart = props => {
   )
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     list: store.getProducts,
+    qty: store.getQuantity,
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProducts }, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getProducts, count }, dispatch)
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))

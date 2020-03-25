@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
@@ -18,7 +18,7 @@ import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
 import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
-// import BlogArticle from './pages/Knowledge/BlogArticle'
+import BlogArticle from './pages/Knowledge/BlogArticle'
 function App() {
   return (
     <Router>
@@ -38,12 +38,12 @@ function App() {
             <Route path="/activity">
               <Activity />
             </Route>
-            <Route path="/knowledge/blog">
+            <Route exact path="/knowledge/blog">
               <Blog />
             </Route>
-            {/* <Route path="/knowledge/blog/:aTitle">
+            <Route path="/knowledge/blog/:aId?">
               <BlogArticle />
-            </Route> */}
+            </Route>
             <Route path="/knowledge/partner">
               <Partner />
             </Route>
@@ -68,7 +68,7 @@ function App() {
             <Route path="/bonuspoints">
               <BonusPoints />
             </Route>
-            <Route path="/order/:orderId?">
+            <Route path="/order/:mId?">
               <Order />
             </Route>
             <Route path="/login">

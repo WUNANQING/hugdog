@@ -21,22 +21,22 @@ export const getBlog = () => {
 export const showBlogArticle = data => {
   return { type: 'SHOW_BLOG_ARTICLE', data }
 }
-export const getBlogArticle = aTitle => {
+export const getBlogArticle = aId => {
   return async dispatch => {
-    const req = new Request(`http://localhost:6001/knowledge/blog/${aTitle}`, {
+    const req = new Request(`http://localhost:6001/knowledge/blog/${aId}`, {
       method: 'GET',
       credentials: 'include',
     })
     const res = await fetch(req)
     const data = await res.json()
-    console.log(data)
+    console.log('getBlogArticle', data)
     dispatch(showBlogArticle(data))
   }
 }
 
 //Question
 export const showQuestion = data => {
-  return { type: 'SHOW_QUESTIONS', data }
+  return { type: 'SHOW_QUESTION', data }
 }
 //要全部資料
 export const getQuestion = () => {
@@ -47,6 +47,7 @@ export const getQuestion = () => {
     })
     const res = await fetch(req)
     const data = await res.json()
+    console.log(data)
     dispatch(showQuestion(data))
   }
 }

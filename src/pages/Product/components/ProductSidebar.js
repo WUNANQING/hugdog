@@ -1,12 +1,19 @@
 import React from 'react'
-import { Col, Nav, Navbar, InputGroup, FormControl } from 'react-bootstrap'
-const ProductSidebar = () => {
+import { Col, Nav, Navbar } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
+//redux
+import { connect } from 'react-redux'
+//action
+import { bindActionCreators } from 'redux'
+import { getProducts, getCategory, getVendor } from '../actions/index'
+const ProductSidebar = (props) => {
   const productCategory = [
     '飼料',
     '零食',
     '犬用保健食品',
     '狗罐頭/鮮食/餐盒',
     '美容/清潔用品',
+    '犬用玩具',
     '狗籠/狗屋',
     '床組',
     '狗衣服',
@@ -44,31 +51,50 @@ const ProductSidebar = () => {
     'Nutram 紐頓',
     'arrr',
   ]
+
   const productCategorysidebar = productCategory.map((value, index) => (
-    <Nav.Link key={value} href={'/products/category?cId=' + eval(index + 1)}>
+    <Nav.Link
+      key={value}
+      onClick={() => {
+        props.history.push('/products?cId=' + eval(index + 1))
+        props.getCategory(props.match.params.page || '')
+      }}
+    >
       {value}
     </Nav.Link>
   ))
+
   const productBrandSidebar = productBrand.map((value, index) => (
-    <Nav.Link key={value} href={'/products/vendor?Id=' + eval(index + 1)}>
+    <Nav.Link
+      key={value}
+      onClick={() => {
+        props.history.push('/products?vId=' + eval(index + 1))
+        props.getVendor(props.match.params.page || '')
+      }}
+    >
       {value}
     </Nav.Link>
   ))
   return (
-    <Col className="p-0" md={2}>
-      <Navbar className="bg-light" expand="md">
+    <Col md={2} className="border-light" style={{ borderStyle: 'double' }}>
+      <Navbar expand="md">
         <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
         <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
           <Nav className="nav-menu mr-auto flex-column">
-            <h5 className="mt-1">商品分類</h5>
+            <Nav.Link
+              as="h4"
+              className="mt-1 p-0"
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                props.history.push('/products')
+                props.getProducts(props.match.params.page || '')
+              }}
+            >
+              商品分類
+            </Nav.Link>
             {productCategorysidebar}
-            <h5 className="mt-1">品牌</h5>
+            <h4 className="mt-1">品牌</h4>
             {productBrandSidebar}
-            <h5 className="mt-1">價格範圍</h5>
-            <InputGroup>
-              <FormControl className="col-md-6" />~
-              <FormControl className="col-md-6" />
-            </InputGroup>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -76,4 +102,8 @@ const ProductSidebar = () => {
   )
 }
 
-export default ProductSidebar
+//若不在此元件儲存狀態得放置null
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getProducts, getCategory, getVendor }, dispatch)
+}
+export default withRouter(connect(null, mapDispatchToProps)(ProductSidebar))

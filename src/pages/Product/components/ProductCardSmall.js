@@ -3,37 +3,52 @@ import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { FaPaw } from 'react-icons/fa'
 import { Col, Card, Nav, Button, Image } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { count } from '../actions/index'
+import $ from 'jquery'
+import '../../../css/product/productCard.scss'
 
-const ProductCard = props => {
+const ProductCardSmall = (props) => {
   return (
     <Col md={3} className="mb-3">
       <Card className="shadow-sm">
-        <Image
-          src={require('../../../images/product/' + props.data.pImg + '.jpg')}
-          className="card-img-top"
-          alt="..."
-        />
+        <Link to={'/productdetail/' + props.data.pId}>
+          <Image
+            src={require('../../../images/product/' + props.data.pImg + '.jpg')}
+            className="card-img-top mt-3"
+            alt="..."
+          />
+        </Link>
         <Card.Body className="card-body">
           <Card.Title>{props.data.pName}</Card.Title>
           <Card.Text>{props.data.pInfo}</Card.Text>
-          <Card.Text className="text-danger">
+          <Card.Text className="text-danger text-center">
             NTD {props.data.pPrice}元
           </Card.Text>
-          <div className="d-md-flex justify-content-around mb-3">
+          <div className="d-flex justify-content-around mb-3">
             <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />
             <FaPaw />
           </div>
-          <div className="d-md-flex justify-content-around">
+          <div className="d-flex justify-content-around">
             <Nav.Link className="p-0">
-              <Link to={'/productdetail/' + props.data.pId} className="p-0">
-                <Button className="text-center p-1">查看商品</Button>
-              </Link>
+              <Button
+                className="text-center p-1"
+                onClick={() => {
+                  props.history.push('/productdetail/' + props.data.pId)
+                }}
+              >
+                查看商品
+              </Button>
             </Nav.Link>
             <Nav.Link className="p-0">
-              <Link to="/cart" className="p-0">
-                <Button
-                  className="text-center p-1"
-                  onClick={() => {
+              <Button
+                className="text-center p-1"
+                onClick={(e) => {
+                  if (
+                    localStorage.getItem('mId') &&
+                    localStorage.getItem('mId') !== '0'
+                  ) {
                     let item = {
                       pId: props.data.pId,
                       pName: props.data.pName,
@@ -50,21 +65,27 @@ const ProductCard = props => {
                       let currentCart = JSON.parse(localStorage.getItem('cart'))
                       if (
                         [...currentCart].find(
-                          value => value.pId === props.data.pId
+                          (value) => value.pId === props.data.pId
                         )
                       ) {
                         return alert('已加入購物車')
                       } else {
                         const newCart = [...currentCart, item]
+                        props.count(newCart)
                         localStorage.setItem('cart', JSON.stringify(newCart))
+                        $(e.currentTarget)
+                          .parentsUntil('.col-md-3')
+                          .fadeToggle()
                       }
                     }
                     props.history.push('/cart')
-                  }}
-                >
-                  快速結帳
-                </Button>
-              </Link>
+                  } else {
+                    return alert('尚未登入')
+                  }
+                }}
+              >
+                快速結帳
+              </Button>
             </Nav.Link>
           </div>
         </Card.Body>
@@ -72,5 +93,7 @@ const ProductCard = props => {
     </Col>
   )
 }
-
-export default withRouter(ProductCard)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ count }, dispatch)
+}
+export default withRouter(connect(null, mapDispatchToProps)(ProductCardSmall))

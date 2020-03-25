@@ -32,8 +32,8 @@ function Partner(props) {
   }, [])
   return (
     <>
-      <div className="banner"></div>
-      <Container>
+      <div className="knowledgebanner"></div>
+      <Container className="partner">
         <Row>
           <Col xs={12} md={12}>
             <Tabs defaultActiveKey="open" id="uncontrolled-tab-example">

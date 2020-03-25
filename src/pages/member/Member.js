@@ -23,7 +23,7 @@ import Pokemon from '../../components/member/pokemon'
 function Member() {
   return (
     <>
-      {localStorage.getItem('mId') === 0 ? (
+      {localStorage.getItem('mId') === '0' ? (
         <h1>請登入</h1>
       ) : (
         <Switch>
@@ -43,7 +43,7 @@ function Member() {
             <div className="member-bg">
               <div className="head">
                 <img
-                  // src={require('../../images/member/member-img/+.jpg')}
+                  // src={require('../../images/member/member-img/m004.jpg')}
                   src={require('../../images/member/member-img/' +
                     localStorage.getItem('mImg').toLowerCase() +
                     '.jpg')}
@@ -54,6 +54,7 @@ function Member() {
                 {localStorage.getItem('mName')}，歡迎使用HugDog會員頁面
               </div>
             </div>
+
             <div className="member-content d-flex container">
               <div className="member-sidebar">
                 <Nav>

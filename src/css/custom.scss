@@ -5,13 +5,13 @@ $primary: #cea160;
 $secondary: #8f8f8f;
 $success: #54ad84;
 $info: #34a3be;
-$warning: #fdcf00;
+$warning: #facc00;
 $danger: #c04a68;
 $light: #eeeeee;
 $dark: #000000;
 $body-color: #495057;
 //字型
-$font-size-base: 0.92rem;
+$font-size-base: 0.96rem;
 $font-family-base: 'Roboto', 'Noto Sans TC', sans-serif;
 //按鈕樣式
 $btn-padding-y: 0.75rem;
@@ -35,6 +35,8 @@ $input-border-radius: 0;
 $input-placeholder-color: #aaaaaa;
 $input-focus-border-color: $primary;
 $custom-checkbox-indicator-border-radius: 0;
+$custom-file-button-bg: $info;
+$custom-file-button-color: #ffffff;
 //表單驗證
 $form-feedback-valid-color: $success;
 $form-feedback-invalid-color: $danger;
@@ -50,6 +52,12 @@ $breadcrumb-bg: transparent;
 $list-group-border-radius: 0;
 $list-group-item-padding-y: 1rem;
 $list-group-item-padding-x: 1.5rem;
+//modal
+$modal-inner-padding: 1rem 2rem;
+$modal-content-border-color: transparent;
+$modal-header-border-color: transparent;
+$modal-content-border-radius: 0;
+$modal-backdrop-opacity: 0.7;
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
@@ -66,9 +74,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   // color: #495057;
 }
-section.body {
-  min-height: 50vh;
-}
 a,
 a:link {
   text-decoration: none;
@@ -81,9 +86,10 @@ a:link {
 }
 // btn
 .btn-primary,
+.btn-primary:disabled,
 .btn-primary:hover,
 .btn-primary:focus,
-.btn-outline-primary:hover {
+.btn-outline-primary:not(:disabled):hover {
   color: #ffffff;
 }
 .btn-theme {
@@ -91,7 +97,7 @@ a:link {
   background-color: #000000;
   border-color: #000000;
 }
-.btn-theme:hover {
+.btn-theme:not(:disabled):hover {
   color: #ffffff;
   background-color: #c59043;
   border-color: #c08a3b;
@@ -101,7 +107,7 @@ a:link {
   background-color: #c59043;
   border-color: #c08a3b;
 }
-.btn-theme-reverse:hover {
+.btn-theme-reverse:not(:disabled):hover {
   color: #ffffff;
   background-color: #000000;
   border-color: #000000;
@@ -110,7 +116,7 @@ a:link {
   color: #000000;
   border-color: #000000;
 }
-.btn-outline-theme:hover {
+.btn-outline-theme:not(:disabled):hover {
   color: #ffffff;
   background-color: #c59043;
   border-color: #c08a3b;
@@ -119,15 +125,40 @@ a:link {
   color: #cccccc;
   border-color: #cccccc;
 }
+.btn-theme:disabled,
+.btn-theme-reverse:disabled {
+  color: #ffffff;
+}
 //form
 .invalid-feedback {
   font-size: 90%;
+}
+//modal
+.modal .modal-header {
+  border-radius: 0;
+}
+//loading-spinner
+section.body {
+  min-height: 50vh;
+  position: relative;
+
+  .loading-spinner {
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    justify-content: center;
+    align-items: center;
+  }
 }
 /* -----header----- */
 header .navbar {
   padding: 1rem;
   position: relative;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 header .navbar .navbar-collapse {
@@ -138,13 +169,14 @@ header .navbar .navbar-collapse {
   width: 100%;
   left: 0;
   padding: 0.5rem 1rem;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   overflow-y: scroll;
   max-height: 80vh;
 }
 @media (min-width: 768px) {
   header .navbar .navbar-collapse {
     position: static;
+    background: transparent;
     padding: 0;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0);
     overflow-y: unset;
@@ -168,7 +200,7 @@ header .navbar-toggler {
 }
 
 header .nav-menu {
-  font-size: 0.9rem;
+  // font-size: 0.9rem;
 }
 
 header .navbar-light .navbar-nav .nav-link {
@@ -214,7 +246,10 @@ header .navbar-light .navbar-nav .nav-link > .dropdown-menu {
   // position: absolute;
   // right: 20px;
   // width: 120px; */
-  transform: translate(-90px, -5px);
+  transform: translate(-100px, -5px);
+}
+header .navbar-light .navbar-nav .nav-link:last-child > .dropdown-menu {
+  transform: translate(-120px, -5px);
 }
 header .navbar-light .navbar-nav .nav-link:hover > .dropdown-menu {
   position: absolute;
@@ -302,7 +337,7 @@ footer ul.footer-menu {
 footer ul.footer-menu > li {
   flex: 1 0 100%;
   padding: 1rem;
-  font-size: 0.9rem;
+  // font-size: 0.9rem;
 }
 
 footer ul.footer-menu ul > li {
@@ -310,7 +345,7 @@ footer ul.footer-menu ul > li {
 }
 footer ul.footer-menu ul > li a {
   color: #eeeeee;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 footer ul.footer-menu ul > li a:hover {

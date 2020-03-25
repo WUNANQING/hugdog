@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getProducts, getProductDetail } from './actions/index'
+import { getProducts, getProductDetail, count } from './actions/index'
 import {
   Container,
   Row,
@@ -22,7 +22,7 @@ import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCardSmall from './components/ProductCardSmall'
 
-const ProductDetail = props => {
+const ProductDetail = (props) => {
   const [total, setTotal] = useState(1)
   const [mycart, setMycart] = useState([])
   const pId = props.match.params.pId ? props.match.params.pId : ''
@@ -30,7 +30,7 @@ const ProductDetail = props => {
   //更新購物車
   function updateCartToLocalStorage(item) {
     const currentCart = JSON.parse(localStorage.getItem('cart')) || []
-    if ([...currentCart].find(value => value.pId === item.pId)) {
+    if ([...currentCart].find((value) => value.pId === item.pId)) {
       alert('已加入購物車')
     } else {
       const newCart = [...currentCart, item]
@@ -43,8 +43,26 @@ const ProductDetail = props => {
     props.getProductDetail(pId)
     props.getProducts()
   }, [props.match.params.pId])
+
   //設定猜你喜歡只列出4項
   let arr = props.list.rows && props.list.rows.slice(0, 4)
+
+  //加入願望清單的request
+  async function postList(list) {
+    const req = new Request('http://localhost:6001/list/post', {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(list),
+    })
+    const res = await fetch(req)
+    const listContent = await res.json()
+    await console.log(listContent)
+  }
+
   return (
     <Container>
       <Row className="my-5">
@@ -71,7 +89,9 @@ const ProductDetail = props => {
               <br />
               <h6>{props.detail[0] ? props.detail[0].pInfo : ''}</h6>
               <br />
-              <h4>${props.detail[0] ? props.detail[0].pPrice : ''}</h4>
+              <h4 className="text-danger">
+                ${props.detail[0] ? props.detail[0].pPrice : ''}
+              </h4>
               <br />
               <div className="mt-3 d-flex justify-content-between">
                 <Button
@@ -79,13 +99,21 @@ const ProductDetail = props => {
                   variant="primary "
                   size="md"
                   onClick={() => {
-                    updateCartToLocalStorage({
-                      pId: props.detail[0].pId,
-                      pName: props.detail[0].pName,
-                      pQuantity: total,
-                      pPrice: props.detail[0].pPrice,
-                      pImg: props.detail[0].pImg,
-                    })
+                    if (
+                      localStorage.getItem('mId') &&
+                      localStorage.getItem('mId') !== '0'
+                    ) {
+                      props.count(mycart)
+                      updateCartToLocalStorage({
+                        pId: props.detail[0].pId,
+                        pName: props.detail[0].pName,
+                        pQuantity: total,
+                        pPrice: props.detail[0].pPrice,
+                        pImg: props.detail[0].pImg,
+                      })
+                    } else {
+                      return alert('尚未登入')
+                    }
                   }}
                 >
                   <MdAddShoppingCart className="mb-1" />
@@ -95,7 +123,7 @@ const ProductDetail = props => {
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      setTotal(total - 1)
+                      total > 1 && setTotal(total - 1)
                     }}
                   >
                     -
@@ -122,6 +150,19 @@ const ProductDetail = props => {
                   className="mb-md-2 btn-padding-x btn-padding-y"
                   variant="primary"
                   size="md"
+                  onClick={() => {
+                    if (
+                      localStorage.getItem('mId') &&
+                      localStorage.getItem('mId') !== '0'
+                    ) {
+                      let item = props.detail[0].pId
+                      let mId = localStorage.getItem('mId')
+                      let list = { item: item, mId: mId }
+                      postList(list)
+                    } else {
+                      return alert('尚未登入')
+                    }
+                  }}
                 >
                   <MdPlaylistAdd className="mb-md-1" />
                   加入清單
@@ -131,32 +172,42 @@ const ProductDetail = props => {
                   variant="primary"
                   size="md"
                   onClick={() => {
-                    let item = {
-                      pId: props.detail[0].pId,
-                      pName: props.detail[0].pName,
-                      pQuantity: 1,
-                      pPrice: props.detail[0].pPrice,
-                      pImg: props.detail[0].pImg,
-                    }
-                    let cart = []
-                    cart.push(item)
-
-                    if (localStorage.getItem('cart') === null) {
-                      localStorage.setItem('cart', JSON.stringify(cart))
-                    } else {
-                      let currentCart = JSON.parse(localStorage.getItem('cart'))
-                      if (
-                        [...currentCart].find(
-                          value => value.pId === props.detail[0].pId
-                        )
-                      ) {
-                        alert('已加入購物車')
-                      } else {
-                        const newCart = [...currentCart, item]
-                        localStorage.setItem('cart', JSON.stringify(newCart))
+                    if (
+                      localStorage.getItem('mId') &&
+                      localStorage.getItem('mId') !== '0'
+                    ) {
+                      let item = {
+                        pId: props.detail[0].pId,
+                        pName: props.detail[0].pName,
+                        pQuantity: 1,
+                        pPrice: props.detail[0].pPrice,
+                        pImg: props.detail[0].pImg,
                       }
+                      let cart = []
+                      cart.push(item)
+
+                      if (localStorage.getItem('cart') === null) {
+                        localStorage.setItem('cart', JSON.stringify(cart))
+                      } else {
+                        let currentCart = JSON.parse(
+                          localStorage.getItem('cart')
+                        )
+                        if (
+                          [...currentCart].find(
+                            (value) => value.pId === props.detail[0].pId
+                          )
+                        ) {
+                          alert('已加入購物車')
+                        } else {
+                          props.count(mycart)
+                          const newCart = [...currentCart, item]
+                          localStorage.setItem('cart', JSON.stringify(newCart))
+                        }
+                      }
+                      props.history.push('/cart')
+                    } else {
+                      return alert('尚未登入')
                     }
-                    props.history.push('/cart')
                   }}
                 >
                   <MdShoppingCart className="mb-md-1" />
@@ -239,10 +290,6 @@ const ProductDetail = props => {
             </Col>
           </Row>
           <Row>
-            {/* {}裡面不能下if判斷式？ */}
-            {/* {if(props.list.rows){props.list.rows.map((value, index) => {
-              return <ProductCard key={index} data={props.list.rows[index]} />
-            })}} */}
             {props.list.rows &&
               arr.map((value, index) => {
                 return (
@@ -256,15 +303,15 @@ const ProductDetail = props => {
   )
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     list: store.getProducts,
     detail: store.getProductDetail,
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProducts, getProductDetail }, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getProducts, getProductDetail, count }, dispatch)
 }
 
 export default withRouter(

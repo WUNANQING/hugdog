@@ -11,7 +11,6 @@ import { getBlog } from './actions/index'
 import BlogPost from './Blogpost'
 import '../../components/Knowledge/knowledge.scss'
 import Blogheader from './Blogheader'
-import Banner from '../../components/Knowledge/banner'
 import Search from '../../components/Knowledge/Search'
 
 const Blog = props => {
@@ -59,9 +58,9 @@ const Blog = props => {
   return (
     <>
       {/* <Blogheader /> */}
-      {/* <Banner /> */}
 
-      <Container>
+      <div className="knowledgebanner"></div>
+      <Container className="blog">
         <br />
         <nav className="nav d-flex justify-content-between">
           <a className="nav-link" href="#">
@@ -72,14 +71,14 @@ const Blog = props => {
 
         {/* 文章 */}
         <div className="wrap">
-          <Row className="article mr-3">
-            {/* <div className="article mr-3"> */}
-            {props.post &&
-              props.post.map((value, index) => {
-                return <BlogPost key={index} data={props.post[index]} />
-              })}
-            {/* </div> */}
-          </Row>
+          {/* <Row className="articlepost mr-3"> */}
+          {/* <div className="article mr-3"> */}
+          {props.post &&
+            props.post.map((value, index) => {
+              return <BlogPost key={index} data={props.post[index]} />
+            })}
+          {/* </div> */}
+          {/* </Row> */}
 
           {pages}
         </div>

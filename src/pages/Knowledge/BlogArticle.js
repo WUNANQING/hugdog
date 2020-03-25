@@ -1,60 +1,80 @@
 import React, { useState, useEffect } from 'react'
+import { Container, Row } from 'react-bootstrap'
 import { Image } from 'react-bootstrap'
+import { FaRegHeart, FaHeart } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom'
+import $ from 'jquery'
 //redux
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getBlogArticle } from './actions/index'
+import { getBlog, getBlogArticle } from './actions/index'
 
 import { container } from 'react-bootstrap'
 import Breadcrumbs from '../../components/Breadcrumbs'
+import '../../components/Knowledge/knowledge.scss'
 
-function BlogArticle(props) {
+const BlogArticle = props => {
+  const aId = props.match.params.aId ? props.match.params.aId : ''
+
+  console.log(aId)
+
   useEffect(() => {
-    props.getBlogArticle(props.match.params.aTitle)
-    props.getBlog()
-  }, [props.match.params.aTitle])
+    props.getBlogArticle(props.match.params.aId)
+  }, [props.match.params.aId])
 
-  console.log(props.match.params)
+  // console.log(props.match.params)
+
+  $('.trun').click(function() {
+    document.getElementById('trun').innerHTML = <FaHeart />
+  })
 
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-8">
-            <Breadcrumbs />
+      <Container>
+        <Row>
+          <div className="article">
             <nav className="nav">
-              <a className="nav-link" href="#">
-                首頁
-              </a>
-              <a className="nav-link" href="/blog">
-                / Blog
-              </a>
-              <a className="nav-link" href="#">
-                / title
-              </a>
+              <Breadcrumbs />
             </nav>
-
-            <div className="article-text">
-              {/* <Image
-                className="blogImg"
-                src={require('../../images/knowledge/blog/' +
-                  props.data.bId +
-                  '.jpg')}
-                alt=""
-              /> */}
-              <div className="articleTitle">
-                <div className="text-right">{props.data.dDate}</div>
-                <h3>{props.data.aTitle}</h3>
+            <br />
+            <div>
+              {props.article[0] ? (
+                <Image
+                  className="articeImg"
+                  src={require('../../images/knowledge/blog/' +
+                    props.article[0].aId +
+                    '.jpg')}
+                  alt=""
+                />
+              ) : (
+                ''
+              )}
+            </div>
+            <br />
+            <div className="articleTitle">
+              <div className="text-left d-flex ">
+                <div className="mr-3">
+                  {props.article[0] ? props.article[0].dDate : ''}
+                </div>
+                <div id="trun" className="ml=4">
+                  <FaRegHeart />
+                </div>
               </div>
-              <div className="context">
-                <p>{props.data.aDes}</p>
-              </div>
+              <br />
+              <h2 className="text-center">
+                {props.article[0] ? props.article[0].aTitle : ''}
+              </h2>
+            </div>
+            <br />
+            <div className="context">
+              <p className="articletxt text-center">
+                {props.article[0] ? props.article[0].aDes : ''}
+              </p>
             </div>
           </div>
-        </div>
-      </div>
+        </Row>
+      </Container>
     </>
   )
 }
