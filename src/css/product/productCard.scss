@@ -29,8 +29,8 @@
     border-radius: 5px;
   }
   img {
-    width: 284.66px;
-    height: 284.66px;
+    width: 283.98px;
+    height: 300.66px;
     object-fit: contain;
   }
 }
@@ -63,7 +63,7 @@
   }
   img {
     width: 205.48px;
-    height: 205.48px;
+    height: 221.47px;
     object-fit: contain;
   }
 }
@@ -96,7 +96,7 @@
   }
   img {
     width: 253px;
-    height: 221.47px;
+    height: 266px;
     object-fit: contain;
   }
 }
@@ -133,4 +133,11 @@
 }
 .sticky-top {
   padding-right: 0;
+}
+//商品側欄
+.sidebar {
+  a:hover {
+    background-color: #b2a190;
+    opacity: 0.5;
+  }
 }

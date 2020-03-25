@@ -76,7 +76,7 @@ const ProductSidebar = (props) => {
     </Nav.Link>
   ))
   return (
-    <Col md={2} className="border-light">
+    <Col md={2} className="sidebar">
       <Navbar expand="md">
         <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
         <Navbar.Collapse id="basic-navbar-nav" className="order-4 order-md-3">
@@ -90,7 +90,7 @@ const ProductSidebar = (props) => {
                 props.getProducts(props.match.params.page || '')
               }}
             >
-             全部商品
+              全部商品
             </Nav.Link>
             {productCategorysidebar}
             <h4 className="mt-1">品牌</h4>

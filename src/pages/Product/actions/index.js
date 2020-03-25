@@ -82,3 +82,9 @@ export const count = (quantity) => ({
   type: 'COUNT_QUANTITY',
   quantity,
 })
+//跟server要清單資料
+// export cont getList = (mId)=>{
+//   return async (dispatch) =>{
+//     con
+//   }
+// }

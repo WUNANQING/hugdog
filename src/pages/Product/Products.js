@@ -105,26 +105,22 @@ const Products = (props) => {
   )
 
   return (
-    <div className="bg-light">
-      <Container>
-        <Row className="my-5">
-          <ProductSidebar />
-          <Col md={10}>
-            <Breadcrumb />
-            {sort}
-            <Row>
-              {props.list.rows &&
-                props.list.rows.map((value, index) => {
-                  return (
-                    <ProductCard key={index} data={props.list.rows[index]} />
-                  )
-                })}
-            </Row>
-            {paginationBasic}
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container>
+      <Row className="my-5">
+        <ProductSidebar />
+        <Col md={10} className="bg-white">
+          <Breadcrumb />
+          {sort}
+          <Row>
+            {props.list.rows &&
+              props.list.rows.map((value, index) => {
+                return <ProductCard key={index} data={props.list.rows[index]} />
+              })}
+          </Row>
+          {paginationBasic}
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
