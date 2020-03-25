@@ -32,6 +32,71 @@ const MemberInfo = props => {
   const mEmail = props.data[i] ? props.data[i].mEmail : ''
   const mAddress = props.data[i] ? props.data[i].mAddress : ''
   //狗狗基本資料
+  const memberInfo = {
+    mName: '',
+    mAccount: '',
+    mPassword: '',
+    mImg: '',
+    mGender: '',
+    mBday: '',
+    mPhone: '',
+    mEmail: '',
+    mAddress: '',
+  }
+  //寫入會員資訊
+  function getformInfo(e, info) {
+    console.log(e.currentTarget.value)
+    switch (info) {
+      case 'mName':
+        memberInfo.mName = e.currentTarget.value
+        break
+      case 'mAccount':
+        memberInfo.mAccount = e.currentTarget.value
+        break
+      case 'mPassword':
+        memberInfo.mPassword = e.currentTarget.value
+        break
+      case 'mImg':
+        memberInfo.mPassword = e.currentTarget.value
+        break
+      case 'mGender':
+        memberInfo.mGender = e.currentTarget.value
+        break
+      case 'mBday':
+        memberInfo.mBday = e.currentTarget.value
+        break
+      case 'mPhone':
+        memberInfo.mPhone = e.currentTarget.value
+        break
+      case 'mEmail':
+        memberInfo.mEmail = e.currentTarget.value
+        break
+      case 'mAddress':
+        memberInfo.mAddress = e.currentTarget.value
+        break
+
+      default:
+        break
+    }
+  }
+  //建立會員資料
+  //建立訂單
+  async function updateMember(form) {
+    mId = localStorage.getItem('mId')
+    console.log(JSON.stringify(form))
+    const req = new Request(`http://localhost:6001/member/update/${mId}`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(form),
+    })
+    const res = await fetch(req)
+    const order = await res.json()
+    await console.log(order)
+  }
   console.log(props.data)
   useEffect(() => {
     props.getMemberData()
@@ -76,8 +141,8 @@ const MemberInfo = props => {
                 <form
                   name="myForm"
                   method="POST"
-                  action="dog-updateEdit.php"
-                  enctype="multipart/form-data"
+                  // action="dog-updateEdit.php"
+                  // enctype="multipart/form-data"
                 >
                   <table class="table table-borderless">
                     <tbody>
@@ -100,6 +165,7 @@ const MemberInfo = props => {
                             name="dName"
                             value={mName}
                             class="form-control"
+                            onChange={e => getformInfo(e, 'mName')}
                           />
                         </td>
                       </tr>
@@ -111,6 +177,7 @@ const MemberInfo = props => {
                             name="mId"
                             value={mAccount}
                             class="form-control"
+                            onChange={e => getformInfo(e, 'mAccount')}
                           />
                         </td>
                       </tr>
@@ -122,6 +189,7 @@ const MemberInfo = props => {
                             name="dGender"
                             value={mPassword}
                             class="form-control"
+                            onChange={e => getformInfo(e, 'mPassword')}
                           />
                         </td>
                       </tr>
@@ -129,11 +197,10 @@ const MemberInfo = props => {
                         <td class="text-right">會員性別</td>
                         <td>
                           <input
-                            placeholder="歲"
                             type="text"
-                            name="dYear"
                             value={mGender}
                             class="form-control"
+                            onChange={e => getformInfo(e, 'mGender')}
                           />
                         </td>
                       </tr>
@@ -145,6 +212,7 @@ const MemberInfo = props => {
                             name="dWeight"
                             class="form-control"
                             value={mBday}
+                            onChange={e => getformInfo(e, 'mBday')}
                           />
                         </td>
                       </tr>
@@ -156,6 +224,7 @@ const MemberInfo = props => {
                             name="dInfo"
                             class="form-control"
                             value={mPhone}
+                            onChange={e => getformInfo(e, 'mPhone')}
                           />
                         </td>
                       </tr>
@@ -167,6 +236,7 @@ const MemberInfo = props => {
                             name="dInfo"
                             class="form-control"
                             value={mEmail}
+                            onChange={e => getformInfo(e, 'mEmail')}
                           />
                         </td>
                       </tr>
@@ -178,6 +248,7 @@ const MemberInfo = props => {
                             name="dInfo"
                             class="form-control"
                             value={mAddress}
+                            onChange={e => getformInfo(e, 'mAddress')}
                           />
                         </td>
                       </tr>
