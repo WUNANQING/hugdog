@@ -24,9 +24,7 @@ function CouponList(props) {
   let second = nowtime.getSeconds()
   second = second < 10 ? '0' + second : second
   let testTime = y + m + d + h + minute + second
-
-  // formatDateTime()
-  console.log(9999, testTime)
+  // console.log(9999, testTime)
   // console.log(9999, data)
   useEffect(() => {}, [])
 
@@ -71,7 +69,7 @@ function CouponList(props) {
         oldendtime.substr(11, 2) +
         oldendtime.substr(14, 2) +
         oldendtime.substr(17, 2)
-      console.log(newendtimecheck)
+      // console.log(newendtimecheck)
       if (newendtimecheck > testTime) {
         lists.push(
           <tr key={props.data[i].mmId}>
