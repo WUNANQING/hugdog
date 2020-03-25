@@ -68,7 +68,7 @@ const Checkout = (props) => {
         buyerInfo.card = e.currentTarget.id
         break
       case 'cardNumber':
-        buyerInfo.cardNumber = e.currentTarget.value
+        buyerInfo.cardNumber += e.currentTarget.value
         break
       case 'owner':
         buyerInfo.owner = e.currentTarget.value
@@ -172,7 +172,15 @@ const Checkout = (props) => {
         <hr className="mt-0" />
         <Row className="mt-5">
           <Col sm={{ span: 8, offset: 2 }}>
-            <h3>輸入姓名與地址</h3>
+            <div className="d-flex justify-content-between align-items-center">
+              <h3>輸入姓名與地址</h3>
+              <Form.Check
+                id="auto"
+                type="checkbox"
+                label="自動填入資訊"
+                onClick={() => {}}
+              />
+            </div>
             <hr />
             <br />
             <Form
@@ -223,7 +231,7 @@ const Checkout = (props) => {
                     className="pr-0"
                     onChange={(e) => getformInfo(e, 'county')}
                   >
-                    <option>縣/市</option>
+                    <option value="none">縣/市</option>
                     <option value="基隆市">基隆市</option>
                     <option value="臺北市">臺北市</option>
                     <option value="新北市">新北市</option>
@@ -360,18 +368,50 @@ const Checkout = (props) => {
                 </div>
               </Form.Group>
               <Form.Group>
-                <Form.Control
-                  required
-                  name="cardNumber"
-                  size="lg"
-                  type="text"
-                  placeholder="信用卡/金融卡卡號"
-                  onChange={(e) => getformInfo(e, 'cardNumber')}
-                />
-                <Form.Control.Feedback>正確!</Form.Control.Feedback>
-                <Form.Control.Feedback type="invalid">
-                  請輸入卡號
-                </Form.Control.Feedback>
+                <Form.Row>
+                  <Form.Group as={Col}>
+                    <Form.Control
+                      required
+                      name="cardNumber"
+                      size="lg"
+                      type="text"
+                      placeholder="信用卡/金融卡卡"
+                      onChange={(e) => getformInfo(e, 'cardNumber')}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Control
+                      required
+                      name="cardNumber"
+                      size="lg"
+                      type="text"
+                      placeholder="號"
+                      onChange={(e) => getformInfo(e, 'cardNumber')}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Control
+                      required
+                      name="cardNumber"
+                      size="lg"
+                      type="text"
+                      onChange={(e) => getformInfo(e, 'cardNumber')}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Control
+                      required
+                      name="cardNumber"
+                      size="lg"
+                      type="text"
+                      onChange={(e) => getformInfo(e, 'cardNumber')}
+                    />
+                  </Form.Group>
+                  <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    請輸入卡號
+                  </Form.Control.Feedback>
+                </Form.Row>
                 <br />
                 <Form.Row>
                   <Form.Group as={Col} xs={3}>

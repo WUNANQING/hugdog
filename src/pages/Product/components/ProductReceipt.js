@@ -19,7 +19,7 @@ function ProductReceipt() {
   }, [])
 
   //計算總價
-  const sum = items => {
+  const sum = (items) => {
     let total = 0
     for (let i = 0; i < items.length; i++) {
       total += items[i].pQuantity * items[i].pPrice
@@ -47,7 +47,7 @@ function ProductReceipt() {
             檢視訂單摘要：NT${sum(mycart)}
           </Button>
           <Modal centered size="md" show={show} onHide={() => setShow(false)}>
-            <Modal.Header>
+            <Modal.Header className="d-flex justify-content-center">
               <Logo className="App-logo" alt="logo" />
             </Modal.Header>
             <Modal.Body>
@@ -66,7 +66,7 @@ function ProductReceipt() {
                   return (
                     <>
                       <Row className="show-grid">
-                        <Col>商品名稱:{value.pName}</Col>
+                        <Col className="font-weight-bold">{value.pName}</Col>
                       </Row>
                       <Row className="show-grid">
                         <Col>
@@ -83,6 +83,7 @@ function ProductReceipt() {
                           </div>
                         </Col>
                       </Row>
+                      <br />
                     </>
                   )
                 })}

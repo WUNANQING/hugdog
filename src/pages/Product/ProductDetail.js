@@ -120,6 +120,10 @@ const ProductDetail = (props) => {
                 ${props.detail[0] ? props.detail[0].pPrice : ''}
               </h4>
               <br />
+              <h6>
+                庫存數量：{props.detail[0] ? props.detail[0].pQuantity : ''}
+              </h6>
+              <br />
               <div className="mt-3 d-flex justify-content-between">
                 <Button
                   className="mb-md-2 "
@@ -146,7 +150,7 @@ const ProductDetail = (props) => {
                   <MdAddShoppingCart className="mb-1" />
                   加入購物車
                 </Button>
-                <ButtonGroup className="mb-md-2" size="md">
+                <ButtonGroup className="mb-md-2" size="sm">
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
@@ -165,7 +169,7 @@ const ProductDetail = (props) => {
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      setTotal(total + 1)
+                      total < props.detail[0].pQuantity && setTotal(total + 1)
                     }}
                   >
                     +

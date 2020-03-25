@@ -17,7 +17,6 @@ import { getProducts, count } from './actions/index'
 import { bindActionCreators } from 'redux'
 
 const Cart = (props) => {
-  //下面追加購買按“立即結帳"立刻儲存在localStorage卻無法讓頁面更新;追加購買產品卡片會立即不見
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
 
@@ -90,7 +89,7 @@ const Cart = (props) => {
     }
     return total
   }
-  //設定猜你喜歡只列出4項商品(未完成;無法重新render更新顯示數量;以及按了快速結帳會消失隱藏)
+  //設定猜你喜歡只列出4項商品
   let random = Math.floor(Math.random() * 20) - 5
   let arr = props.list.rows && props.list.rows.slice(random, random + 4)
 
@@ -249,7 +248,8 @@ const Cart = (props) => {
                       className="border-dark bg-light text-dark"
                       id="+"
                       onClick={(e) => {
-                        updateQuantityToLocalStorage(e, index, 1)
+                        value.pQuantity < 10 &&
+                          updateQuantityToLocalStorage(e, index, 1)
                       }}
                     >
                       +
