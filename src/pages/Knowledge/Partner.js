@@ -35,10 +35,10 @@ function Partner(props) {
       <div className="knowledgebanner"></div>
       <Container className="partner">
         <Row>
-          <Col xs={12} md={12}>
+          <Col xs={12} md={12} className="mt-3 ">
             <Tabs defaultActiveKey="open" id="uncontrolled-tab-example">
               <Tab eventKey="open" title="進行中">
-                <Row xs={12} md={6}>
+                <Row xs={12} md={6} className="justify-content-center">
                   {props.post &&
                     props.post.map((value, index) => {
                       return (
