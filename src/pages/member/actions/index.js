@@ -52,6 +52,8 @@ export const getMemberOrderDataDetail = mId => {
     dispatch(showMemberOrderDataDetail(data))
   }
 }
+
+//查看會員細節
 export const showMemberDetail = data => {
   return { type: 'SHOW_MEMBER_DETAIL', data }
 }
@@ -67,33 +69,7 @@ export const getMemberDetail = mId => {
     dispatch(showMemberDetail(data))
   }
 }
-//新增會員
-// export const userRegister = userData => ({
-//   type: 'USER_REGISTER',
-//   data: userData,
-// })
-// export const userRegisterAsync = (userData, callback) => {
-//   return async dispatch => {
-//     const request = new Request('http://localhost:6001/member/insert', {
-//       method: 'POST',
-//       body: JSON.stringify(userData),
-//       headers: new Headers({
-//         Accept: 'application/json',
-//         'Content-Type': 'application/json',
-//       }),
-//     })
-
-//     // console.log(JSON.stringify(userData))
-
-//     const response = await fetch(request)
-//     const data = await response.json()
-//     console.log(data)
-
-//     // 設定資料
-//     dispatch(userRegister(data))
-//     callback()
-//   }
-// }
+//查看狗狗
 export const showDog = data => {
   return { type: 'SHOW_DOG', data }
 }
@@ -109,6 +85,7 @@ export const getDogData = () => {
     dispatch(showDog(data))
   }
 }
+//查看狗狗細節
 export const showDogDetail = data => {
   return { type: 'SHOW_DOG_DETAIL', data }
 }
@@ -125,15 +102,3 @@ export const getDogDetail = mId => {
     dispatch(showDogDetail(data))
   }
 }
-// export const getMemberData = mId => {
-//   return async dispatch => {
-//     const req = new Request(`http://localhost:6001/member/${mId}`, {
-//       method: 'GET',
-//       credentials: 'include',
-//     })
-//     const res = await fetch(req)
-//     const data = await res.json()
-//     // console.log(data.member)
-//     dispatch(showMember(data.member))
-//   }
-// }
