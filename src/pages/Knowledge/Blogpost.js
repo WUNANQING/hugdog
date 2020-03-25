@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { Row, Col, Button, Image } from 'react-bootstrap'
+import { Row, Col, Button, Image, Badge } from 'react-bootstrap'
+import { FiClock } from 'react-icons/fi'
 import $ from 'jquery'
 
 const BlogArt = props => {
@@ -22,93 +23,57 @@ const BlogArt = props => {
     })
   })
 
-  const BlogType = [
-    { id: 1, name: '健康與生活' },
-    { id: 2, name: '疫苗與用藥' },
-    { id: 3, name: '營養與處方' },
-    { id: 4, name: '美容與保養' },
-  ]
+  let showBlogType = ''
+  if (props.data.aType === '1') {
+    showBlogType = '健康知識'
+  } else if (props.data.aType === '2') {
+    showBlogType = '疫苗與用藥'
+  } else if (props.data.aType === '3') {
+    showBlogType = '營養與處方'
+  } else {
+    showBlogType = '美容與保養'
+  }
 
   return (
     <>
-      <Col xs={12} className="">
-        <div className="wrap">
-          {/* // item1 */}
-          <div className="item">
-            <div className="pic">
-              <Image
-                className="blogImg"
-                src={require('../../images/knowledge/blog/' +
-                  props.data.aId +
-                  '.jpg')}
-                alt=""
-              />
-            </div>
+      <Row className="mt-2 shadow p-3 mb-4 bg-white rounded">
+        <Col>
+          <Image
+            className="blogImg"
+            src={require('../../images/knowledge/blog/' +
+              props.data.aId +
+              '.jpg')}
+            alt=""
+          />
+        </Col>
+        <Col>
+          <div className="header d-flex align-items-center justify-content-between mb-1 mr-2">
+            <span className="icn-time">
+              <FiClock /> {props.data.dDate}
+            </span>
 
-            <div className="txt">
-              <p>{props.data.dDate}</p>
-              <Link to={'/knowledge/blog/' + props.data.aId}>
-                <h3>{props.data.aTitle}</h3>
-              </Link>
-              <p className="JQellipsis">{props.data.aDes} </p>
-              <br />
-              <Link to={'/knowledge/blog/' + props.data.aId}>
-                <h6 className="text-right">看更多...</h6>
-              </Link>
-            </div>
+            <h6>
+              {''}
+              <Badge variant="primary text-light" className="p-2">
+                {showBlogType}
+              </Badge>
+            </h6>
           </div>
 
-          <div className="wrap-content-inner">
-            <div className="p1-post">
-              <Link>
-                <h3> {props.data.aTitle}</h3>
-              </Link>
-              <div className="p1-date">
-                <span className="icn-time"> icon </span> {props.data.dDate}
-                <span className="icn-eye"> icon </span> 觀看數
-                <span className="label label-default">
-                  <Link></Link>{' '}
-                </span>
-                <div className="row">
-                  <div className="col-md-4">
-                    <Link>
-                      <Image
-                        className="img-responsive img-frame"
-                        src={require('../../images/knowledge/blog/' +
-                          props.data.aId +
-                          '.jpg')}
-                        alt=""
-                      />
-                    </Link>
-                  </div>
-                  <div className="col-md-8">
-                    <p className="JQellipsis"> {props.data.aDes} </p>
-                    <p className="btn btn-danger btn-sm btn-embossed">
-                      <Link> 看全文...</Link>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="blogTitle mb-3 mt-2">
+            <Link to={'/knowledge/blog/' + props.data.aId}>
+              <h4 className="text-secondary">{props.data.aTitle}</h4>
+            </Link>
           </div>
-          {/* // item 2 
-            <div className="item">
-              <div className="txt">
-                <h2>{props.data.aTitle}</h2>
-                <p>{props.data.aDes}</p>
-              </div>
-              <div className="pic">
-                <Image
-                  className="blogImg"
-                  src={require('../../images/knowledge/blog/' +
-                    props.data.aId +
-                    '.jpg')}
-                  alt=""
-                />
-              </div>
-            </div> */}
-        </div>
-      </Col>
+          <div className="blogtxt">
+            <p className="JQellipsis"> {props.data.aDes} </p>
+            <Link to={'/knowledge/blog/' + props.data.aId} className="">
+              <p className="text-right align-items-buttom mr-4">看全文</p>
+            </Link>
+          </div>
+        </Col>
+      </Row>
+      {/* <hr /> */}
     </>
   )
 }

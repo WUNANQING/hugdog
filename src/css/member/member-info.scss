@@ -94,3 +94,20 @@
 .tr400 {
   transform: translateY(400px);
 }
+.dog-insert {
+  .card-width {
+    width: 480px;
+  }
+  .dog-confirm {
+    // background: bisque;
+    height: 60px;
+    width: 480px;
+    transform: translateY(6px);
+  }
+  .disappear {
+    display: none;
+  }
+  .appear {
+    display: inline-block;
+  }
+}

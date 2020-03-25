@@ -38,15 +38,19 @@ const DogInfo = props => {
   let dogList = []
   for (let i = 0; i < props.data.length; i++) {
     dogList.push(
-      <tr>
-        <th scope="row">{i + 1}</th>
-        <td className="order_show" onClick="" id={i} name={i}>
-          {props.data[i] ? props.data[i].dId : ''}
-        </td>
+      <tr className="order_show" onClick="" id={i} name={i}>
+        {/* <th scope="row">{i + 1}</th> */}
+        <td>{i + 1}</td>
         <td>{props.data[i] ? props.data[i].dName : ''}</td>
         <td>{props.data[i] ? props.data[i].dGender : ''}</td>
         <td>{props.data[i] ? props.data[i].dYear : ''}</td>
         <td>{props.data[i] ? props.data[i].dWeight : ''}</td>
+        <td>
+          <button className="btn btn-info">修改</button>
+        </td>
+        <td>
+          <button className="btn btn-info">刪除</button>
+        </td>
       </tr>
     )
   }
@@ -54,27 +58,26 @@ const DogInfo = props => {
     <div class="tab-content content" id="content2">
       <div>
         <h3>
-          狗狗資訊 <br />
+          狗狗資訊{' '}
+          <Link to="/dog-insert">
+            <button className="btn btn-info">新增狗狗</button>
+          </Link>
+          <br />
         </h3>
         <div class="row">
           <div class="col-md-8">
             <div class="card card-width">
               <div class="card-body">
-                <form
-                  name="myForm"
-                  method="POST"
-                  action="dog-updateEdit.php"
-                  enctype="multipart/form-data"
-                >
+                <form name="myForm" method="POST" enctype="multipart/form-data">
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">狗狗編號</th>
                         <th scope="col">狗狗姓名</th>
                         <th scope="col">狗狗性別</th>
                         <th scope="col">狗狗年齡</th>
                         <th scope="col">狗狗體重</th>
+                        <th scope="col">功能</th>
                       </tr>
                     </thead>
                     <tbody>{dogList}</tbody>

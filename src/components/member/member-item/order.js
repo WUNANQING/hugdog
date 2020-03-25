@@ -129,9 +129,10 @@ const MemberOrderInfo = props => {
                     <Col xs={6} sm={6} md={6} lg={3}>
                       <img
                         className="sm_cart_img"
-                        src={require('../../../images/product/' +
-                          value.pImg +
-                          '.jpg')}
+                        // src={require('../../../images/product/' +
+                        //   value.pImg +
+                        //   '.jpg')}
+                        src={require('../../../images/product/C1.jpg')}
                         alt="..."
                       />
                     </Col>
