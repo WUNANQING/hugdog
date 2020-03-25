@@ -75,7 +75,7 @@ function Coupon(props) {
         .removeClass('active')
     })
   }, [])
-  console.log(123456788, props)
+  // console.log(123456788, props)
   if (!props.data) return <></>
   // if (props.data) console.log(props.data)
   return (

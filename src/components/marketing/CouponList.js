@@ -9,8 +9,7 @@ import '../../css/marketing/coupon.scss'
 import { GiManualMeatGrinder } from 'react-icons/gi'
 function CouponList(props) {
   useEffect(() => {}, [])
-  let ttt = new Date().toString()
-  console.log(ttt)
+
   console.log(props.data)
   let abc = props.data[0] ? props.data[0] : ''
   let lists = []
@@ -19,8 +18,8 @@ function CouponList(props) {
       //記得在JSX中使用JS變數要用花括號包著
       let oldtimeget = props.data[i].timeget
       let oldendtime = props.data[i].endtime
-      console.log(oldtimeget.substr(0, 10))
-      console.log(oldtimeget.substr(12, 7))
+      // console.log(oldtimeget.substr(0, 10))
+      // console.log(oldtimeget.substr(12, 7))
       let newtimeget =
         oldtimeget.substr(0, 10) +
         ' ' +

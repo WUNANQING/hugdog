@@ -47,6 +47,44 @@ export const formServerCouponsALL = () => {
     dispatch(showCoupons(data))
   }
 }
+export const checkCoupon = data => {
+  return { type: 'CHECK_COUPON', data }
+}
+export const formServerCheckCoupons = verify => {
+  return async dispatch => {
+    const request = new Request(
+      `http://localhost:6001/marketing_member/couponverify/${verify}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(request)
+    const data = await res.json()
+
+    console.log('checkcoupon', data)
+    dispatch(checkCoupon(data))
+  }
+}
+export const showCode = userData => {
+  return { type: 'SHOW_CODE', data: userData }
+}
+export const formServerCouponsCode = code => {
+  return async dispatch => {
+    const request = new Request(
+      `http://localhost:6001/marketing_member/code/${code}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(request)
+    const data = await res.json()
+
+    console.log('code', data)
+    dispatch(showCode(data))
+  }
+}
 export const insertCoupon = userData => ({
   type: 'USER_REGISTER',
   data: userData,
@@ -54,14 +92,17 @@ export const insertCoupon = userData => ({
 //補:檢查填寫格式
 export const insertCouponAsync = (userData, callback) => {
   return async dispatch => {
-    const request = new Request('http://localhost:5500/member/insert', {
-      method: 'POST',
-      body: JSON.stringify(userData),
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
+    const request = new Request(
+      'http://localhost:6001/marketing_member/insert',
+      {
+        method: 'POST',
+        body: JSON.stringify(userData),
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
 
     // console.log(JSON.stringify(userData))
 
