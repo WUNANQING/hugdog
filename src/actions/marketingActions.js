@@ -18,10 +18,26 @@ export const formServerCoupons = mmId => {
     dispatch(showCoupons(data))
   }
 }
-export const formServerCouponsWE = used => {
+// export const formServerCouponsWE = used => {
+//   return async dispatch => {
+//     const request = new Request(
+//       `http://localhost:6001/marketing_member/used/${used}`,
+//       {
+//         method: 'GET',
+//         credentials: 'include',
+//       }
+//     )
+//     const res = await fetch(request)
+//     const data = await res.json()
+
+//     console.log('GBM', data)
+//     dispatch(showCoupons(data))
+//   }
+// }
+export const formServerCouponsWE = (used, mId) => {
   return async dispatch => {
     const request = new Request(
-      `http://localhost:6001/marketing_member/used/${used}`,
+      `http://localhost:6001/marketing_member/used/${used}/${mId}`,
       {
         method: 'GET',
         credentials: 'include',
@@ -32,6 +48,90 @@ export const formServerCouponsWE = used => {
 
     console.log('GBM', data)
     dispatch(showCoupons(data))
+  }
+}
+export const formServerCouponsALL = mId => {
+  return async dispatch => {
+    const request = new Request(
+      `http://localhost:6001/marketing_member/used/${mId}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(request)
+    const data = await res.json()
+
+    console.log('GBM', data)
+    dispatch(showCoupons(data))
+  }
+}
+export const checkCoupon = data => {
+  return { type: 'CHECK_COUPON', data }
+}
+export const formServerCheckCoupons = verify => {
+  return async dispatch => {
+    const request = new Request(
+      `http://localhost:6001/marketing_member/couponverify/${verify}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(request)
+    const data = await res.json()
+
+    console.log('checkcoupon', data)
+    dispatch(checkCoupon(data))
+  }
+}
+export const showCode = userData => {
+  return { type: 'SHOW_CODE', data: userData }
+}
+export const formServerCouponsCode = code => {
+  return async dispatch => {
+    const request = new Request(
+      `http://localhost:6001/marketing_member/code/${code}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(request)
+    const data = await res.json()
+
+    console.log('code', data)
+    dispatch(showCode(data))
+  }
+}
+export const insertCoupon = userData => ({
+  type: 'USER_REGISTER',
+  data: userData,
+})
+//補:檢查填寫格式
+export const insertCouponAsync = (userData, callback) => {
+  return async dispatch => {
+    const request = new Request(
+      'http://localhost:6001/marketing_member/insert',
+      {
+        method: 'POST',
+        body: JSON.stringify(userData),
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      }
+    )
+
+    // console.log(JSON.stringify(userData))
+
+    const response = await fetch(request)
+    const data = await response.json()
+    console.log(data)
+
+    // 設定資料
+    dispatch(insertCoupon(data))
+    callback()
   }
 }
 

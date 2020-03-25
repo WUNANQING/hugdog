@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux'
-import { getCoupons, insertCoupon } from './marketingReducer'
+import {
+  getCoupons,
+  insertCoupon,
+  getCode,
+  CheckCoupon,
+} from './marketingReducer'
 
 // 會員reducers
 const getMember = (state = [], action) => {
@@ -152,6 +157,7 @@ const getQuestionDetail = (state = [], action) => {
 const rootReducer = combineReducers({
   getMember,
   counter,
+  CheckCoupon,
   getProducts,
   getProductDetail,
   getDog,
@@ -165,6 +171,7 @@ const rootReducer = combineReducers({
   insertCoupon,
   getMemberOrder,
   getMemberOrderDetail,
+  getCode,
   getDogDetail,
   getQuantity,
 })

@@ -71,14 +71,14 @@ const Blog = props => {
 
         {/* 文章 */}
         <div className="wrap">
-          <Row className="article mr-3">
-            {/* <div className="article mr-3"> */}
-            {props.post &&
-              props.post.map((value, index) => {
-                return <BlogPost key={index} data={props.post[index]} />
-              })}
-            {/* </div> */}
-          </Row>
+          {/* <Row className="articlepost mr-3"> */}
+          {/* <div className="article mr-3"> */}
+          {props.post &&
+            props.post.map((value, index) => {
+              return <BlogPost key={index} data={props.post[index]} />
+            })}
+          {/* </div> */}
+          {/* </Row> */}
 
           {pages}
         </div>
