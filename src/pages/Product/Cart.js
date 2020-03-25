@@ -62,7 +62,7 @@ const Cart = (props) => {
   //從localStorage取得購物車資料
   useEffect(() => {
     getCartFromLocalStorage()
-    props.getProducts(Math.floor(Math.random() * 19) + 1)
+    props.getProducts(Math.floor(Math.random() * 18) + 1)
   }, [props.qty])
 
   //購物車有變動即更改
@@ -95,7 +95,7 @@ const Cart = (props) => {
   let arr = props.list.rows && props.list.rows.slice(random, random + 4)
 
   return (
-    <Container>
+    <Container className="cart">
       <Row>
         <Col md={12} className="mt-5 d-flex justify-content-center">
           <Col md={7} className="border position-relative">
@@ -171,6 +171,7 @@ const Cart = (props) => {
                   <h3>購物車內沒有任何商品</h3>
                   <hr />
                   <Image
+                    className="ad"
                     src={require('../../images/product/dog-ad.jpg')}
                     alt="..."
                   />

@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import $ from 'jquery'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import ProductReceipt from './components/ProductReceipt'
 const Checkout = (props) => {
-  // 設定mId的來源,抓到mId去檢索會員的最新訂單:目前直接用表單的action跳轉;送出按鈕使用props.history.location.push()似乎不行
+  //設定驗證狀態
+  const [validated, setValidated] = useState(false)
+  //設定驗證方法
+  function handleSubmit(e) {
+    const form = e.currentTarget
+    if (form.checkValidity() === false) {
+      e.preventDefault()
+      e.stopPropagation()
+    } else if (form.checkValidity() === true) {
+      postOrder(buyerInfo)
+      localStorage.setItem('cart', JSON.stringify([]))
+      props.history.push(`/order/${mId}`)
+    }
+    setValidated(true)
+  }
+  // 設定mId的來源,抓到mId去檢索會員的最新訂單
   const mId = localStorage.getItem('mId')
   //表單資訊
   const buyerInfo = {
@@ -160,33 +175,52 @@ const Checkout = (props) => {
             <h3>輸入姓名與地址</h3>
             <hr />
             <br />
-            <Form name="checkout">
+            <Form
+              name="checkout"
+              noValidate
+              validated={validated}
+              onSubmit={(e) => {
+                handleSubmit(e)
+              }}
+            >
               <Form.Row>
                 <Form.Group as={Col} xs={12} md={6}>
                   <Form.Control
+                    required
                     name="lastName"
                     size="lg"
                     type="text"
                     placeholder="姓氏"
                     onChange={(e) => getformInfo(e, 'lastName')}
                   />
+                  <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    請輸入姓氏
+                  </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} xs={12} md={6}>
                   <Form.Control
+                    required
                     name="firstName"
                     size="lg"
                     type="text"
                     placeholder="名字"
                     onChange={(e) => getformInfo(e, 'firstName')}
                   />
+                  <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    請輸入名字
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col} xs={12} md={2}>
                   <Form.Control
+                    required
                     name="county"
                     as="select"
                     size="lg"
+                    className="pr-0"
                     onChange={(e) => getformInfo(e, 'county')}
                   >
                     <option>縣/市</option>
@@ -213,15 +247,24 @@ const Checkout = (props) => {
                     <option value="金門縣">金門縣</option>
                     <option value="連江縣">連江縣</option>
                   </Form.Control>
+                  <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    請選擇縣市
+                  </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} xs={12} md={5}>
                   <Form.Control
+                    required
                     name="address"
                     size="lg"
                     type="text"
                     placeholder="地址"
                     onChange={(e) => getformInfo(e, 'address')}
                   />
+                  <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    請輸入地址
+                  </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} xs={12} md={5}>
                   <Form.Control
@@ -233,23 +276,29 @@ const Checkout = (props) => {
                   />
                 </Form.Group>
               </Form.Row>
-
-              <Form.Control
-                name="zip"
-                size="lg"
-                type="text"
-                placeholder="郵遞區號"
-                onChange={(e) => getformInfo(e, 'zip')}
-              />
-              <br />
-              <Form.Control
-                readOnly
-                style={{ pointerEvents: 'none' }}
-                name="country"
-                size="lg"
-                type="text"
-                placeholder="台灣"
-              />
+              <Form.Group>
+                <Form.Control
+                  required
+                  name="zip"
+                  size="lg"
+                  type="text"
+                  placeholder="郵遞區號"
+                  onChange={(e) => getformInfo(e, 'zip')}
+                />
+                <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  請輸入郵遞區號
+                </Form.Control.Feedback>
+                <br />
+                <Form.Control
+                  readOnly
+                  style={{ pointerEvents: 'none' }}
+                  name="country"
+                  size="lg"
+                  type="text"
+                  placeholder="台灣"
+                />
+              </Form.Group>
               <br />
               <br />
               <h3>輸入聯絡資訊</h3>
@@ -257,20 +306,32 @@ const Checkout = (props) => {
               <br />
               <Form.Group>
                 <Form.Control
+                  required
                   name="email"
                   size="lg"
                   type="email"
                   placeholder="電子郵件地址"
                   onChange={(e) => getformInfo(e, 'email')}
                 />
-                <br />
+                <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  請輸入email
+                </Form.Control.Feedback>
+              </Form.Group>
+              <br />
+              <Form.Group>
                 <Form.Control
+                  required
                   name="mobile"
                   size="lg"
                   type="text"
                   placeholder="行動電話號碼"
                   onChange={(e) => getformInfo(e, 'mobile')}
                 />
+                <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  請輸入行動電話號碼
+                </Form.Control.Feedback>
                 <br />
               </Form.Group>
               <h3>輸入卡片資訊</h3>
@@ -279,6 +340,7 @@ const Checkout = (props) => {
               <Form.Group>
                 <div className="mb-3">
                   <Form.Check
+                    required
                     inline
                     name="card"
                     label="MasterCard"
@@ -287,6 +349,7 @@ const Checkout = (props) => {
                     onChange={(e) => getformInfo(e, 'card')}
                   />
                   <Form.Check
+                    required
                     inline
                     name="card"
                     label="VISA"
@@ -295,53 +358,65 @@ const Checkout = (props) => {
                     onChange={(e) => getformInfo(e, 'card')}
                   />
                 </div>
+              </Form.Group>
+              <Form.Group>
                 <Form.Control
+                  required
                   name="cardNumber"
                   size="lg"
                   type="text"
                   placeholder="信用卡/金融卡卡號"
                   onChange={(e) => getformInfo(e, 'cardNumber')}
-                ></Form.Control>
+                />
+                <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  請輸入卡號
+                </Form.Control.Feedback>
                 <br />
                 <Form.Row>
                   <Form.Group as={Col} xs={3}>
                     <Form.Control
+                      required
                       name="valid"
                       size="lg"
                       type="text"
                       placeholder="到期月年"
                     />
+                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      請輸入到期月年
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group as={Col} xs={3}>
                     <Form.Control
+                      required
                       name="ccv"
                       size="lg"
                       type="text"
                       placeholder="安全碼"
                     />
+                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      請輸入安全碼
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group as={Col} xs={3}>
                     <Form.Control
+                      required
                       name="owner"
                       size="lg"
                       type="text"
                       placeholder="卡片持有人"
                       onChange={(e) => getformInfo(e, 'owner')}
                     />
+                    <Form.Control.Feedback>正確!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      請輸入卡片持有人
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Form.Row>
                 <hr />
-                <Button
-                  variant="primary"
-                  size="lg"
-                  block
-                  type="submit"
-                  onClick={() => {
-                    postOrder(buyerInfo)
-                    localStorage.setItem('cart', JSON.stringify([]))
-                    props.history.push(`/order/${mId}`)
-                  }}
-                >
+                <Button variant="primary" size="lg" block type="submit">
                   確定結帳
                 </Button>
               </Form.Group>

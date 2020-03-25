@@ -1,5 +1,8 @@
-.col-md-4,
-.col-md-3 {
+//產品列表
+.products {
+}
+//產品列表卡片
+.WNQ {
   .card {
     height: 100%;
     left: 0px;
@@ -12,4 +15,122 @@
     top: -2px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
+  .card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .btn {
+    border-radius: 5px;
+  }
+  img {
+    width: 284.66px;
+    height: 284.66px;
+    object-fit: contain;
+  }
+}
+//產品小卡
+.WNQcard {
+  .card {
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+  }
+  .card:hover {
+    left: -2px;
+    top: -2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  .card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .btn {
+    border-radius: 5px;
+  }
+  img {
+    width: 205.48px;
+    height: 205.48px;
+    object-fit: contain;
+  }
+}
+//產品卡片促銷
+.WNQsale {
+  .card {
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+  }
+  .card:hover {
+    left: -2px;
+    top: -2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  .card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .btn {
+    border-radius: 5px;
+  }
+  img {
+    width: 253px;
+    height: 221.47px;
+    object-fit: contain;
+  }
+}
+//產品細節
+.detail {
+  .image {
+    cursor: zoom-in;
+    width: 350px;
+    height: 350px;
+    object-fit: contain;
+  }
+  .btn {
+    border-radius: 5px;
+  }
+}
+//購物車
+.cart {
+  .btn {
+    border-radius: 5px;
+  }
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+  }
+  .ad {
+    width: 80%;
+    height: 80%;
+  }
+}
+//modal改不動
+.modal-open {
+  padding-right: 0;
+}
+.sticky-top {
+  padding-right: 0;
 }

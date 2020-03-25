@@ -12,6 +12,7 @@ import {
   Button,
   Accordion,
   Card,
+  Modal,
 } from 'react-bootstrap'
 import {
   MdAddShoppingCart,
@@ -25,6 +26,9 @@ import ProductCardSmall from './components/ProductCardSmall'
 const ProductDetail = (props) => {
   const [total, setTotal] = useState(1)
   const [mycart, setMycart] = useState([])
+  //圖片Modal顯示狀態
+  const [show, setShow] = useState(false)
+
   const pId = props.match.params.pId ? props.match.params.pId : ''
 
   //更新購物車
@@ -38,7 +42,7 @@ const ProductDetail = (props) => {
       setMycart(newCart)
     }
   }
-  //即時更新商品數量(未完成)
+  //即時更新商品數量
   useEffect(() => {
     props.getProductDetail(pId)
     props.getProducts()
@@ -61,10 +65,15 @@ const ProductDetail = (props) => {
     const res = await fetch(req)
     const listContent = await res.json()
     await console.log(listContent)
+    if (listContent.success) {
+      return alert('收藏成功')
+    } else {
+      return alert('已加入清單')
+    }
   }
 
   return (
-    <Container>
+    <Container className="detail">
       <Row className="my-5">
         <ProductSidebar />
         <Col md={10}>
@@ -74,12 +83,30 @@ const ProductDetail = (props) => {
           <Row className="mb-5">
             <Col md={5} className="text-center">
               {props.detail[0] ? (
-                <Image
-                  src={require('../../images/product/' +
-                    props.detail[0].pImg +
-                    '.jpg')}
-                  thumbnail
-                />
+                <>
+                  <Image
+                    className="image"
+                    src={require('../../images/product/' +
+                      props.detail[0].pImg +
+                      '.jpg')}
+                    thumbnail
+                    onClick={() => setShow(true)}
+                  />
+                  <Modal
+                    centered
+                    size="md"
+                    show={show}
+                    onHide={() => setShow(false)}
+                  >
+                    <Image
+                      className="image"
+                      src={require('../../images/product/' +
+                        props.detail[0].pImg +
+                        '.jpg')}
+                      thumbnail
+                    />
+                  </Modal>
+                </>
               ) : (
                 ''
               )}
@@ -285,7 +312,15 @@ const ProductDetail = (props) => {
             <Col>
               <div className="mt-5 d-md-flex justify-content-between">
                 <p>猜你喜歡</p>
-                <Link to="/products">查看更多></Link>
+                <Link
+                  to={
+                    props.detail[0]
+                      ? '/products?cId=' + props.detail[0].pCategoryId
+                      : ''
+                  }
+                >
+                  查看更多>
+                </Link>
               </div>
             </Col>
           </Row>

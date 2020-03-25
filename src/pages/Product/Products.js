@@ -83,6 +83,7 @@ const Products = (props) => {
       </Pagination.Item>
     )
   }
+
   //設定分頁容納節點
   const paginationBasic = (
     <Pagination className="d-flex justify-content-center" size="md">
@@ -104,22 +105,26 @@ const Products = (props) => {
   )
 
   return (
-    <Container>
-      <Row className="my-5">
-        <ProductSidebar />
-        <Col md={10}>
-          <Breadcrumb />
-          {sort}
-          <Row>
-            {props.list.rows &&
-              props.list.rows.map((value, index) => {
-                return <ProductCard key={index} data={props.list.rows[index]} />
-              })}
-          </Row>
-          {paginationBasic}
-        </Col>
-      </Row>
-    </Container>
+    <div className="bg-light">
+      <Container>
+        <Row className="my-5">
+          <ProductSidebar />
+          <Col md={10}>
+            <Breadcrumb />
+            {sort}
+            <Row>
+              {props.list.rows &&
+                props.list.rows.map((value, index) => {
+                  return (
+                    <ProductCard key={index} data={props.list.rows[index]} />
+                  )
+                })}
+            </Row>
+            {paginationBasic}
+          </Col>
+        </Row>
+      </Container>
+    </div>
   )
 }
 
