@@ -8,7 +8,7 @@ import '../../../css/product/productCard.scss'
 const ProductCard = (props) => {
   return (
     <Col md={4} className="mb-3 WNQ">
-      <Card>
+      <Card className="text-center">
         <Link to={'/productdetail/' + props.data.pId} className="p-0">
           <Image
             src={require('../../../images/product/' + props.data.pImg + '.jpg')}
@@ -17,12 +17,9 @@ const ProductCard = (props) => {
           />
         </Link>
         <Card.Body className="card-body">
-          <Card.Title className="text-center">{props.data.pName}</Card.Title>
-          <Card.Text className="text-center">{props.data.pInfo}</Card.Text>
-          <Card.Text
-            as="h4"
-            className="text-danger text-center font-weight-bold"
-          >
+          <Card.Title>{props.data.pName}</Card.Title>
+          <Card.Text>{props.data.pInfo}</Card.Text>
+          <Card.Text as="h4" className="text-danger font-weight-bold">
             NTD {props.data.pPrice}元
           </Card.Text>
           <div className="d-flex justify-content-around mb-3">
@@ -32,10 +29,10 @@ const ProductCard = (props) => {
             <FaPaw />
             <FaPaw />
           </div>
-          <p className="text-center">上架時間 {props.data.created_at}</p>
+          <p>上架時間 {props.data.created_at}</p>
           <div className="d-flex justify-content-around">
             <Button
-              className="text-center p-1"
+              className="p-1"
               onClick={() => {
                 props.history.push('/productdetail/' + props.data.pId)
               }}
@@ -43,7 +40,7 @@ const ProductCard = (props) => {
               查看商品
             </Button>
             <Button
-              className="text-center p-1"
+              className="p-1"
               onClick={() => {
                 if (
                   localStorage.getItem('mId') &&

@@ -12,7 +12,7 @@ import '../../../css/product/productCard.scss'
 const ProductCardSmallSale = (props) => {
   return (
     <Col md={3} className="mb-3 WNQsale">
-      <Card className="shadow-sm">
+      <Card className="shadow-sm text-center">
         <Link to={'/productdetail/' + props.data.pId}>
           <Image
             src={require('../../../images/product/' + props.data.pImg + '.jpg')}
@@ -21,13 +21,13 @@ const ProductCardSmallSale = (props) => {
           />
         </Link>
         <Card.Body className="card-body">
-          <Card.Title className="text-center">{props.data.pName}</Card.Title>
-          <Card.Text className="text-center">{props.data.pInfo}</Card.Text>
+          <Card.Title className="">{props.data.pName}</Card.Title>
+          <Card.Text className="">{props.data.pInfo}</Card.Text>
           <div className="d-flex justify-content-between">
-            <Card.Text className="text-danger text-center justify-content-between">
+            <Card.Text className="text-danger  justify-content-between">
               <del>NTD {props.data.pPrice}元</del>
             </Card.Text>
-            <Card.Text className="text-info text-center font-weight-bold">
+            <Card.Text className="text-info  font-weight-bold">
               <u>NTD {Math.ceil(props.data.pPrice * 0.8)}元</u>
             </Card.Text>
           </div>
@@ -37,7 +37,7 @@ const ProductCardSmallSale = (props) => {
           </div>
           <div className="d-flex justify-content-around">
             <Button
-              className="text-center p-1"
+              className=" p-1"
               onClick={() => {
                 props.history.push('/productdetail/' + props.data.pId)
               }}
@@ -45,7 +45,7 @@ const ProductCardSmallSale = (props) => {
               查看商品
             </Button>
             <Button
-              className="text-center p-1"
+              className=" p-1"
               onClick={(e) => {
                 if (
                   localStorage.getItem('mId') &&

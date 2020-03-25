@@ -105,7 +105,7 @@ const Products = (props) => {
   )
 
   return (
-    <Container>
+    <Container className="products">
       <Row className="my-5">
         <ProductSidebar />
         <Col md={10} className="bg-white">
