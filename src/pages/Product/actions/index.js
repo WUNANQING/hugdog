@@ -82,3 +82,4 @@ export const count = (quantity) => ({
   type: 'COUNT_QUANTITY',
   quantity,
 })
+//跟server要清單資料
