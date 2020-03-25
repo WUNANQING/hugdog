@@ -9,7 +9,7 @@ import { count } from '../actions/index'
 import $ from 'jquery'
 import '../../../css/product/productCard.scss'
 
-const ProductCardSmall = (props) => {
+const ProductCardSmallSale = (props) => {
   return (
     <Col md={3} className="mb-3">
       <Card className="shadow-sm">
@@ -23,9 +23,14 @@ const ProductCardSmall = (props) => {
         <Card.Body className="card-body">
           <Card.Title>{props.data.pName}</Card.Title>
           <Card.Text>{props.data.pInfo}</Card.Text>
-          <Card.Text className="text-danger text-center">
-            NTD {props.data.pPrice}元
-          </Card.Text>
+          <div className="d-flex justify-content-between">
+            <Card.Text className="text-danger text-center justify-content-between">
+              <del>NTD {props.data.pPrice}元</del>
+            </Card.Text>
+            <Card.Text className="text-info text-center font-weight-bold">
+              <u>NTD {Math.ceil(props.data.pPrice * 0.8)}元</u>
+            </Card.Text>
+          </div>
           <div className="d-flex justify-content-around mb-3">
             <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />
             <FaPaw />
@@ -53,7 +58,7 @@ const ProductCardSmall = (props) => {
                       pId: props.data.pId,
                       pName: props.data.pName,
                       pQuantity: 1,
-                      pPrice: props.data.pPrice,
+                      pPrice: props.data.pPrice * 0.8,
                       pImg: props.data.pImg,
                     }
                     let cart = []
@@ -96,4 +101,6 @@ const ProductCardSmall = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ count }, dispatch)
 }
-export default withRouter(connect(null, mapDispatchToProps)(ProductCardSmall))
+export default withRouter(
+  connect(null, mapDispatchToProps)(ProductCardSmallSale)
+)

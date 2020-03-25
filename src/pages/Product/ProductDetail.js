@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getProducts, getProductDetail } from './actions/index'
+import { getProducts, getProductDetail, count } from './actions/index'
 import {
   Container,
   Row,
@@ -22,7 +22,7 @@ import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCardSmall from './components/ProductCardSmall'
 
-const ProductDetail = props => {
+const ProductDetail = (props) => {
   const [total, setTotal] = useState(1)
   const [mycart, setMycart] = useState([])
   const pId = props.match.params.pId ? props.match.params.pId : ''
@@ -30,7 +30,7 @@ const ProductDetail = props => {
   //更新購物車
   function updateCartToLocalStorage(item) {
     const currentCart = JSON.parse(localStorage.getItem('cart')) || []
-    if ([...currentCart].find(value => value.pId === item.pId)) {
+    if ([...currentCart].find((value) => value.pId === item.pId)) {
       alert('已加入購物車')
     } else {
       const newCart = [...currentCart, item]
@@ -89,7 +89,9 @@ const ProductDetail = props => {
               <br />
               <h6>{props.detail[0] ? props.detail[0].pInfo : ''}</h6>
               <br />
-              <h4>${props.detail[0] ? props.detail[0].pPrice : ''}</h4>
+              <h4 className="text-danger">
+                ${props.detail[0] ? props.detail[0].pPrice : ''}
+              </h4>
               <br />
               <div className="mt-3 d-flex justify-content-between">
                 <Button
@@ -101,6 +103,7 @@ const ProductDetail = props => {
                       localStorage.getItem('mId') &&
                       localStorage.getItem('mId') !== '0'
                     ) {
+                      props.count(mycart)
                       updateCartToLocalStorage({
                         pId: props.detail[0].pId,
                         pName: props.detail[0].pName,
@@ -120,7 +123,7 @@ const ProductDetail = props => {
                   <Button
                     className="border-dark bg-light text-dark"
                     onClick={() => {
-                      setTotal(total - 1)
+                      total > 1 && setTotal(total - 1)
                     }}
                   >
                     -
@@ -191,11 +194,12 @@ const ProductDetail = props => {
                         )
                         if (
                           [...currentCart].find(
-                            value => value.pId === props.detail[0].pId
+                            (value) => value.pId === props.detail[0].pId
                           )
                         ) {
                           alert('已加入購物車')
                         } else {
+                          props.count(mycart)
                           const newCart = [...currentCart, item]
                           localStorage.setItem('cart', JSON.stringify(newCart))
                         }
@@ -286,10 +290,6 @@ const ProductDetail = props => {
             </Col>
           </Row>
           <Row>
-            {/* {}裡面不能下if判斷式？ */}
-            {/* {if(props.list.rows){props.list.rows.map((value, index) => {
-              return <ProductCard key={index} data={props.list.rows[index]} />
-            })}} */}
             {props.list.rows &&
               arr.map((value, index) => {
                 return (
@@ -303,15 +303,15 @@ const ProductDetail = props => {
   )
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     list: store.getProducts,
     detail: store.getProductDetail,
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getProducts, getProductDetail }, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getProducts, getProductDetail, count }, dispatch)
 }
 
 export default withRouter(
