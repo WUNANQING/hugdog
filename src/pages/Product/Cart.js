@@ -94,6 +94,27 @@ const Cart = (props) => {
   let random = Math.floor(Math.random() * 20) - 5
   let arr = props.list.rows && props.list.rows.slice(random, random + 4)
 
+  //加入願望清單的request
+  async function postList(list) {
+    const req = new Request('http://localhost:6001/list/post', {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(list),
+    })
+    const res = await fetch(req)
+    const listContent = await res.json()
+    await console.log(listContent)
+    if (listContent.success) {
+      alert('收藏成功')
+    } else {
+      alert('已加入清單')
+    }
+  }
+
   return (
     <Container className="cart">
       <Row>
@@ -241,7 +262,26 @@ const Cart = (props) => {
                   </h4>
                 </Col>
                 <Col md={2}>
-                  <Button className="mb-2" variant="primary" size="md">
+                  <Button
+                    className="mb-2"
+                    variant="primary"
+                    size="md"
+                    onClick={(e) => {
+                      if (
+                        localStorage.getItem('mId') &&
+                        localStorage.getItem('mId') !== '0'
+                      ) {
+                        let item = value.pId
+                        let mId = localStorage.getItem('mId')
+                        let list = { item: item, mId: mId }
+                        postList(list)
+                        deleteItem(index)
+                        $(e.currentTarget).parentsUntil('.item').fadeOut()
+                      } else {
+                        return alert('尚未登入')
+                      }
+                    }}
+                  >
                     <MdPlaylistAdd className="mb-md-1" />
                     下次再買
                   </Button>

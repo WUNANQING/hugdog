@@ -70,7 +70,7 @@ const ProductCardSmall = (props) => {
                       const newCart = [...currentCart, item]
                       props.count(newCart)
                       localStorage.setItem('cart', JSON.stringify(newCart))
-                      $(e.currentTarget).parentsUntil('.col-md-3').fadeToggle()
+                      $(e.currentTarget).parentsUntil('.col-md-3').fadeOut()
                     }
                   }
                   props.history.push('/cart')
