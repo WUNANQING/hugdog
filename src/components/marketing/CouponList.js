@@ -8,6 +8,26 @@ import $ from 'jquery'
 import '../../css/marketing/coupon.scss'
 import { GiManualMeatGrinder } from 'react-icons/gi'
 function CouponList(props) {
+  let nowtime = new Date()
+  let nowtime2 = nowtime.toLocaleString()
+  console.log(9999, nowtime2)
+  let y = nowtime.getFullYear()
+  console.log(y)
+  let m = nowtime.getMonth() + 1
+  m = m < 10 ? '0' + m : m
+  let d = nowtime.getDate()
+  d = d < 10 ? '0' + d : d
+  let h = nowtime.getHours()
+  h = h < 10 ? '0' + h : h
+  let minute = nowtime.getMinutes()
+  minute = minute < 10 ? '0' + minute : minute
+  let second = nowtime.getSeconds()
+  second = second < 10 ? '0' + second : second
+  let testTime = y + m + d + h + minute + second
+
+  // formatDateTime()
+  console.log(9999, testTime)
+  // console.log(9999, data)
   useEffect(() => {}, [])
 
   console.log(props.data)
@@ -44,14 +64,33 @@ function CouponList(props) {
         oldendtime.substr(16, 1) +
         ' ' +
         oldendtime.substr(17, 2)
-      lists.push(
-        <tr key={props.data[i].mmId}>
-          <td>{props.data[i].mmId}</td>
-          <td>{props.data[i].mtName}</td>
-          <td>{newtimeget}</td>
-          <td>{newendtime}</td>
-        </tr>
-      )
+      let newendtimecheck =
+        oldendtime.substr(0, 4) +
+        oldendtime.substr(5, 2) +
+        oldendtime.substr(8, 2) +
+        oldendtime.substr(11, 2) +
+        oldendtime.substr(14, 2) +
+        oldendtime.substr(17, 2)
+      console.log(newendtimecheck)
+      if (newendtimecheck > testTime) {
+        lists.push(
+          <tr key={props.data[i].mmId}>
+            <td>{+[i] + 1}</td>
+            <td>{props.data[i].mtName}</td>
+            <td>{newtimeget}</td>
+            <td>{newendtime}</td>
+          </tr>
+        )
+      } else {
+        lists.push(
+          <tr key={props.data[i].mmId}>
+            <td>{+[i] + 1}</td>
+            <td>{props.data[i].mtName}</td>
+            <td>{newtimeget}</td>
+            <td className="CouponExpired">{newendtime}</td>
+          </tr>
+        )
+      }
     }
   }
   console.log(lists)

@@ -27,8 +27,9 @@ function Coupon(props) {
   // console.log(props)
   // console.log(props.data)
   // console.log(props)
+  let y = localStorage.getItem('mId')
   useEffect(() => {
-    props.formServerCouponsWE(0)
+    props.formServerCouponsWE(0, y)
     $('.CouponListNavAC1').on('click', function() {
       $(this)
         .addClass('active')
@@ -98,7 +99,7 @@ function Coupon(props) {
                     <Nav.Link
                       className="CouponListNavAC1 active"
                       onClick={() => {
-                        props.formServerCouponsWE(0)
+                        props.formServerCouponsWE(0, y)
                       }}
                     >
                       未使用
@@ -106,7 +107,7 @@ function Coupon(props) {
                     <Nav.Link
                       className="CouponListNavAC2"
                       onClick={() => {
-                        props.formServerCouponsWE(1)
+                        props.formServerCouponsWE(1, y)
                       }}
                     >
                       已使用
@@ -114,7 +115,7 @@ function Coupon(props) {
                     <Nav.Link
                       className="CouponListNavAC3"
                       onClick={() => {
-                        props.formServerCouponsALL()
+                        props.formServerCouponsALL(y)
                       }}
                     >
                       全部顯示

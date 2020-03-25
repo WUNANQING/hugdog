@@ -19,7 +19,7 @@ function CouponInsert(props) {
 
   let x = localStorage.getItem('mName')
   let y = localStorage.getItem('mId')
-  // console.log(x, y)
+  console.log(x, y)
   const [username, setUsername] = useState(x)
   const [userId, setUserId] = useState(y)
   const [marketingName, setMarketingName] = useState('')
@@ -30,7 +30,6 @@ function CouponInsert(props) {
   const [error, setError] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
   const [test, setTest] = useState(false)
-
   function handleSubmit2() {
     let error = false
     let errorMessages = []
@@ -107,7 +106,7 @@ function CouponInsert(props) {
     }
 
     console.log(userData)
-    // props.userRegisterAsync(userData, () => alert('成功登入'))
+
     if (marketingName !== '' && test && props.data3 == '') {
       console.log('測試2', props)
       props.insertCouponAsync(userData, () => console.log('前端傳資料成功'))
@@ -115,10 +114,13 @@ function CouponInsert(props) {
       setMarketingName('')
       setMarketingId('')
       setEndtime('')
-    }
-    if (props.data3 !== '') {
-      setErrorMessages('此優惠卷已取得過')
-      // setError(true)
+      // setTest2(true)
+    } else if (props.data3 !== '' && test) {
+      setErrorMessages(['此優惠卷已取得過'])
+      // alert('此優惠卷已取得過')
+      setError(true)
+      console.log(123, errorMessages)
+      // setTest2(false)
     }
     setTest(false)
   }, [test])

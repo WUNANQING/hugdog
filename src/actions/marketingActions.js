@@ -18,10 +18,26 @@ export const formServerCoupons = mmId => {
     dispatch(showCoupons(data))
   }
 }
-export const formServerCouponsWE = used => {
+// export const formServerCouponsWE = used => {
+//   return async dispatch => {
+//     const request = new Request(
+//       `http://localhost:6001/marketing_member/used/${used}`,
+//       {
+//         method: 'GET',
+//         credentials: 'include',
+//       }
+//     )
+//     const res = await fetch(request)
+//     const data = await res.json()
+
+//     console.log('GBM', data)
+//     dispatch(showCoupons(data))
+//   }
+// }
+export const formServerCouponsWE = (used, mId) => {
   return async dispatch => {
     const request = new Request(
-      `http://localhost:6001/marketing_member/used/${used}`,
+      `http://localhost:6001/marketing_member/used/${used}/${mId}`,
       {
         method: 'GET',
         credentials: 'include',
@@ -34,12 +50,15 @@ export const formServerCouponsWE = used => {
     dispatch(showCoupons(data))
   }
 }
-export const formServerCouponsALL = () => {
+export const formServerCouponsALL = mId => {
   return async dispatch => {
-    const request = new Request(`http://localhost:6001/marketing_member/`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const request = new Request(
+      `http://localhost:6001/marketing_member/used/${mId}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
     const res = await fetch(request)
     const data = await res.json()
 
