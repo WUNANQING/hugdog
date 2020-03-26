@@ -131,7 +131,11 @@ function Header(props) {
                 </Link>
               </div>
             </div>
-            <Nav.Link href="#">
+            <Nav.Link
+              onClick={() => {
+                props.history.push('/list/' + localStorage.getItem('mId'))
+              }}
+            >
               <IconContext.Provider value={{ size: '1.5rem' }}>
                 <FiHeart />
               </IconContext.Provider>
