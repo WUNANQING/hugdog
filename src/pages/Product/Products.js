@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
-import { Container, Row, Col, Pagination } from 'react-bootstrap'
+import { Container, Row, Col, Pagination, Image } from 'react-bootstrap'
 //redux
 import { connect } from 'react-redux'
 //action
@@ -61,7 +61,13 @@ const Products = (props) => {
 
   //設定分頁
   let pages = []
-  for (let number = 1; number <= props.list.totalPages; number++) {
+  for (
+    let number = props.list.page - 5;
+    number <= props.list.page + 5;
+    number++
+  ) {
+    if (number < 1 || number > props.list.totalPages) continue
+
     pages.push(
       <Pagination.Item
         key={number}
@@ -91,7 +97,7 @@ const Products = (props) => {
       <Pagination.Prev
         href={'/products/' + (props.list.page === 1 ? 1 : props.list.page - 1)}
       />
-      {pages}
+      {pages.slice(0, 10)}
       <Pagination.Next
         href={
           '/products/' +
@@ -105,22 +111,26 @@ const Products = (props) => {
   )
 
   return (
-    <Container className="products">
-      <Row className="my-5">
-        <ProductSidebar />
-        <Col md={10} className="bg-white">
-          <Breadcrumb />
-          {sort}
-          <Row>
-            {props.list.rows &&
-              props.list.rows.map((value, index) => {
-                return <ProductCard key={index} data={props.list.rows[index]} />
-              })}
-          </Row>
-          {paginationBasic}
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <Container className="products">
+        <Row className="my-5">
+          <ProductSidebar />
+          <Col md={10} className="bg-white">
+            <Breadcrumb />
+            {sort}
+            <Row>
+              {props.list.rows &&
+                props.list.rows.map((value, index) => {
+                  return (
+                    <ProductCard key={index} data={props.list.rows[index]} />
+                  )
+                })}
+            </Row>
+            {paginationBasic}
+          </Col>
+        </Row>
+      </Container>
+    </>
   )
 }
 

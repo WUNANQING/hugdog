@@ -275,8 +275,10 @@ const Cart = (props) => {
                         let mId = localStorage.getItem('mId')
                         let list = { item: item, mId: mId }
                         postList(list)
-                        deleteItem(index)
-                        $(e.currentTarget).parentsUntil('.item').fadeOut()
+                        setTimeout(() => {
+                          deleteItem(index)
+                          $(e.currentTarget).parentsUntil('.item').fadeOut()
+                        }, 2000)
                       } else {
                         return alert('尚未登入')
                       }
