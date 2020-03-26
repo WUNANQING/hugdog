@@ -66,9 +66,9 @@ const ProductDetail = (props) => {
     const listContent = await res.json()
     await console.log(listContent)
     if (listContent.success) {
-      return alert('收藏成功')
+      alert('收藏成功')
     } else {
-      return alert('已加入清單')
+      alert('已加入清單')
     }
   }
 

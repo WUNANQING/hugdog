@@ -20,6 +20,7 @@ import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
 import DogInsert from './pages/member/dogInsert'
 import BlogArticle from './pages/Knowledge/BlogArticle'
+import List from './pages/Product/List'
 function App() {
   return (
     <Router>
@@ -80,6 +81,9 @@ function App() {
             </Route>
             <Route path="/dog-insert">
               <DogInsert />
+            </Route>
+            <Route path="/list/:mId?">
+              <List />
             </Route>
           </Switch>
         </section>
