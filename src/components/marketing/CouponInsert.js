@@ -5,7 +5,10 @@ import { BrowserRouter as Router, withRouter } from 'react-router-dom'
 import { GiTicket } from 'react-icons/gi'
 import { IconContext } from 'react-icons'
 import '../../css/marketing/coupon.scss'
+import Swal from 'sweetalert2'
+
 import { connect } from 'react-redux'
+
 //action
 import { bindActionCreators } from 'redux'
 import {
@@ -151,12 +154,19 @@ function CouponInsert(props) {
     ) {
       console.log('測試2', props)
       props.insertCouponAsync(userData, () => console.log('前端傳資料成功'))
-
+      Swal.fire({
+        icon: 'success',
+        title: '優惠卷領取成功',
+        // showConfirmButton: false,
+        timer: 2500,
+        preConfirm: () => {
+          window.location.reload()
+        },
+      })
       setMarketingName('')
       setMarketingId('')
       setEndtime('')
       // setTest2(true)
-      window.location.reload()
     } else if (marketingName !== '' && test && newendtimecheck < testTime) {
       setErrorMessages(['此優惠卷已過期'])
       // alert('此優惠卷已取得過')
@@ -232,7 +242,7 @@ function CouponInsert(props) {
     </>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     data: store.getCode,
     data2: store.getCoupons,
@@ -241,7 +251,7 @@ const mapStateToProps = store => {
 }
 
 //action
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     { insertCouponAsync, formServerCouponsCode, formServerCheckCoupons },
     dispatch

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Nav, Card, Form, Button, Col, Row, Table } from 'react-bootstrap'
 
 import { BrowserRouter as Router, withRouter } from 'react-router-dom'
+import Swal from 'sweetalert2'
 // import { FiSearch, FiHeart } from 'react-icons/fi'
 import '../../css/marketing/coupon.scss'
 import { connect } from 'react-redux'
@@ -119,7 +120,13 @@ function CouponEvent(props) {
     ) {
       console.log('測試2', props)
       props.insertCouponAsync(userData, () => console.log('前端傳資料成功'))
-      alert('優惠卷領取成功')
+      // alert('優惠卷領取成功')
+      Swal.fire({
+        icon: 'success',
+        title: '優惠卷領取成功',
+        showConfirmButton: false,
+        timer: 2500,
+      })
       setMarketingName('')
       setMarketingId('')
       setEndtime('')
@@ -127,7 +134,13 @@ function CouponEvent(props) {
       // window.location.reload()
     } else if (props.data3 !== '' && test) {
       // setErrorMessages(['此優惠卷已取得過'])
-      alert('此優惠卷已取得過')
+      // alert('此優惠卷已取得過')
+      Swal.fire({
+        icon: 'error',
+        title: '此優惠卷已取得過',
+        showConfirmButton: false,
+        timer: 2500,
+      })
       // setError(true)
       console.log(123, errorMessages)
     }
