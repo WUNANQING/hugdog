@@ -11,7 +11,8 @@ import ProductDetail from './pages/Product/ProductDetail'
 import Member from './pages/member/Member'
 import Cart from './pages/Product/Cart'
 import Checkout from './pages/Product/Checkout'
-import Service from './pages/service/ServiceHome'
+import Service from './pages/service/ServiceApp'
+import ServiceAdmin from './pages/service/admin/ServiceAdminApp'
 import Coupon from './pages/Marketing/Coupon'
 import BonusPoints from './pages/Marketing/BonusPoints1'
 import Order from './pages/Product/Order'
@@ -33,7 +34,10 @@ function App() {
             <Route path="/member">
               <Member />
             </Route>
-            <Route path="/service">
+            <Route path="/service/admin/">
+              <ServiceAdmin />
+            </Route>
+            <Route path="/service/">
               <Service />
             </Route>
             <Route path="/activity">
