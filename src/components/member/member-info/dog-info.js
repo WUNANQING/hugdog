@@ -16,7 +16,7 @@ import {
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../../css/member/member-info.scss'
 
-const DogInfo = props => {
+const DogInfo = (props) => {
   const [dog, setDog] = useState([])
   //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
   const mId = localStorage.getItem('mId')
@@ -96,10 +96,10 @@ const DogInfo = props => {
     </div>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return { data: store.getDogDetail }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getDogDetail }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DogInfo)

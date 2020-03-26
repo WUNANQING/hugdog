@@ -1,13 +1,92 @@
-import React, { useState } from 'react'
-import { StickyContainer, Sticky } from 'react-sticky'
-
+import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+// import { StickyContainer, Sticky } from 'react-sticky'
 //引入自己的css
 import '../../css/activity/activity.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Breadcrumb from '../../components/Breadcrumbs'
+//redux
+import { connect } from 'react-redux'
+//action
+import { bindActionCreators } from 'redux'
+import getActivityClassDetail from '../../reducers/index'
 
-function ActivityClass() {
+function ActivityClass(props) {
+  // const cId = props.data[0] ? props.data[0].cId : ''
+  // const [actClassData, setActClassData] = useState([])
   const [quantity, setQuantity] = useState(1)
+  const [data, setData] = useState([])
+
+  //課程加入收藏
+  const addCollection = () => {
+    // console.log('123')
+    fetch(`http://localhost:6001/activity_collection/insertClass/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        mId: 'm001',
+        cId: props.match.params.cId,
+      }),
+    })
+      .then((r) => r.json())
+      .then((obj) => console.log(obj))
+
+    // console.log(JSON.stringify(actCollectionData))
+
+    // const response = await fetch(request)
+    // const data = await response.json()
+    // console.log(data)
+    // callback()
+  }
+
+  //課程報名參加
+  const joinClass = () => {
+    console.log('報名參加')
+    fetch(`http://localhost:6001/activity_successEvent/insertSuccessEvent/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        mId: 'm001',
+        LId: props.match.params.cId,
+        LName: data.cName,
+        LDate: data.cDate,
+        LPeople: quantity + '',
+      }),
+    })
+      .then((r) => r.json())
+      .then((obj) => console.log(obj))
+  }
+
+  useEffect(() => {
+    const cId = props.match.params.cId
+    // const cInfo = props.match.params.cInfo
+    // console.log('propsdata:', props.match.params.cId)
+    // props.getActivityClassDetail(cId)
+
+    //fetch課程資料
+    async function getActClassData() {
+      const req = new Request(`http://localhost:6001/activity_class/${cId}`, {
+        method: 'GET',
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      })
+      const res = await fetch(req)
+      const data = await res.json()
+      // console.log(data[0].cImg)
+      setData(data[0])
+      // setData(data[0].cInfo.split('\n').join())
+    }
+    getActClassData()
+  }, [])
+
   return (
     <>
       <div className="container activity-class my-3">
@@ -15,35 +94,14 @@ function ActivityClass() {
         <div className="row mt-3 left-right-container">
           <div className="col-lg-7 class-left">
             <figure className="classPic">
-              <img src={require('../../images/activity/class-p1.jpg')} alt="" />
+              {/* <img src={require(`../../images/activity/${data.cImg}`)} alt="" /> */}
             </figure>
-            <div>
+            <div style={{ whiteSpace: 'pre-wrap' }}>
               <h5>活動內容</h5>
               <hr />
-              <p>▍課程理念</p>
-              <p>
-                學習生涯剛起步的幼犬們，正準備開始探索這個世界，不熟悉人類社會規則的牠們，會做一些正常的行為，例如咬東西探索世界，但這些行為卻常常困擾著我們，透過這個課程，讓牠們學到一些人類希望牠們做到的基礎行為。
-              </p>
-              <p>▍課程對象</p>
-              <p>
-                適合10週以上，6個月以下的幼犬課程。
-                包括個人及團體課程（2隻狗以上）。
-              </p>
-              <p>▍課程內容</p>
-              <p>
-                大小便訓練
-                <br />
-                籠內訓練
-                <br />
-                社會化
-                <br />
-                正確遊戲方式、不咬手、減少含咬
-                <br />
-                基礎服從訓練：坐下、趴下、等待、喚回等
-                <br />
-              </p>
+              {data.cInfo}
             </div>
-            <div className="block-notice">
+            <div className="block-notice mt-3">
               <h5>注意事項</h5>
               <hr />
               <div>
@@ -74,10 +132,10 @@ function ActivityClass() {
           </div>
           <div className="col-lg-5 class-right">
             <div className="right-sticky">
-              <h3 className="title">寵物訓練課程-幼犬先修班</h3>
+              <h3 className="title">{data.cName}</h3>
               <div className="price">
                 <span className="symbol">NT$ </span>
-                <span className="amount">1800</span>
+                <span className="amount">{data.cPrice}</span>
               </div>
               <hr />
               <div className="my-4">
@@ -87,10 +145,10 @@ function ActivityClass() {
                     id="exampleFormControlSelect1"
                   >
                     <option>請選擇活動規格</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option>{data.cDate}</option>
+                    <option>2020-04-17 (四) 13:00 ~ 15:00</option>
+                    <option>2020-04-17 (四) 13:00 ~ 15:00</option>
+                    <option>2020-04-17 (四) 13:00 ~ 15:00</option>
                   </select>
                 </div>
                 <div className="quantity">
@@ -112,6 +170,7 @@ function ActivityClass() {
                       className="col-2 border-secondary form-control-plaintext text-center"
                       value={quantity}
                     />
+
                     <div className="input-group-append">
                       <button
                         className="btn btn-outline-secondary"
@@ -122,6 +181,9 @@ function ActivityClass() {
                       >
                         +
                       </button>
+                      <div className="ml-2 d-flex align-items-center">
+                        部份規格剩最後 <span>1</span> 個名額
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -129,6 +191,7 @@ function ActivityClass() {
                   <button
                     type="button"
                     className="btn btn-primary form-control"
+                    onClick={joinClass}
                   >
                     立即報名
                   </button>
@@ -137,6 +200,7 @@ function ActivityClass() {
                   <button
                     type="button"
                     className="btn btn-outline-primary form-control"
+                    onClick={addCollection}
                   >
                     加入收藏
                   </button>
@@ -148,13 +212,11 @@ function ActivityClass() {
                 <div className="activity-info">
                   <div className="row info-item">
                     <div className="col-4 info-title">活動摘要</div>
-                    <div className="col info-content">
-                      摩卡壺是非常容易入門的咖啡沖煮器具，只要掌握沖煮的訣竅，在家也能煮出濃郁、不焦苦的義式濃縮(Espresso)咖啡！課程中還會教你，如何利用espresso咖啡，變化出拿鐵、維也納、焦糖瑪其朵等各具特色的義式咖啡飲品喔！
-                    </div>
+                    <div className="col info-content">{data.cInfo2}</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">最近活動日期</div>
-                    <div className="col info-content">2020/03/07 (六)</div>
+                    <div className="col info-content">{data.cDate}</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">預約須知</div>
@@ -164,13 +226,11 @@ function ActivityClass() {
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">活動所在地</div>
-                    <div className="col info-content">台灣 / 台北市</div>
+                    <div className="col info-content">{data.cLocation}</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">活動地址</div>
-                    <div className="col info-content">
-                      台北市中山區龍江路342巷15號
-                    </div>
+                    <div className="col info-content">{data.cAddress}</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">開放入場時間</div>
@@ -178,11 +238,11 @@ function ActivityClass() {
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">活動長度</div>
-                    <div className="col info-content">2.5 小時</div>
+                    <div className="col info-content">{data.cTime}</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">剩餘名額</div>
-                    <div className="col info-content">2</div>
+                    <div className="col info-content">{data.cPeople}</div>
                   </div>
                 </div>
               </div>
@@ -194,5 +254,12 @@ function ActivityClass() {
     </>
   )
 }
+// const mapStateToProps = store => {
+//   return { data: store.getActivityClassDetail }
+// }
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators({ getActivityClassDetail }, dispatch)
+// }
+// export default connect(mapStateToProps, mapDispatchToProps)(ActivityClass)
 
-export default ActivityClass
+export default withRouter(ActivityClass)

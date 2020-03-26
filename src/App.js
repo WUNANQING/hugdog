@@ -11,11 +11,15 @@ import ProductDetail from './pages/Product/ProductDetail'
 import Member from './pages/member/Member'
 import Cart from './pages/Product/Cart'
 import Checkout from './pages/Product/Checkout'
-import Service from './pages/service/ServiceHome'
+import Service from './pages/service/ServiceApp'
+import ServiceAdmin from './pages/service/admin/ServiceAdminApp'
 import Coupon from './pages/Marketing/Coupon'
 import BonusPoints from './pages/Marketing/BonusPoints1'
 import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
+import ActivityClass from './pages/Activity/ActivityClass'
+import ActivityLecture from './pages/Activity/ActivityLecture'
+import ActivitySale from './pages/Activity/ActivitySale'
 import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
 import DogInsert from './pages/member/dogInsert'
@@ -34,8 +38,20 @@ function App() {
             <Route path="/member">
               <Member />
             </Route>
-            <Route path="/service">
+            <Route path="/service/admin/">
+              <ServiceAdmin />
+            </Route>
+            <Route path="/service/">
               <Service />
+            </Route>
+            <Route path="/activity/lecture/:LId">
+              <ActivityLecture />
+            </Route>
+            <Route path="/activity/class/:cId">
+              <ActivityClass />
+            </Route>
+            <Route path="/activity/sale/:sId">
+              <ActivitySale />
             </Route>
             <Route path="/activity">
               <Activity />

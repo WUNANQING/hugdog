@@ -121,6 +121,15 @@ a:link {
   background-color: #c59043;
   border-color: #c08a3b;
 }
+.btn-outline-theme1 {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+.btn-outline-theme1:not(:disabled):hover {
+  color: #ffffff;
+  background-color: #c59043;
+  border-color: #c08a3b;
+}
 .btn-outline-light {
   color: #cccccc;
   border-color: #cccccc;
