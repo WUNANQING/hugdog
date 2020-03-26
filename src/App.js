@@ -11,13 +11,15 @@ import ProductDetail from './pages/Product/ProductDetail'
 import Member from './pages/member/Member'
 import Cart from './pages/Product/Cart'
 import Checkout from './pages/Product/Checkout'
-import Service from './pages/service/ServiceHome'
+import Service from './pages/service/ServiceApp'
+import ServiceAdmin from './pages/service/admin/ServiceAdminApp'
 import Coupon from './pages/Marketing/Coupon'
 import BonusPoints from './pages/Marketing/BonusPoints1'
 import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
 import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
+import DogInsert from './pages/member/dogInsert'
 import BlogArticle from './pages/Knowledge/BlogArticle'
 function App() {
   return (
@@ -32,7 +34,10 @@ function App() {
             <Route path="/member">
               <Member />
             </Route>
-            <Route path="/service">
+            <Route path="/service/admin/">
+              <ServiceAdmin />
+            </Route>
+            <Route path="/service/">
               <Service />
             </Route>
             <Route path="/activity">
@@ -76,6 +81,9 @@ function App() {
             </Route>
             <Route path="/register">
               <MemberRegister />
+            </Route>
+            <Route path="/dog-insert">
+              <DogInsert />
             </Route>
           </Switch>
         </section>

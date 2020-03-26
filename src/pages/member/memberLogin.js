@@ -60,9 +60,11 @@ const MemberLogin = props => {
         console.log('正確')
         $('.alertBox')
           .removeClass('disappear')
+          .removeClass('alert-danger')
           .addClass('appear')
-          .text('登入成功', 2000)
-        window.location.replace('http://localhost:3000/member/')
+          .addClass('alert-success')
+          .text('登入成功')
+        window.location.replace('http://localhost:3000/member/', 2000)
 
         const member = props.data[i]
         // setCookie('mId', mId)
@@ -72,26 +74,26 @@ const MemberLogin = props => {
         localStorage.setItem('mName', mName)
         localStorage.setItem('mImg', mImg)
       }
-      if ($('#exampleInputAccount1').val() === '') {
-        // alert('帳號不能為空白')
-        $('.alertBox')
-          .removeClass('disappear')
-          .addClass('appear')
-          .text('帳號不能為空白')
-      }
-      // if ($('#exampleInputAccount1').length < 3) {
-      //   alert('帳號要大於三位')
+      // if ($('#exampleInputAccount1').val() === '') {
+      //   // alert('帳號不能為空白')
+      //   $('.alertBox')
+      //     .removeClass('disappear')
+      //     .addClass('appear')
+      //     .text('帳號不能為空白')
       // }
-      if ($('#exampleInputPassword1').val() === '') {
-        // alert('密碼不能為空白')
-        $('.alertBox')
-          .removeClass('disappear')
-          .addClass('appear')
-          .text('密碼不能為空白')
-      }
-      // if ($('#exampleInputPassword1').length < 3) {
-      //   alert('密碼要大於三位')
+      // // if ($('#exampleInputAccount1').length < 3) {
+      // //   alert('帳號要大於三位')
+      // // }
+      // if ($('#exampleInputPassword1').val() === '') {
+      //   // alert('密碼不能為空白')
+      //   $('.alertBox')
+      //     .removeClass('disappear')
+      //     .addClass('appear')
+      //     .text('密碼不能為空白')
       // }
+      // // if ($('#exampleInputPassword1').length < 3) {
+      // //   alert('密碼要大於三位')
+      // // }
       else {
         console.log('不正確')
         // alert('帳號或密碼錯誤')
@@ -112,11 +114,21 @@ const MemberLogin = props => {
       $('.show').addClass('active')
       $('.hide').removeClass('active')
       $('#exampleInputPassword1').attr('type', 'text')
+      // $('.alertBox')
+      //   .removeClass('disappear')
+      //   .removeClass('alert-danger')
+      //   .addClass('appear')
+      //   .addClass('alert-success')
     })
     $('.hide').click(function() {
       $('.hide').addClass('active')
       $('.show').removeClass('active')
       $('#exampleInputPassword1').attr('type', 'password')
+      // $('.alertBox')
+      //   // .removeClass('appear')
+      //   .removeClass('alert-success')
+      //   // .addClass('disappear')
+      //   .addClass('alert-danger')
     })
     const account = $('#exampleInputAccount1').val()
     const password = $('#exampleInputPassword1').val()

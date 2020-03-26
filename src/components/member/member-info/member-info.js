@@ -31,6 +31,7 @@ const MemberInfo = props => {
   const mPhone = props.data[i] ? props.data[i].mPhone : ''
   const mEmail = props.data[i] ? props.data[i].mEmail : ''
   const mAddress = props.data[i] ? props.data[i].mAddress : ''
+
   //狗狗基本資料
   const memberInfo = {
     mName: '',
@@ -79,6 +80,7 @@ const MemberInfo = props => {
         break
     }
   }
+
   //建立會員資料
   //建立訂單
   async function updateMember(form) {
@@ -252,16 +254,23 @@ const MemberInfo = props => {
                           />
                         </td>
                       </tr>
+                      <tr>
+                        <td class="text-right">會員無言</td>
+                        <td>
+                          <input type="text" class="form-control" />
+                        </td>
+                      </tr>
                     </tbody>
                     <tfoot>
                       <tr>
                         <td class="" colspan="6">
-                          <button
+                          <div
                             href="./member-updateEdit.php"
                             class="btn btn-sm btn-danger"
+                            onClick={updateMember}
                           >
                             <i class="fa fa-trash"></i> 修改
-                          </button>
+                          </div>
                         </td>
                       </tr>
                     </tfoot>

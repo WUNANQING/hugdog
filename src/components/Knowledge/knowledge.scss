@@ -7,75 +7,27 @@
 
 //blog css
 .blog {
-  body {
-    padding: 100px 0;
-    // background: linear-gradient(20deg, #3d5493, #1aa2a0) fixed center center /
-    // 100% 100%;
+  .blogImg {
+    width: 400px;
   }
-  // .wrap {
-  //   width: 1200px;
-  //   margin: auto;
-  // }
-  .item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-    font-family: 'Noto Sans TC', sans-serif;
-    h3 {
-      font-weight: 800;
-      margin-bottom: 1em;
-    }
+  .sidebar {
     p {
-      font-weight: 300;
-      // line-height: 1;
+      font-size: larger;
     }
-
-    .pic {
-      width: 55%;
-      flex-shrink: 0;
-      img {
-        width: 100%;
-        vertical-align: middle;
-      }
+    p:hover {
+      background-color: red;
+      opacity: 0.5;
+      color: white;
     }
-
-    .txt {
-      width: 55%;
-      flex-shrink: 0;
-      padding: 20px 20px;
-      box-sizing: border-box;
-      position: relative;
-      z-index: 1;
-    }
-  }
-  .item > :first-child {
-    margin-right: -10%;
-  }
-  .item:nth-child(1) .txt {
-    background-color: rgba(206, 205, 204, 0.8);
-  }
-
-  .articlepost {
-    padding: 5px;
-  }
-
-  //blogheader css
-  .carouselImg {
-    width: 100vh;
-    height: 85vh;
-  }
-
-  .articlepost {
-    .blogImg {
-      display: block;
-      height: auto;
-      width: 100%;
+    p:target {
+      background-color: skyblue;
     }
   }
 }
+
 .article {
   .articeImg {
-    // height: 400px;
+    max-width: 100%;
   }
   .articletxt {
     white-space: pre-wrap;
