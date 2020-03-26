@@ -55,6 +55,7 @@ function CouponEvent(props) {
   useEffect(() => {
     props.formServerCheckCoupons(verify)
     props.formServerCouponsCode(couponCode)
+    console.log('測試0')
   }, [verify])
 
   useEffect(() => {
@@ -118,12 +119,11 @@ function CouponEvent(props) {
     ) {
       console.log('測試2', props)
       props.insertCouponAsync(userData, () => console.log('前端傳資料成功'))
-
+      alert('優惠卷領取成功')
       setMarketingName('')
       setMarketingId('')
       setEndtime('')
-      setVerify('')
-      setCouponCode('')
+
       // window.location.reload()
     } else if (props.data3 !== '' && test) {
       // setErrorMessages(['此優惠卷已取得過'])
@@ -131,6 +131,8 @@ function CouponEvent(props) {
       // setError(true)
       console.log(123, errorMessages)
     }
+    setVerify('')
+    setCouponCode('')
     setTest(false)
   }, [test])
   return (
@@ -203,7 +205,7 @@ function CouponEvent(props) {
     </>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     data: store.getCode,
     data2: store.getCoupons,
@@ -212,7 +214,7 @@ const mapStateToProps = store => {
 }
 
 //action
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     { insertCouponAsync, formServerCouponsCode, formServerCheckCoupons },
     dispatch
