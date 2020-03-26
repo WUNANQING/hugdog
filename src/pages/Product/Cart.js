@@ -17,7 +17,6 @@ import { getProducts, count } from './actions/index'
 import { bindActionCreators } from 'redux'
 
 const Cart = (props) => {
-  //下面追加購買按“立即結帳"立刻儲存在localStorage卻無法讓頁面更新;追加購買產品卡片會立即不見
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
 
@@ -62,7 +61,7 @@ const Cart = (props) => {
   //從localStorage取得購物車資料
   useEffect(() => {
     getCartFromLocalStorage()
-    props.getProducts(Math.floor(Math.random() * 19) + 1)
+    props.getProducts(Math.floor(Math.random() * 18) + 1)
   }, [props.qty])
 
   //購物車有變動即更改
@@ -90,12 +89,33 @@ const Cart = (props) => {
     }
     return total
   }
-  //設定猜你喜歡只列出4項商品(未完成;無法重新render更新顯示數量;以及按了快速結帳會消失隱藏)
+  //設定猜你喜歡只列出4項商品
   let random = Math.floor(Math.random() * 20) - 5
   let arr = props.list.rows && props.list.rows.slice(random, random + 4)
 
+  //加入願望清單的request
+  async function postList(list) {
+    const req = new Request('http://localhost:6001/list/post', {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(list),
+    })
+    const res = await fetch(req)
+    const listContent = await res.json()
+    await console.log(listContent)
+    if (listContent.success) {
+      alert('收藏成功')
+    } else {
+      alert('已加入清單')
+    }
+  }
+
   return (
-    <Container>
+    <Container className="cart">
       <Row>
         <Col md={12} className="mt-5 d-flex justify-content-center">
           <Col md={7} className="border position-relative">
@@ -171,6 +191,7 @@ const Cart = (props) => {
                   <h3>購物車內沒有任何商品</h3>
                   <hr />
                   <Image
+                    className="ad"
                     src={require('../../images/product/dog-ad.jpg')}
                     alt="..."
                   />
@@ -227,7 +248,8 @@ const Cart = (props) => {
                       className="border-dark bg-light text-dark"
                       id="+"
                       onClick={(e) => {
-                        updateQuantityToLocalStorage(e, index, 1)
+                        value.pQuantity < 10 &&
+                          updateQuantityToLocalStorage(e, index, 1)
                       }}
                     >
                       +
@@ -240,7 +262,26 @@ const Cart = (props) => {
                   </h4>
                 </Col>
                 <Col md={2}>
-                  <Button className="mb-2" variant="primary" size="md">
+                  <Button
+                    className="mb-2"
+                    variant="primary"
+                    size="md"
+                    onClick={(e) => {
+                      if (
+                        localStorage.getItem('mId') &&
+                        localStorage.getItem('mId') !== '0'
+                      ) {
+                        let item = value.pId
+                        let mId = localStorage.getItem('mId')
+                        let list = { item: item, mId: mId }
+                        postList(list)
+                        deleteItem(index)
+                        $(e.currentTarget).parentsUntil('.item').fadeOut()
+                      } else {
+                        return alert('尚未登入')
+                      }
+                    }}
+                  >
                     <MdPlaylistAdd className="mb-md-1" />
                     下次再買
                   </Button>

@@ -40,7 +40,7 @@ const DogInfo = props => {
     dogList.push(
       <tr className="order_show" onClick="" id={i} name={i}>
         {/* <th scope="row">{i + 1}</th> */}
-        <td>{props.data[i] ? props.data[i].dId : ''}</td>
+        <td>{i + 1}</td>
         <td>{props.data[i] ? props.data[i].dName : ''}</td>
         <td>{props.data[i] ? props.data[i].dGender : ''}</td>
         <td>{props.data[i] ? props.data[i].dYear : ''}</td>
@@ -58,7 +58,11 @@ const DogInfo = props => {
     <div class="tab-content content" id="content2">
       <div>
         <h3>
-          狗狗資訊 <br />
+          狗狗資訊{' '}
+          <Link to="/dog-insert">
+            <button className="btn btn-info">新增狗狗</button>
+          </Link>
+          <br />
         </h3>
         <div class="row">
           <div class="col-md-8">

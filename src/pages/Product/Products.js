@@ -83,6 +83,7 @@ const Products = (props) => {
       </Pagination.Item>
     )
   }
+
   //設定分頁容納節點
   const paginationBasic = (
     <Pagination className="d-flex justify-content-center" size="md">
@@ -104,10 +105,10 @@ const Products = (props) => {
   )
 
   return (
-    <Container>
+    <Container className="products">
       <Row className="my-5">
         <ProductSidebar />
-        <Col md={10}>
+        <Col md={10} className="bg-white">
           <Breadcrumb />
           {sort}
           <Row>
