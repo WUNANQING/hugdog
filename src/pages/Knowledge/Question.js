@@ -20,6 +20,7 @@ import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
 import { getQuestion } from './actions/index'
+import { getDogDetail, getMemberDetail } from '../member/actions/index'
 
 import $ from 'jquery'
 
@@ -29,11 +30,12 @@ import '../../components/Knowledge/knowledge.scss'
 import QuestionArt from './QuestionArt'
 
 function Question(props) {
+  const mId = localStorage.getItem('mId')
   useEffect(() => {
-    console.log(props)
     props.getQuestion()
+    props.getDogDetail()
+    props.getMemberDetail(mId)
   }, [])
-
 
   //sweetalert
   const Swal = require('sweetalert2')
@@ -62,6 +64,7 @@ function Question(props) {
       event.preventDefault()
       event.stopPropagation()
     } else if (form.checkValidity() === true) {
+      postAsk(askInfo)
       setShow(false)
       post()
     }
@@ -75,13 +78,47 @@ function Question(props) {
     setClassify(newClassify)
   }
 
-
   //--------------------發問
-  //從mid抓會員資料
-  const mId = localStorage.getItem('mId')
-  //建立發問
-  async function postOrder(form) {
-    const req = new Request('http://localhost:6001/order/post', {
+
+  // const dName = localstorage.getItem('dName')
+
+  //表單資訊
+  const mName = props.mPost[0] ? props.mPost[0].mName : ''
+  const askInfo = {
+    mId: mId,
+    mName: mName,
+    dogYear: '',
+    askTitle: '',
+    classify: '',
+    type: '',
+    askTxt: '',
+  }
+
+  //寫入表單資訊
+  function askformInfo(e, info) {
+    switch (info) {
+      case 'dogYear':
+        askInfo.dogYear = e.currentTarget.value
+        break
+      case 'classify':
+        askInfo.classify = e.currentTarget.value
+        break
+      case 'type':
+        askInfo.type = e.currentTarget.value
+        break
+      case 'askTitle':
+        askInfo.askTitle = e.currentTarget.value
+        break
+      case 'askTxt':
+        askInfo.askTxt = e.currentTarget.value
+        break
+      default:
+        break
+    }
+  }
+  //建立問題
+  async function postAsk(form) {
+    const req = new Request('http://localhost:6001/knowledge/question/ask', {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({
@@ -169,9 +206,21 @@ function Question(props) {
 
                 <Form.Group controlId="exampleForm.ControlSelect1 petselect">
                   {/* <Form.Label>寵物</Form.Label> */}
-                  <Form.Control name="dogname" as="select" required>
+                  <Form.Control
+                    name="dogYear"
+                    as="select"
+                    onChange={e => askformInfo(e, 'dogYear')}
+                    required
+                  >
                     <option value="">請選擇寵物</option>
-                    <option value="1">1</option>
+                    {props.dogPost &&
+                      props.dogPost.map((value, index) => {
+                        return (
+                          <option value={value.dId} key={index}>
+                            {value.dName} ／ {value.dYear}歲
+                          </option>
+                        )
+                      })}
                     {/* <option>{props.data.qName}</option> */}
                   </Form.Control>
                 </Form.Group>
@@ -180,7 +229,12 @@ function Question(props) {
                     as={Col}
                     controlId="exampleForm.ControlSelect1 typeselect"
                   >
-                    <Form.Control name="classify" as="select" required>
+                    <Form.Control
+                      name="classify"
+                      as="select"
+                      required
+                      onChange={e => askformInfo(e, 'classify')}
+                    >
                       <option value="">請選擇類型</option>
                       <option value="1">行為</option>
                       <option value="2">照護</option>
@@ -192,7 +246,12 @@ function Question(props) {
                     as={Col}
                     controlId="exampleForm.ControlSelect2 typeselect"
                   >
-                    <Form.Control name="type" as="select" required>
+                    <Form.Control
+                      name="type"
+                      as="select"
+                      onChange={e => askformInfo(e, 'type')}
+                      required
+                    >
                       <option value="">請選擇類型</option>
                       <option value="1">行為</option>
                       <option value="2">照護</option>
@@ -203,19 +262,21 @@ function Question(props) {
 
                 <Form.Group controlId="exampleForm.ControlInput1">
                   <Form.Control
-                    name="title"
+                    name="askTitle"
                     type="text"
                     placeholder="請輸入問題標題"
+                    onChange={e => askformInfo(e, 'askTitle')}
                     required
                   />
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                   <Form.Control
                     required
-                    name="asktxt"
+                    name="askTxt"
                     as="textarea"
                     rows="8"
                     placeholder="請詳述說明狀況、發生時間、主要徵狀、寵物變化..."
+                    onChange={e => askformInfo(e, 'askTxt')}
                   />
                 </Form.Group>
               </Modal.Body>
@@ -262,10 +323,17 @@ function Question(props) {
 }
 
 const mapStateToProps = store => {
-  return { post: store.getQuestion }
+  return {
+    post: store.getQuestion,
+    dogPost: store.getDogDetail,
+    mPost: store.getMemberDetail,
+  }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getQuestion }, dispatch)
+  return bindActionCreators(
+    { getQuestion, getDogDetail, getMemberDetail },
+    dispatch
+  )
 }
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Question)

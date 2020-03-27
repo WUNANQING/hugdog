@@ -15,6 +15,15 @@ const getMember = (state = [], action) => {
       return state
   }
 }
+// 會員細節reducers
+const getMemberDetail = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_MEMBER_DETAIL':
+      return action.data
+    default:
+      return state
+  }
+}
 // 會員訂單reducers
 const getMemberOrder = (state = [], action) => {
   switch (action.type) {
@@ -174,6 +183,7 @@ const rootReducer = combineReducers({
   getCode,
   getDogDetail,
   getQuantity,
+  getMemberDetail,
 })
 
 export { rootReducer }
