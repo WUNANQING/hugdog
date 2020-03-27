@@ -17,21 +17,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../../css/member/member-info.scss'
 
 const ServiceOrder = (props) => {
-  const [serviceOrder, setServiceOrder] = useState([])
-  //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
-  const mId = localStorage.getItem('mId')
-  async function getOrderDetail(orderId) {
-    const req = new Request(`http://localhost:6001/member/Sorder/${mId}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
-    const res = await fetch(req)
-    const detail = await res.json()
-    console.log(detail)
-    ServiceOrder(detail)
-  }
   //狗狗基本資料
-
+  console.log('length: ', props.data.length)
   useEffect(() => {
     props.getServiceOrder()
   }, [])

@@ -96,8 +96,18 @@ function Member() {
                       <p>個人資訊</p>
                     </div>
                     <ul>
-                      <li> 個人資料修改</li>
-                      <li> 狗狗資料修改</li>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-info"
+                      >
+                        個人資訊修改
+                      </Nav.Link>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-info"
+                      >
+                        狗狗資訊修改
+                      </Nav.Link>
                     </ul>
                   </div>
                   <div className="member-form">
@@ -105,10 +115,31 @@ function Member() {
                       <p>商品查詢</p>
                     </div>
                     <ul>
-                      <li> 我的優惠</li>
-                      <li> 我的訂單</li>
-                      <li> 我的最愛</li>
-                      <li> 購物車</li>
+                      {' '}
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-item"
+                      >
+                        我的優惠
+                      </Nav.Link>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-item"
+                      >
+                        我的訂單
+                      </Nav.Link>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-item"
+                      >
+                        我的最愛
+                      </Nav.Link>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-item"
+                      >
+                        購物車
+                      </Nav.Link>
                     </ul>
                   </div>
                 </div>
@@ -118,19 +149,43 @@ function Member() {
                       <p>服務查詢</p>
                     </div>
                     <ul>
-                      <li>保姆訂單查詢</li>
-                      <li> 評論紀錄</li>
-                      <li> 最愛保姆</li>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-activity"
+                      >
+                        保姆訂單查詢
+                      </Nav.Link>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-activity"
+                      >
+                        評論紀錄
+                      </Nav.Link>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-activity"
+                      >
+                        最愛保姆
+                      </Nav.Link>
                     </ul>
                   </div>
                   <div className="member-form">
                     <div className="title-box">
-                      <p>服務查詢</p>
+                      <p>活動查詢</p>
                     </div>
                     <ul>
-                      <li>保姆訂單查詢</li>
-                      <li> 評論紀錄</li>
-                      <li> 最愛保姆</li>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-activity"
+                      >
+                        已報名活動
+                      </Nav.Link>
+                      <Nav.Link
+                        className="member-sidebar-text-content"
+                        href="/member/member-activity"
+                      >
+                        最愛活動
+                      </Nav.Link>
                     </ul>
                   </div>
                 </div>

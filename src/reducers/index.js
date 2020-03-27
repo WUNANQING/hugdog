@@ -24,6 +24,15 @@ const getMemberOrder = (state = [], action) => {
       return state
   }
 }
+//更新會員資料
+const updateMember = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_MEMBER':
+      return { ...action.data }
+    default:
+      return state
+  }
+}
 //會員訂單細節
 const getMemberOrderDetail = (state = [], action) => {
   switch (action.type) {
@@ -124,7 +133,15 @@ const getDogDetail = (state = [], action) => {
       return state
   }
 }
-
+//更新狗狗資料
+const updateDog = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_DOG':
+      return { ...action.data }
+    default:
+      return state
+  }
+}
 const getQuantity = (state = 0, action) => {
   switch (action.type) {
     case 'COUNT_QUANTITY':
@@ -191,14 +208,6 @@ const getQuestionDetail = (state = [], action) => {
   }
 }
 
-const updateMember = (state = [], action) => {
-  switch (action.type) {
-    case 'UPDATE_MEMBER':
-      return { ...action.data }
-    default:
-      return state
-  }
-}
 //knowledge end
 const rootReducer = combineReducers({
   getMember,

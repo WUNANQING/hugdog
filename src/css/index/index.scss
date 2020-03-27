@@ -181,3 +181,17 @@
     }
   }
 }
+.home {
+  position: relative;
+  // filter: brightness(50%);
+}
+.home_login {
+  position: absolute;
+  z-index: 3;
+  left: 20%;
+}
+.home_hide {
+  display: none;
+}
+.user {
+}

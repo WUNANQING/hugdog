@@ -17,20 +17,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../../css/member/member-info.scss'
 
 const DogInfo = (props) => {
-  const [dog, setDog] = useState([])
   //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
-  const mId = localStorage.getItem('mId')
-  async function getOrderDetail(orderId) {
-    const req = new Request(`http://localhost:6001/dog/${mId}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
-    const res = await fetch(req)
-    const detail = await res.json()
-    console.log(detail)
-    setDog(detail)
-  }
-  //狗狗基本資料
 
   useEffect(() => {
     props.getDogDetail()
@@ -46,13 +33,19 @@ const DogInfo = (props) => {
         <td>{props.data[i] ? props.data[i].dYear : ''}</td>
         <td>{props.data[i] ? props.data[i].dWeight : ''}</td>
         <td>
-          <button className="btn btn-info">修改</button>
+          <div className="btn btn-info" onClick={dogEdit}>
+            修改
+          </div>
         </td>
         <td>
-          <button className="btn btn-info">刪除</button>
+          <div className="btn btn-info">刪除</div>
         </td>
       </tr>
     )
+    function dogEdit() {
+      window.location.replace('http://localhost:3000/dog-edit')
+      localStorage.setItem('dId', props.data[i] ? props.data[i].dId : '')
+    }
   }
   return (
     <div class="tab-content content" id="content2">

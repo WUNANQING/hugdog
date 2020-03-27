@@ -135,10 +135,24 @@
     display: inline-block;
   }
 }
-.favorite_items_wrap {
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 60px;
+.favorite {
+  .favorite_items_wrap {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 200px;
+  }
+  img {
+    width: 110px;
+    height: auto;
+  }
+  // .favorite_items_wrap {
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
+  //   display: -webkit-box;
+  //   -webkit-line-clamp: 2;
+  //   -webkit-box-orient: vertical;
+  //   width: 200px;
+  // }
 }

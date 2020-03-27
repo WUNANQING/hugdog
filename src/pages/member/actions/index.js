@@ -122,13 +122,35 @@ export const getDogDetail = (mId) => {
     dispatch(showDogDetail(data))
   }
 }
+//更新狗狗資料
+export const updateDog = (data) => {
+  return { type: 'UPDATE_DOG', data }
+}
+export const updateServerDog = (val) => {
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/dog/update/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(val),
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(updateDog(data))
+  }
+}
 //查看服務訂單
 export const showServiceOrder = (data) => {
   return { type: 'SHOW_SERVICE_ORDER', data }
 }
-export const getServiceOrder = () => {
+export const getServiceOrder = (mId) => {
+  mId = localStorage.getItem('mId')
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/member/Sorder`, {
+    const req = new Request(`http://localhost:6001/member/Sorder/${mId}`, {
       method: 'GET',
       credentials: 'include',
     })

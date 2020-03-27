@@ -38,23 +38,39 @@ const LoveList = (props) => {
     props.getLoveList()
     console.log('pName: ', pName)
   }, [])
+
   let LoveList = []
   console.log('pName: ', pName)
   for (let i = 0; i < props.data.length; i++) {
     LoveList.push(
-      <tr className="order_show" onClick="" id={i} name={i}>
+      <tr className="order_show" onClick={jump} id={i} name={i}>
         {/* <th scope="row">{i + 1}</th> */}
         <td>{i + 1}</td>
         <td className="favorite_items_wrap">
           {props.data[i] ? props.data[i].pName : ''}
         </td>
         <td>{props.data[i] ? props.data[i].pPrice : ''}</td>
-        <td>{props.data[i] ? props.data[i].pImg : ''}</td>
+        <td>
+          <img
+            className="sm_cart_img"
+            src={require(`../../../images/product/${
+              props.data[i] ? props.data[i].pImg : ''
+            }.jpg`)}
+            alt="..."
+          />
+        </td>
         <td className="favorite_items_wrap">
           {props.data[i] ? props.data[i].pInfo : ''}
         </td>
       </tr>
     )
+    function jump() {
+      window.location.replace(
+        `http://localhost:3000/productdetail/${
+          props.data[i] ? props.data[i].pId : ''
+        }`
+      )
+    }
   }
   console.log('pName: ', pName)
   return (
@@ -64,7 +80,7 @@ const LoveList = (props) => {
           最愛商品
           <br />
         </h3>
-        <div class="row">
+        <div class="row favorite">
           <div class="col-md-8">
             <div class="card card-width">
               <div class="card-body">

@@ -29,7 +29,7 @@ const ActivityOrder = (props) => {
   let ActivityOrderList = []
   for (let i = 0; i < props.data.length; i++) {
     ActivityOrderList.push(
-      <tr className="order_show" onClick="" id={i} name={i}>
+      <tr className="order_show" onClick={jump} id={i} name={i}>
         {/* <th scope="row">{i + 1}</th> */}
         <td>{i + 1}</td>
         <td>{props.data[i] ? props.data[i].eId : ''}</td>
@@ -37,6 +37,13 @@ const ActivityOrder = (props) => {
         <td>{props.data[i] ? props.data[i].eDate : ''}</td>
       </tr>
     )
+    function jump() {
+      window.location.replace(
+        `http://localhost:3000/activity/class/${
+          props.data[i] ? props.data[i].eId : ''
+        }`
+      )
+    }
   }
   return (
     <div class="tab-content content" id="content1">
