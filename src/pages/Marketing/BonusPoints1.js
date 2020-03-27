@@ -4,6 +4,8 @@ import { Form, Button, Row, Col, Card } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import BonusPointsNav from '../../components/marketing/BonusPointsNav'
 import BonusPointsList from '../../components/marketing/BonusPointsList'
+import BonusPointsDescription from './BonusPointsDescription'
+
 import { IoIosStar, IoMdStarOutline, IoMdStarHalf } from 'react-icons/io'
 import { IconContext } from 'react-icons'
 import $ from 'jquery'
@@ -28,7 +30,16 @@ function BonusPoints() {
     <>
       {/* <MyComponent /> */}
       <BonusPointsNav bonusPoints={5000} />
-      <BonusPointsList />
+
+      <Switch>
+        <Route path="/bonuspoints/event">{/* <CouponEvent /> */}</Route>
+        <Route path="/bonuspoints/description">
+          <BonusPointsDescription />
+        </Route>
+        <Route path="/bonuspoints">
+          <BonusPointsList />
+        </Route>
+      </Switch>
     </>
   )
 }
