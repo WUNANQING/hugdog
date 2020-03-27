@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Badge, Button } from 'react-bootstrap'
-import { Image } from 'react-bootstrap'
+import { Container, Row, Col, Badge, Button, Image } from 'react-bootstrap'
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
 import { FiClock } from 'react-icons/fi'
 import { AiOutlineTag } from 'react-icons/ai'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import $ from 'jquery'
 //redux
 import { connect } from 'react-redux'
@@ -14,11 +13,17 @@ import { getBlog, getBlogArticle } from './actions/index'
 
 import Breadcrumbs from '../../components/Breadcrumbs'
 import '../../components/Knowledge/knowledge.scss'
+import BlogArticleSm from './BlogArticleSm'
 
 const BlogArticle = props => {
   const aId = props.match.params.aId ? props.match.params.aId : ''
 
   console.log(aId)
+
+  useEffect(() => {
+    console.log(props)
+    props.getBlog()
+  }, [])
 
   useEffect(() => {
     props.getBlogArticle(props.match.params.aId)
@@ -31,25 +36,30 @@ const BlogArticle = props => {
   })
 
   let showBlogType = ''
-  if (props.article[0] ? props.article[0].dDate : '' === '1') {
+  if (props.article[0] && props.article[0].aType === '1') {
     showBlogType = '健康知識'
-  } else if (props.article[0] ? props.article[0].dDate : '' === '2') {
+  } else if (props.article[0] && props.article[0].aType === '2') {
     showBlogType = '疫苗與用藥'
-  } else if (props.article[0] ? props.article[0].dDate : '' === '3') {
+  } else if (props.article[0] && props.article[0].aType === '3') {
     showBlogType = '營養與處方'
   } else {
     showBlogType = '美容與保養'
   }
+
+  let arr = props.post.rows && props.post.rows.slice(0, 3)
+
+  const [heart, setHeart] = useState(true)
 
   return (
     <>
       <Container className="article">
         <Row className="mt-5">
           <Col md={9} className="mt-2 shadow-lg p-3 mb-4 bg-white rounded">
-            <div className=" d-flex justify-content-between align-items-center mt-2">
+            <div className=" d-flex justify-content-between align-items-center mt-1">
               <h6 className="">
                 <Badge variant="primary text-light" className="p-2">
                   {showBlogType}
+                  {/* {props.article[0] ? props.article[0].aType : ''} */}
                 </Badge>
                 <span className="icn-time ml-3">
                   <FiClock /> {props.article[0] ? props.article[0].dDate : ''}
@@ -57,13 +67,12 @@ const BlogArticle = props => {
               </h6>
 
               <Button
+                type="submit"
                 variant="link"
                 className="d-flex text-danger btn-white"
-                onClick={() => alert('11111')}
+                onClick={() => setHeart(!heart)}
               >
-                <h1>
-                  <FaRegHeart />
-                </h1>
+                <h1 id="heart">{heart ? <FaRegHeart /> : <FaHeart />}</h1>
               </Button>
             </div>
             <div>
@@ -90,41 +99,25 @@ const BlogArticle = props => {
               </p>
             </div>
           </Col>
-          <Col md={3}></Col>
+          <Col md={3}>
+            <div className="mt-3 text-center">
+              <h4 className="r">最新文章</h4>
+              <br></br>
+              <div className="sidebar mr-4 ml-4">
+                <Link>
+                  {props.post.rows &&
+                    arr.map((value, index) => {
+                      return (
+                        <BlogArticleSm key={index} data={props.post[index]} />
+                      )
+                    })}
+                  {/* <BlogArticleSm /> */}
+                </Link>
+              </div>
+            </div>
+          </Col>
         </Row>
       </Container>
-
-      {/* <Container>
-        <Row>
-          <div className="article">
-            <nav className="nav">
-              <Breadcrumbs />
-            </nav>
-            <br />
-            <br />
-            <div className="articleTitle">
-              <div className="text-left d-flex ">
-                <div className="mr-3">
-                  {props.article[0] ? props.article[0].dDate : ''}
-                </div>
-                <div id="trun" className="ml=4">
-                  <FaRegHeart />
-                </div>
-              </div>
-              <br />
-              <h2 className="text-center">
-                {props.article[0] ? props.article[0].aTitle : ''}
-              </h2>
-            </div>
-            <br />
-            <div className="context">
-              <p className="articletxt text-center">
-                {props.article[0] ? props.article[0].aDes : ''}
-              </p>
-            </div>
-          </div>
-        </Row>
-      </Container> */}
     </>
   )
 }
@@ -133,7 +126,7 @@ const mapStateToProps = store => {
   return { post: store.getBlog, article: store.getBlogArticle }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getBlogArticle }, dispatch)
+  return bindActionCreators({ getBlog, getBlogArticle }, dispatch)
 }
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(BlogArticle)

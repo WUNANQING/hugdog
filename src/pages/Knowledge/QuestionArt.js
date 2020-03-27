@@ -63,7 +63,7 @@ function QuestionArt(props) {
             </div>
             <div>
               <h6 className="m-3">
-                發問飼主：<strong> {props.data.mName}</strong>{' '}
+                發問飼主：<strong>{props.data.mName}</strong>{' '}
               </h6>
               <h6 className="m-3">
                 寵物年紀：<strong>{props.data.qAge}</strong> 歲
