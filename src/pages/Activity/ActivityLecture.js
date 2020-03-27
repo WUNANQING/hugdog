@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { StickyContainer, Sticky } from 'react-sticky'
+import { withRouter } from 'react-router-dom'
 
 //引入自己的css
 import '../../css/activity/activity.scss'
@@ -8,6 +9,71 @@ import Breadcrumb from '../../components/Breadcrumbs'
 
 function ActivityLecture(props) {
   const [quantity, setQuantity] = useState(1)
+  const [data, setData] = useState([])
+
+  //講座加入收藏
+  const addCollection = () => {
+    console.log('加入收藏')
+    fetch(`http://localhost:6001/activity_collection/insertLecture/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        mId: 'm001',
+        LId: props.match.params.LId,
+      }),
+    })
+      .then((r) => r.json())
+      .then((obj) => console.log(obj))
+  }
+
+  //講座報名參加
+  const joinLecture = () => {
+    console.log('報名參加')
+    fetch(`http://localhost:6001/activity_successEvent/insertSuccessEvent/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        mId: 'm001',
+        eId: props.match.params.LId,
+        eName: data.LName,
+        eDate: data.LDate,
+        ePeople: quantity + '',
+      }),
+    })
+      .then((r) => r.json())
+      .then((obj) => console.log(obj))
+  }
+
+  useEffect(() => {
+    const LId = props.match.params.LId
+    // const cInfo = props.match.params.cInfo
+    // console.log('propsdata:', props.match.params.cId)
+    // props.getActivityClassDetail(cId)
+
+    //fetch課程資料
+    async function getActClassData() {
+      const req = new Request(`http://localhost:6001/activity_lecture/${LId}`, {
+        method: 'GET',
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+      })
+      const res = await fetch(req)
+      const data = await res.json()
+      // console.log(data[0].cImg)
+      setData(data[0])
+      // setData(data[0].cInfo.split('\n').join())
+    }
+    getActClassData()
+  }, [])
+
   return (
     <>
       <div className="container activity-lecture my-3">
@@ -20,10 +86,11 @@ function ActivityLecture(props) {
                 alt=""
               />
             </figure>
-            <div>
+            <div style={{ whiteSpace: 'pre-wrap' }}>
               <h5>講座內容</h5>
               <hr />
-              <p>▍講座理念</p>
+              {data.LInfo}
+              {/* <p>▍講座理念</p>
               <p>
                 為了受虐的動物，我們應該站出來!動物虐待案件充斥在你我的生活周遭，但是大多數的人遇到時，卻沒有個管道可以著手幫忙。我們雖然擁有管道及方法，但動物虐待案件數量太龐大，一年內平均會收到700-900件通報案件，人力有限的情況下，時常需要仰賴在地調查志工協助了解實際狀況及蒐證，必要時，需要與飼主進行溝通以及勸導，以提昇動物福利，因此調查部門正招募全台的有志人士，在合法、合理、合情的方式下，一同拯救需要幫助的動物。
               </p>
@@ -44,9 +111,9 @@ function ActivityLecture(props) {
                 <br />
                 鬆繩隨行散步
                 <br />
-              </p>
+              </p> */}
             </div>
-            <div className="block-notice">
+            <div className="block-notice mt-3">
               <h5>注意事項</h5>
               <hr />
               <div>
@@ -75,7 +142,7 @@ function ActivityLecture(props) {
           </div>
           <div className="col-lg-5 lecture-right">
             <div className="right-sticky">
-              <h3 className="title">動保系列講座：一切都是為了毛</h3>
+              <h3 className="title">{data.LName}</h3>
               <div className="price">
                 <span className="symbol">NT$ </span>
                 <span className="amount">200</span>
@@ -88,10 +155,10 @@ function ActivityLecture(props) {
                     id="exampleFormControlSelect1"
                   >
                     <option>請選擇活動規格</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option>{data.LDate}</option>
+                    <option>2020-04-17 (四) 13:00 ~ 15:00</option>
+                    <option>2020-04-17 (四) 13:00 ~ 15:00</option>
+                    <option>2020-04-17 (四) 13:00 ~ 15:00</option>
                   </select>
                 </div>
                 <div className="quantity">
@@ -123,6 +190,9 @@ function ActivityLecture(props) {
                       >
                         +
                       </button>
+                      <div className="ml-2 d-flex align-items-center">
+                        部份規格剩最後 <span>1</span> 個名額
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -130,6 +200,7 @@ function ActivityLecture(props) {
                   <button
                     type="button"
                     className="btn btn-primary form-control"
+                    onClick={joinLecture}
                   >
                     立即報名
                   </button>
@@ -138,6 +209,7 @@ function ActivityLecture(props) {
                   <button
                     type="button"
                     className="btn btn-outline-primary form-control"
+                    onClick={addCollection}
                   >
                     加入收藏
                   </button>
@@ -150,13 +222,14 @@ function ActivityLecture(props) {
                   <div className="row info-item">
                     <div className="col-4 info-title">活動摘要</div>
                     <div className="col info-content">
-                      如果您的內心也是「為了生活我可以忍，但虐待動物就不行！
-                      」請您踴躍報名台北場專業調查志工培訓，調查志工培訓課程將傳授動保知識及調查技巧，能實際參與、協助協會調查員處理受虐案件。
+                      {data.LInfo2}
+                      {/* 如果您的內心也是「為了生活我可以忍，但虐待動物就不行！
+                      」請您踴躍報名台北場專業調查志工培訓，調查志工培訓課程將傳授動保知識及調查技巧，能實際參與、協助協會調查員處理受虐案件。 */}
                     </div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">最近活動日期</div>
-                    <div className="col info-content">2020/03/07 (六)</div>
+                    <div className="col info-content">{data.LDate}</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">預約須知</div>
@@ -166,13 +239,11 @@ function ActivityLecture(props) {
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">活動所在地</div>
-                    <div className="col info-content">台灣 / 台北市</div>
+                    <div className="col info-content">{data.LLocation}</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">活動地址</div>
-                    <div className="col info-content">
-                      台灣大學第二學生活動中心（台北市大安區羅斯福路四段85號）
-                    </div>
+                    <div className="col info-content">{data.LAddress}</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">開放入場時間</div>
@@ -180,11 +251,11 @@ function ActivityLecture(props) {
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">活動長度</div>
-                    <div className="col info-content">2.5 小時</div>
+                    <div className="col info-content">{data.LTime}小時</div>
                   </div>
                   <div className="row info-item">
                     <div className="col-4 info-title">剩餘名額</div>
-                    <div className="col info-content">2</div>
+                    <div className="col info-content">{data.LPeople}</div>
                   </div>
                 </div>
               </div>
@@ -197,4 +268,4 @@ function ActivityLecture(props) {
   )
 }
 
-export default ActivityLecture
+export default withRouter(ActivityLecture)

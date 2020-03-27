@@ -1,187 +1,155 @@
-import React from 'react'
-import { Row, Col, Form, Card } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Form, Card, Button } from 'react-bootstrap'
+import { withRouter } from 'react-router'
+import ServiceBookingForm from '../../components/service/ServiceBookingForm'
+import ServiceGoBack from '../../components/service/ServiceGoBack'
+import { getDataFromServer } from '../../utils/service/ServiceFunction'
+import ServiceNoUser from '../../components/service/redirect/ServiceNoUser'
+import { MdSend } from 'react-icons/md'
+import Swal from 'sweetalert2'
+import $ from 'jquery'
 //引入自己的scss
 import '../../css/service/style.scss'
 
 function ServiceBooking(props) {
-  //縣市
-  const cityArea = [
-    { id: 1, name: '臺北市' },
-    { id: 2, name: '新北市' },
-    { id: 3, name: '桃園市' },
-    { id: 4, name: '臺中市' },
-    { id: 5, name: '臺南市' },
-    { id: 6, name: '高雄市' },
-    { id: 7, name: '新竹縣' },
-    { id: 8, name: '苗栗縣' },
-    { id: 9, name: '彰化縣' },
-    { id: 10, name: '南投縣' },
-    { id: 11, name: '嘉義縣' },
-    { id: 12, name: '屏東縣' },
-    { id: 13, name: '宜蘭縣' },
-    { id: 14, name: '花蓮縣' },
-    { id: 15, name: '臺東縣' },
-    { id: 16, name: '澎湖縣' },
-    { id: 17, name: '金門縣' },
-    { id: 18, name: '連江縣' },
-    { id: 19, name: '基隆市' },
-    { id: 20, name: '新竹市' },
-    { id: 21, name: '嘉義市' },
-  ]
+  const sMemberId = props.sMemberId
 
-  //服務類型
-  const serviceType = [
-    { id: 1, name: '安親托育' },
-    { id: 2, name: '寄宿照顧' },
-    { id: 3, name: '到府陪伴' },
-    { id: 4, name: '到府遛狗' },
-  ]
+  const [users, setUsers] = useState([]) //保母資料(service_user的資料)
+  //設定子元件回傳資料
+  const [orderData, setOrderData] = useState(JSON)
+  //表單驗證
+  const [validated, setValidated] = useState(false)
+  // const [customValidated, setCustomValidated] = useState(false)
+  const handleSubmit = event => {
+    console.log(orderData)
+    setValidated(true)
+    event.preventDefault()
+    const form = event.currentTarget
+    //若未完成驗證
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+      //focus on valueMissing
+      // console.log($(form)[0].elements)
+      for (let i = 0; i < $(form)[0].elements.length; i++) {
+        if (
+          $(form)[0].elements[i].validity.valueMissing ||
+          $(form)[0].elements[i].validity.typeMismatch
+        ) {
+          $(form)[0].elements[i].focus()
+          break
+        }
+      }
+    } else {
+      //完成驗證
+      Swal.fire({
+        title: '確認送出預約?',
+        text: '送出後保母將收到您的訂單',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#cea160',
+        cancelButtonColor: '#8f8f8f',
+        confirmButtonText: '確認',
+        cancelButtonText: '返回',
+      }).then(result => {
+        if (result.value) {
+          //子元件回傳的資料並傳送
+          fetch(
+            `http://localhost:6001/service/order/insert/${props.match.params.userId}`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(orderData),
+            }
+          )
+            .then(r => r.json())
+            .then(obj => {
+              console.log(obj)
+              //回饋訊息
+              Swal.fire({
+                title: '預約成功',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500,
+              }).then(result => {
+                if (result.value) {
+                  //-----待處理-----
+                  props.history.push('/member/member-service')
+                }
+              })
+            })
+        }
+      })
+      return false
+    }
+  }
 
-  //體型
-  const dogSize = [
-    { id: 1, name: '迷你(0-4KG)' },
-    { id: 2, name: '小型(0-4KG)' },
-    { id: 3, name: '中型(4-10KG)' },
-    { id: 4, name: '大型(11-25KG)' },
-  ]
-  //評價分數
-  const serviceRating = [
-    { id: 1, name: '極度好評(4-5分)' },
-    { id: 2, name: '好評(4-5分)' },
-    { id: 3, name: '普通(4-5分)' },
-    { id: 4, name: '差評(4-5分)' },
-    { id: 5, name: '極度差評(4-5分)' },
-  ]
+  //子元件回傳資料
+  const callbackOrderData = child => {
+    setOrderData(child)
+  }
+  //子元件回傳自訂驗證
+  // const callbackCustomValid = child => {
+  //   setCustomValidated(child)
+  // }
 
-  //其他服務
-  const extraService = [
-    { id: 1, name: '洗澡' },
-    { id: 2, name: '美容' },
-    { id: 3, name: '行為訓練' },
-    { id: 4, name: '有專業執照' },
-  ]
+  useEffect(() => {
+    //取得個別保母資料
+    const data = getDataFromServer(
+      `http://localhost:6001/service/user/${props.match.params.userId}?dataSts=Y`
+    )
+    Promise.resolve(data).then(data => {
+      setUsers(data)
+    })
+  }, [])
 
   return (
     <>
-      <div className="Service ServiceBooking">
-        <div className="container py-3">
+      {users.length !== 0 ? (
+        <div className="ServiceBooking">
+          <ServiceGoBack
+            prevUrl={'/service/detail/' + props.match.params.userId}
+          />
           <Row>
             <Col>
+              <h4 className="my-4">聯絡 {users[0].sName}</h4>
               <Card className="card-light">
                 <Card.Body>
-                  <Form>
-                    <div className="p-sm-3">
-                      <h5>服務內容</h5>
-                      <hr className="title" />
-                      <div className="p-sm-3 px-0">
-                        <Form.Group as={Row} controlId="serviceType">
-                          <Form.Label column sm="3">
-                            選擇服務
-                          </Form.Label>
-                          <Col sm="9">
-                            <Form.Control as="select" name="serviceType">
-                              <option value="">請選擇</option>
-                              {serviceType.map(obj => (
-                                <option value={obj.id} key={obj.id}>
-                                  {obj.name}
-                                </option>
-                              ))}
-                            </Form.Control>
-                          </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId="formPlaintextPassword">
-                          <Form.Label column sm="3">
-                            選擇時段
-                          </Form.Label>
-                          <Col sm="4">
-                            <Form.Control
-                              name="fromDate"
-                              type="text"
-                              placeholder="選擇時段"
-                            />
-                          </Col>
-                          <Col sm="1">-</Col>
-                          <Col sm="4">
-                            <Form.Control
-                              name="toDate"
-                              type="text"
-                              placeholder="選擇時段"
-                            />
-                          </Col>
-                        </Form.Group>
-                      </div>
-                      <h5>會員基本資料</h5>
-                      <hr className="title" />
-                      <div className="p-sm-3 px-0">
-                        <Form.Group as={Row} controlId="addr">
-                          <Form.Label column sm="3">
-                            地址
-                          </Form.Label>
-                          <Col sm="9">
-                            <Form.Control
-                              name="addr"
-                              type="text"
-                              placeholder="請填入地址"
-                            />
-                          </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId="phone">
-                          <Form.Label column sm="3">
-                            電話
-                          </Form.Label>
-                          <Col sm="9">
-                            <Form.Control
-                              name="phone"
-                              type="text"
-                              placeholder="請填入電話"
-                            />
-                          </Col>
-                        </Form.Group>
-                      </div>
-                      <h5>狗狗資料</h5>
-                      <hr className="title" />
-                      <div className="p-sm-3 px-0">
+                  <Form
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleSubmit}
+                  >
+                    <div className="p-sm-4">
+                      <ServiceBookingForm
+                        parentOrderData={callbackOrderData}
+                        // parentCustomValidated={callbackCustomValid}
+                        sMemberId={sMemberId}
+                      />
+                      <div className="pb-4 px-0">
                         <Form.Group as={Row}>
-                          <Form.Label column sm="3">
-                            <span className="label-danger">最多接待2位</span>
-                          </Form.Label>
-                          <Col sm="9"></Col>
-                        </Form.Group>
-                      </div>
-                      <h5>額外需求</h5>
-                      <hr className="title" />
-                      <div className="p-sm-3 px-0">
-                        <Form.Group as={Row}>
-                          <Form.Label column sm="3">
-                            選擇額外需求
-                          </Form.Label>
-                          <Col sm="9">
-                            {extraService.map(obj => (
-                              <Col md={12} lg={6} key={obj.id}>
-                                <Form.Check
-                                  custom
-                                  name={`extraService`}
-                                  type={`checkbox`}
-                                  id={`extraService${obj.id}`}
-                                  label={obj.name}
-                                />
-                              </Col>
-                            ))}
+                          <Col className="text-center">
+                            <Form.Check
+                              custom
+                              name="admit"
+                              type="checkbox"
+                              id="admit"
+                              label="我同意HugDog預約服務條款"
+                              feedback="您必須勾選同意才能繼續"
+                              required
+                            />
                           </Col>
                         </Form.Group>
                       </div>
-                      <h5>備註</h5>
-                      <hr className="title" />
-                      <div className="p-sm-3 px-0">
+                      <div className="pb-4 px-0">
                         <Form.Group as={Row}>
-                          <Col>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                              <Form.Control
-                                as="textarea"
-                                rows="3"
-                                placeholder="最多500個字"
-                              />
-                            </Form.Group>
+                          <Col className="text-center">
+                            <Button variant="success" type="submit">
+                              <MdSend />
+                              送出預約
+                            </Button>
                           </Col>
                         </Form.Group>
                       </div>
@@ -192,9 +160,11 @@ function ServiceBooking(props) {
             </Col>
           </Row>
         </div>
-      </div>
+      ) : (
+        <ServiceNoUser />
+      )}
     </>
   )
 }
 
-export default ServiceBooking
+export default withRouter(ServiceBooking)

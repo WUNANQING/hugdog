@@ -60,7 +60,7 @@ function CouponDescription() {
             優惠券為贈品，係屬無償取得，不適用商品（服務）禮券記載之規範。
           </li>
           <li>
-            本公司有權決定終止及變更優惠券贈送辦法及折抵方式的權利。詳見https://shop.wwwwwwwwwwwwwwwwwwwww.com.tw/，相關資訊以更新後者為準
+            本公司有權決定終止及變更優惠券贈送辦法及折抵方式的權利。詳見https://shop.hugdog.com.tw/，相關資訊以更新後者為準
           </li>
         </ul>
       </div>

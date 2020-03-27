@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-// import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 function ActClassCard(props) {
   // console.log('asdf', props.ttt)
@@ -12,13 +12,13 @@ function ActClassCard(props) {
   let title = actClass.cName
   let date = actClass.cDate
   let img = actClass.cImg
-  let Id = actClass.cId
+  // let Id = actClass.cId
 
   // console.log(`../../images/activity/${img}`)
   return (
     <>
       <Card className="my-3">
-        <Link to="/activity/class">
+        <Link to={'/activity/class/' + props.data.cId}>
           <Card.Img
             variant="top"
             src={require(`../../images/activity/${img}`)}
@@ -43,11 +43,10 @@ function ActClassCard(props) {
           <Card.Title>{title}</Card.Title>
         </Card.Body>
         <Card.Footer bg="primary">
-          <Link to="/activity/class">#優惠活動</Link>
-          <Link to="/activity/lecture">#講座活動</Link>
+          <Link to="/activity/class">#課程報名</Link>
         </Card.Footer>
       </Card>
     </>
   )
 }
-export default ActClassCard
+export default withRouter(ActClassCard)

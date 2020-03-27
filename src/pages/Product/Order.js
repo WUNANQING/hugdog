@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { MdShoppingCart, MdBookmarkBorder } from 'react-icons/md'
-const Order = props => {
+const Order = (props) => {
   //設定訂單狀態
   const [order, setOrder] = useState([])
   //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
@@ -24,7 +24,7 @@ const Order = props => {
   }, [])
 
   //計算總價
-  const sum = items => {
+  const sum = (items) => {
     let total = 0
     for (let i = 0; i < items.length; i++) {
       total += items[i].pQuantity * items[i].pPrice
@@ -199,8 +199,8 @@ const Order = props => {
           <p className="ml-4 font-weight-bold">
             {order[0] ? order[0].owner : ''}
           </p>
-          <p className="font-weight-bold">{order[0] ? order[0].card : ''}</p>
           <p className="font-weight-bold">
+            {order[0] ? order[0].card : ''}{' '}
             {order[0] ? order[0].cardNumber : ''}
           </p>
         </Col>
