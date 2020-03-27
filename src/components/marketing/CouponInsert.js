@@ -50,12 +50,22 @@ function CouponInsert(props) {
 
     if (!couponCode) {
       // console.log('nousername')
-      error = true
-      errorMessages.push('請輸入序號')
+      // error = true
+      // errorMessages.push('請輸入序號')
+      Swal.fire({
+        icon: 'error',
+        title: '請輸入序號',
+        timer: 2500,
+      })
     } else if (0 < +couponCode.length && +couponCode.length < 12) {
       // console.log('nousername')
-      error = true
-      errorMessages.push('請輸入十二碼')
+      // error = true
+      // errorMessages.push('請輸入十二碼')
+      Swal.fire({
+        icon: 'error',
+        title: '請輸入十二碼',
+        timer: 2500,
+      })
     } else if (+couponCode.length === 12) {
       setError(false)
       console.log(12345222)
@@ -86,9 +96,14 @@ function CouponInsert(props) {
     //   return
     // }
     if (props.data.length == 0 && +couponCode.length === 12) {
-      setErrorMessages(['序號無效'])
+      // setErrorMessages(['序號無效'])
       // alert('此優惠卷已取得過')
-      setError(true)
+      // setError(true)
+      Swal.fire({
+        icon: 'error',
+        title: '序號無效',
+        timer: 2500,
+      })
       // console.log('空的')
       // setTest2(false)
     }
@@ -168,17 +183,36 @@ function CouponInsert(props) {
       setEndtime('')
       // setTest2(true)
     } else if (marketingName !== '' && test && newendtimecheck < testTime) {
-      setErrorMessages(['此優惠卷已過期'])
+      // setErrorMessages(['此優惠卷已過期'])
+      // setError(true)
       // alert('此優惠卷已取得過')
-      setError(true)
-      console.log(123, errorMessages && test)
-      // setTest2(false)
+
+      Swal.fire({
+        icon: 'error',
+        title: '此優惠卷已過期',
+        // showConfirmButton: false,
+        timer: 2500,
+        // preConfirm: () => {
+        //   window.location.reload()
+        // },
+        // console.log(123, errorMessages && test)
+        // setTest2(false)
+      })
     } else if (props.data3 !== '' && test) {
-      setErrorMessages(['此優惠卷已取得過'])
+      // setErrorMessages(['此優惠卷已取得過'])
+      // setError(true)
       // alert('此優惠卷已取得過')
-      setError(true)
-      console.log(123, errorMessages)
-      // setTest2(false)
+      Swal.fire({
+        icon: 'error',
+        title: '此優惠卷已取得過',
+        // showConfirmButton: false,
+        timer: 2500,
+        // preConfirm: () => {
+        //   window.location.reload()
+        // },
+        // console.log(123, errorMessages)
+        // setTest2(false)
+      })
     }
     setTest(false)
   }, [test])
