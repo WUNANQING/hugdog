@@ -1,9 +1,9 @@
-export const showCoupons = data => {
+export const showCoupons = (data) => {
   return { type: 'SHOW_COUPON', data }
 }
 //跟node要資料
-export const formServerCoupons = mmId => {
-  return async dispatch => {
+export const formServerCoupons = (mmId) => {
+  return async (dispatch) => {
     const request = new Request(
       `http://localhost:6001/marketing_member/mmId/${mmId}`,
       {
@@ -35,7 +35,7 @@ export const formServerCoupons = mmId => {
 //   }
 // }
 export const formServerCouponsWE = (used, mId) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const request = new Request(
       `http://localhost:6001/marketing_member/used/${used}/${mId}`,
       {
@@ -50,8 +50,8 @@ export const formServerCouponsWE = (used, mId) => {
     dispatch(showCoupons(data))
   }
 }
-export const formServerCouponsALL = mId => {
-  return async dispatch => {
+export const formServerCouponsALL = (mId) => {
+  return async (dispatch) => {
     const request = new Request(
       `http://localhost:6001/marketing_member/used/${mId}`,
       {
@@ -66,11 +66,11 @@ export const formServerCouponsALL = mId => {
     dispatch(showCoupons(data))
   }
 }
-export const checkCoupon = data => {
+export const checkCoupon = (data) => {
   return { type: 'CHECK_COUPON', data }
 }
-export const formServerCheckCoupons = verify => {
-  return async dispatch => {
+export const formServerCheckCoupons = (verify) => {
+  return async (dispatch) => {
     const request = new Request(
       `http://localhost:6001/marketing_member/couponverify/${verify}`,
       {
@@ -85,11 +85,11 @@ export const formServerCheckCoupons = verify => {
     dispatch(checkCoupon(data))
   }
 }
-export const showCode = userData => {
+export const showCode = (userData) => {
   return { type: 'SHOW_CODE', data: userData }
 }
-export const formServerCouponsCode = code => {
-  return async dispatch => {
+export const formServerCouponsCode = (code) => {
+  return async (dispatch) => {
     const request = new Request(
       `http://localhost:6001/marketing_member/code/${code}`,
       {
@@ -104,13 +104,13 @@ export const formServerCouponsCode = code => {
     dispatch(showCode(data))
   }
 }
-export const insertCoupon = userData => ({
+export const insertCoupon = (userData) => ({
   type: 'USER_REGISTER',
   data: userData,
 })
 //補:檢查填寫格式
 export const insertCouponAsync = (userData, callback) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const request = new Request(
       'http://localhost:6001/marketing_member/insert',
       {

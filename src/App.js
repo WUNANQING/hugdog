@@ -23,6 +23,7 @@ import ActivitySale from './pages/Activity/ActivitySale'
 import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
 import DogInsert from './pages/member/dogInsert'
+import DogDetail from './components/member/member-info/dog-detail'
 import BlogArticle from './pages/Knowledge/BlogArticle'
 import List from './pages/Product/List'
 function App() {
@@ -100,6 +101,9 @@ function App() {
             </Route>
             <Route path="/list/:mId?">
               <List />
+            </Route>
+            <Route path="/dog-edit">
+              <DogDetail />
             </Route>
           </Switch>
         </section>

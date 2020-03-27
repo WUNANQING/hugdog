@@ -18,9 +18,80 @@ $('#logout').click(function () {
   window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {
-  useEffect(() => {}, [props.qty])
+  useEffect(() => {
+    $('.user').click(function () {
+      $('.home_login').removeClass('home_hide')
+      $('.home').css('filter', 'brightness(50%)')
+    })
+  }, [props.qty])
   return (
     <>
+      <div className="container home_login home_hide">
+        <div className=" login-container">
+          <div className="login">
+            <div
+              className="alertBox alert alert-danger disappear"
+              role="alert"
+            ></div>
+            <img
+              src={require('../images/logo-dark.svg')}
+              alt="Background"
+              className="text-center"
+            />
+            <hr />
+            <form>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputAccount1"
+                  aria-describedby="accountHelp"
+                  placeholder="帳號"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="密碼"
+                />
+                <img
+                  src={require('../images/member/hide_password.png')}
+                  alt="Background"
+                  className="show"
+                />
+                <img
+                  src={require('../images/member/show_hide_password.png')}
+                  alt="Background"
+                  className="hide active"
+                />
+              </div>
+              <Link class="form-group text-left">
+                <p>忘記密碼?</p>
+              </Link>
+              <br />
+              <Link
+                type="submit"
+                class="btn btn-primary btn-block login-btn"
+                // to={'/member/'}
+              >
+                登入
+              </Link>
+              <div class="form-group d-flex justify-content-between register">
+                <div>
+                  <p>還沒有註冊帳號?</p>
+                </div>
+                <div>
+                  <Link class="" to="/register">
+                    <p>立即註冊→</p>
+                  </Link>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
       <header className="sticky-top">
         <Navbar bg="white" variant="light" expand="md">
           <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
@@ -108,7 +179,9 @@ function Header(props) {
             </div>
 
             <div className="nav-link">
-              <IconContext.Provider value={{ size: '1.5rem' }}>
+              <IconContext.Provider
+                value={{ size: '1.5rem', className: 'user' }}
+              >
                 <AiOutlineUser />
               </IconContext.Provider>
               <div className="dropdown-menu">

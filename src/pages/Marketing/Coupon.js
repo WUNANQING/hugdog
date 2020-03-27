@@ -30,7 +30,7 @@ function Coupon(props) {
   let y = localStorage.getItem('mId')
   useEffect(() => {
     props.formServerCouponsWE(0, y)
-    $('.CouponListNavAC1').on('click', function() {
+    $('.CouponListNavAC1').on('click', function () {
       $(this)
         .addClass('active')
         .siblings()
@@ -45,7 +45,7 @@ function Coupon(props) {
         .siblings()
         .removeClass('active')
     })
-    $('.CouponListNavAC2').on('click', function() {
+    $('.CouponListNavAC2').on('click', function () {
       $(this)
         .addClass('active')
         .siblings()
@@ -60,7 +60,7 @@ function Coupon(props) {
         .siblings()
         .removeClass('active')
     })
-    $('.CouponListNavAC3').on('click', function() {
+    $('.CouponListNavAC3').on('click', function () {
       $(this)
         .addClass('active')
         .siblings()
@@ -131,12 +131,12 @@ function Coupon(props) {
     </>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return { data: store.getCoupons }
 }
 
 //action
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     { formServerCouponsWE, formServerCouponsALL },
     dispatch
