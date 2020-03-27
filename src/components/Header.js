@@ -18,7 +18,7 @@ $('#logout').click(function () {
   window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {
-  useEffect(() => {}, [props.qty])
+  useEffect(() => {}, [props.qty || props.data])
   return (
     <>
       <header className="sticky-top">
@@ -140,10 +140,17 @@ function Header(props) {
                 <FiHeart />
               </IconContext.Provider>
             </Nav.Link>
-            <Nav className="nav-icon order-3 order-md-4">
+            <Nav
+              className="nav-icon order-3 order-md-4"
+              onClick={() => {
+                props.history.push('/cart')
+              }}
+            >
               <div className="nav-link">
                 {JSON.parse(localStorage.getItem('cart')) === null ||
-                JSON.parse(localStorage.getItem('cart')).length === 0 ? (
+                JSON.parse(localStorage.getItem('cart')).length === 0 ||
+                localStorage.getItem('mId') === '0' ||
+                localStorage.getItem('mId') === null ? (
                   <div className="icon">
                     <IconContext.Provider value={{ size: '1.5rem' }}>
                       <AiOutlineShopping />
@@ -165,7 +172,9 @@ function Header(props) {
 
                   <Link className="dropdown-item nav-link">
                     {JSON.parse(localStorage.getItem('cart')) === null ||
-                    JSON.parse(localStorage.getItem('cart')).length === 0 ? (
+                    JSON.parse(localStorage.getItem('cart')).length === 0 ||
+                    localStorage.getItem('mId') === '0' ||
+                    localStorage.getItem('mId') === null ? (
                       <div className="text-center">
                         <span>購物車沒有商品</span>
                         <br />
@@ -200,6 +209,7 @@ function Header(props) {
 const mapStateToProps = (store) => {
   return {
     qty: store.getQuantity,
+    data: store.getMember,
   }
 }
 export default withRouter(connect(mapStateToProps, null)(Header))

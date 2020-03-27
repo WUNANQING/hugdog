@@ -89,7 +89,7 @@ const Order = (props) => {
               付款資料
             </div>
             <div
-              className="position-absolute "
+              className="position-absolute font-weight-bold"
               style={{
                 right: (-28.805 / 647.484) * 100 + '%',
                 top: 10,

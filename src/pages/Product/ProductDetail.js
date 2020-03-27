@@ -40,6 +40,7 @@ const ProductDetail = (props) => {
       const newCart = [...currentCart, item]
       localStorage.setItem('cart', JSON.stringify(newCart))
       setMycart(newCart)
+      alert('加入成功')
     }
   }
   //即時更新商品數量
@@ -229,6 +230,7 @@ const ProductDetail = (props) => {
                           )
                         ) {
                           alert('已加入購物車')
+                          return
                         } else {
                           props.count(mycart)
                           const newCart = [...currentCart, item]
