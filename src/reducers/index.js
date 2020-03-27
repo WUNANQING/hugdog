@@ -61,6 +61,15 @@ const getLoveList = (state = [], action) => {
       return state
   }
 }
+//會員最愛商品
+const getLoveActivity = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_LOVE_ACTIVITY':
+      return action.data
+    default:
+      return state
+  }
+}
 //會員reducers
 
 //商品reducers
@@ -182,6 +191,14 @@ const getQuestionDetail = (state = [], action) => {
   }
 }
 
+const updateMember = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_MEMBER':
+      return { ...action.data }
+    default:
+      return state
+  }
+}
 //knowledge end
 const rootReducer = combineReducers({
   getMember,
@@ -206,6 +223,8 @@ const rootReducer = combineReducers({
   getServiceOrder,
   getActivityOrder,
   getLoveList,
+  getLoveActivity,
+  updateMember,
 })
 
 export { rootReducer }

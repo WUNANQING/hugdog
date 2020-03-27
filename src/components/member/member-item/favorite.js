@@ -45,10 +45,14 @@ const LoveList = (props) => {
       <tr className="order_show" onClick="" id={i} name={i}>
         {/* <th scope="row">{i + 1}</th> */}
         <td>{i + 1}</td>
-        <td>{props.data[i] ? props.data[i].pName : ''}</td>
+        <td className="favorite_items_wrap">
+          {props.data[i] ? props.data[i].pName : ''}
+        </td>
         <td>{props.data[i] ? props.data[i].pPrice : ''}</td>
         <td>{props.data[i] ? props.data[i].pImg : ''}</td>
-        <td>{props.data[i] ? props.data[i].pInfo : ''}</td>
+        <td className="favorite_items_wrap">
+          {props.data[i] ? props.data[i].pInfo : ''}
+        </td>
       </tr>
     )
   }

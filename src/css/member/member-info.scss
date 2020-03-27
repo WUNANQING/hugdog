@@ -135,3 +135,10 @@
     display: inline-block;
   }
 }
+.favorite_items_wrap {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 60px;
+}

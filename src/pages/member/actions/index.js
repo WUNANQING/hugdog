@@ -15,7 +15,27 @@ export const getMemberData = () => {
     dispatch(showMember(data))
   }
 }
-
+//更新會員資料
+export const updateMember = (data) => {
+  return { type: 'UPDATE_MEMBER', data }
+}
+export const updateServerMember = (val) => {
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/update`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(val),
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(updateMember(data))
+  }
+}
 //會員訂單資料
 export const showMemberOrder = (data) => {
   return { type: 'SHOW_MEMBER_ORDER', data }
@@ -149,5 +169,25 @@ export const getLoveList = (mId) => {
     const data = await res.json()
     console.log('list: ', data)
     dispatch(showLoveList(data))
+  }
+}
+//查看最愛活動
+export const showLoveActivity = (data) => {
+  return { type: 'SHOW_LOVE_ACTIVITY', data }
+}
+export const getLoveActivity = (mId) => {
+  mId = localStorage.getItem('mId')
+  return async (dispatch) => {
+    const req = new Request(
+      `http://localhost:6001/activity_collection/${mId}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(showLoveActivity(data))
   }
 }
