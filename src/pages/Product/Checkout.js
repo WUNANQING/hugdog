@@ -13,19 +13,6 @@ import { FaCcMastercard, FaCcVisa } from 'react-icons/fa'
 const Checkout = (props) => {
   //設定驗證狀態
   const [validated, setValidated] = useState(false)
-  //設定驗證方法
-  function handleSubmit(e) {
-    const form = e.currentTarget
-    if (form.checkValidity() === false) {
-      e.preventDefault()
-      e.stopPropagation()
-    } else if (form.checkValidity() === true) {
-      postOrder(buyerInfo)
-      localStorage.setItem('cart', JSON.stringify([]))
-      props.history.push(`/order/${mId}`)
-    }
-    setValidated(true)
-  }
   // 設定mId的來源,抓到mId去檢索會員的最新訂單
   const mId = localStorage.getItem('mId')
   //表單資訊
@@ -111,6 +98,19 @@ const Checkout = (props) => {
     } else {
       $(e.currentTarget).focus()
     }
+  }
+  //設定驗證方法
+  function handleSubmit(e) {
+    const form = e.currentTarget
+    if (form.checkValidity() === false) {
+      e.preventDefault()
+      e.stopPropagation()
+    } else if (form.checkValidity() === true) {
+      postOrder(buyerInfo)
+      localStorage.setItem('cart', JSON.stringify([]))
+      props.history.push(`/order/${mId}`)
+    }
+    setValidated(true)
   }
 
   useEffect(() => {

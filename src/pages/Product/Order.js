@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { MdShoppingCart, MdBookmarkBorder } from 'react-icons/md'
+//redux
+import { connect } from 'react-redux'
+
 const Order = (props) => {
   //設定訂單狀態
   const [order, setOrder] = useState([])
@@ -217,6 +220,17 @@ const Order = (props) => {
         </Col>
       </Row>
       <Row>
+        <Col
+          xs={12}
+          sm={12}
+          md={5}
+          className="mt-3 d-flex justify-content-between"
+        >
+          <span>{props.discount ? '使用優惠' : '未用優惠'}</span>
+          <span>NT${props.discount}</span>
+        </Col>
+      </Row>
+      <Row>
         <Col xs={12} sm={12} md={5} className="mt-3">
           <hr className="my-0" />
         </Col>
@@ -230,7 +244,10 @@ const Order = (props) => {
         >
           <p className="font-weight-bold">總計</p>
           <p className="font-weight-bold">
-            NT${sum(order[0] ? JSON.parse(order[0].cart) : 0)}
+            NT$
+            {props.discount
+              ? sum(order[0] ? JSON.parse(order[0].cart) : 0) - props.discount
+              : sum(order[0] ? JSON.parse(order[0].cart) : 0)}
           </p>
         </Col>
       </Row>
@@ -254,5 +271,7 @@ const Order = (props) => {
     </Container>
   )
 }
-
-export default withRouter(Order)
+const mapStateToProps = (store) => {
+  return { discount: store.useCoupon }
+}
+export default withRouter(connect(mapStateToProps, null)(Order))

@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 import ProductCardSmallSale from './components/ProductCardSmallSale'
-import { getProducts, count } from './actions/index'
+import { getProducts, count, useCoupon } from './actions/index'
 import { bindActionCreators } from 'redux'
 import { formServerCouponsWE } from '../../actions/marketingActions'
 
@@ -354,11 +354,12 @@ const Cart = (props) => {
                       $('#sum').text(
                         'NT$' + (sum(mycartDisplay) - e.currentTarget.value)
                       )
+                      props.useCoupon(Number(e.currentTarget.value))
                     }}
                   >
                     <option value="">請選擇</option>
                     {props.coupons &&
-                      props.coupons.map((value, index) => (
+                      props.coupons.map((value) => (
                         <option
                           id={value.mmId}
                           key={value.mmId}
@@ -430,7 +431,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { getProducts, count, formServerCouponsWE },
+    { getProducts, count, formServerCouponsWE, useCoupon },
     dispatch
   )
 }
