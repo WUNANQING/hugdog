@@ -3,7 +3,7 @@ import $ from 'jquery'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import ProductReceipt from './components/ProductReceipt'
-const Checkout = (props) => {
+const Checkout = props => {
   //設定驗證狀態
   const [validated, setValidated] = useState(false)
   //設定驗證方法
@@ -99,7 +99,11 @@ const Checkout = (props) => {
     let length = $(e.currentTarget).val().length
     let maxlength = $(e.currentTarget).attr('maxlength')
     if (length == maxlength) {
-      $(e.currentTarget).parent().next().find('.cardInput').focus() //要注意是不是同層
+      $(e.currentTarget)
+        .parent()
+        .next()
+        .find('.cardInput')
+        .focus() //要注意是不是同層
     } else {
       $(e.currentTarget).focus()
     }
@@ -197,7 +201,7 @@ const Checkout = (props) => {
               name="checkout"
               noValidate
               validated={validated}
-              onSubmit={(e) => {
+              onSubmit={e => {
                 handleSubmit(e)
               }}
             >
@@ -209,7 +213,7 @@ const Checkout = (props) => {
                     size="lg"
                     type="text"
                     placeholder="姓氏"
-                    onChange={(e) => getformInfo(e, 'lastName')}
+                    onChange={e => getformInfo(e, 'lastName')}
                   />
                   <Form.Control.Feedback>正確!</Form.Control.Feedback>
                   <Form.Control.Feedback type="invalid">
@@ -223,7 +227,7 @@ const Checkout = (props) => {
                     size="lg"
                     type="text"
                     placeholder="名字"
-                    onChange={(e) => getformInfo(e, 'firstName')}
+                    onChange={e => getformInfo(e, 'firstName')}
                   />
                   <Form.Control.Feedback>正確!</Form.Control.Feedback>
                   <Form.Control.Feedback type="invalid">
@@ -239,7 +243,7 @@ const Checkout = (props) => {
                     as="select"
                     size="lg"
                     className="pr-0"
-                    onChange={(e) => getformInfo(e, 'county')}
+                    onChange={e => getformInfo(e, 'county')}
                   >
                     <option value="">縣/市</option>
                     <option value="基隆市">基隆市</option>
@@ -277,7 +281,7 @@ const Checkout = (props) => {
                     size="lg"
                     type="text"
                     placeholder="地址"
-                    onChange={(e) => getformInfo(e, 'address')}
+                    onChange={e => getformInfo(e, 'address')}
                   />
                   <Form.Control.Feedback>正確!</Form.Control.Feedback>
                   <Form.Control.Feedback type="invalid">
@@ -290,7 +294,7 @@ const Checkout = (props) => {
                     size="lg"
                     type="text"
                     placeholder="附加詳細地址(選填)"
-                    onChange={(e) => getformInfo(e, 'detailedAddress')}
+                    onChange={e => getformInfo(e, 'detailedAddress')}
                   />
                 </Form.Group>
               </Form.Row>
@@ -302,7 +306,7 @@ const Checkout = (props) => {
                   type="text"
                   placeholder="郵遞區號"
                   pattern="^[0-9]{3}|[0-9]{5}$"
-                  onChange={(e) => getformInfo(e, 'zip')}
+                  onChange={e => getformInfo(e, 'zip')}
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
@@ -331,7 +335,7 @@ const Checkout = (props) => {
                   type="email"
                   placeholder="電子郵件地址"
                   pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
-                  onChange={(e) => getformInfo(e, 'email')}
+                  onChange={e => getformInfo(e, 'email')}
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
@@ -347,7 +351,7 @@ const Checkout = (props) => {
                   type="text"
                   placeholder="行動電話號碼"
                   pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$"
-                  onChange={(e) => getformInfo(e, 'mobile')}
+                  onChange={e => getformInfo(e, 'mobile')}
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
@@ -367,7 +371,7 @@ const Checkout = (props) => {
                     label="MasterCard"
                     type="radio"
                     id="MasterCard"
-                    onChange={(e) => getformInfo(e, 'card')}
+                    onChange={e => getformInfo(e, 'card')}
                   />
                   <Form.Check
                     required
@@ -376,7 +380,7 @@ const Checkout = (props) => {
                     label="VISA"
                     type="radio"
                     id="VISA"
-                    onChange={(e) => getformInfo(e, 'card')}
+                    onChange={e => getformInfo(e, 'card')}
                   />
                 </div>
               </Form.Group>
@@ -392,10 +396,10 @@ const Checkout = (props) => {
                       placeholder="0000"
                       maxlength="4"
                       pattern="[0-9]{4}"
-                      onKeyUp={(e) => {
+                      onKeyUp={e => {
                         cardInput(e)
                       }}
-                      onBlur={(e) => getformInfo(e, 'cardNumber')}
+                      onBlur={e => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md={2}>
@@ -408,10 +412,10 @@ const Checkout = (props) => {
                       placeholder="0000"
                       maxlength="4"
                       pattern="[0-9]{4}"
-                      onKeyUp={(e) => {
+                      onKeyUp={e => {
                         cardInput(e)
                       }}
-                      onBlur={(e) => getformInfo(e, 'cardNumber')}
+                      onBlur={e => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md={2}>
@@ -424,10 +428,10 @@ const Checkout = (props) => {
                       placeholder="0000"
                       maxlength="4"
                       pattern="[0-9]{4}"
-                      onKeyUp={(e) => {
+                      onKeyUp={e => {
                         cardInput(e)
                       }}
-                      onBlur={(e) => getformInfo(e, 'cardNumber')}
+                      onBlur={e => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
                   <Form.Group as={Col} md={2}>
@@ -440,10 +444,10 @@ const Checkout = (props) => {
                       placeholder="0000"
                       maxlength="4"
                       pattern="[0-9]{4}"
-                      onKeyUp={(e) => {
+                      onKeyUp={e => {
                         cardInput(e)
                       }}
-                      onBlur={(e) => getformInfo(e, 'cardNumber')}
+                      onBlur={e => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
                   <Form.Control.Feedback>正確!</Form.Control.Feedback>
@@ -491,7 +495,7 @@ const Checkout = (props) => {
                       type="text"
                       placeholder="卡片持有人"
                       pattern="^\D+$"
-                      onChange={(e) => getformInfo(e, 'owner')}
+                      onChange={e => getformInfo(e, 'owner')}
                     />
                     <Form.Control.Feedback>正確!</Form.Control.Feedback>
                     <Form.Control.Feedback type="invalid">

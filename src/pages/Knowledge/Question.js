@@ -34,9 +34,6 @@ function Question(props) {
     props.getQuestion()
   }, [])
 
-  // useEffect(() => {
-  //   props.getDogData()
-  // }, [])
 
   //sweetalert
   const Swal = require('sweetalert2')
@@ -55,7 +52,7 @@ function Question(props) {
   }
   const handleShow = () => setShow(true)
 
-  //確認判斷
+  //判斷表格
   const [validated, setValidated] = useState(false)
   const handleSubmit = event => {
     const form = event.currentTarget
@@ -76,6 +73,26 @@ function Question(props) {
   const [classify, setClassify] = useState('')
   function changeClassify(newClassify) {
     setClassify(newClassify)
+  }
+
+
+  //--------------------發問
+  //從mid抓會員資料
+  const mId = localStorage.getItem('mId')
+  //建立發問
+  async function postOrder(form) {
+    const req = new Request('http://localhost:6001/order/post', {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(form),
+    })
+    const res = await fetch(req)
+    const order = await res.json()
+    await console.log(order)
   }
 
   return (
