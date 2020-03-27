@@ -38,6 +38,7 @@ function Question(props) {
   //   props.getDogData()
   // }, [])
 
+  //sweetalert
   const Swal = require('sweetalert2')
   function post() {
     Swal.fire({
@@ -49,23 +50,28 @@ function Question(props) {
   const [show, setShow] = useState(false)
   const handleClose = () => {
     setShow(false)
-    setTimeout(() => {
-      post()
-    }, 400)
+    //   setTimeout(() => {
+    //   }, 400)
   }
   const handleShow = () => setShow(true)
 
-  //表格確認
+  //確認判斷
   const [validated, setValidated] = useState(false)
   const handleSubmit = event => {
     const form = event.currentTarget
+    console.log(form)
+    console.log('form.checkValidity()', form.checkValidity())
     if (form.checkValidity() === false) {
       event.preventDefault()
       event.stopPropagation()
+    } else if (form.checkValidity() === true) {
+      setShow(false)
+      post()
     }
     setValidated(true)
   }
 
+  //
   //分類篩選
   const [classify, setClassify] = useState('')
   function changeClassify(newClassify) {
@@ -135,19 +141,20 @@ function Question(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <Modal.Header closeButton>
-              <Modal.Title>
-                <MdPets /> 我要發問
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {/* 我的表格 */}
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <MdPets /> 我要發問
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {/* 我的表格 */}
+
                 <Form.Group controlId="exampleForm.ControlSelect1 petselect">
                   {/* <Form.Label>寵物</Form.Label> */}
-                  <Form.Control as="select" required>
-                    <option>請選擇寵物</option>
-                    <option>1</option>
+                  <Form.Control name="dogname" as="select" required>
+                    <option value="">請選擇寵物</option>
+                    <option value="1">1</option>
                     {/* <option>{props.data.qName}</option> */}
                   </Form.Control>
                 </Form.Group>
@@ -156,11 +163,11 @@ function Question(props) {
                     as={Col}
                     controlId="exampleForm.ControlSelect1 typeselect"
                   >
-                    <Form.Control as="select" required>
-                      <option>請選擇類型</option>
-                      <option>行為</option>
-                      <option>照護</option>
-                      <option>飲食</option>
+                    <Form.Control name="classify" as="select" required>
+                      <option value="">請選擇類型</option>
+                      <option value="1">行為</option>
+                      <option value="2">照護</option>
+                      <option value="3">飲食</option>
                     </Form.Control>
                   </Form.Group>
 
@@ -168,18 +175,19 @@ function Question(props) {
                     as={Col}
                     controlId="exampleForm.ControlSelect2 typeselect"
                   >
-                    <Form.Control as="select" required>
-                      <option>請選擇類別</option>
-                      <option>行為</option>
-                      <option>照護</option>
-                      <option>飲食</option>
+                    <Form.Control name="type" as="select" required>
+                      <option value="">請選擇類型</option>
+                      <option value="1">行為</option>
+                      <option value="2">照護</option>
+                      <option value="3">飲食</option>
                     </Form.Control>
                   </Form.Group>
                 </Form.Row>
 
                 <Form.Group controlId="exampleForm.ControlInput1">
                   <Form.Control
-                    type="email"
+                    name="title"
+                    type="text"
                     placeholder="請輸入問題標題"
                     required
                   />
@@ -187,21 +195,22 @@ function Question(props) {
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                   <Form.Control
                     required
+                    name="asktxt"
                     as="textarea"
                     rows="8"
                     placeholder="請詳述說明狀況、發生時間、主要徵狀、寵物變化..."
                   />
                 </Form.Group>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                取消發問
-              </Button>
-              <Button variant="primary" type="submit" onClick={handleClose}>
-                發佈
-              </Button>
-            </Modal.Footer>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose} id="btn">
+                  取消發問
+                </Button>
+                <Button variant="primary" type="submit">
+                  發佈
+                </Button>
+              </Modal.Footer>
+            </Form>
           </Modal>
         </div>
         <div>

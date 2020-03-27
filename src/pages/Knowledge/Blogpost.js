@@ -4,7 +4,7 @@ import { Row, Col, Button, Image, Badge } from 'react-bootstrap'
 import { FiClock } from 'react-icons/fi'
 import $ from 'jquery'
 
-const BlogArt = props => {
+const BlogPost = props => {
   // useEffect(() => {
   //   props.getBlogArticle(props.match.params.aId)
   // }, [props.match.params.aId])
@@ -78,4 +78,4 @@ const BlogArt = props => {
   )
 }
 
-export default withRouter(BlogArt)
+export default withRouter(BlogPost)
