@@ -17,7 +17,7 @@ function ActLectureCard(props) {
   return (
     <>
       <Card className="my-3">
-        <Link to="/activity/class">
+        <Link to={'/activity/lecture/' + props.data.LId}>
           <Card.Img
             variant="top"
             src={require(`../../images/activity/${img}`)}
@@ -42,7 +42,6 @@ function ActLectureCard(props) {
           <Card.Title>{title}</Card.Title>
         </Card.Body>
         <Card.Footer bg="primary">
-          <Link to="/activity/class">#優惠活動</Link>
           <Link to="/activity/lecture">#講座活動</Link>
         </Card.Footer>
       </Card>

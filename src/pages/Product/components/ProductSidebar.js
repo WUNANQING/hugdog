@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
 import { getProducts, getCategory, getVendor } from '../actions/index'
+import $ from 'jquery'
 const ProductSidebar = (props) => {
   const productCategory = [
     '飼料',
@@ -55,9 +56,16 @@ const ProductSidebar = (props) => {
   const productCategorysidebar = productCategory.map((value, index) => (
     <Nav.Link
       key={value}
-      onClick={() => {
+      className="class"
+      onClick={(e) => {
         props.history.push('/products?cId=' + eval(index + 1))
         props.getCategory(props.match.params.page || '')
+        $(e.currentTarget)
+          .addClass('bg-primary text-dark text-right font-weight-bold selected')
+          .siblings()
+          .removeClass(
+            'bg-primary text-dark text-right font-weight-bold selected'
+          )
       }}
     >
       {value}
@@ -67,9 +75,16 @@ const ProductSidebar = (props) => {
   const productBrandSidebar = productBrand.map((value, index) => (
     <Nav.Link
       key={value}
-      onClick={() => {
+      className="brand"
+      onClick={(e) => {
         props.history.push('/products?vId=' + eval(index + 1))
         props.getVendor(props.match.params.page || '')
+        $(e.currentTarget)
+          .addClass('bg-primary text-dark text-right font-weight-bold selected')
+          .siblings()
+          .removeClass(
+            'bg-primary text-dark text-right font-weight-bold selected'
+          )
       }}
     >
       {value}

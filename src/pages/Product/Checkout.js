@@ -94,6 +94,16 @@ const Checkout = (props) => {
     await console.log(order)
   }
 
+  //卡號監聽事件
+  function cardInput(e) {
+    let length = $(e.currentTarget).val().length
+    let maxlength = $(e.currentTarget).attr('maxlength')
+    if (length == maxlength) {
+      $(e.currentTarget).parent().next().find('.cardInput').focus() //要注意是不是同層
+    } else {
+      $(e.currentTarget).focus()
+    }
+  }
   return (
     <>
       <Container>
@@ -231,7 +241,7 @@ const Checkout = (props) => {
                     className="pr-0"
                     onChange={(e) => getformInfo(e, 'county')}
                   >
-                    <option value="none">縣/市</option>
+                    <option value="">縣/市</option>
                     <option value="基隆市">基隆市</option>
                     <option value="臺北市">臺北市</option>
                     <option value="新北市">新北市</option>
@@ -291,6 +301,7 @@ const Checkout = (props) => {
                   size="lg"
                   type="text"
                   placeholder="郵遞區號"
+                  pattern="^[0-9]{3}|[0-9]{5}$"
                   onChange={(e) => getformInfo(e, 'zip')}
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
@@ -319,6 +330,7 @@ const Checkout = (props) => {
                   size="lg"
                   type="email"
                   placeholder="電子郵件地址"
+                  pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{3,6}(?:\.[a-z]{2})?)$"
                   onChange={(e) => getformInfo(e, 'email')}
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
@@ -334,11 +346,12 @@ const Checkout = (props) => {
                   size="lg"
                   type="text"
                   placeholder="行動電話號碼"
+                  pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$"
                   onChange={(e) => getformInfo(e, 'mobile')}
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  請輸入行動電話號碼
+                  請輸入行動電話號碼,(09xx-xxx-xxx 或 09xxxxxxxx)
                 </Form.Control.Feedback>
                 <br />
               </Form.Group>
@@ -369,42 +382,68 @@ const Checkout = (props) => {
               </Form.Group>
               <Form.Group>
                 <Form.Row>
-                  <Form.Group as={Col}>
+                  <Form.Group as={Col} md={2}>
                     <Form.Control
                       required
+                      className="cardInput"
                       name="cardNumber"
                       size="lg"
                       type="text"
-                      placeholder="信用卡/金融卡卡"
-                      onChange={(e) => getformInfo(e, 'cardNumber')}
+                      placeholder="0000"
+                      maxlength="4"
+                      pattern="[0-9]{4}"
+                      onKeyUp={(e) => {
+                        cardInput(e)
+                      }}
+                      onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col}>
+                  <Form.Group as={Col} md={2}>
                     <Form.Control
                       required
+                      className="cardInput"
                       name="cardNumber"
                       size="lg"
                       type="text"
-                      placeholder="號"
-                      onChange={(e) => getformInfo(e, 'cardNumber')}
+                      placeholder="0000"
+                      maxlength="4"
+                      pattern="[0-9]{4}"
+                      onKeyUp={(e) => {
+                        cardInput(e)
+                      }}
+                      onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col}>
+                  <Form.Group as={Col} md={2}>
                     <Form.Control
                       required
+                      className="cardInput"
                       name="cardNumber"
                       size="lg"
                       type="text"
-                      onChange={(e) => getformInfo(e, 'cardNumber')}
+                      placeholder="0000"
+                      maxlength="4"
+                      pattern="[0-9]{4}"
+                      onKeyUp={(e) => {
+                        cardInput(e)
+                      }}
+                      onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col}>
+                  <Form.Group as={Col} md={2}>
                     <Form.Control
                       required
+                      className="cardInput"
                       name="cardNumber"
                       size="lg"
                       type="text"
-                      onChange={(e) => getformInfo(e, 'cardNumber')}
+                      placeholder="0000"
+                      maxlength="4"
+                      pattern="[0-9]{4}"
+                      onKeyUp={(e) => {
+                        cardInput(e)
+                      }}
+                      onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
                   <Form.Control.Feedback>正確!</Form.Control.Feedback>
@@ -420,7 +459,9 @@ const Checkout = (props) => {
                       name="valid"
                       size="lg"
                       type="text"
-                      placeholder="到期月年"
+                      maxlength="5"
+                      placeholder="MM/YY"
+                      pattern="^\d{2}\/\d{2}$"
                     />
                     <Form.Control.Feedback>正確!</Form.Control.Feedback>
                     <Form.Control.Feedback type="invalid">
@@ -434,6 +475,8 @@ const Checkout = (props) => {
                       size="lg"
                       type="text"
                       placeholder="安全碼"
+                      maxlength="3"
+                      pattern="^\d{3}$"
                     />
                     <Form.Control.Feedback>正確!</Form.Control.Feedback>
                     <Form.Control.Feedback type="invalid">
@@ -447,6 +490,7 @@ const Checkout = (props) => {
                       size="lg"
                       type="text"
                       placeholder="卡片持有人"
+                      pattern="^\D+$"
                       onChange={(e) => getformInfo(e, 'owner')}
                     />
                     <Form.Control.Feedback>正確!</Form.Control.Feedback>

@@ -48,7 +48,6 @@ const MemberInfo = (props) => {
   //狗狗基本資料
   const handleSubmit = (e) => {
     const memberInfo = {
-      mId,
       mName,
       mAccount,
       mPassword,
@@ -60,7 +59,6 @@ const MemberInfo = (props) => {
       mAddress,
     }
     props.updateServerMember(memberInfo)
-    alert('更新成功')
   }
   //寫入會員資訊
   // function getformInfo(e, info) {
@@ -194,7 +192,7 @@ const MemberInfo = (props) => {
                           <input
                             type="text"
                             name="dName"
-                            value={mName}
+                            value={mNamedefault}
                             class="form-control"
                             onChange={(e) => setMName(e.target.value)}
                           />
@@ -208,7 +206,7 @@ const MemberInfo = (props) => {
                             name="mId"
                             value={mAccount}
                             class="form-control"
-                            onChange={(e) => setMAccount(e.target.value)}
+                            // onChange={(e) => getformInfo(e, 'mAccount')}
                           />
                         </td>
                       </tr>
@@ -220,7 +218,7 @@ const MemberInfo = (props) => {
                             name="dGender"
                             value={mPassword}
                             class="form-control"
-                            onChange={(e) => setMPassword(e.target.value)}
+                            // onChange={(e) => getformInfo(e, 'mPassword')}
                           />
                         </td>
                       </tr>
@@ -231,7 +229,7 @@ const MemberInfo = (props) => {
                             type="text"
                             value={mGender}
                             class="form-control"
-                            onChange={(e) => setMGender(e.target.value)}
+                            // onChange={(e) => getformInfo(e, 'mGender')}
                           />
                         </td>
                       </tr>
@@ -243,7 +241,7 @@ const MemberInfo = (props) => {
                             name="dWeight"
                             class="form-control"
                             value={mBday}
-                            onChange={(e) => setMBday(e.target.value)}
+                            onChange={(e) => setMBday(e)}
                           />
                         </td>
                       </tr>
@@ -255,7 +253,7 @@ const MemberInfo = (props) => {
                             name="dInfo"
                             class="form-control"
                             value={mPhone}
-                            onChange={(e) => setMPhone(e.target.value)}
+                            // onChange={(e) => getformInfo(e, 'mPhone')}
                           />
                         </td>
                       </tr>
@@ -267,7 +265,7 @@ const MemberInfo = (props) => {
                             name="dInfo"
                             class="form-control"
                             value={mEmail}
-                            onChange={(e) => setMEmail(e.target.value)}
+                            // onChange={(e) => getformInfo(e, 'mEmail')}
                           />
                         </td>
                       </tr>
@@ -279,8 +277,14 @@ const MemberInfo = (props) => {
                             name="dInfo"
                             class="form-control"
                             value={mAddress}
-                            onChange={(e) => setMAddress(e.target.value)}
+                            // onChange={(e) => getformInfo(e, 'mAddress')}
                           />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-right">會員無言</td>
+                        <td>
+                          <input type="text" class="form-control" />
                         </td>
                       </tr>
                     </tbody>

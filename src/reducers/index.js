@@ -24,9 +24,47 @@ const getMemberOrder = (state = [], action) => {
       return state
   }
 }
+//會員訂單細節
 const getMemberOrderDetail = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_MEMBER_ORDER_DETAIL':
+      return action.data
+    default:
+      return state
+  }
+}
+
+//會員服務訂單
+const getServiceOrder = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_SERVICE_ORDER':
+      return action.data
+    default:
+      return state
+  }
+}
+//會員活動訂單
+const getActivityOrder = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_ACTIVITY_ORDER':
+      return action.data
+    default:
+      return state
+  }
+}
+//會員最愛商品
+const getLoveList = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_LOVE_LIST':
+      return action.data
+    default:
+      return state
+  }
+}
+//會員最愛商品
+const getLoveActivity = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_LOVE_ACTIVITY':
       return action.data
     default:
       return state
@@ -70,7 +108,7 @@ const getProductDetail = (state = [], action) => {
 const getDog = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_DOG': {
-      console.log(action.data)
+      // console.log(action.data)
       return action.data
     }
 
@@ -153,6 +191,14 @@ const getQuestionDetail = (state = [], action) => {
   }
 }
 
+const updateMember = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_MEMBER':
+      return { ...action.data }
+    default:
+      return state
+  }
+}
 //knowledge end
 const rootReducer = combineReducers({
   getMember,
@@ -174,6 +220,11 @@ const rootReducer = combineReducers({
   getCode,
   getDogDetail,
   getQuantity,
+  getServiceOrder,
+  getActivityOrder,
+  getLoveList,
+  getLoveActivity,
+  updateMember,
 })
 
 export { rootReducer }

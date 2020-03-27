@@ -1,10 +1,10 @@
-export const showMember = data => {
+export const showMember = (data) => {
   return { type: 'SHOW_MEMBER', data }
 }
 
 //跟node要資料
 export const getMemberData = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/member/`, {
       method: 'GET',
       credentials: 'include',
@@ -15,15 +15,35 @@ export const getMemberData = () => {
     dispatch(showMember(data))
   }
 }
-
+//更新會員資料
+export const updateMember = (data) => {
+  return { type: 'UPDATE_MEMBER', data }
+}
+export const updateServerMember = (val) => {
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/update`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(val),
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(updateMember(data))
+  }
+}
 //會員訂單資料
-export const showMemberOrder = data => {
+export const showMemberOrder = (data) => {
   return { type: 'SHOW_MEMBER_ORDER', data }
 }
 
 //跟node要資料
 export const getMemberOrderData = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/member/order/`, {
       method: 'GET',
       credentials: 'include',
@@ -35,13 +55,13 @@ export const getMemberOrderData = () => {
   }
 }
 //跟server要訂單細節
-export const showMemberOrderDataDetail = data => {
+export const showMemberOrderDataDetail = (data) => {
   return { type: 'SHOW_MEMBER_ORDER_DETAIL', data }
 }
-export const getMemberOrderDataDetail = mId => {
+export const getMemberOrderDataDetail = (mId) => {
   mId = localStorage.getItem('mId')
   console.log('mId: ', mId)
-  return async dispatch => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/member/order/${mId}`, {
       method: 'GET',
       credentials: 'include',
@@ -54,11 +74,11 @@ export const getMemberOrderDataDetail = mId => {
 }
 
 //查看會員細節
-export const showMemberDetail = data => {
+export const showMemberDetail = (data) => {
   return { type: 'SHOW_MEMBER_DETAIL', data }
 }
-export const getMemberDetail = mId => {
-  return async dispatch => {
+export const getMemberDetail = (mId) => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/member/${mId}`, {
       method: 'GET',
       credentials: 'include',
@@ -70,35 +90,104 @@ export const getMemberDetail = mId => {
   }
 }
 //查看狗狗
-export const showDog = data => {
+export const showDog = (data) => {
   return { type: 'SHOW_DOG', data }
 }
 export const getDogData = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/dog/`, {
       method: 'GET',
       credentials: 'include',
     })
     const res = await fetch(req)
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
     dispatch(showDog(data))
   }
 }
 //查看狗狗細節
-export const showDogDetail = data => {
+export const showDogDetail = (data) => {
   return { type: 'SHOW_DOG_DETAIL', data }
 }
-export const getDogDetail = mId => {
+export const getDogDetail = (mId) => {
   mId = localStorage.getItem('mId')
-  return async dispatch => {
+  return async (dispatch) => {
     const req = new Request(`http://localhost:6001/dog/${mId}`, {
       method: 'GET',
       credentials: 'include',
     })
     const res = await fetch(req)
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
     dispatch(showDogDetail(data))
+  }
+}
+//查看服務訂單
+export const showServiceOrder = (data) => {
+  return { type: 'SHOW_SERVICE_ORDER', data }
+}
+export const getServiceOrder = () => {
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/Sorder`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log(data)
+    dispatch(showServiceOrder(data))
+  }
+}
+//查看活動訂單
+export const showActivityOrder = (data) => {
+  return { type: 'SHOW_ACTIVITY_ORDER', data }
+}
+export const getActivityOrder = () => {
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/activity_successEvent`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log(data)
+    dispatch(showActivityOrder(data))
+  }
+}
+//查看最愛商品
+export const showLoveList = (data) => {
+  return { type: 'SHOW_LOVE_LIST', data }
+}
+export const getLoveList = (mId) => {
+  mId = localStorage.getItem('mId')
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/list/${mId}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(showLoveList(data))
+  }
+}
+//查看最愛活動
+export const showLoveActivity = (data) => {
+  return { type: 'SHOW_LOVE_ACTIVITY', data }
+}
+export const getLoveActivity = (mId) => {
+  mId = localStorage.getItem('mId')
+  return async (dispatch) => {
+    const req = new Request(
+      `http://localhost:6001/activity_collection/${mId}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(showLoveActivity(data))
   }
 }

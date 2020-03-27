@@ -222,7 +222,7 @@ const Cart = (props) => {
                   </Link>
                 </Col>
                 <Col md={2}>
-                  <h3 className="font-weight-bold">{value.pName}</h3>
+                  <h4 className="font-weight-bold">{value.pName}</h4>
                   <h4>數量:{value.pQuantity}</h4>
                   <h4>價格:{value.pPrice}</h4>
                 </Col>
@@ -275,8 +275,10 @@ const Cart = (props) => {
                         let mId = localStorage.getItem('mId')
                         let list = { item: item, mId: mId }
                         postList(list)
-                        deleteItem(index)
-                        $(e.currentTarget).parentsUntil('.item').fadeOut()
+                        setTimeout(() => {
+                          deleteItem(index)
+                          $(e.currentTarget).parentsUntil('.item').fadeOut()
+                        }, 2000)
                       } else {
                         return alert('尚未登入')
                       }
@@ -381,17 +383,8 @@ const Cart = (props) => {
           <h3>運貨與退貨通知</h3>
           <hr />
           <p className="px-3">
-            如果你需要退貨，可以辦理免額外付費運送退貨商品，也可以將商品退回任一間
-            Apple 直營店。如果是符 合退貨條件的產品，你可在收到訂單商品的 14
-            天內開始辦理退貨。只須登入你的帳戶，或撥打電話聯絡我 們：
-            0800-020-021。如果你需要退貨，可以辦理免額外付費運送退貨商品，也可以將商品退回任一間
-            Apple 直營店。如果是符合退貨條件的產品，你可在收到訂單商品的 14
-            天內開始辦理退貨。只須登入你的 帳戶，或撥打電話聯絡我們：
-            0800-020-021。如果你需要退貨，可以辦理免額外付費運送退貨商品，也可
-            以將商品退回任一間 Apple
-            直營店。如果是符合退貨條件的產品，你可在收到訂單商品的 14
-            天內開始辦理 退貨。只須登入你的帳戶，或撥打電話聯絡我們：
-            0800-020-021。
+            如果你需要退貨，可以辦理免額外付費運送退貨商品。如果是符合退貨條件的產品，你可在收到訂單商品的14
+            天內開始辦理退貨。只須登入你的帳戶，或撥打電話聯絡我們：0800-020-021。
           </p>
         </Col>
       </Row>
