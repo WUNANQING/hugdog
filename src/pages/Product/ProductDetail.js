@@ -435,6 +435,11 @@ const ProductDetail = (props) => {
                         props.comments.rows.map((value, index) => {
                           return (
                             <>
+                              {/* <img
+                                src={require('../../images/member/member-img/' +
+                                  value.mImg +
+                                  '.jpg')}
+                              /> */}
                               <div className="d-flex justify-content-between">
                                 <p>
                                   {'***' + value.mAccount.slice(0, 3) + '***'}
@@ -449,7 +454,29 @@ const ProductDetail = (props) => {
                                 )}
                               </p>
                               <p>{value.comment}</p>
-                              <p>{value.created_at}</p>
+                              <div className="d-flex justify-content-between">
+                                <span>{value.updated_at}</span>
+                                {value.mId == localStorage.getItem('mId') ? (
+                                  <div>
+                                    <Button
+                                      variant="link"
+                                      className="p-0 text-decoration-none"
+                                      onClick={() => {}}
+                                    >
+                                      編輯評論
+                                    </Button>
+                                    <Button
+                                      variant="link"
+                                      className="p-0 text-decoration-none"
+                                      onClick={() => {}}
+                                    >
+                                      刪除評論
+                                    </Button>
+                                  </div>
+                                ) : (
+                                  ''
+                                )}
+                              </div>
                               <hr />
                             </>
                           )

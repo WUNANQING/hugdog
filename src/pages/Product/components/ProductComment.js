@@ -4,6 +4,7 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai'
 import $ from 'jquery'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const ProductComment = (props) => {
   const pId = props.detail[0] && props.detail[0].pId
@@ -82,11 +83,28 @@ const ProductComment = (props) => {
         type="submit"
         onClick={(e) => {
           if (!mId) {
-            alert('尚未登入')
+            Swal.fire({
+              title: '尚未登入',
+              text: '前往登入頁面?',
+              icon: 'info',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: '確定',
+              cancelButtonText: '取消',
+            }).then((result) => {
+              if (result.value) {
+                props.history.push('/login')
+              }
+            })
             e.preventDefault()
             e.stopPropagation()
           } else if (comment.content === '' || comment.rating === null) {
-            alert('沒有評價和內容不得為空')
+            Swal.fire({
+              icon: 'warning',
+              title: '還沒完成評論...',
+              showConfirmButton: false,
+            })
             e.preventDefault()
             e.stopPropagation()
           } else {
