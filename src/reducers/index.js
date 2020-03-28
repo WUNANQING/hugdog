@@ -111,12 +111,29 @@ const getProducts = (state = [], action) => {
       return state
   }
 }
-
 //商品細節
 const getProductDetail = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_PRODUCT_DETAIL':
       return action.data
+    default:
+      return state
+  }
+}
+//Header即時更新數量
+const getQuantity = (state = 0, action) => {
+  switch (action.type) {
+    case 'COUNT_QUANTITY':
+      return action.quantity
+    default:
+      return state
+  }
+}
+//紀錄優惠券的優惠金額
+const useCoupon = (state = 0, action) => {
+  switch (action.type) {
+    case 'USE_COUPON':
+      return action.discount
     default:
       return state
   }
@@ -147,14 +164,6 @@ const updateDog = (state = [], action) => {
   switch (action.type) {
     case 'UPDATE_DOG':
       return { ...action.data }
-    default:
-      return state
-  }
-}
-const getQuantity = (state = 0, action) => {
-  switch (action.type) {
-    case 'COUNT_QUANTITY':
-      return action.quantity
     default:
       return state
   }
@@ -244,6 +253,7 @@ const rootReducer = combineReducers({
   getLoveList,
   getLoveActivity,
   updateMember,
+  useCoupon,
 })
 
 export { rootReducer }

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCard from './components/ProductCard'
-import { Container, Row, Col, Pagination, Image } from 'react-bootstrap'
+import { Container, Row, Col, Pagination } from 'react-bootstrap'
 //redux
 import { connect } from 'react-redux'
 //action
