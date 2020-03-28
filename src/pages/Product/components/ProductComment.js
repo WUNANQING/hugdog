@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { AiFillLike, AiFillDislike } from 'react-icons/ai'
 import $ from 'jquery'
