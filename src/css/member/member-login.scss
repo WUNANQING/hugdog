@@ -51,35 +51,18 @@
       color: white;
       font-size: 24px;
       margin-bottom: 30px;
-      background: linear-gradient(
-        45deg,
-        rgba(65, 160, 90, 1) 35%,
-        rgba(235, 220, 70, 0.8) 60%
-      );
-      background: -moz-linear-gradient(
-        45deg,
-        rgba(65, 160, 90, 1) 35%,
-        rgba(235, 220, 70, 0.8) 60%
-      );
-      background: -webkit-linear-gradient(
-        45deg,
-        rgba(65, 160, 90, 1) 35%,
-        rgba(235, 220, 70, 0.8) 60%
-      );
-      background: -o-linear-gradient(
-        45deg,
-        rgba(65, 160, 90, 1) 35%,
-        rgba(235, 220, 70, 0.8) 60%
-      );
 
       cursor: pointer;
     }
     .register {
       font-size: 20px;
-      background: rgb(245, 243, 243);
+      background: #eeeeee;
       height: 50px;
       line-height: 50px;
       margin-top: 30px;
+      border-radius: 30px;
+      height: 60px;
+      line-height: 60px;
       p {
         margin-left: 20px;
         margin-right: 20px;
