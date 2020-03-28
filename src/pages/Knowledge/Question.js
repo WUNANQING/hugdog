@@ -21,6 +21,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getQuestion } from './actions/index'
 import { getDogDetail, getMemberDetail } from '../member/actions/index'
+import ServiceAdminLoginChk from '../../components/service/redirect/ServiceAdminLoginChk'
 
 import $ from 'jquery'
 
@@ -56,7 +57,7 @@ function Question(props) {
 
   //判斷表格
   const [validated, setValidated] = useState(false)
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     const form = event.currentTarget
     console.log(form)
     console.log('form.checkValidity()', form.checkValidity())
@@ -131,6 +132,9 @@ function Question(props) {
     const order = await res.json()
     await console.log(order)
   }
+
+  //選項
+  const optionType = new Array()
 
   return (
     <>
@@ -209,7 +213,7 @@ function Question(props) {
                   <Form.Control
                     name="dogYear"
                     as="select"
-                    onChange={e => askformInfo(e, 'dogYear')}
+                    onChange={(e) => askformInfo(e, 'dogYear')}
                     required
                   >
                     <option value="">請選擇寵物</option>
@@ -233,12 +237,12 @@ function Question(props) {
                       name="classify"
                       as="select"
                       required
-                      onChange={e => askformInfo(e, 'classify')}
+                      onChange={(e) => askformInfo(e, 'classify')}
                     >
                       <option value="">請選擇類型</option>
-                      <option value="1">行為</option>
-                      <option value="2">照護</option>
-                      <option value="3">飲食</option>
+                      <option value="a">行為</option>
+                      <option value="b">照護</option>
+                      <option value="c">飲食</option>
                     </Form.Control>
                   </Form.Group>
 
@@ -249,7 +253,7 @@ function Question(props) {
                     <Form.Control
                       name="type"
                       as="select"
-                      onChange={e => askformInfo(e, 'type')}
+                      onChange={(e) => askformInfo(e, 'type')}
                       required
                     >
                       <option value="">請選擇類型</option>
@@ -265,7 +269,7 @@ function Question(props) {
                     name="askTitle"
                     type="text"
                     placeholder="請輸入問題標題"
-                    onChange={e => askformInfo(e, 'askTitle')}
+                    onChange={(e) => askformInfo(e, 'askTitle')}
                     required
                   />
                 </Form.Group>
@@ -276,7 +280,7 @@ function Question(props) {
                     as="textarea"
                     rows="8"
                     placeholder="請詳述說明狀況、發生時間、主要徵狀、寵物變化..."
-                    onChange={e => askformInfo(e, 'askTxt')}
+                    onChange={(e) => askformInfo(e, 'askTxt')}
                   />
                 </Form.Group>
               </Modal.Body>
@@ -322,14 +326,14 @@ function Question(props) {
   )
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     post: store.getQuestion,
     dogPost: store.getDogDetail,
     mPost: store.getMemberDetail,
   }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     { getQuestion, getDogDetail, getMemberDetail },
     dispatch

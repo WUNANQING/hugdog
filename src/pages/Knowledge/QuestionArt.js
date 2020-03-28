@@ -86,7 +86,7 @@ function QuestionArt(props) {
 
               <Card.Text>{props.data.qDes}</Card.Text>
               <div className="text-right">
-                {props.data.qAns === '' ? (
+                {props.data.qAns === null ? (
                   <Button variant="secondary" size="sm" disabled>
                     未回答
                   </Button>
