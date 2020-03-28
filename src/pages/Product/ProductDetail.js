@@ -13,6 +13,7 @@ import {
   Accordion,
   Card,
   Modal,
+  Form,
 } from 'react-bootstrap'
 import {
   MdAddShoppingCart,
@@ -22,6 +23,8 @@ import {
 import Breadcrumb from '../../components/Breadcrumbs'
 import ProductSidebar from './components/ProductSidebar'
 import ProductCardSmall from './components/ProductCardSmall'
+import Swal from 'sweetalert2/src/sweetalert2.js'
+import PrdouctComment from './components/ProductComment'
 
 const ProductDetail = (props) => {
   const [total, setTotal] = useState(1)
@@ -35,12 +38,29 @@ const ProductDetail = (props) => {
   function updateCartToLocalStorage(item) {
     const currentCart = JSON.parse(localStorage.getItem('cart')) || []
     if ([...currentCart].find((value) => value.pId === item.pId)) {
-      alert('已加入購物車')
+      Swal.fire({
+        title: '已加入購物車',
+        text: '前往購物車結帳?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.value) {
+          props.history.push('/cart')
+        }
+      })
     } else {
       const newCart = [...currentCart, item]
       localStorage.setItem('cart', JSON.stringify(newCart))
       setMycart(newCart)
-      alert('加入成功')
+      Swal.fire({
+        icon: 'success',
+        title: '加入成功',
+        showConfirmButton: false,
+      })
     }
   }
   //即時更新商品數量
@@ -67,9 +87,26 @@ const ProductDetail = (props) => {
     const listContent = await res.json()
     await console.log(listContent)
     if (listContent.success) {
-      alert('收藏成功')
+      Swal.fire({
+        icon: 'success',
+        title: '收藏成功',
+        showConfirmButton: false,
+      })
     } else {
-      alert('已加入清單')
+      Swal.fire({
+        title: '已加入清單',
+        text: '前往清單查看?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.value) {
+          props.history.push('/list/' + localStorage.getItem('mId'))
+        }
+      })
     }
   }
 
@@ -144,7 +181,20 @@ const ProductDetail = (props) => {
                         pImg: props.detail[0].pImg,
                       })
                     } else {
-                      return alert('尚未登入')
+                      Swal.fire({
+                        title: '尚未登入',
+                        text: '前往登入頁面?',
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                      }).then((result) => {
+                        if (result.value) {
+                          props.history.push('/login')
+                        }
+                      })
                     }
                   }}
                 >
@@ -192,7 +242,20 @@ const ProductDetail = (props) => {
                       let list = { item: item, mId: mId }
                       postList(list)
                     } else {
-                      return alert('尚未登入')
+                      Swal.fire({
+                        title: '尚未登入',
+                        text: '前往登入頁面?',
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                      }).then((result) => {
+                        if (result.value) {
+                          props.history.push('/login')
+                        }
+                      })
                     }
                   }}
                 >
@@ -229,17 +292,55 @@ const ProductDetail = (props) => {
                             (value) => value.pId === props.detail[0].pId
                           )
                         ) {
-                          alert('已加入購物車')
-                          return
+                          Swal.fire({
+                            title: '已加入購物車',
+                            text: '前往購物車結帳?',
+                            icon: 'info',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '確定',
+                            cancelButtonText: '取消',
+                          }).then((result) => {
+                            if (result.value) {
+                              props.history.push('/cart')
+                            }
+                          })
                         } else {
                           props.count(mycart)
                           const newCart = [...currentCart, item]
                           localStorage.setItem('cart', JSON.stringify(newCart))
+                          Swal.fire({
+                            title: '加入成功',
+                            text: '前往購物車結帳?',
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '確定',
+                            cancelButtonText: '取消',
+                          }).then((result) => {
+                            if (result.value) {
+                              props.history.push('/cart')
+                            }
+                          })
                         }
                       }
-                      props.history.push('/cart')
                     } else {
-                      return alert('尚未登入')
+                      Swal.fire({
+                        title: '尚未登入',
+                        text: '前往登入頁面?',
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                      }).then((result) => {
+                        if (result.value) {
+                          props.history.push('/login')
+                        }
+                      })
                     }
                   }}
                 >
@@ -308,7 +409,9 @@ const ProductDetail = (props) => {
                     商品評論
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey="1">
-                    <Card.Body></Card.Body>
+                    <Card.Body>
+                      <PrdouctComment />
+                    </Card.Body>
                   </Accordion.Collapse>
                 </Card>
               </Accordion>

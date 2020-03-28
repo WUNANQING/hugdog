@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { FaPaw } from 'react-icons/fa'
 import { Col, Card, Image, Nav, Button } from 'react-bootstrap'
 import '../../../css/product/productCard.scss'
+import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const ProductCard = (props) => {
   return (
@@ -65,15 +66,54 @@ const ProductCard = (props) => {
                         (value) => value.pId === props.data.pId
                       )
                     ) {
-                      return alert('已加入購物車')
+                      Swal.fire({
+                        title: '已加入購物車',
+                        text: '前往購物車結帳?',
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                      }).then((result) => {
+                        if (result.value) {
+                          props.history.push('/cart')
+                        }
+                      })
                     } else {
                       const newCart = [...currentCart, item]
                       localStorage.setItem('cart', JSON.stringify(newCart))
+                      Swal.fire({
+                        title: '加入成功',
+                        text: '前往購物車結帳?',
+                        icon: 'success',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                      }).then((result) => {
+                        if (result.value) {
+                          props.history.push('/cart')
+                        }
+                      })
                     }
                   }
-                  props.history.push('/cart')
                 } else {
-                  return alert('尚未登入')
+                  Swal.fire({
+                    title: '尚未登入',
+                    text: '前往登入頁面?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消',
+                  }).then((result) => {
+                    if (result.value) {
+                      props.history.push('/login')
+                    }
+                  })
                 }
               }}
             >
