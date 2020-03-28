@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getProducts, getProductDetail, count } from './actions/index'
+import {
+  getProducts,
+  getProductDetail,
+  count,
+  getComments,
+} from './actions/index'
 import {
   Container,
   Row,
@@ -25,6 +30,7 @@ import ProductSidebar from './components/ProductSidebar'
 import ProductCardSmall from './components/ProductCardSmall'
 import Swal from 'sweetalert2/src/sweetalert2.js'
 import PrdouctComment from './components/ProductComment'
+import { AiFillLike, AiFillDislike } from 'react-icons/ai'
 
 const ProductDetail = (props) => {
   const [total, setTotal] = useState(1)
@@ -67,6 +73,7 @@ const ProductDetail = (props) => {
   useEffect(() => {
     props.getProductDetail(pId)
     props.getProducts()
+    props.getComments(pId)
   }, [props.match.params.pId])
 
   //設定猜你喜歡只列出4項
@@ -109,7 +116,7 @@ const ProductDetail = (props) => {
       })
     }
   }
-
+  console.log('評論', props.comments)
   return (
     <Container className="detail">
       <Row className="my-5">
@@ -407,9 +414,46 @@ const ProductDetail = (props) => {
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey="1" type="button">
                     商品評論
+                    {
+                      <>
+                        <AiFillLike
+                          className="mx-2"
+                          style={{ color: 'rgb(32, 120, 244)' }}
+                        />
+                        {props.comments.likes}
+                        <AiFillDislike
+                          className="mx-2"
+                          style={{ color: 'rgb(243, 62, 88)' }}
+                        />
+                        {props.comments.dislikes}
+                      </>
+                    }
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey="1">
                     <Card.Body>
+                      {props.comments.rows &&
+                        props.comments.rows.map((value, index) => {
+                          return (
+                            <>
+                              <div className="d-flex justify-content-between">
+                                <p>
+                                  {'***' + value.mAccount.slice(0, 3) + '***'}
+                                </p>
+                                <span>{index + 1 + 'F'}</span>
+                              </div>
+                              <p>
+                                {value.rating === 1 ? (
+                                  <AiFillLike />
+                                ) : (
+                                  <AiFillDislike />
+                                )}
+                              </p>
+                              <p>{value.comment}</p>
+                              <p>{value.created_at}</p>
+                              <hr />
+                            </>
+                          )
+                        })}
                       <PrdouctComment />
                     </Card.Body>
                   </Accordion.Collapse>
@@ -451,11 +495,15 @@ const mapStateToProps = (store) => {
   return {
     list: store.getProducts,
     detail: store.getProductDetail,
+    comments: store.showComments,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getProducts, getProductDetail, count }, dispatch)
+  return bindActionCreators(
+    { getProducts, getProductDetail, count, getComments },
+    dispatch
+  )
 }
 
 export default withRouter(

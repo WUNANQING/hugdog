@@ -138,6 +138,15 @@ const useCoupon = (state = 0, action) => {
       return state
   }
 }
+//顯示商品評論
+const showComments = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_COMMENTS':
+      return action.comments
+    default:
+      return state
+  }
+}
 //商品reducers
 
 const getDog = (state = [], action) => {
@@ -254,6 +263,7 @@ const rootReducer = combineReducers({
   getLoveActivity,
   updateMember,
   useCoupon,
+  showComments,
 })
 
 export { rootReducer }
