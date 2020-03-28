@@ -204,7 +204,7 @@ const Order = (props) => {
           </p>
           <p className="font-weight-bold">
             {order[0] ? order[0].card : ''}{' '}
-            {order[0] ? order[0].cardNumber : ''}
+            {order[0] ? '****' + order[0].cardNumber.slice(12, 16) : ''}
           </p>
         </Col>
       </Row>
@@ -253,7 +253,14 @@ const Order = (props) => {
       </Row>
       <Row>
         <Col className="my-5 d-flex justify-content-around">
-          <Button className="mb-md-2" variant="primary" size="lg" href="#">
+          <Button
+            className="mb-md-2"
+            variant="primary"
+            size="lg"
+            onClick={() => {
+              props.history.push('/member/member-item')
+            }}
+          >
             <MdBookmarkBorder className="mb-md-1" />
             檢視訂單
           </Button>
@@ -261,7 +268,9 @@ const Order = (props) => {
             className="mb-md-2"
             variant="primary"
             size="lg"
-            href="/products"
+            onClick={() => {
+              props.history.push('/products')
+            }}
           >
             <MdShoppingCart className="mb-md-1" />
             繼續選購

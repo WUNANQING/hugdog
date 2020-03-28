@@ -258,7 +258,7 @@ const ProductDetail = (props) => {
                 }}
               >
                 <h6 className="text-center border-bottom">為何選擇我們?</h6>
-                <div>為何是我為何是我為何是我為何是我為何是我為何是我</div>
+                <div>我們秉持著給消費者最好，提供最優質的商品</div>
               </div>
               <div
                 className="mb-3 border p-3"
@@ -268,8 +268,8 @@ const ProductDetail = (props) => {
                   overflow: 'hidden',
                 }}
               >
-                <h6 className="text-center border-bottom">為何選擇我們?</h6>
-                <div>為何是我為何是我為何是我為何是我為何是我為何是我</div>
+                <h6 className="text-center border-bottom">為何選擇此產品?</h6>
+                <div>在各項評比獲得最高分，並廣受消費者好評</div>
               </div>
               <div
                 className="mb-3 border p-3"
@@ -279,8 +279,8 @@ const ProductDetail = (props) => {
                   overflow: 'hidden',
                 }}
               >
-                <h6 className="text-center border-bottom">為何選擇我們?</h6>
-                <div>為何是我為何是我為何是我為何是我為何是我為何是我</div>
+                <h6 className="text-center border-bottom">運貨與退貨通知</h6>
+                <div>只須登入帳戶，或撥電話聯絡我們，即有專人服務</div>
               </div>
             </Col>
           </Row>
@@ -308,7 +308,7 @@ const ProductDetail = (props) => {
                     商品評論
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey="1">
-                    <Card.Body>Hello! I'm another body</Card.Body>
+                    <Card.Body></Card.Body>
                   </Accordion.Collapse>
                 </Card>
               </Accordion>

@@ -379,7 +379,7 @@ const Checkout = (props) => {
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  請輸入行動電話號碼,(09xx-xxx-xxx 或 09xxxxxxxx)
+                  請輸入電話號碼,(09xx-xxx-xxx、09xxxxxxxx、04-xxxx-xxxx或(04)xxxx-xxxx)
                 </Form.Control.Feedback>
                 <br />
               </Form.Group>
@@ -418,7 +418,7 @@ const Checkout = (props) => {
               </Form.Group>
               <Form.Group>
                 <Form.Row>
-                  <Form.Group as={Col} md={2}>
+                  <Form.Group as={Col} xs={3} sm={3} md={2}>
                     <Form.Control
                       required
                       className="cardInput"
@@ -434,7 +434,7 @@ const Checkout = (props) => {
                       onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col} md={2}>
+                  <Form.Group as={Col} xs={3} sm={3} md={2}>
                     <Form.Control
                       required
                       className="cardInput"
@@ -450,7 +450,7 @@ const Checkout = (props) => {
                       onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col} md={2}>
+                  <Form.Group as={Col} xs={3} sm={3} md={2}>
                     <Form.Control
                       required
                       className="cardInput"
@@ -466,7 +466,7 @@ const Checkout = (props) => {
                       onBlur={(e) => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col} md={2}>
+                  <Form.Group as={Col} xs={3} sm={3} md={2}>
                     <Form.Control
                       required
                       className="cardInput"
@@ -489,7 +489,7 @@ const Checkout = (props) => {
                 </Form.Row>
                 <br />
                 <Form.Row>
-                  <Form.Group as={Col} xs={3}>
+                  <Form.Group as={Col} xs={3} sm={4}>
                     <Form.Control
                       required
                       name="valid"
@@ -519,7 +519,7 @@ const Checkout = (props) => {
                       請輸入安全碼
                     </Form.Control.Feedback>
                   </Form.Group>
-                  <Form.Group as={Col} xs={3}>
+                  <Form.Group as={Col} xs={6} sm={5} md={3}>
                     <Form.Control
                       required
                       name="owner"
