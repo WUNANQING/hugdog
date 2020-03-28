@@ -21,7 +21,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getQuestion } from './actions/index'
 import { getDogDetail, getMemberDetail } from '../member/actions/index'
-import ServiceAdminLoginChk from '../../components/service/redirect/ServiceAdminLoginChk'
+// import ServiceAdminLoginChk from '../../components/service/redirect/'
 
 import $ from 'jquery'
 
@@ -40,10 +40,18 @@ function Question(props) {
 
   //sweetalert
   const Swal = require('sweetalert2')
-  function post() {
+  function sAlert() {
     Swal.fire({
       icon: 'success',
       title: '發問成功',
+    })
+  }
+  function mAlert() {
+    Swal.fire({
+      icon: 'warning',
+      title: '尚未登入',
+    }).then(function () {
+      window.location.href = '/login'
     })
   }
   //發問視窗
@@ -53,7 +61,13 @@ function Question(props) {
     //   setTimeout(() => {
     //   }, 400)
   }
-  const handleShow = () => setShow(true)
+  const handleShow = () => {
+    if (localStorage.getItem('mId') && localStorage.getItem('mId') !== '0') {
+      setShow(true)
+    } else {
+      return mAlert()
+    }
+  }
 
   //判斷表格
   const [validated, setValidated] = useState(false)
@@ -67,7 +81,7 @@ function Question(props) {
     } else if (form.checkValidity() === true) {
       postAsk(askInfo)
       setShow(false)
-      post()
+      sAlert()
     }
     setValidated(true)
   }
@@ -206,8 +220,6 @@ function Question(props) {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                {/* 我的表格 */}
-
                 <Form.Group controlId="exampleForm.ControlSelect1 petselect">
                   {/* <Form.Label>寵物</Form.Label> */}
                   <Form.Control

@@ -12,7 +12,7 @@ function PartnerNowon(props) {
   const [open, setOpen] = useState(false)
   const [heart, setHeart] = useState(true)
 
-  $('.trun').click(function() {
+  $('.trun').click(function () {
     document.getElementById('trun').innerHTML = <FaHeart />
   })
 
@@ -39,8 +39,7 @@ function PartnerNowon(props) {
               <span className="cardtime ">
                 活動地點：
                 <span className="text-danger ">
-                  {' '}
-                  {props.data.pLocation}{' '}
+                  {props.data.pLocation}
                 </span>{' '}
               </span>
             </div>
@@ -74,15 +73,12 @@ function PartnerNowon(props) {
                     />
                   </div>
                 </div>
-                <p className=" ml-3">白白</p>
+                <p className=" ml-3">{props.data.mName}</p>
               </div>
               <div className="d-flex mt-3 justify-content-between">
                 <p className="">
                   <strong> 主題：</strong>
                   {props.data.pTitle}
-                </p>
-                <p className="pr-3">
-                  <strong> 費用：</strong> {props.data.pPrice}
                 </p>
               </div>
               <hr />
@@ -94,14 +90,17 @@ function PartnerNowon(props) {
               </div>
             </Col>
           </Row>
+
           <Row className=" pt-4">
             <Col>
               <div>
                 <div className="p-1">
-                  <strong>成團人數：</strong> 15 人
+                  <strong>成團人數：</strong> {props.data.pNumberLimit}
+                  <strong>人</strong>
                 </div>
                 <div>
-                  <strong className="p-1">已報名人數：</strong> 10人
+                  <strong className="p-1">已報名人數：</strong>
+                  <strong>人</strong>
                 </div>
               </div>
             </Col>
@@ -134,12 +133,17 @@ function PartnerNowon(props) {
           <Row>
             <Collapse in={open}>
               <Col
-                id="example-collapse-text"
+                id="example-collapse-text "
                 className="mt-2 p-2 bg-light"
                 md={{ span: 6, offset: 6 }}
               >
                 <div> 已報名：</div>
-                <div> 會員</div>
+                <div className="justify-content-between d-flex">
+                  <div> {props.data.mName} 會員名 </div>
+                  <Button variant="primary" size="sm">
+                    取消報名
+                  </Button>
+                </div>
               </Col>
             </Collapse>
           </Row>
