@@ -12,7 +12,7 @@ import { Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../../css/member/member-info.scss'
 //點擊可以按照id顯示
-const MemberOrderInfo = props => {
+const MemberOrderInfo = (props) => {
   const [order, setOrder] = useState([])
   //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
   const mId = localStorage.getItem('mId')
@@ -31,7 +31,7 @@ const MemberOrderInfo = props => {
 
   var orderData = []
   var total = []
-  const orderDetail = props => {}
+  const orderDetail = (props) => {}
   for (let i = 0; i <= props.data.length; i++) {
     const name = props.data[i] ? props.data[i].name : ''
     const address = props.data[i] ? props.data[i].address : ''
@@ -44,7 +44,7 @@ const MemberOrderInfo = props => {
       card,
       mobile,
     })
-    const orderDataTotal = orderData.map(a => a)
+    const orderDataTotal = orderData.map((a) => a)
     total = orderDataTotal
     // console.log('total: ', total)
     // console.log('data: ', orderData)
@@ -53,8 +53,8 @@ const MemberOrderInfo = props => {
     // console.log('address: ', address)
     // console.log('card: ', card)
     // console.log('mobile: ', mobile)
-    console.log('cart', cart)
-    console.log('length', props.data.length)
+    // console.log('cart', cart)
+    // console.log('length', props.data.length)
   }
   // console.log('data: ', orderData)
   // const totalData = [
@@ -64,9 +64,9 @@ const MemberOrderInfo = props => {
   //   props.data ? props.data.mobile : '',
   // ]
   // console.log('totalData', totalData)
-  console.log('Total', total)
-  console.log('dataTotal', total[0].name)
-  console.log('dataTotal', props.data[1] ? props.data[1].mobile : '')
+  // console.log('Total', total)
+  // console.log('dataTotal', total[0].name)
+  // console.log('dataTotal', props.data[1] ? props.data[1].mobile : '')
   // console.log('dataTotal', total[1].mobile)
   // console.log('dataTotal: ', orderDataTotal.name)
   // console.log('mId: ', mId)
@@ -74,7 +74,7 @@ const MemberOrderInfo = props => {
     props.getMemberOrderDataDetail(mId)
     // getOrderDetail(orderId)
   }, [])
-  const sum = items => {
+  const sum = (items) => {
     let total = 0
     for (let i = 0; i < items.length; i++) {
       total += items[i].pQuantity * items[i].pPrice
@@ -285,9 +285,7 @@ const MemberOrderInfo = props => {
     console.log('n:' + e.currentTarget.id)
     console.log('p:' + $('.order_detail').attr('name'))
 
-    $('.order_detail')
-      .eq(n)
-      .show()
+    $('.order_detail').eq(n).show()
     $('.list-container').hide()
 
     // if (n === $('.order_detail').attr('data-name')) {
@@ -348,10 +346,10 @@ const MemberOrderInfo = props => {
     </div>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return { data: store.getMemberOrderDetail }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getMemberOrderDataDetail }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MemberOrderInfo)

@@ -4,7 +4,7 @@ import $ from 'jquery'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getDogData } from '../../../pages/member/actions/index'
+import { getLoveActivity } from '../../../pages/member/actions/index'
 import {
   Form,
   FormControl,
@@ -16,21 +16,45 @@ import {
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../../css/member/member-info.scss'
 
-const DogInfo = props => {
+const ServiceOrder = (props) => {
+  const [serviceOrder, setServiceOrder] = useState([])
+  //設定mId的來源,抓到mId去檢索會員的最新訂單(未完成)
+  const mId = localStorage.getItem('mId')
+  async function getOrderDetail(orderId) {
+    const req = new Request(`http://localhost:6001/member/Sorder/${mId}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const detail = await res.json()
+    console.log(detail)
+    ServiceOrder(detail)
+  }
   //狗狗基本資料
-  const dId = props.data[0] ? props.data[0].dId : ''
-  const dName = props.data[0] ? props.data[0].dName : ''
-  const mId = props.data[0] ? props.data[0].mId : ''
-  const dImg = props.data[0] ? props.data[0].dImg : ''
-  const dGender = props.data[0] ? props.data[0].dGender : ''
-  const dYear = props.data[0] ? props.data[0].dYear : ''
-  const dMonth = props.data[0] ? props.data[0].dMonth : ''
-  const dWeight = props.data[0] ? props.data[0].dWeight : ''
-  const dInfo = props.data[0] ? props.data[0].dInfo : ''
+
   useEffect(() => {
-    props.getDogData()
+    props.getLoveActivity()
   }, [])
 
+  let ServiceOrderList = []
+  for (let i = 0; i < props.data.length; i++) {
+    ServiceOrderList.push(
+      <tr className="order_show" onClick={jump} id={i} name={i}>
+        {/* <th scope="row">{i + 1}</th> */}
+        <td>{i + 1}</td>
+        <td>{props.data[i] ? props.data[i].oId : ''}</td>
+        <td>{props.data[i] ? props.data[i].oName : ''}</td>
+        <td>{props.data[i] ? props.data[i].oDate : ''}</td>
+      </tr>
+    )
+    function jump() {
+      window.location.replace(
+        `http://localhost:3000/activity/class/${
+          props.data[i] ? props.data[i].oId : ''
+        }`
+      )
+    }
+  }
   return (
     <div class="tab-content content" id="content2">
       <div>
@@ -42,113 +66,19 @@ const DogInfo = props => {
           <div class="col-md-8">
             <div class="card card-width">
               <div class="card-body">
-                <form
-                  name="myForm"
-                  method="POST"
-                  action="dog-updateEdit.php"
-                  enctype="multipart/form-data"
-                >
-                  <table class="table table-borderless">
-                    <tbody>
+                <form name="myForm" method="POST" enctype="multipart/form-data">
+                  <table class="table table-striped">
+                    <thead>
                       <tr>
-                        <td class="text-right">狗狗編號</td>
-                        <td>
-                          <input
-                            type="text"
-                            name="dId"
-                            value="2222"
-                            class="form-control"
-                          />
-                        </td>
+                        <th scope="col">#</th>
+                        <th scope="col">活動編號</th>
+                        <th scope="col">活動名稱</th>
+                        <th scope="col">活動時間</th>
                       </tr>
-                      <tr>
-                        <td class="text-right">狗狗姓名</td>
-                        <td>
-                          <input
-                            type="text"
-                            name="dName"
-                            value="Sunny"
-                            class="form-control"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-right">主人編號</td>
-                        <td>
-                          <input
-                            type="text"
-                            name="mId"
-                            value="m001"
-                            class="form-control"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-right">狗狗性別</td>
-                        <td>
-                          <input
-                            type="text"
-                            name="dGender"
-                            value="girl"
-                            class="form-control"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-right">狗狗年紀</td>
-                        <td>
-                          <input
-                            placeholder="歲"
-                            type="text"
-                            name="dYear"
-                            value="6"
-                            class="form-control"
-                          />
-                        </td>
-                        <td>
-                          <input
-                            placeholder="月"
-                            type="text"
-                            name="dMonth"
-                            value="2"
-                            class="form-control"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-right">狗狗體重</td>
-                        <td>
-                          <input
-                            type="text"
-                            name="dWeight"
-                            class="form-control"
-                            value="4"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-right">狗狗資訊</td>
-                        <td>
-                          <input
-                            type="text"
-                            name="dInfo"
-                            class="form-control"
-                            value=""
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
+                    </thead>
+                    <tbody>{ServiceOrderList}</tbody>
                     <tfoot>
-                      <tr>
-                        <td class="" colspan="6">
-                          <button
-                            href="./member-updateEdit.php"
-                            class="btn btn-sm btn-danger"
-                          >
-                            <i class="fa fa-trash"></i> 修改
-                          </button>
-                        </td>
-                      </tr>
+                      <tr></tr>
                     </tfoot>
                   </table>
                 </form>
@@ -159,16 +89,13 @@ const DogInfo = props => {
         <br />
         <br />
       </div>
-      <div>
-        <img src="images/001.png" alt="" />
-      </div>
     </div>
   )
 }
-const mapStateToProps = store => {
-  return { data: store.getDog }
+const mapStateToProps = (store) => {
+  return { data: store.getLoveActivity }
 }
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getDogData }, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getLoveActivity }, dispatch)
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DogInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceOrder)

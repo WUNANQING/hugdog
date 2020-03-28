@@ -108,7 +108,9 @@ function Header(props) {
             </div>
 
             <div className="nav-link">
-              <IconContext.Provider value={{ size: '1.5rem' }}>
+              <IconContext.Provider
+                value={{ size: '1.5rem', className: 'user' }}
+              >
                 <AiOutlineUser />
               </IconContext.Provider>
               <div className="dropdown-menu">

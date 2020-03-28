@@ -10,7 +10,7 @@ import { getBlog } from './actions/index'
 
 import BlogPost from './Blogpost'
 import '../../components/Knowledge/knowledge.scss'
-import Search from '../../components/Knowledge/Search'
+// import SideMenu from '../../components/Knowledge/'
 
 const Blog = props => {
   useEffect(() => {
@@ -66,7 +66,7 @@ const Blog = props => {
           </Col>
           <Col md={3}>
             <div className="mt-3 text-center">
-              <h4 className="r">全部分類</h4>
+              <h4 className="r">尋找分類</h4>
               <br></br>
               <div className="sidebar mr-4 ml-4">
                 <Link>
@@ -85,6 +85,7 @@ const Blog = props => {
                 </Link>
               </div>
             </div>
+            {/* <sideMenu /> */}
           </Col>
         </Row>
       </Container>

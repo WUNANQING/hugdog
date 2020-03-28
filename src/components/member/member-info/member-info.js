@@ -4,7 +4,10 @@ import $ from 'jquery'
 import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
-import { getMemberData } from '../../../pages/member/actions/index'
+import {
+  getMemberData,
+  updateServerMember,
+} from '../../../pages/member/actions/index'
 import {
   Form,
   FormControl,
@@ -16,93 +19,121 @@ import {
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../../css/member/member-info.scss'
 
-const MemberInfo = props => {
+const MemberInfo = (props) => {
   //會員基本資料
   var i = parseInt(localStorage.getItem('mId') - 1)
   // var i = parseInt(document.cookie.slice(4)) - 1
   // var i = parseInt(document.cookie) - 1
+  const [mName, setMName] = useState('')
+  const [mAccount, setMAccount] = useState('')
+  const [mPassword, setMPassword] = useState('')
+  const [mImg, setMImg] = useState('')
+  const [mGender, setMGender] = useState('')
+  const [mBday, setMBday] = useState('')
+  const [mPhone, setMPhone] = useState('')
+  const [mEmail, setMEmail] = useState('')
+  const [mAddress, setMAddress] = useState('')
+  //default
   const mId = props.data[i] ? props.data[i].mId : ''
-  const mName = props.data[i] ? props.data[i].mName : ''
-  const mAccount = props.data[i] ? props.data[i].mAccount : ''
-  const mPassword = props.data[i] ? props.data[i].mPassword : ''
-  const mImg = props.data[i] ? props.data[i].mImg : ''
-  const mGender = props.data[i] ? props.data[i].mGender : ''
-  const mBday = props.data[i] ? props.data[i].mBday : ''
-  const mPhone = props.data[i] ? props.data[i].mPhone : ''
-  const mEmail = props.data[i] ? props.data[i].mEmail : ''
-  const mAddress = props.data[i] ? props.data[i].mAddress : ''
-
+  const mNamedefault = props.data[i] ? props.data[i].mName : ''
+  const mAccountdefault = props.data[i] ? props.data[i].mAccount : ''
+  const mPassworddefault = props.data[i] ? props.data[i].mPassword : ''
+  const mImgdefault = props.data[i] ? props.data[i].mImg : ''
+  const mGenderdefault = props.data[i] ? props.data[i].mGender : ''
+  const mBdaydefault = props.data[i] ? props.data[i].mBday : ''
+  const mPhonedefault = props.data[i] ? props.data[i].mPhone : ''
+  const mEmaildefault = props.data[i] ? props.data[i].mEmail : ''
+  const mAddressdefault = props.data[i] ? props.data[i].mAddress : ''
+  console.log('data: ', props.data[i])
   //狗狗基本資料
-  const memberInfo = {
-    mName: '',
-    mAccount: '',
-    mPassword: '',
-    mImg: '',
-    mGender: '',
-    mBday: '',
-    mPhone: '',
-    mEmail: '',
-    mAddress: '',
+  const handleSubmit = (e) => {
+    const memberInfo = {
+      mId,
+      mName,
+      mAccount,
+      mPassword,
+      mImg,
+      mGender,
+      mBday,
+      mPhone,
+      mEmail,
+      mAddress,
+    }
+    props.updateServerMember(memberInfo)
+    alert('更新成功')
   }
   //寫入會員資訊
-  function getformInfo(e, info) {
-    console.log(e.currentTarget.value)
-    switch (info) {
-      case 'mName':
-        memberInfo.mName = e.currentTarget.value
-        break
-      case 'mAccount':
-        memberInfo.mAccount = e.currentTarget.value
-        break
-      case 'mPassword':
-        memberInfo.mPassword = e.currentTarget.value
-        break
-      case 'mImg':
-        memberInfo.mPassword = e.currentTarget.value
-        break
-      case 'mGender':
-        memberInfo.mGender = e.currentTarget.value
-        break
-      case 'mBday':
-        memberInfo.mBday = e.currentTarget.value
-        break
-      case 'mPhone':
-        memberInfo.mPhone = e.currentTarget.value
-        break
-      case 'mEmail':
-        memberInfo.mEmail = e.currentTarget.value
-        break
-      case 'mAddress':
-        memberInfo.mAddress = e.currentTarget.value
-        break
+  // function getformInfo(e, info) {
+  //   console.log(e.currentTarget.value)
 
-      default:
-        break
-    }
-  }
+  //   switch (info) {
+  //     case 'mName':
+  //       memberInfo.mName = e.currentTarget.value
+  //       break
+  //     case 'mAccount':
+  //       memberInfo.mAccount = e.currentTarget.value
+  //       break
+  //     case 'mPassword':
+  //       memberInfo.mPassword = e.currentTarget.value
+  //       break
+  //     case 'mImg':
+  //       memberInfo.mPassword = e.currentTarget.value
+  //       break
+  //     case 'mGender':
+  //       memberInfo.mGender = e.currentTarget.value
+  //       break
+  //     case 'mBday':
+  //       memberInfo.mBday = e.currentTarget.value
+  //       break
+  //     case 'mPhone':
+  //       memberInfo.mPhone = e.currentTarget.value
+  //       break
+  //     case 'mEmail':
+  //       memberInfo.mEmail = e.currentTarget.value
+  //       break
+  //     case 'mAddress':
+  //       memberInfo.mAddress = e.currentTarget.value
+  //       break
+
+  //     default:
+  //       break
+  //   }
+  // }
 
   //建立會員資料
   //建立訂單
-  async function updateMember(form) {
-    mId = localStorage.getItem('mId')
-    console.log(JSON.stringify(form))
-    const req = new Request(`http://localhost:6001/member/update/${mId}`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify(form),
-    })
-    const res = await fetch(req)
-    const order = await res.json()
-    await console.log(order)
-  }
+  // async function updateMember(form) {
+  //   mId = localStorage.getItem('mId')
+  //   console.log(JSON.stringify(form))
+  //   const req = new Request(`http://localhost:6001/member/update/1}`, {
+  //     method: 'POST',
+  //     credentials: 'include',
+  //     headers: new Headers({
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     }),
+  //     body: JSON.stringify(form),
+  //   })
+  //   const res = await fetch(req)
+  //   const order = await res.json()
+  //   await console.log(order)
+  // }
+
   console.log(props.data)
+  useEffect(() => setMName(mNamedefault), [mNamedefault])
+  useEffect(() => setMAccount(mAccountdefault), [mAccountdefault])
+  useEffect(() => setMPassword(mPassworddefault), [mPassworddefault])
+  useEffect(() => setMImg(mImgdefault), [mImgdefault])
+  useEffect(() => setMGender(mGenderdefault), [mGenderdefault])
+  useEffect(() => setMBday(mBdaydefault), [mBdaydefault])
+  useEffect(() => setMPhone(mPhonedefault), [mPhonedefault])
+  useEffect(() => setMEmail(mEmaildefault), [mEmaildefault])
+  useEffect(() => setMAddress(mAddressdefault), [mAddressdefault])
   useEffect(() => {
+    props.updateServerMember()
     props.getMemberData()
-    $('.nav-item').click(function() {
+    // props.getServerMember()
+    $('.nav-item').click(function () {
       let effect = $(this).data('effect')
       console.log(effect)
       switch (effect) {
@@ -123,9 +154,7 @@ const MemberInfo = props => {
           break
       }
       $('.nav-link').removeClass('active')
-      $(this)
-        .find('a')
-        .addClass('active')
+      $(this).find('a').addClass('active')
     })
   }, [])
 
@@ -167,7 +196,7 @@ const MemberInfo = props => {
                             name="dName"
                             value={mName}
                             class="form-control"
-                            onChange={e => getformInfo(e, 'mName')}
+                            onChange={(e) => setMName(e.target.value)}
                           />
                         </td>
                       </tr>
@@ -179,7 +208,7 @@ const MemberInfo = props => {
                             name="mId"
                             value={mAccount}
                             class="form-control"
-                            onChange={e => getformInfo(e, 'mAccount')}
+                            onChange={(e) => setMAccount(e.target.value)}
                           />
                         </td>
                       </tr>
@@ -191,7 +220,7 @@ const MemberInfo = props => {
                             name="dGender"
                             value={mPassword}
                             class="form-control"
-                            onChange={e => getformInfo(e, 'mPassword')}
+                            onChange={(e) => setMPassword(e.target.value)}
                           />
                         </td>
                       </tr>
@@ -202,7 +231,7 @@ const MemberInfo = props => {
                             type="text"
                             value={mGender}
                             class="form-control"
-                            onChange={e => getformInfo(e, 'mGender')}
+                            onChange={(e) => setMGender(e.target.value)}
                           />
                         </td>
                       </tr>
@@ -214,7 +243,7 @@ const MemberInfo = props => {
                             name="dWeight"
                             class="form-control"
                             value={mBday}
-                            onChange={e => getformInfo(e, 'mBday')}
+                            onChange={(e) => setMBday(e.target.value)}
                           />
                         </td>
                       </tr>
@@ -226,7 +255,7 @@ const MemberInfo = props => {
                             name="dInfo"
                             class="form-control"
                             value={mPhone}
-                            onChange={e => getformInfo(e, 'mPhone')}
+                            onChange={(e) => setMPhone(e.target.value)}
                           />
                         </td>
                       </tr>
@@ -238,7 +267,7 @@ const MemberInfo = props => {
                             name="dInfo"
                             class="form-control"
                             value={mEmail}
-                            onChange={e => getformInfo(e, 'mEmail')}
+                            onChange={(e) => setMEmail(e.target.value)}
                           />
                         </td>
                       </tr>
@@ -250,14 +279,8 @@ const MemberInfo = props => {
                             name="dInfo"
                             class="form-control"
                             value={mAddress}
-                            onChange={e => getformInfo(e, 'mAddress')}
+                            onChange={(e) => setMAddress(e.target.value)}
                           />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-right">會員無言</td>
-                        <td>
-                          <input type="text" class="form-control" />
                         </td>
                       </tr>
                     </tbody>
@@ -267,7 +290,7 @@ const MemberInfo = props => {
                           <div
                             href="./member-updateEdit.php"
                             class="btn btn-sm btn-danger"
-                            onClick={updateMember}
+                            onClick={(e) => handleSubmit(e)}
                           >
                             <i class="fa fa-trash"></i> 修改
                           </div>
@@ -289,10 +312,10 @@ const MemberInfo = props => {
     </div>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return { data: store.getMember }
 }
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getMemberData }, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getMemberData, updateServerMember }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MemberInfo)

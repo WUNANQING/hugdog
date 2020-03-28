@@ -20,6 +20,7 @@ import { connect } from 'react-redux'
 //action
 import { bindActionCreators } from 'redux'
 import { getQuestion } from './actions/index'
+import { getDogDetail, getMemberDetail } from '../member/actions/index'
 
 import $ from 'jquery'
 
@@ -29,15 +30,14 @@ import '../../components/Knowledge/knowledge.scss'
 import QuestionArt from './QuestionArt'
 
 function Question(props) {
+  const mId = localStorage.getItem('mId')
   useEffect(() => {
-    console.log(props)
     props.getQuestion()
+    props.getDogDetail()
+    props.getMemberDetail(mId)
   }, [])
 
-  // useEffect(() => {
-  //   props.getDogData()
-  // }, [])
-
+  //sweetalert
   const Swal = require('sweetalert2')
   function post() {
     Swal.fire({
@@ -49,27 +49,87 @@ function Question(props) {
   const [show, setShow] = useState(false)
   const handleClose = () => {
     setShow(false)
-    setTimeout(() => {
-      post()
-    }, 400)
+    //   setTimeout(() => {
+    //   }, 400)
   }
   const handleShow = () => setShow(true)
 
-  //表格確認
+  //判斷表格
   const [validated, setValidated] = useState(false)
   const handleSubmit = event => {
     const form = event.currentTarget
+    console.log(form)
+    console.log('form.checkValidity()', form.checkValidity())
     if (form.checkValidity() === false) {
       event.preventDefault()
       event.stopPropagation()
+    } else if (form.checkValidity() === true) {
+      postAsk(askInfo)
+      setShow(false)
+      post()
     }
     setValidated(true)
   }
 
+  //
   //分類篩選
   const [classify, setClassify] = useState('')
   function changeClassify(newClassify) {
     setClassify(newClassify)
+  }
+
+  //--------------------發問
+
+  // const dName = localstorage.getItem('dName')
+
+  //表單資訊
+  const mName = props.mPost[0] ? props.mPost[0].mName : ''
+  const askInfo = {
+    mId: mId,
+    mName: mName,
+    dogYear: '',
+    askTitle: '',
+    classify: '',
+    type: '',
+    askTxt: '',
+  }
+
+  //寫入表單資訊
+  function askformInfo(e, info) {
+    switch (info) {
+      case 'dogYear':
+        askInfo.dogYear = e.currentTarget.value
+        break
+      case 'classify':
+        askInfo.classify = e.currentTarget.value
+        break
+      case 'type':
+        askInfo.type = e.currentTarget.value
+        break
+      case 'askTitle':
+        askInfo.askTitle = e.currentTarget.value
+        break
+      case 'askTxt':
+        askInfo.askTxt = e.currentTarget.value
+        break
+      default:
+        break
+    }
+  }
+  //建立問題
+  async function postAsk(form) {
+    const req = new Request('http://localhost:6001/knowledge/question/ask', {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(form),
+    })
+    const res = await fetch(req)
+    const order = await res.json()
+    await console.log(order)
   }
 
   return (
@@ -135,19 +195,32 @@ function Question(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <Modal.Header closeButton>
-              <Modal.Title>
-                <MdPets /> 我要發問
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {/* 我的表格 */}
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <MdPets /> 我要發問
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {/* 我的表格 */}
+
                 <Form.Group controlId="exampleForm.ControlSelect1 petselect">
                   {/* <Form.Label>寵物</Form.Label> */}
-                  <Form.Control as="select" required>
-                    <option>請選擇寵物</option>
-                    <option>1</option>
+                  <Form.Control
+                    name="dogYear"
+                    as="select"
+                    onChange={e => askformInfo(e, 'dogYear')}
+                    required
+                  >
+                    <option value="">請選擇寵物</option>
+                    {props.dogPost &&
+                      props.dogPost.map((value, index) => {
+                        return (
+                          <option value={value.dId} key={index}>
+                            {value.dName} ／ {value.dYear}歲
+                          </option>
+                        )
+                      })}
                     {/* <option>{props.data.qName}</option> */}
                   </Form.Control>
                 </Form.Group>
@@ -156,11 +229,16 @@ function Question(props) {
                     as={Col}
                     controlId="exampleForm.ControlSelect1 typeselect"
                   >
-                    <Form.Control as="select" required>
-                      <option>請選擇類型</option>
-                      <option>行為</option>
-                      <option>照護</option>
-                      <option>飲食</option>
+                    <Form.Control
+                      name="classify"
+                      as="select"
+                      required
+                      onChange={e => askformInfo(e, 'classify')}
+                    >
+                      <option value="">請選擇類型</option>
+                      <option value="1">行為</option>
+                      <option value="2">照護</option>
+                      <option value="3">飲食</option>
                     </Form.Control>
                   </Form.Group>
 
@@ -168,40 +246,49 @@ function Question(props) {
                     as={Col}
                     controlId="exampleForm.ControlSelect2 typeselect"
                   >
-                    <Form.Control as="select" required>
-                      <option>請選擇類別</option>
-                      <option>行為</option>
-                      <option>照護</option>
-                      <option>飲食</option>
+                    <Form.Control
+                      name="type"
+                      as="select"
+                      onChange={e => askformInfo(e, 'type')}
+                      required
+                    >
+                      <option value="">請選擇類型</option>
+                      <option value="1">行為</option>
+                      <option value="2">照護</option>
+                      <option value="3">飲食</option>
                     </Form.Control>
                   </Form.Group>
                 </Form.Row>
 
                 <Form.Group controlId="exampleForm.ControlInput1">
                   <Form.Control
-                    type="email"
+                    name="askTitle"
+                    type="text"
                     placeholder="請輸入問題標題"
+                    onChange={e => askformInfo(e, 'askTitle')}
                     required
                   />
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                   <Form.Control
                     required
+                    name="askTxt"
                     as="textarea"
                     rows="8"
                     placeholder="請詳述說明狀況、發生時間、主要徵狀、寵物變化..."
+                    onChange={e => askformInfo(e, 'askTxt')}
                   />
                 </Form.Group>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                取消發問
-              </Button>
-              <Button variant="primary" type="submit" onClick={handleClose}>
-                發佈
-              </Button>
-            </Modal.Footer>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose} id="btn">
+                  取消發問
+                </Button>
+                <Button variant="primary" type="submit">
+                  發佈
+                </Button>
+              </Modal.Footer>
+            </Form>
           </Modal>
         </div>
         <div>
@@ -236,10 +323,17 @@ function Question(props) {
 }
 
 const mapStateToProps = store => {
-  return { post: store.getQuestion }
+  return {
+    post: store.getQuestion,
+    dogPost: store.getDogDetail,
+    mPost: store.getMemberDetail,
+  }
 }
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getQuestion }, dispatch)
+  return bindActionCreators(
+    { getQuestion, getDogDetail, getMemberDetail },
+    dispatch
+  )
 }
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Question)

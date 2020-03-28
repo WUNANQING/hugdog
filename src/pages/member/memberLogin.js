@@ -20,9 +20,9 @@ import MemberSidebar from '../../components/member/member-sidebar'
 import '../../css/member/member-login.scss'
 // import { doc } from 'prettier'
 
-const MemberLogin = props => {
+const MemberLogin = (props) => {
   localStorage.setItem('mId', 0)
-  $('.login-btn').click(function() {
+  $('.login-btn').click(function () {
     console.log('輸入帳號: ' + $('#exampleInputAccount1').val())
     console.log('輸入密碼: ' + $('#exampleInputPassword1').val())
     // console.log('帳號: ' + mAccount)
@@ -36,26 +36,10 @@ const MemberLogin = props => {
       var mAccount = props.data[i] ? props.data[i].mAccount : ''
       var mPassword = props.data[i] ? props.data[i].mPassword : ''
       var mImg = props.data[i] ? props.data[i].mImg : ''
-      //新增cookie
-      function setCookie(cname, cvalue, exdays) {
-        var d = new Date()
-        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
-        var expires = 'expires=' + d.toUTCString()
-        document.cookie = cname + '=' + cvalue + '; ' + expires
-      }
-      //清除cookie
-      function clearAllCookie() {
-        var keys = document.cookie.match(/[^ =;]+(?=\=)/g)
-        if (keys) {
-          for (var i = keys.length; i--; )
-            document.cookie =
-              keys[i] + '=0;expires=' + new Date(0).toUTCString()
-        }
-      }
 
       if (
-        $('#exampleInputAccount1').val() === mAccount &&
-        $('#exampleInputPassword1').val() === mPassword
+        $('.account').val() === mAccount &&
+        $('.password').val() === mPassword
       ) {
         console.log('正確')
         $('.alertBox')
@@ -110,7 +94,7 @@ const MemberLogin = props => {
     // window.location.reload()
     //第一种只刷新一次
     //mousedown,mouseup
-    $('.show').click(function() {
+    $('.show').click(function () {
       $('.show').addClass('active')
       $('.hide').removeClass('active')
       $('#exampleInputPassword1').attr('type', 'text')
@@ -120,7 +104,7 @@ const MemberLogin = props => {
       //   .addClass('appear')
       //   .addClass('alert-success')
     })
-    $('.hide').click(function() {
+    $('.hide').click(function () {
       $('.hide').addClass('active')
       $('.show').removeClass('active')
       $('#exampleInputPassword1').attr('type', 'password')
@@ -132,7 +116,7 @@ const MemberLogin = props => {
     })
     const account = $('#exampleInputAccount1').val()
     const password = $('#exampleInputPassword1').val()
-  }, [document.cookie])
+  }, [localStorage.getItem('mId')])
   //    {document.cookie === '' ? ():()
   return (
     <>
@@ -154,7 +138,7 @@ const MemberLogin = props => {
                 <div class="form-group">
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control account"
                     id="exampleInputAccount1"
                     aria-describedby="accountHelp"
                     placeholder="帳號"
@@ -163,7 +147,7 @@ const MemberLogin = props => {
                 <div class="form-group">
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control password"
                     id="exampleInputPassword1"
                     placeholder="密碼"
                   />
@@ -209,10 +193,10 @@ const MemberLogin = props => {
     </>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return { data: store.getMember, detail: store.getMemberDetail }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getMemberData, getMemberDetail }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MemberLogin)

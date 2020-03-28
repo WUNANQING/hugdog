@@ -17,7 +17,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import '../../css/member/member-info.scss'
 import DogInfo from '../../components/member/member-info/dog-info'
 import Memberinfo from '../../components/member/member-info/member-info'
-const MemberInfo = props => {
+const MemberInfo = (props) => {
   //會員基本資料
 
   var i = document.cookie + 1
@@ -70,7 +70,7 @@ const MemberInfo = props => {
 
   useEffect(() => {
     props.getMemberData()
-    $('.nav-item').click(function() {
+    $('.nav-item').click(function () {
       let effect = $(this).data('effect')
       console.log(effect)
       switch (effect) {
@@ -91,11 +91,9 @@ const MemberInfo = props => {
           break
       }
       $('.nav-link').removeClass('active')
-      $(this)
-        .find('a')
-        .addClass('active')
+      $(this).find('a').addClass('active')
     })
-    $('#logout').click(function() {
+    $('#logout').click(function () {
       // clearAllCookie()
       // clearCookie('mId')
       // localStorage.clear()
@@ -104,7 +102,7 @@ const MemberInfo = props => {
       localStorage.setItem('cart', [])
       window.location.replace('http://localhost:3000/login/')
     })
-    $('#loglog').click(function() {
+    $('#loglog').click(function () {
       // clearCookie('mId')
       clearCookie('mId')
       // localStorage.clear()
@@ -158,7 +156,46 @@ const MemberInfo = props => {
                     >
                       登出
                     </button>
-                    <button id="loglog">123</button>
+                  </Nav>
+                </div>
+                <div className="member-sidebar-RWD">
+                  <Nav>
+                    <Nav.Link className="member-sidebar-text" href="/member">
+                      首頁
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-info"
+                    >
+                      個人資訊
+                    </Nav.Link>
+
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-item"
+                    >
+                      商品查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-service"
+                    >
+                      服務查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-activity"
+                    >
+                      活動查詢
+                    </Nav.Link>
+                    <button
+                      className="member-sidebar-text logout"
+                      href="/login"
+                      id="logout"
+                      // onClick={() => clearAllCookie()}
+                    >
+                      登出
+                    </button>
                   </Nav>
                 </div>
                 <div class=" wrapper">
@@ -185,10 +222,10 @@ const MemberInfo = props => {
     </>
   )
 }
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return { data: store.getMember }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getMemberData }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MemberInfo)
