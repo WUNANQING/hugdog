@@ -231,36 +231,3 @@
     bottom: 39%;
   }
 }
-.poup-login-destop {
-  width: 500px;
-  margin: auto;
-  background-color: #fff;
-  box-shadow: 7px 6px 40px 0px rgba(204, 204, 223, 0.16);
-  position: fixed;
-  max-width: 90%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 600px;
-  padding: 50px;
-  z-index: 11;
-  opacity: 0;
-  visibility: hidden;
-}
-.bg-login-popup {
-  height: 100%;
-  width: 100%;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  position: fixed;
-  overflow: auto;
-
-  opacity: 0;
-  visibility: hidden;
-
-  background-color: rgba(0, 0, 0, 0.8);
-  transition: 0.5s;
-}
