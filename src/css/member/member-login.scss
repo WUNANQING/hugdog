@@ -51,7 +51,27 @@
       color: white;
       font-size: 24px;
       margin-bottom: 30px;
-      background: black;
+      background: linear-gradient(
+        45deg,
+        rgba(65, 160, 90, 1) 35%,
+        rgba(235, 220, 70, 0.8) 60%
+      );
+      background: -moz-linear-gradient(
+        45deg,
+        rgba(65, 160, 90, 1) 35%,
+        rgba(235, 220, 70, 0.8) 60%
+      );
+      background: -webkit-linear-gradient(
+        45deg,
+        rgba(65, 160, 90, 1) 35%,
+        rgba(235, 220, 70, 0.8) 60%
+      );
+      background: -o-linear-gradient(
+        45deg,
+        rgba(65, 160, 90, 1) 35%,
+        rgba(235, 220, 70, 0.8) 60%
+      );
+
       cursor: pointer;
     }
     .register {
@@ -59,6 +79,7 @@
       background: rgb(245, 243, 243);
       height: 50px;
       line-height: 50px;
+      margin-top: 30px;
       p {
         margin-left: 20px;
         margin-right: 20px;
@@ -66,6 +87,36 @@
     }
     p {
       color: grey;
+    }
+  }
+  #exampleInputAccount1,
+  #exampleInputPassword1,
+  .register {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: none;
+  }
+  .login-btn {
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    font-size: 20px;
+    margin-top: 20px;
+    background: rgb(173, 173, 173);
+  }
+  .hrhr {
+    background: rgb(173, 173, 173);
+    border: none;
+    height: 2px;
+  }
+
+  .text-left {
+    margin-top: 20px;
+    p {
+      font-size: 20px;
+      margin-top: 20px;
     }
   }
 }
