@@ -1,24 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import ProductReceipt from './components/ProductReceipt'
-const Checkout = props => {
+//redux
+import { connect } from 'react-redux'
+//action
+import { bindActionCreators } from 'redux'
+import { getMemberDetail } from '../member/actions/index'
+import { FaCcMastercard, FaCcVisa } from 'react-icons/fa'
+
+const Checkout = (props) => {
   //設定驗證狀態
   const [validated, setValidated] = useState(false)
-  //設定驗證方法
-  function handleSubmit(e) {
-    const form = e.currentTarget
-    if (form.checkValidity() === false) {
-      e.preventDefault()
-      e.stopPropagation()
-    } else if (form.checkValidity() === true) {
-      postOrder(buyerInfo)
-      localStorage.setItem('cart', JSON.stringify([]))
-      props.history.push(`/order/${mId}`)
-    }
-    setValidated(true)
-  }
   // 設定mId的來源,抓到mId去檢索會員的最新訂單
   const mId = localStorage.getItem('mId')
   //表單資訊
@@ -41,7 +35,8 @@ const Checkout = props => {
   function getformInfo(e, info) {
     switch (info) {
       case 'lastName':
-        buyerInfo.lastName = e.currentTarget.value
+        buyerInfo.lastName =
+          e.currentTarget.value || props.data[0].mName.slice(0, 1)
         break
       case 'firstName':
         buyerInfo.firstName = e.currentTarget.value
@@ -108,6 +103,23 @@ const Checkout = props => {
       $(e.currentTarget).focus()
     }
   }
+  //設定驗證方法
+  function handleSubmit(e) {
+    const form = e.currentTarget
+    if (form.checkValidity() === false) {
+      e.preventDefault()
+      e.stopPropagation()
+    } else if (form.checkValidity() === true) {
+      postOrder(buyerInfo)
+      localStorage.setItem('cart', JSON.stringify([]))
+      props.history.push(`/order/${mId}`)
+    }
+    setValidated(true)
+  }
+
+  useEffect(() => {
+    props.getMemberDetail(mId)
+  }, [])
   return (
     <>
       <Container>
@@ -157,7 +169,7 @@ const Checkout = props => {
                 購物車
               </div>
               <div
-                className="position-absolute "
+                className="position-absolute font-weight-bold"
                 style={{
                   left: (294.9375 / 647.484) * 100 + '%',
                   top: 10,
@@ -191,8 +203,24 @@ const Checkout = props => {
               <Form.Check
                 id="auto"
                 type="checkbox"
-                label="自動填入資訊"
-                onClick={() => {}}
+                label="同會員資訊"
+                onClick={() => {
+                  buyerInfo.lastName = props.detail[0].mName.slice(0, 1)
+                  $('[name=lastName]').val(props.detail[0].mName.slice(0, 1))
+                  buyerInfo.firstName = props.detail[0].mName.slice(1)
+                  $('[name=firstName]').val(props.detail[0].mName.slice(1))
+                  buyerInfo.county = props.detail[0].mAddress.slice(0, 3)
+                  $('[name=county]').val(props.detail[0].mAddress.slice(0, 3))
+                  buyerInfo.address = props.detail[0].mAddress.slice(3)
+                  $('[name=address]').val(props.detail[0].mAddress.slice(3))
+                  //會員資料庫無郵遞區號預設是地址欄位前三個
+                  // buyerInfo.county = props.detail[0].mAddress.slice(0, 3)
+                  // $('[name=zip]').val(props.detail[0].mAddress.slice(0, 3))
+                  buyerInfo.email = props.detail[0].mEmail
+                  $('[name=email]').val(props.detail[0].mEmail)
+                  buyerInfo.mobile = props.detail[0].mPhone
+                  $('[name=mobile]').val(props.detail[0].mPhone)
+                }}
               />
             </div>
             <hr />
@@ -310,7 +338,7 @@ const Checkout = props => {
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  請輸入郵遞區號
+                  請輸入郵遞區號,(123或者12345)
                 </Form.Control.Feedback>
                 <br />
                 <Form.Control
@@ -349,13 +377,13 @@ const Checkout = props => {
                   name="mobile"
                   size="lg"
                   type="text"
-                  placeholder="行動電話號碼"
-                  pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$"
-                  onChange={e => getformInfo(e, 'mobile')}
+                  placeholder="行動電話或家用電話"
+                  pattern="^09[0-9]{2}-?[0-9]{3}-?[0-9]{3}$|^\(?\d{2,3}\)?-?\d{4}-?\d{4}$"
+                  onChange={(e) => getformInfo(e, 'mobile')}
                 />
                 <Form.Control.Feedback>正確!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  請輸入行動電話號碼,(09xx-xxx-xxx 或 09xxxxxxxx)
+                  請輸入電話號碼,(09xx-xxx-xxx、09xxxxxxxx、04-xxxx-xxxx或(04)xxxx-xxxx)
                 </Form.Control.Feedback>
                 <br />
               </Form.Group>
@@ -363,30 +391,38 @@ const Checkout = props => {
               <hr />
               <br />
               <Form.Group>
-                <div className="mb-3">
-                  <Form.Check
-                    required
-                    inline
-                    name="card"
-                    label="MasterCard"
-                    type="radio"
-                    id="MasterCard"
-                    onChange={e => getformInfo(e, 'card')}
-                  />
-                  <Form.Check
-                    required
-                    inline
-                    name="card"
-                    label="VISA"
-                    type="radio"
-                    id="VISA"
-                    onChange={e => getformInfo(e, 'card')}
-                  />
-                </div>
+                <Form.Check
+                  required
+                  inline
+                  name="card"
+                  label="MasterCard"
+                  type="radio"
+                  id="MasterCard"
+                  onChange={(e) => {
+                    getformInfo(e, 'card')
+                    $('#master').fadeToggle()
+                    $('#visa').fadeOut()
+                  }}
+                />
+                <FaCcMastercard id="master" size="25px" display="none" />
+                <Form.Check
+                  required
+                  inline
+                  name="card"
+                  label="VISA"
+                  type="radio"
+                  id="VISA"
+                  onChange={(e) => {
+                    getformInfo(e, 'card')
+                    $('#visa').fadeToggle()
+                    $('#master').fadeOut()
+                  }}
+                />
+                <FaCcVisa id="visa" size="25px" display="none" />
               </Form.Group>
               <Form.Group>
                 <Form.Row>
-                  <Form.Group as={Col} md={2}>
+                  <Form.Group as={Col} xs={3} sm={3} md={2}>
                     <Form.Control
                       required
                       className="cardInput"
@@ -402,7 +438,7 @@ const Checkout = props => {
                       onBlur={e => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col} md={2}>
+                  <Form.Group as={Col} xs={3} sm={3} md={2}>
                     <Form.Control
                       required
                       className="cardInput"
@@ -418,7 +454,7 @@ const Checkout = props => {
                       onBlur={e => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col} md={2}>
+                  <Form.Group as={Col} xs={3} sm={3} md={2}>
                     <Form.Control
                       required
                       className="cardInput"
@@ -434,7 +470,7 @@ const Checkout = props => {
                       onBlur={e => getformInfo(e, 'cardNumber')}
                     />
                   </Form.Group>
-                  <Form.Group as={Col} md={2}>
+                  <Form.Group as={Col} xs={3} sm={3} md={2}>
                     <Form.Control
                       required
                       className="cardInput"
@@ -457,7 +493,7 @@ const Checkout = props => {
                 </Form.Row>
                 <br />
                 <Form.Row>
-                  <Form.Group as={Col} xs={3}>
+                  <Form.Group as={Col} xs={3} sm={4}>
                     <Form.Control
                       required
                       name="valid"
@@ -487,7 +523,7 @@ const Checkout = props => {
                       請輸入安全碼
                     </Form.Control.Feedback>
                   </Form.Group>
-                  <Form.Group as={Col} xs={3}>
+                  <Form.Group as={Col} xs={6} sm={5} md={3}>
                     <Form.Control
                       required
                       name="owner"
@@ -515,5 +551,12 @@ const Checkout = props => {
     </>
   )
 }
-
-export default withRouter(Checkout)
+const mapStateToProps = (store) => {
+  return { detail: store.getMemberDetail }
+}
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ getMemberDetail }, dispatch)
+}
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Checkout)
+)

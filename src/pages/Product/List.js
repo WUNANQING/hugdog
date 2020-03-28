@@ -3,10 +3,16 @@ import { withRouter, Link } from 'react-router-dom'
 import { Container, Row, Col, Image, Button } from 'react-bootstrap'
 import { MdAddShoppingCart, MdDelete } from 'react-icons/md'
 import $ from 'jquery'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { count } from './actions/index'
 
 const List = (props) => {
   //清單狀態
   const [list, setList] = useState([])
+  const [mycart, setMycart] = useState([])
+  const [show, setShow] = useState(false)
+
   //從server拿清單
   async function getList() {
     const req = new Request(
@@ -21,10 +27,10 @@ const List = (props) => {
     console.log(data)
     setList(data)
   }
-  //return完後呼叫清單function;如果沒有監聽狀態,刪除商品後無法使商品列完整消失只會消失按鈕
+  //return完後呼叫清單function;如果沒有監聽狀態,刪除商品後無法使商品列完整消失只會消失按鈕,相比cart少了showCart狀態;因此如果是根據list,前端會一直發出請求
   useEffect(() => {
     getList()
-  }, [list])
+  }, [show])
   //刪除清單項目
   async function delList(itemId) {
     let mId = props.match.params.mId
@@ -91,11 +97,56 @@ const List = (props) => {
                   </Col>
                   <Col md={2}>
                     <h4 className="text-center font-weight-bold">
-                      NT${value.pQuantity * value.pPrice}
+                      NT${value.pPrice}
                     </h4>
                   </Col>
                   <Col md={2}>
-                    <Button className="mb-2" variant="primary" size="md">
+                    <Button
+                      className="mb-2"
+                      variant="primary"
+                      size="md"
+                      onClick={() => {
+                        let item = {
+                          pId: value.pId,
+                          pName: value.pName,
+                          pQuantity: 1,
+                          pPrice: value.pPrice,
+                          pImg: value.pImg,
+                        }
+                        let cart = []
+                        cart.push(item)
+                        if (localStorage.getItem('cart') === null) {
+                          localStorage.setItem('cart', JSON.stringify(cart))
+                        } else {
+                          let currentCart = JSON.parse(
+                            localStorage.getItem('cart')
+                          )
+                          if (
+                            [...currentCart].find(
+                              (currentValue) => currentValue.pId === value.pId
+                            )
+                          ) {
+                            alert('已加入購物車')
+                            return
+                          } else {
+                            props.count(mycart)
+                            const newCart = [...currentCart, item]
+                            localStorage.setItem(
+                              'cart',
+                              JSON.stringify(newCart)
+                            )
+                          }
+                        }
+                        let r = window.confirm('需要到購物車頁面結帳嗎?')
+                        if (r === true) {
+                          setTimeout(() => {
+                            props.history.push('/cart')
+                          }, 700)
+                        } else {
+                          alert('加入成功')
+                        }
+                      }}
+                    >
                       <MdAddShoppingCart className="mb-md-1" />
                       加入購物車
                     </Button>
@@ -103,8 +154,15 @@ const List = (props) => {
                       className="mb-2"
                       variant="primary"
                       size="md"
+                      style={{ maxWidth: '134.17px' }}
                       onClick={(e) => {
+                        let r = window.confirm('確定刪除嗎')
+                        if (r === true) {
+                        } else {
+                          return
+                        }
                         delList(value.itemId)
+                        setShow(!show)
                         $(e.currentTarget).parentsUntil('.item').fadeOut()
                       }}
                     >
@@ -135,4 +193,7 @@ const List = (props) => {
   )
 }
 
-export default withRouter(List)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ count }, dispatch)
+}
+export default withRouter(connect(null, mapDispatchToProps)(List))

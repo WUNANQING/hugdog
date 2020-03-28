@@ -100,9 +100,17 @@ const ProductSidebar = (props) => {
               as="h4"
               className="mt-1 p-0"
               style={{ cursor: 'pointer' }}
-              onClick={() => {
+              onClick={(e) => {
                 props.history.push('/products')
                 props.getProducts(props.match.params.page || '')
+                $(e.currentTarget)
+                  .addClass(
+                    'bg-primary text-dark text-right font-weight-bold selected'
+                  )
+                  .siblings()
+                  .removeClass(
+                    'bg-primary text-dark text-right font-weight-bold selected'
+                  )
               }}
             >
               全部商品

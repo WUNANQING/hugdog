@@ -82,4 +82,8 @@ export const count = (quantity) => ({
   type: 'COUNT_QUANTITY',
   quantity,
 })
-//跟server要清單資料
+//紀錄使用過優惠券的折扣或減價
+export const useCoupon = (discount) => ({
+  type: 'USE_COUPON',
+  discount,
+})

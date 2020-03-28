@@ -29,23 +29,24 @@ function Home(props) {
     handleClose()
     setShow2(true)
   }
-  $('.show').click(function () {
-    console.log('show')
-    $('.show').addClass('active')
-    $('.hide').removeClass('active')
-    $('#exampleInputPassword1').attr('type', 'text')
-  })
-  $('.hide').click(function () {
-    console.log('hide')
-    $('.hide').addClass('active')
-    $('.show').removeClass('active')
-    $('#exampleInputPassword1').attr('type', 'password')
-  })
+
   useEffect(() => {
     // props.getMemberDetail(mId)
     // props.getMemberData()
     // window.location.reload()
     //第一种只刷新一次
+    $('.show').click(function () {
+      console.log('show')
+      $('.show').addClass('active')
+      $('.hide').removeClass('active')
+      $('#exampleInputPassword1').attr('type', 'text')
+    })
+    $('.hide').click(function () {
+      console.log('hide')
+      $('.hide').addClass('active')
+      $('.show').removeClass('active')
+      $('#exampleInputPassword1').attr('type', 'password')
+    })
   }, [])
   return (
     <>

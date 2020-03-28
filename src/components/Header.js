@@ -18,80 +18,9 @@ $('#logout').click(function () {
   window.location.replace('http://localhost:3000/login/')
 })
 function Header(props) {
-  useEffect(() => {
-    $('.user').click(function () {
-      $('.home_login').removeClass('home_hide')
-      $('.home').css('filter', 'brightness(50%)')
-    })
-  }, [props.qty])
+  useEffect(() => {}, [props.qty || props.data])
   return (
     <>
-      <div className="container home_login home_hide">
-        <div className=" login-container">
-          <div className="login">
-            <div
-              className="alertBox alert alert-danger disappear"
-              role="alert"
-            ></div>
-            <img
-              src={require('../images/logo-dark.svg')}
-              alt="Background"
-              className="text-center"
-            />
-            <hr />
-            <form>
-              <div class="form-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputAccount1"
-                  aria-describedby="accountHelp"
-                  placeholder="帳號"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="密碼"
-                />
-                <img
-                  src={require('../images/member/hide_password.png')}
-                  alt="Background"
-                  className="show"
-                />
-                <img
-                  src={require('../images/member/show_hide_password.png')}
-                  alt="Background"
-                  className="hide active"
-                />
-              </div>
-              <Link class="form-group text-left">
-                <p>忘記密碼?</p>
-              </Link>
-              <br />
-              <Link
-                type="submit"
-                class="btn btn-primary btn-block login-btn"
-                // to={'/member/'}
-              >
-                登入
-              </Link>
-              <div class="form-group d-flex justify-content-between register">
-                <div>
-                  <p>還沒有註冊帳號?</p>
-                </div>
-                <div>
-                  <Link class="" to="/register">
-                    <p>立即註冊→</p>
-                  </Link>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
       <header className="sticky-top">
         <Navbar bg="white" variant="light" expand="md">
           <Navbar.Toggle aria-controls="basic-navbar-nav order-1" />
@@ -213,10 +142,17 @@ function Header(props) {
                 <FiHeart />
               </IconContext.Provider>
             </Nav.Link>
-            <Nav className="nav-icon order-3 order-md-4">
+            <Nav
+              className="nav-icon order-3 order-md-4"
+              onClick={() => {
+                props.history.push('/cart')
+              }}
+            >
               <div className="nav-link">
                 {JSON.parse(localStorage.getItem('cart')) === null ||
-                JSON.parse(localStorage.getItem('cart')).length === 0 ? (
+                JSON.parse(localStorage.getItem('cart')).length === 0 ||
+                localStorage.getItem('mId') === '0' ||
+                localStorage.getItem('mId') === null ? (
                   <div className="icon">
                     <IconContext.Provider value={{ size: '1.5rem' }}>
                       <AiOutlineShopping />
@@ -238,7 +174,9 @@ function Header(props) {
 
                   <Link className="dropdown-item nav-link">
                     {JSON.parse(localStorage.getItem('cart')) === null ||
-                    JSON.parse(localStorage.getItem('cart')).length === 0 ? (
+                    JSON.parse(localStorage.getItem('cart')).length === 0 ||
+                    localStorage.getItem('mId') === '0' ||
+                    localStorage.getItem('mId') === null ? (
                       <div className="text-center">
                         <span>購物車沒有商品</span>
                         <br />
@@ -273,6 +211,7 @@ function Header(props) {
 const mapStateToProps = (store) => {
   return {
     qty: store.getQuantity,
+    data: store.getMember,
   }
 }
 export default withRouter(connect(mapStateToProps, null)(Header))

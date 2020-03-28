@@ -13,8 +13,9 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 import ProductCardSmallSale from './components/ProductCardSmallSale'
-import { getProducts, count } from './actions/index'
+import { getProducts, count, useCoupon } from './actions/index'
 import { bindActionCreators } from 'redux'
+import { formServerCouponsWE } from '../../actions/marketingActions'
 
 const Cart = (props) => {
   const [mycart, setMycart] = useState([])
@@ -58,10 +59,11 @@ const Cart = (props) => {
     setMycart(currentCart)
   }
 
-  //從localStorage取得購物車資料
+  //從localStorage取得購物車資料;從server讀取此會員未使用的優惠券
   useEffect(() => {
     getCartFromLocalStorage()
     props.getProducts(Math.floor(Math.random() * 18) + 1)
+    props.formServerCouponsWE(0, localStorage.getItem('mId'))
   }, [props.qty])
 
   //購物車有變動即更改
@@ -116,78 +118,14 @@ const Cart = (props) => {
 
   return (
     <Container className="cart">
-      <Row>
-        <Col md={12} className="mt-5 d-flex justify-content-center">
-          <Col md={7} className="border position-relative">
-            <div
-              className="rounded bg-primary position-absolute rounded-circle"
-              style={{
-                width: 20 + 'px',
-                height: 20 + 'px',
-                left: (-10 / 647.484) * 100 + '%',
-                top: -10,
-              }}
-            ></div>
-            <div
-              className="rounded bg-dark position-absolute rounded-circle"
-              style={{
-                width: 20 + 'px',
-                height: 20 + 'px',
-                left: (313.742 / 647.484) * 100 + '%',
-                top: -10,
-              }}
-            ></div>
-            <div
-              className="rounded bg-dark position-absolute rounded-circle"
-              style={{
-                width: 20 + 'px',
-                height: 20 + 'px',
-                left: (637.484 / 647.484) * 100 + '%',
-                top: -10,
-              }}
-            ></div>
-          </Col>
-        </Col>
-      </Row>
-      <Row>
-        <Col md={12} className="d-flex justify-content-center">
-          <Col md={7} className="position-relative">
-            <div
-              className="position-absolute "
-              style={{
-                left: (-21.6015 / 647.484) * 100 + '%',
-                top: 10,
-              }}
-            >
-              購物車
-            </div>
-            <div
-              className="position-absolute "
-              style={{
-                left: (294.9375 / 647.484) * 100 + '%',
-                top: 10,
-              }}
-            >
-              付款資料
-            </div>{' '}
-            <div
-              className="position-absolute "
-              style={{
-                right: (-28.805 / 647.484) * 100 + '%',
-                top: 10,
-              }}
-            >
-              訂單資料
-            </div>
-          </Col>
-        </Col>
-      </Row>
       <Row className="mt-5">
         <Col md={12}>
-          <Row className="mt-5">
-            <Col>
-              {mycartDisplay.length === 0 ? (
-                <>
+          {mycartDisplay.length === 0 ||
+          localStorage.getItem('mId') === '0' ||
+          localStorage.getItem('mId') === null ? (
+            <>
+              <Row className="mt-5">
+                <Col>
                   <h3>購物車內沒有任何商品</h3>
                   <hr />
                   <Image
@@ -200,116 +138,196 @@ const Cart = (props) => {
                       前往選購
                     </Button>
                   </Link>
-                </>
-              ) : (
-                <h3>以下是你購物車內的商品 NT${sum(mycartDisplay)}</h3>
-              )}
-              <hr />
-            </Col>
-          </Row>
-          {mycartDisplay.map((value, index) => {
-            return (
-              <Row className="item align-items-center" key={value.pId}>
-                <Col md={4} className="text-center">
-                  <Link to={'/productdetail/' + value.pId} className="p-0">
-                    <Image
-                      src={require('../../images/product/' +
-                        value.pImg +
-                        '.jpg')}
-                      className="card-img-top"
-                      alt="..."
-                    />
-                  </Link>
                 </Col>
-                <Col md={2}>
-                  <h4 className="font-weight-bold">{value.pName}</h4>
-                  <h4>數量:{value.pQuantity}</h4>
-                  <h4>價格:{value.pPrice}</h4>
+              </Row>
+            </>
+          ) : (
+            <>
+              <Row>
+                <Col md={12} className="d-flex justify-content-center">
+                  <Col md={7} className="border position-relative">
+                    <div
+                      className="rounded bg-primary position-absolute rounded-circle"
+                      style={{
+                        width: 20 + 'px',
+                        height: 20 + 'px',
+                        left: (-10 / 647.484) * 100 + '%',
+                        top: -10,
+                      }}
+                    ></div>
+                    <div
+                      className="rounded bg-dark position-absolute rounded-circle"
+                      style={{
+                        width: 20 + 'px',
+                        height: 20 + 'px',
+                        left: (313.742 / 647.484) * 100 + '%',
+                        top: -10,
+                      }}
+                    ></div>
+                    <div
+                      className="rounded bg-dark position-absolute rounded-circle"
+                      style={{
+                        width: 20 + 'px',
+                        height: 20 + 'px',
+                        left: (637.484 / 647.484) * 100 + '%',
+                        top: -10,
+                      }}
+                    ></div>
+                  </Col>
                 </Col>
-                <Col md={2}>
-                  <ButtonGroup className="mb-md-2">
-                    <Button
-                      className="border-dark bg-light text-dark"
-                      id="-"
-                      onClick={(e) => {
-                        updateQuantityToLocalStorage(e, index, 1)
+              </Row>
+              <Row className="mb-5">
+                <Col md={12} className="d-flex justify-content-center">
+                  <Col md={7} className="position-relative">
+                    <div
+                      className="position-absolute font-weight-bold"
+                      style={{
+                        left: (-21.6015 / 647.484) * 100 + '%',
+                        top: 10,
                       }}
                     >
-                      -
-                    </Button>
-                    <Button
-                      className="border-dark bg-light text-dark"
-                      value={value.pQuantity}
-                      type="input"
-                    >
-                      {value.pQuantity}
-                    </Button>
-                    <Button
-                      className="border-dark bg-light text-dark"
-                      id="+"
-                      onClick={(e) => {
-                        value.pQuantity < 10 &&
-                          updateQuantityToLocalStorage(e, index, 1)
+                      購物車
+                    </div>
+                    <div
+                      className="position-absolute "
+                      style={{
+                        left: (294.9375 / 647.484) * 100 + '%',
+                        top: 10,
                       }}
                     >
-                      +
-                    </Button>
-                  </ButtonGroup>
+                      付款資料
+                    </div>{' '}
+                    <div
+                      className="position-absolute "
+                      style={{
+                        right: (-28.805 / 647.484) * 100 + '%',
+                        top: 10,
+                      }}
+                    >
+                      訂單資料
+                    </div>
+                  </Col>
                 </Col>
-                <Col md={2}>
-                  <h4 className="text-center font-weight-bold">
-                    NT${value.pQuantity * value.pPrice}
-                  </h4>
-                </Col>
-                <Col md={2}>
-                  <Button
-                    className="mb-2"
-                    variant="primary"
-                    size="md"
-                    onClick={(e) => {
-                      if (
-                        localStorage.getItem('mId') &&
-                        localStorage.getItem('mId') !== '0'
-                      ) {
-                        let item = value.pId
-                        let mId = localStorage.getItem('mId')
-                        let list = { item: item, mId: mId }
-                        postList(list)
-                        setTimeout(() => {
-                          deleteItem(index)
-                          $(e.currentTarget).parentsUntil('.item').fadeOut()
-                        }, 2000)
-                      } else {
-                        return alert('尚未登入')
-                      }
-                    }}
-                  >
-                    <MdPlaylistAdd className="mb-md-1" />
-                    下次再買
-                  </Button>
-                  <Button
-                    className="mb-2"
-                    variant="primary"
-                    size="md"
-                    onClick={(e) => {
-                      props.count(mycart)
-                      deleteItem(index)
-                      $(e.currentTarget).parentsUntil('.item').fadeOut()
-                    }}
-                  >
-                    <MdDelete className="mb-md-1" />
-                    刪除商品
-                  </Button>
-                </Col>
+              </Row>
+              <Row className="mt-5">
                 <Col>
+                  <h3>以下是你購物車內的商品 NT${sum(mycartDisplay)}</h3>
                   <hr />
                 </Col>
               </Row>
-            )
-          })}
+              {mycartDisplay.map((value, index) => {
+                return (
+                  <Row className="item align-items-center" key={value.pId}>
+                    <Col md={4} className="text-center">
+                      <Link to={'/productdetail/' + value.pId} className="p-0">
+                        <Image
+                          src={require('../../images/product/' +
+                            value.pImg +
+                            '.jpg')}
+                          className="card-img-top"
+                          alt="..."
+                        />
+                      </Link>
+                    </Col>
+                    <Col md={2}>
+                      <h4 className="font-weight-bold">{value.pName}</h4>
+                      <h4>數量:{value.pQuantity}</h4>
+                      <h4>價格:{value.pPrice}</h4>
+                    </Col>
+                    <Col md={2}>
+                      <ButtonGroup className="mb-md-2">
+                        <Button
+                          className="border-dark bg-light text-dark"
+                          id="-"
+                          onClick={(e) => {
+                            updateQuantityToLocalStorage(e, index, 1)
+                          }}
+                        >
+                          -
+                        </Button>
+                        <Button
+                          className="border-dark bg-light text-dark"
+                          value={value.pQuantity}
+                          type="input"
+                        >
+                          {value.pQuantity}
+                        </Button>
+                        <Button
+                          className="border-dark bg-light text-dark"
+                          id="+"
+                          onClick={(e) => {
+                            value.pQuantity < 10 &&
+                              updateQuantityToLocalStorage(e, index, 1)
+                          }}
+                        >
+                          +
+                        </Button>
+                      </ButtonGroup>
+                    </Col>
+                    <Col md={2}>
+                      <h4 className="text-center font-weight-bold">
+                        NT${value.pQuantity * value.pPrice}
+                      </h4>
+                    </Col>
+                    <Col md={2}>
+                      <Button
+                        className="mb-2"
+                        variant="primary"
+                        size="md"
+                        onClick={(e) => {
+                          if (
+                            localStorage.getItem('mId') &&
+                            localStorage.getItem('mId') !== '0'
+                          ) {
+                            let item = value.pId
+                            let mId = localStorage.getItem('mId')
+                            let list = { item: item, mId: mId }
+                            postList(list)
+                            setTimeout(() => {
+                              deleteItem(index)
+                              $(e.currentTarget).parentsUntil('.item').fadeOut()
+                            }, 1000)
+                          } else {
+                            return alert('尚未登入')
+                          }
+                        }}
+                      >
+                        <MdPlaylistAdd className="mb-md-1" />
+                        下次再買
+                      </Button>
+                      <Button
+                        className="mb-2"
+                        variant="primary"
+                        size="md"
+                        onClick={(e) => {
+                          let r = window.confirm('確定刪除嗎')
+                          if (r === true) {
+                            alert('成功刪除1筆商品')
+                          } else {
+                            return
+                          }
+                          props.count(mycart)
+                          deleteItem(index)
+                          $(e.currentTarget).parentsUntil('.item').fadeOut()
+                        }}
+                      >
+                        <MdDelete className="mb-md-1" />
+                        刪除商品
+                      </Button>
+                    </Col>
+                    <Col>
+                      <hr />
+                    </Col>
+                  </Row>
+                )
+              })}
+            </>
+          )}
         </Col>
       </Row>
-      {mycartDisplay.length === 0 ? (
+      {mycartDisplay.length === 0 ||
+      localStorage.getItem('mId') === '0' ||
+      localStorage.getItem('mId') === null ? (
         ''
       ) : (
         <>
@@ -327,31 +345,42 @@ const Cart = (props) => {
           </Row>
           <Row className="mt-3">
             <Col md={{ offset: 6 }}>
-              <Button
-                className="bg-transparent border-0 text-dark p-0"
-                onClick={(e) => {
-                  $('#coupon').toggle().focus()
-                  if ($(e.target).hasClass('text-dark')) {
-                    $(e.target)
-                      .removeClass('text-dark')
-                      .addClass('text-primary')
-                  } else {
-                    $(e.target)
-                      .removeClass('text-primary')
-                      .addClass('text-dark')
-                  }
-                }}
-              >
-                促銷代碼或優惠券
-              </Button>
-              <input id="coupon" type="text" className="b-0" />
+              <span className="d-flex justify-content-between">
+                <span>
+                  促銷代碼或優惠券
+                  <select
+                    onChange={(e) => {
+                      $('#discount').text(e.currentTarget.value)
+                      $('#sum').text(
+                        'NT$' + (sum(mycartDisplay) - e.currentTarget.value)
+                      )
+                      props.useCoupon(Number(e.currentTarget.value))
+                    }}
+                  >
+                    <option value="">請選擇</option>
+                    {props.coupons &&
+                      props.coupons.map((value) => (
+                        <option
+                          id={value.mmId}
+                          key={value.mmId}
+                          value={value.mtDiscountP}
+                        >
+                          {value.mtName}
+                        </option>
+                      ))}
+                  </select>
+                </span>
+                <span id="discount"></span>
+              </span>
               <hr />
             </Col>
           </Row>
           <Row className="mt-1">
             <Col md={{ offset: 6 }} className="d-flex justify-content-between">
               <div className="font-weight-bold">你的總金額</div>
-              <div className="font-weight-bold">NT${sum(mycartDisplay)}</div>
+              <div className="font-weight-bold" id="sum">
+                NT${sum(mycartDisplay)}
+              </div>
             </Col>
           </Row>
           <Row className="mt-1">
@@ -396,10 +425,14 @@ const mapStateToProps = (store) => {
   return {
     list: store.getProducts,
     qty: store.getQuantity,
+    coupons: store.getCoupons,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getProducts, count }, dispatch)
+  return bindActionCreators(
+    { getProducts, count, formServerCouponsWE, useCoupon },
+    dispatch
+  )
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))
