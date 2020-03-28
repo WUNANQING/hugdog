@@ -181,17 +181,86 @@
     }
   }
 }
-.home {
-  position: relative;
-  // filter: brightness(50%);
+
+.login {
+  input {
+    height: 55px;
+  }
+  .modal-logo {
+    img {
+      height: 50px;
+    }
+  }
+  .show {
+    cursor: pointer;
+    position: absolute;
+    right: 45px;
+    bottom: 44%;
+  }
+  .hide {
+    cursor: pointer;
+    position: absolute;
+    right: 45px;
+    bottom: 44%;
+  }
+  .active {
+    display: none;
+  }
+  .show2 {
+    cursor: pointer;
+    position: absolute;
+    right: 45px;
+    bottom: 52%;
+  }
+  .hide2 {
+    cursor: pointer;
+    position: absolute;
+    right: 45px;
+    bottom: 52%;
+  }
+  .show3 {
+    cursor: pointer;
+    position: absolute;
+    right: 45px;
+    bottom: 39%;
+  }
+  .hide3 {
+    cursor: pointer;
+    position: absolute;
+    right: 45px;
+    bottom: 39%;
+  }
 }
-.home_login {
-  position: absolute;
-  z-index: 3;
-  left: 20%;
+.poup-login-destop {
+  width: 500px;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 7px 6px 40px 0px rgba(204, 204, 223, 0.16);
+  position: fixed;
+  max-width: 90%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 600px;
+  padding: 50px;
+  z-index: 11;
+  opacity: 0;
+  visibility: hidden;
 }
-.home_hide {
-  display: none;
-}
-.user {
+.bg-login-popup {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  overflow: auto;
+
+  opacity: 0;
+  visibility: hidden;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: 0.5s;
 }
