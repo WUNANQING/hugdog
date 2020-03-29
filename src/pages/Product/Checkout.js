@@ -113,9 +113,23 @@ const Checkout = (props) => {
     setValidated(true)
   }
 
+  //若有使用優惠券,將使用的優惠券狀態改成已使用
+  async function updateCoupon(mmId, mId) {
+    const req = new Request(
+      `http://localhost:6001/order/updateCoupon/${mmId}/${mId}`,
+      {
+        method: 'POST',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(req)
+    const coupon = await res.json()
+  }
+
   useEffect(() => {
     props.getMemberDetail(mId)
   }, [])
+  console.log(props.couponId)
   return (
     <>
       <Container>
@@ -227,6 +241,7 @@ const Checkout = (props) => {
               validated={validated}
               onSubmit={(e) => {
                 handleSubmit(e)
+                props.couponId && updateCoupon(props.couponId, mId)
               }}
             >
               <Form.Row>
@@ -548,7 +563,7 @@ const Checkout = (props) => {
   )
 }
 const mapStateToProps = (store) => {
-  return { detail: store.getMemberDetail }
+  return { detail: store.getMemberDetail, couponId: store.couponId }
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getMemberDetail }, dispatch)

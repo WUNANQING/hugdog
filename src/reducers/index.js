@@ -138,6 +138,15 @@ const useCoupon = (state = 0, action) => {
       return state
   }
 }
+//紀錄使用過的優惠券的編號
+const couponId = (state = 0, action) => {
+  switch (action.type) {
+    case 'COUPON_ID':
+      return action.mmId
+    default:
+      return state
+  }
+}
 //顯示商品評論
 const showComments = (state = [], action) => {
   switch (action.type) {
@@ -264,6 +273,7 @@ const rootReducer = combineReducers({
   updateMember,
   useCoupon,
   showComments,
+  couponId,
 })
 
 export { rootReducer }

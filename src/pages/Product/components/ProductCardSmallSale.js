@@ -75,7 +75,7 @@ const ProductCardSmallSale = (props) => {
                       const newCart = [...currentCart, item]
                       props.count(newCart)
                       localStorage.setItem('cart', JSON.stringify(newCart))
-                      $(e.currentTarget).parentsUntil('.col-md-3').fadeToggle()
+                      // $(e.currentTarget).parentsUntil('.WNQsale').fadeOut()
                       Swal.fire({
                         icon: 'success',
                         title: '加入成功',

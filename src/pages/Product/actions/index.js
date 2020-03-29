@@ -87,6 +87,8 @@ export const useCoupon = (discount) => ({
   type: 'USE_COUPON',
   discount,
 })
+//紀錄使用過的優惠券的編號
+export const couponId = (mmId) => ({ type: 'COUPON_ID', mmId })
 //跟server要評論資料
 export const showComments = (comments) => {
   return { type: 'SHOW_COMMENTS', comments }
