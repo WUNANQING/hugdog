@@ -113,10 +113,10 @@ const Products = (props) => {
   return (
     <>
       <Container className="products">
-        <Row className="my-5">
+        <Row className="my-5 d-flex justify-content-center">
           <ProductSidebar />
           <Col md={10} className="bg-white">
-            <Breadcrumb />
+            {/* <Breadcrumb /> */}
             {sort}
             <Row>
               {props.list.rows &&

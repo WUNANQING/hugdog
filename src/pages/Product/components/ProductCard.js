@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { FaPaw } from 'react-icons/fa'
-import { Col, Card, Image, Nav, Button } from 'react-bootstrap'
+import { Col, Card, Image, Button } from 'react-bootstrap'
 import '../../../css/product/productCard.scss'
 import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const ProductCard = (props) => {
   return (
-    <Col md={4} className="mb-3 WNQ">
+    <Col xs={12} sm={12} md={6} lg={4} className="mb-3 WNQ">
       <Card className="text-center">
         <Link to={'/productdetail/' + props.data.pId} className="p-0">
           <Image
@@ -23,13 +22,6 @@ const ProductCard = (props) => {
           <Card.Text as="h4" className="text-danger font-weight-bold">
             NTD {props.data.pPrice}元
           </Card.Text>
-          <div className="d-flex justify-content-around mb-3">
-            <FaPaw className="text-danger" />
-            <FaPaw />
-            <FaPaw />
-            <FaPaw />
-            <FaPaw />
-          </div>
           <p>上架時間 {props.data.created_at}</p>
           <div className="d-flex justify-content-around">
             <Button

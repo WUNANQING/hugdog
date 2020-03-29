@@ -30,6 +30,7 @@ import ProductCardSmall from './components/ProductCardSmall'
 import Swal from 'sweetalert2/src/sweetalert2.js'
 import PrdouctComment from './components/ProductComment'
 import { AiFillLike, AiFillDislike } from 'react-icons/ai'
+import $ from 'jquery'
 
 const ProductDetail = (props) => {
   const [total, setTotal] = useState(1)
@@ -453,14 +454,14 @@ const ProductDetail = (props) => {
                               <p>
                                 {'***' + value.mAccount.slice(0, 3) + '***'}
                               </p>
-                              <p>
+                              <p id="rating">
                                 {value.rating === 1 ? (
                                   <AiFillLike />
                                 ) : (
                                   <AiFillDislike />
                                 )}
                               </p>
-                              <p>{value.comment}</p>
+                              <p id="comment">{value.comment}</p>
                               <div className="d-flex justify-content-between">
                                 <span>{value.updated_at}</span>
                                 {value.mId == localStorage.getItem('mId') ? (
