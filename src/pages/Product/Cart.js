@@ -16,6 +16,7 @@ import ProductCardSmallSale from './components/ProductCardSmallSale'
 import { getProducts, count, useCoupon } from './actions/index'
 import { bindActionCreators } from 'redux'
 import { formServerCouponsWE } from '../../actions/marketingActions'
+import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const Cart = (props) => {
   const [mycart, setMycart] = useState([])
@@ -110,9 +111,26 @@ const Cart = (props) => {
     const listContent = await res.json()
     await console.log(listContent)
     if (listContent.success) {
-      alert('收藏成功')
+      Swal.fire({
+        icon: 'success',
+        title: '收藏成功',
+        showConfirmButton: false,
+      })
     } else {
-      alert('已加入清單')
+      Swal.fire({
+        title: '已加入清單',
+        text: '前往清單查看?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.value) {
+          props.history.push('/list/' + localStorage.getItem('mId'))
+        }
+      })
     }
   }
 
@@ -288,7 +306,20 @@ const Cart = (props) => {
                               $(e.currentTarget).parentsUntil('.item').fadeOut()
                             }, 1000)
                           } else {
-                            return alert('尚未登入')
+                            Swal.fire({
+                              title: '尚未登入',
+                              text: '前往登入頁面?',
+                              icon: 'info',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#d33',
+                              confirmButtonText: '確定',
+                              cancelButtonText: '取消',
+                            }).then((result) => {
+                              if (result.value) {
+                                props.history.push('/login')
+                              }
+                            })
                           }
                         }}
                       >
@@ -300,15 +331,27 @@ const Cart = (props) => {
                         variant="primary"
                         size="md"
                         onClick={(e) => {
-                          let r = window.confirm('確定刪除嗎')
-                          if (r === true) {
-                            alert('成功刪除1筆商品')
-                          } else {
-                            return
-                          }
-                          props.count(mycart)
-                          deleteItem(index)
-                          $(e.currentTarget).parentsUntil('.item').fadeOut()
+                          Swal.fire({
+                            title: '確定刪除?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '確定',
+                            cancelButtonText: '取消',
+                          }).then((result) => {
+                            if (result.value) {
+                              props.count(mycart)
+                              deleteItem(index)
+                              Swal.fire({
+                                icon: 'success',
+                                title: '成功刪除1筆商品',
+                                showConfirmButton: false,
+                                timer: 1500,
+                              })
+                              $(e.currentTarget).parentsUntil('.item').fadeOut()
+                            }
+                          })
                         }}
                       >
                         <MdDelete className="mb-md-1" />
@@ -364,6 +407,7 @@ const Cart = (props) => {
                           id={value.mmId}
                           key={value.mmId}
                           value={value.mtDiscountP}
+                          data-mmId={value.mmId}
                         >
                           {value.mtName}
                         </option>

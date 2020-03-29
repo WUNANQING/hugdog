@@ -6,6 +6,7 @@ import $ from 'jquery'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { count } from './actions/index'
+import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const List = (props) => {
   //清單狀態
@@ -41,7 +42,12 @@ const List = (props) => {
     const res = await fetch(req)
     const data = await res.json()
     if (data.success) {
-      alert('成功刪除' + data.result + '筆商品')
+      Swal.fire({
+        icon: 'success',
+        title: '成功刪除' + data.result + '筆商品',
+        showConfirmButton: false,
+        timer: 1500,
+      })
     } else {
       alert('刪除失敗')
     }
@@ -126,8 +132,20 @@ const List = (props) => {
                               (currentValue) => currentValue.pId === value.pId
                             )
                           ) {
-                            alert('已加入購物車')
-                            return
+                            Swal.fire({
+                              title: '已加入購物車',
+                              text: '前往購物車結帳?',
+                              icon: 'info',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#d33',
+                              confirmButtonText: '確定',
+                              cancelButtonText: '取消',
+                            }).then((result) => {
+                              if (result.value) {
+                                props.history.push('/cart')
+                              }
+                            })
                           } else {
                             props.count(mycart)
                             const newCart = [...currentCart, item]
@@ -135,15 +153,21 @@ const List = (props) => {
                               'cart',
                               JSON.stringify(newCart)
                             )
+                            Swal.fire({
+                              title: '加入成功',
+                              text: '前往購物車結帳?',
+                              icon: 'info',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#d33',
+                              confirmButtonText: '確定',
+                              cancelButtonText: '取消',
+                            }).then((result) => {
+                              if (result.value) {
+                                props.history.push('/cart')
+                              }
+                            })
                           }
-                        }
-                        let r = window.confirm('需要到購物車頁面結帳嗎?')
-                        if (r === true) {
-                          setTimeout(() => {
-                            props.history.push('/cart')
-                          }, 700)
-                        } else {
-                          alert('加入成功')
                         }
                       }}
                     >
@@ -156,14 +180,21 @@ const List = (props) => {
                       size="md"
                       style={{ maxWidth: '134.17px' }}
                       onClick={(e) => {
-                        let r = window.confirm('確定刪除嗎')
-                        if (r === true) {
-                        } else {
-                          return
-                        }
-                        delList(value.itemId)
-                        setShow(!show)
-                        $(e.currentTarget).parentsUntil('.item').fadeOut()
+                        Swal.fire({
+                          title: '確定刪除?',
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: '確定',
+                          cancelButtonText: '取消',
+                        }).then((result) => {
+                          if (result.value) {
+                            delList(value.itemId)
+                            setShow(!show)
+                            $(e.currentTarget).parentsUntil('.item').fadeOut()
+                          }
+                        })
                       }}
                     >
                       <MdDelete className="mb-md-1" />

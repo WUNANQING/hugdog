@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import { count } from '../actions/index'
 import $ from 'jquery'
 import '../../../css/product/productCard.scss'
+import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const ProductCardSmallSale = (props) => {
   return (
@@ -70,17 +71,38 @@ const ProductCardSmallSale = (props) => {
                         (value) => value.pId === props.data.pId
                       )
                     ) {
-                      return alert('已加入購物車')
+                      Swal.fire({
+                        title: '已加入購物車',
+                        icon: 'info',
+                        showConfirmButton: true,
+                      })
                     } else {
                       const newCart = [...currentCart, item]
                       props.count(newCart)
                       localStorage.setItem('cart', JSON.stringify(newCart))
                       $(e.currentTarget).parentsUntil('.col-md-3').fadeToggle()
+                      Swal.fire({
+                        icon: 'success',
+                        title: '加入成功',
+                        showConfirmButton: false,
+                      })
                     }
                   }
-                  props.history.push('/cart')
                 } else {
-                  return alert('尚未登入')
+                  Swal.fire({
+                    title: '尚未登入',
+                    text: '前往登入頁面?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消',
+                  }).then((result) => {
+                    if (result.value) {
+                      props.history.push('/login')
+                    }
+                  })
                 }
               }}
             >
