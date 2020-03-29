@@ -459,7 +459,12 @@ const ProductDetail = (props) => {
                                   <AiFillDislike />
                                 )}
                               </p>
-                              <p id="comment">{value.comment}</p>
+                              <textarea
+                                readOnly="readOnly"
+                                className="border-0"
+                                style={{ resize: 'none' }}
+                                defaultValue={value.comment}
+                              />
                               <div className="d-flex justify-content-between">
                                 <span>{value.updated_at}</span>
                                 {value.mId == localStorage.getItem('mId') ? (
@@ -467,9 +472,38 @@ const ProductDetail = (props) => {
                                     <Button
                                       variant="link"
                                       className="p-0 text-decoration-none"
-                                      onClick={() => {}}
+                                      onClick={(e) => {
+                                        $(e.currentTarget)
+                                          .parents('.d-flex')
+                                          .prev()
+                                          .removeAttr('readOnly')
+                                          .attr('class', 'border')
+                                        $(e.currentTarget)
+                                          .next()
+                                          .attr(
+                                            'class',
+                                            'p-0 text-decoration-none btn btn-link'
+                                          )
+                                      }}
                                     >
                                       編輯評論
+                                    </Button>
+                                    <Button
+                                      variant="link"
+                                      className="p-0 text-decoration-none d-none"
+                                      onClick={(e) => {
+                                        $(e.currentTarget).attr(
+                                          'class',
+                                          'd-none'
+                                        )
+                                        $(e.currentTarget)
+                                          .parents('.d-flex')
+                                          .prev()
+                                          .attr('readOnly', 'readOnly')
+                                          .attr('class', 'border-0')
+                                      }}
+                                    >
+                                      esc
                                     </Button>
                                     <Button
                                       variant="link"
