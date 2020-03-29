@@ -113,9 +113,23 @@ const Checkout = (props) => {
     setValidated(true)
   }
 
+  //若有使用優惠券,將使用的優惠券狀態改成已使用
+  async function updateCoupon(mmId, mId) {
+    const req = new Request(
+      `http://localhost:6001/order/updateCoupon/${mmId}/${mId}`,
+      {
+        method: 'POST',
+        credentials: 'include',
+      }
+    )
+    const res = await fetch(req)
+    const coupon = await res.json()
+  }
+
   useEffect(() => {
     props.getMemberDetail(mId)
   }, [])
+  console.log(props.couponId)
   return (
     <>
       <Container>
@@ -193,7 +207,7 @@ const Checkout = (props) => {
         </Row>
         <hr className="mt-0" />
         <Row className="mt-5">
-          <Col sm={{ span: 8, offset: 2 }}>
+          <Col lg={{ span: 8, offset: 2 }}>
             <div className="d-flex justify-content-between align-items-center">
               <h3>輸入姓名與地址</h3>
               <Form.Check
@@ -227,10 +241,11 @@ const Checkout = (props) => {
               validated={validated}
               onSubmit={(e) => {
                 handleSubmit(e)
+                props.couponId && updateCoupon(props.couponId, mId)
               }}
             >
               <Form.Row>
-                <Form.Group as={Col} xs={12} md={6}>
+                <Form.Group as={Col} xs={12} sm={12} md={6}>
                   <Form.Control
                     required
                     name="lastName"
@@ -244,7 +259,7 @@ const Checkout = (props) => {
                     請輸入姓氏
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} xs={12} md={6}>
+                <Form.Group as={Col} xs={12} sm={12} md={6}>
                   <Form.Control
                     required
                     name="firstName"
@@ -260,7 +275,7 @@ const Checkout = (props) => {
                 </Form.Group>
               </Form.Row>
               <Form.Row>
-                <Form.Group as={Col} xs={12} md={2}>
+                <Form.Group as={Col} xs={12} sm={12} md={2}>
                   <Form.Control
                     required
                     name="county"
@@ -298,7 +313,7 @@ const Checkout = (props) => {
                     請選擇縣市
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} xs={12} md={5}>
+                <Form.Group as={Col} xs={12} sm={12} md={5}>
                   <Form.Control
                     required
                     name="address"
@@ -312,7 +327,7 @@ const Checkout = (props) => {
                     請輸入地址
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} xs={12} md={5}>
+                <Form.Group as={Col} xs={12} sm={12} md={5}>
                   <Form.Control
                     name="detailedAddress"
                     size="lg"
@@ -548,7 +563,7 @@ const Checkout = (props) => {
   )
 }
 const mapStateToProps = (store) => {
-  return { detail: store.getMemberDetail }
+  return { detail: store.getMemberDetail, couponId: store.couponId }
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getMemberDetail }, dispatch)

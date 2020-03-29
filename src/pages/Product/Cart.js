@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 import ProductCardSmallSale from './components/ProductCardSmallSale'
-import { getProducts, count, useCoupon } from './actions/index'
+import { getProducts, count, useCoupon, couponId } from './actions/index'
 import { bindActionCreators } from 'redux'
 import { formServerCouponsWE } from '../../actions/marketingActions'
 import Swal from 'sweetalert2/src/sweetalert2.js'
@@ -144,7 +144,9 @@ const Cart = (props) => {
             <>
               <Row className="mt-5">
                 <Col>
-                  <h3>購物車內沒有任何商品</h3>
+                  <h3 className="text-sm-center text-md-left">
+                    購物車內沒有任何商品
+                  </h3>
                   <hr />
                   <Image
                     className="ad"
@@ -229,87 +231,123 @@ const Cart = (props) => {
               </Row>
               <Row className="mt-5">
                 <Col>
-                  <h3>以下是你購物車內的商品 NT${sum(mycartDisplay)}</h3>
+                  <h3 className="text-sm-center text-md-left">
+                    以下是你購物車內的商品 NT${sum(mycartDisplay)}
+                  </h3>
                   <hr />
                 </Col>
               </Row>
               {mycartDisplay.map((value, index) => {
                 return (
-                  <Row className="item align-items-center" key={value.pId}>
-                    <Col md={4} className="text-center">
-                      <Link to={'/productdetail/' + value.pId} className="p-0">
-                        <Image
-                          src={require('../../images/product/' +
-                            value.pImg +
-                            '.jpg')}
-                          className="card-img-top"
-                          alt="..."
-                        />
-                      </Link>
-                    </Col>
-                    <Col md={2}>
-                      <h4 className="font-weight-bold">{value.pName}</h4>
-                      <h4>數量:{value.pQuantity}</h4>
-                      <h4>價格:{value.pPrice}</h4>
-                    </Col>
-                    <Col md={2}>
-                      <ButtonGroup className="mb-md-2">
-                        <Button
-                          className="border-dark bg-light text-dark"
-                          id="-"
-                          onClick={(e) => {
-                            updateQuantityToLocalStorage(e, index, 1)
-                          }}
+                  <>
+                    <Row className="item align-items-center" key={value.pId}>
+                      <Col md={4} className="text-center">
+                        <Link
+                          to={'/productdetail/' + value.pId}
+                          className="p-0"
                         >
-                          -
-                        </Button>
-                        <Button
-                          className="border-dark bg-light text-dark"
-                          value={value.pQuantity}
-                          type="input"
-                        >
-                          {value.pQuantity}
-                        </Button>
-                        <Button
-                          className="border-dark bg-light text-dark"
-                          id="+"
-                          onClick={(e) => {
-                            value.pQuantity < 10 &&
+                          <Image
+                            src={require('../../images/product/' +
+                              value.pImg +
+                              '.jpg')}
+                            className="card-img-top"
+                            alt="..."
+                          />
+                        </Link>
+                      </Col>
+                      <Col md={3} lg={2}>
+                        <h4 className="font-weight-bold">{value.pName}</h4>
+                        <h4>數量:{value.pQuantity}</h4>
+                        <h4>價格:{value.pPrice}</h4>
+                      </Col>
+                      <Col sm={6} md={2} lg={2}>
+                        <ButtonGroup className="mb-sm-2">
+                          <Button
+                            className="border-dark bg-light text-dark"
+                            id="-"
+                            onClick={(e) => {
                               updateQuantityToLocalStorage(e, index, 1)
+                            }}
+                          >
+                            -
+                          </Button>
+                          <Button
+                            className="border-dark bg-light text-dark"
+                            value={value.pQuantity}
+                            type="input"
+                          >
+                            {value.pQuantity}
+                          </Button>
+                          <Button
+                            className="border-dark bg-light text-dark"
+                            id="+"
+                            onClick={(e) => {
+                              value.pQuantity < 10 &&
+                                updateQuantityToLocalStorage(e, index, 1)
+                            }}
+                          >
+                            +
+                          </Button>
+                        </ButtonGroup>
+                      </Col>
+                      <Col sm={6} md={2} lg={2} className="ml-md-auto">
+                        <h4 className="text-center text-sm-right font-weight-bold">
+                          NT${value.pQuantity * value.pPrice}
+                        </h4>
+                      </Col>
+                      <Col
+                        md={4}
+                        lg={2}
+                        className="d-md-flex flex-md-column d-sm-flex justify-content-sm-between ml-auto"
+                      >
+                        <Button
+                          className="mb-2"
+                          variant="primary"
+                          size="md"
+                          onClick={(e) => {
+                            if (
+                              localStorage.getItem('mId') &&
+                              localStorage.getItem('mId') !== '0'
+                            ) {
+                              let item = value.pId
+                              let mId = localStorage.getItem('mId')
+                              let list = { item: item, mId: mId }
+                              postList(list)
+                              setTimeout(() => {
+                                deleteItem(index)
+                                $(e.currentTarget)
+                                  .parentsUntil('.item')
+                                  .fadeOut()
+                              }, 1000)
+                            } else {
+                              Swal.fire({
+                                title: '尚未登入',
+                                text: '前往登入頁面?',
+                                icon: 'info',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: '確定',
+                                cancelButtonText: '取消',
+                              }).then((result) => {
+                                if (result.value) {
+                                  props.history.push('/login')
+                                }
+                              })
+                            }
                           }}
                         >
-                          +
+                          <MdPlaylistAdd className="mb-md-1" />
+                          下次再買
                         </Button>
-                      </ButtonGroup>
-                    </Col>
-                    <Col md={2}>
-                      <h4 className="text-center font-weight-bold">
-                        NT${value.pQuantity * value.pPrice}
-                      </h4>
-                    </Col>
-                    <Col md={2}>
-                      <Button
-                        className="mb-2"
-                        variant="primary"
-                        size="md"
-                        onClick={(e) => {
-                          if (
-                            localStorage.getItem('mId') &&
-                            localStorage.getItem('mId') !== '0'
-                          ) {
-                            let item = value.pId
-                            let mId = localStorage.getItem('mId')
-                            let list = { item: item, mId: mId }
-                            postList(list)
-                            setTimeout(() => {
-                              deleteItem(index)
-                              $(e.currentTarget).parentsUntil('.item').fadeOut()
-                            }, 1000)
-                          } else {
+                        <Button
+                          className="mb-2"
+                          variant="primary"
+                          size="md"
+                          onClick={(e) => {
                             Swal.fire({
-                              title: '尚未登入',
-                              text: '前往登入頁面?',
-                              icon: 'info',
+                              title: '確定刪除?',
+                              icon: 'warning',
                               showCancelButton: true,
                               confirmButtonColor: '#3085d6',
                               cancelButtonColor: '#d33',
@@ -317,51 +355,32 @@ const Cart = (props) => {
                               cancelButtonText: '取消',
                             }).then((result) => {
                               if (result.value) {
-                                props.history.push('/login')
+                                props.count(mycart)
+                                deleteItem(index)
+                                Swal.fire({
+                                  icon: 'success',
+                                  title: '成功刪除1筆商品',
+                                  showConfirmButton: false,
+                                  timer: 1500,
+                                })
+                                $(e.currentTarget)
+                                  .parentsUntil('.item')
+                                  .fadeOut()
                               }
                             })
-                          }
-                        }}
-                      >
-                        <MdPlaylistAdd className="mb-md-1" />
-                        下次再買
-                      </Button>
-                      <Button
-                        className="mb-2"
-                        variant="primary"
-                        size="md"
-                        onClick={(e) => {
-                          Swal.fire({
-                            title: '確定刪除?',
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: '確定',
-                            cancelButtonText: '取消',
-                          }).then((result) => {
-                            if (result.value) {
-                              props.count(mycart)
-                              deleteItem(index)
-                              Swal.fire({
-                                icon: 'success',
-                                title: '成功刪除1筆商品',
-                                showConfirmButton: false,
-                                timer: 1500,
-                              })
-                              $(e.currentTarget).parentsUntil('.item').fadeOut()
-                            }
-                          })
-                        }}
-                      >
-                        <MdDelete className="mb-md-1" />
-                        刪除商品
-                      </Button>
-                    </Col>
-                    <Col>
-                      <hr />
-                    </Col>
-                  </Row>
+                          }}
+                        >
+                          <MdDelete className="mb-md-1" />
+                          刪除商品
+                        </Button>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <hr />
+                      </Col>
+                    </Row>
+                  </>
                 )
               })}
             </>
@@ -392,12 +411,18 @@ const Cart = (props) => {
                 <span>
                   促銷代碼或優惠券
                   <select
+                    id="coupon"
                     onChange={(e) => {
                       $('#discount').text(e.currentTarget.value)
                       $('#sum').text(
                         'NT$' + (sum(mycartDisplay) - e.currentTarget.value)
                       )
                       props.useCoupon(Number(e.currentTarget.value))
+                      // console.log(
+                      //   $('#coupon').find('option:selected').attr('id')
+                      // )
+                      let mmId = $('#coupon').find('option:selected').attr('id')
+                      props.couponId(mmId)
                     }}
                   >
                     <option value="">請選擇</option>
@@ -407,9 +432,8 @@ const Cart = (props) => {
                           id={value.mmId}
                           key={value.mmId}
                           value={value.mtDiscountP}
-                          data-mmId={value.mmId}
                         >
-                          {value.mtName}
+                          {value.mmId + '.' + value.mtName}
                         </option>
                       ))}
                   </select>
@@ -457,7 +481,15 @@ const Cart = (props) => {
           <hr />
           <p className="px-3">
             如果你需要退貨，可以辦理免額外付費運送退貨商品。如果是符合退貨條件的產品，你可在收到訂單商品的14
-            天內開始辦理退貨。只須登入你的帳戶，或撥打電話聯絡我們：0800-020-021。
+            天內開始辦理退貨。只須登入你的帳戶，或撥打電話聯絡我們：0800-020-021。寄送時間：
+            預計訂單成立後 7
+            個工作天內送達不含週六日及國定假日。如廠商有約定日將於約定日期內送達，約定日期需於訂單成立後
+            14天內。 送貨方式： 透過宅配或是郵局送達。
+            消費者訂購之商品若經配送兩次無法送達，再經本公司以電話與 E-mail
+            均無法聯繫逾三天者，本公司將取消該筆訂單，並且全額退款。 送貨範圍：
+            限台灣本島地區。注意！收件地址請勿為郵政信箱。若有台灣本島以外地區送貨需求，收貨人地址請填台灣本島親友的地址。
+            產品責任險：
+            本產品已投保新光產物產品責任保險$250,000,000元。(保險證號：130008AKP0000930)
           </p>
         </Col>
       </Row>
@@ -475,7 +507,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { getProducts, count, formServerCouponsWE, useCoupon },
+    { getProducts, count, formServerCouponsWE, useCoupon, couponId },
     dispatch
   )
 }

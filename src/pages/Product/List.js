@@ -61,7 +61,9 @@ const List = (props) => {
               <Col>
                 {list.length === 0 ? (
                   <>
-                    <h3>清單內沒有任何商品</h3>
+                    <h3 className="text-sm-center text-md-left">
+                      清單內沒有任何商品
+                    </h3>
                     <hr />
                     <Image
                       className="ad"
@@ -75,7 +77,9 @@ const List = (props) => {
                     </Link>
                   </>
                 ) : (
-                  <h3>以下是你清單內的商品 共{list.length}件</h3>
+                  <h3 className="text-sm-center text-md-left">
+                    以下是你清單內的商品 共{list.length}件
+                  </h3>
                 )}
                 <hr />
               </Col>
@@ -106,7 +110,10 @@ const List = (props) => {
                       NT${value.pPrice}
                     </h4>
                   </Col>
-                  <Col md={2}>
+                  <Col
+                    md={2}
+                    className="d-md-flex flex-md-column d-sm-flex justify-content-sm-between"
+                  >
                     <Button
                       className="mb-2"
                       variant="primary"
@@ -178,7 +185,6 @@ const List = (props) => {
                       className="mb-2"
                       variant="primary"
                       size="md"
-                      style={{ maxWidth: '134.17px' }}
                       onClick={(e) => {
                         Swal.fire({
                           title: '確定刪除?',
@@ -215,7 +221,16 @@ const List = (props) => {
             <hr />
             <p className="px-3">
               如果你需要退貨，可以辦理免額外付費運送退貨商品。如果是符合退貨條件的產品，你可在收到訂單商品的14
-              天內開始辦理退貨。只須登入你的帳戶，或撥打電話聯絡我們：0800-020-021。
+              天內開始辦理退貨。只須登入你的帳戶，或撥打電話聯絡我們：0800-020-021。寄送時間：
+              預計訂單成立後 7
+              個工作天內送達不含週六日及國定假日。如廠商有約定日將於約定日期內送達，約定日期需於訂單成立後
+              14天內。 送貨方式： 透過宅配或是郵局送達。
+              消費者訂購之商品若經配送兩次無法送達，再經本公司以電話與 E-mail
+              均無法聯繫逾三天者，本公司將取消該筆訂單，並且全額退款。
+              送貨範圍：
+              限台灣本島地區。注意！收件地址請勿為郵政信箱。若有台灣本島以外地區送貨需求，收貨人地址請填台灣本島親友的地址。
+              產品責任險：
+              本產品已投保新光產物產品責任保險$250,000,000元。(保險證號：130008AKP0000930)
             </p>
           </Col>
         </Row>

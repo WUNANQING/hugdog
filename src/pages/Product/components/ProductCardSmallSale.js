@@ -1,7 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { FaPaw } from 'react-icons/fa'
 import { Col, Card, Nav, Button, Image } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -12,7 +11,7 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const ProductCardSmallSale = (props) => {
   return (
-    <Col md={3} className="mb-3 WNQsale">
+    <Col md={6} lg={3} className="mb-3 WNQsale">
       <Card className="shadow-sm text-center">
         <Link to={'/productdetail/' + props.data.pId}>
           <Image
@@ -24,7 +23,7 @@ const ProductCardSmallSale = (props) => {
         <Card.Body className="card-body">
           <Card.Title className="">{props.data.pName}</Card.Title>
           <Card.Text className="">{props.data.pInfo}</Card.Text>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-around">
             <Card.Text className="text-danger  justify-content-between">
               <del>NTD {props.data.pPrice}元</del>
             </Card.Text>
@@ -32,13 +31,9 @@ const ProductCardSmallSale = (props) => {
               <u>NTD {Math.ceil(props.data.pPrice * 0.8)}元</u>
             </Card.Text>
           </div>
-          <div className="d-flex justify-content-around mb-3">
-            <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />
-            <FaPaw />
-          </div>
           <div className="d-flex justify-content-around">
             <Button
-              className=" p-1"
+              className="p-1"
               onClick={() => {
                 props.history.push('/productdetail/' + props.data.pId)
               }}
@@ -80,7 +75,7 @@ const ProductCardSmallSale = (props) => {
                       const newCart = [...currentCart, item]
                       props.count(newCart)
                       localStorage.setItem('cart', JSON.stringify(newCart))
-                      $(e.currentTarget).parentsUntil('.col-md-3').fadeToggle()
+                      // $(e.currentTarget).parentsUntil('.WNQsale').fadeOut()
                       Swal.fire({
                         icon: 'success',
                         title: '加入成功',

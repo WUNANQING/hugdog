@@ -30,6 +30,7 @@ import ProductCardSmall from './components/ProductCardSmall'
 import Swal from 'sweetalert2/src/sweetalert2.js'
 import PrdouctComment from './components/ProductComment'
 import { AiFillLike, AiFillDislike } from 'react-icons/ai'
+import $ from 'jquery'
 
 const ProductDetail = (props) => {
   const [total, setTotal] = useState(1)
@@ -121,11 +122,11 @@ const ProductDetail = (props) => {
       <Row className="my-5">
         <ProductSidebar />
         <Col md={10}>
-          <Row className="m-2">
+          {/* <Row className="m-2">
             <Breadcrumb />
-          </Row>
+          </Row> */}
           <Row className="mb-5">
-            <Col md={5} className="text-center">
+            <Col md={12} lg={5} className="text-center">
               {props.detail[0] ? (
                 <>
                   <Image
@@ -155,7 +156,7 @@ const ProductDetail = (props) => {
                 ''
               )}
             </Col>
-            <Col md={4}>
+            <Col md={12} lg={4}>
               <h3>{props.detail[0] ? props.detail[0].pName : ''}</h3>
               <br />
               <h6>{props.detail[0] ? props.detail[0].pInfo : ''}</h6>
@@ -170,8 +171,8 @@ const ProductDetail = (props) => {
               <br />
               <div className="mt-3 d-flex justify-content-between">
                 <Button
-                  className="mb-md-2 "
-                  variant="primary "
+                  className="mb-md-2"
+                  variant="primary"
                   size="md"
                   onClick={() => {
                     if (
@@ -235,7 +236,7 @@ const ProductDetail = (props) => {
               </div>
               <div className="my-3 d-flex justify-content-between">
                 <Button
-                  className="mb-md-2 btn-padding-x btn-padding-y"
+                  className="mb-md-2"
                   variant="primary"
                   size="md"
                   onClick={() => {
@@ -269,7 +270,7 @@ const ProductDetail = (props) => {
                   加入清單
                 </Button>
                 <Button
-                  className="mb-md-2 btn-padding-x btn-padding-y"
+                  className="mb-md-2"
                   variant="primary"
                   size="md"
                   onClick={() => {
@@ -355,7 +356,11 @@ const ProductDetail = (props) => {
                 </Button>
               </div>
             </Col>
-            <Col className="d-md-flex flex-column justify-content-around ">
+            <Col
+              md={12}
+              lg={3}
+              className="d-flex flex-lg-column justify-content-around "
+            >
               <div
                 className="mb-3 border p-3"
                 style={{
@@ -383,7 +388,7 @@ const ProductDetail = (props) => {
                 style={{
                   width: 100 + '%',
                   height: 100 + 'px',
-                  overflow: 'hidden',
+                  overflow: 'scroll',
                 }}
               >
                 <h6 className="text-center border-bottom">運貨與退貨通知</h6>
@@ -404,12 +409,6 @@ const ProductDetail = (props) => {
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
-              </Accordion>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="mt-md-3" md={12}>
-              <Accordion defaultActiveKey="1">
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey="1" type="button">
                     商品評論
@@ -453,14 +452,19 @@ const ProductDetail = (props) => {
                               <p>
                                 {'***' + value.mAccount.slice(0, 3) + '***'}
                               </p>
-                              <p>
+                              <p id="rating">
                                 {value.rating === 1 ? (
                                   <AiFillLike />
                                 ) : (
                                   <AiFillDislike />
                                 )}
                               </p>
-                              <p>{value.comment}</p>
+                              <textarea
+                                readOnly="readOnly"
+                                className="border-0"
+                                style={{ resize: 'none' }}
+                                defaultValue={value.comment}
+                              />
                               <div className="d-flex justify-content-between">
                                 <span>{value.updated_at}</span>
                                 {value.mId == localStorage.getItem('mId') ? (
@@ -468,9 +472,38 @@ const ProductDetail = (props) => {
                                     <Button
                                       variant="link"
                                       className="p-0 text-decoration-none"
-                                      onClick={() => {}}
+                                      onClick={(e) => {
+                                        $(e.currentTarget)
+                                          .parents('.d-flex')
+                                          .prev()
+                                          .removeAttr('readOnly')
+                                          .attr('class', 'border')
+                                        $(e.currentTarget)
+                                          .next()
+                                          .attr(
+                                            'class',
+                                            'p-0 text-decoration-none btn btn-link'
+                                          )
+                                      }}
                                     >
                                       編輯評論
+                                    </Button>
+                                    <Button
+                                      variant="link"
+                                      className="p-0 text-decoration-none d-none"
+                                      onClick={(e) => {
+                                        $(e.currentTarget).attr(
+                                          'class',
+                                          'd-none'
+                                        )
+                                        $(e.currentTarget)
+                                          .parents('.d-flex')
+                                          .prev()
+                                          .attr('readOnly', 'readOnly')
+                                          .attr('class', 'border-0')
+                                      }}
+                                    >
+                                      esc
                                     </Button>
                                     <Button
                                       variant="link"
@@ -497,7 +530,7 @@ const ProductDetail = (props) => {
           </Row>
           <Row>
             <Col>
-              <div className="mt-5 d-md-flex justify-content-between">
+              <div className="mt-5 d-flex justify-content-between">
                 <p>猜你喜歡</p>
                 <Link
                   to={
