@@ -61,7 +61,9 @@ const List = (props) => {
               <Col>
                 {list.length === 0 ? (
                   <>
-                    <h3>清單內沒有任何商品</h3>
+                    <h3 className="text-sm-center text-md-left">
+                      清單內沒有任何商品
+                    </h3>
                     <hr />
                     <Image
                       className="ad"
@@ -75,7 +77,9 @@ const List = (props) => {
                     </Link>
                   </>
                 ) : (
-                  <h3>以下是你清單內的商品 共{list.length}件</h3>
+                  <h3 className="text-sm-center text-md-left">
+                    以下是你清單內的商品 共{list.length}件
+                  </h3>
                 )}
                 <hr />
               </Col>
@@ -106,7 +110,10 @@ const List = (props) => {
                       NT${value.pPrice}
                     </h4>
                   </Col>
-                  <Col md={2}>
+                  <Col
+                    md={2}
+                    className="d-md-flex flex-md-column d-sm-flex justify-content-sm-between"
+                  >
                     <Button
                       className="mb-2"
                       variant="primary"
@@ -178,7 +185,6 @@ const List = (props) => {
                       className="mb-2"
                       variant="primary"
                       size="md"
-                      style={{ maxWidth: '134.17px' }}
                       onClick={(e) => {
                         Swal.fire({
                           title: '確定刪除?',

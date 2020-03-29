@@ -193,7 +193,7 @@ const Checkout = (props) => {
         </Row>
         <hr className="mt-0" />
         <Row className="mt-5">
-          <Col sm={{ span: 8, offset: 2 }}>
+          <Col lg={{ span: 8, offset: 2 }}>
             <div className="d-flex justify-content-between align-items-center">
               <h3>輸入姓名與地址</h3>
               <Form.Check
@@ -230,7 +230,7 @@ const Checkout = (props) => {
               }}
             >
               <Form.Row>
-                <Form.Group as={Col} xs={12} md={6}>
+                <Form.Group as={Col} xs={12} sm={12} md={6}>
                   <Form.Control
                     required
                     name="lastName"
@@ -244,7 +244,7 @@ const Checkout = (props) => {
                     請輸入姓氏
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} xs={12} md={6}>
+                <Form.Group as={Col} xs={12} sm={12} md={6}>
                   <Form.Control
                     required
                     name="firstName"
@@ -260,7 +260,7 @@ const Checkout = (props) => {
                 </Form.Group>
               </Form.Row>
               <Form.Row>
-                <Form.Group as={Col} xs={12} md={2}>
+                <Form.Group as={Col} xs={12} sm={12} md={2}>
                   <Form.Control
                     required
                     name="county"
@@ -298,7 +298,7 @@ const Checkout = (props) => {
                     請選擇縣市
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} xs={12} md={5}>
+                <Form.Group as={Col} xs={12} sm={12} md={5}>
                   <Form.Control
                     required
                     name="address"
@@ -312,7 +312,7 @@ const Checkout = (props) => {
                     請輸入地址
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} xs={12} md={5}>
+                <Form.Group as={Col} xs={12} sm={12} md={5}>
                   <Form.Control
                     name="detailedAddress"
                     size="lg"

@@ -144,7 +144,7 @@ const Cart = (props) => {
             <>
               <Row className="mt-5">
                 <Col>
-                  <h3>購物車內沒有任何商品</h3>
+                  <h3 className="text-sm-center">購物車內沒有任何商品</h3>
                   <hr />
                   <Image
                     className="ad"
@@ -229,7 +229,9 @@ const Cart = (props) => {
               </Row>
               <Row className="mt-5">
                 <Col>
-                  <h3>以下是你購物車內的商品 NT${sum(mycartDisplay)}</h3>
+                  <h3 className="text-sm-center">
+                    以下是你購物車內的商品 NT${sum(mycartDisplay)}
+                  </h3>
                   <hr />
                 </Col>
               </Row>
@@ -247,13 +249,13 @@ const Cart = (props) => {
                         />
                       </Link>
                     </Col>
-                    <Col md={2}>
+                    <Col md={3} lg={2}>
                       <h4 className="font-weight-bold">{value.pName}</h4>
                       <h4>數量:{value.pQuantity}</h4>
                       <h4>價格:{value.pPrice}</h4>
                     </Col>
-                    <Col md={2}>
-                      <ButtonGroup className="mb-md-2">
+                    <Col sm={6} md={2} lg={2}>
+                      <ButtonGroup className="mb-sm-2">
                         <Button
                           className="border-dark bg-light text-dark"
                           id="-"
@@ -282,12 +284,16 @@ const Cart = (props) => {
                         </Button>
                       </ButtonGroup>
                     </Col>
-                    <Col md={2}>
-                      <h4 className="text-center font-weight-bold">
+                    <Col sm={6} md={2} lg={2} className="ml-md-auto">
+                      <h4 className="text-center text-sm-right font-weight-bold">
                         NT${value.pQuantity * value.pPrice}
                       </h4>
                     </Col>
-                    <Col md={2}>
+                    <Col
+                      md={4}
+                      lg={2}
+                      className="d-md-flex flex-md-column d-sm-flex justify-content-sm-between ml-auto"
+                    >
                       <Button
                         className="mb-2"
                         variant="primary"
@@ -358,9 +364,9 @@ const Cart = (props) => {
                         刪除商品
                       </Button>
                     </Col>
-                    <Col>
+                    {/* <Col>
                       <hr />
-                    </Col>
+                    </Col> */}
                   </Row>
                 )
               })}
@@ -368,6 +374,7 @@ const Cart = (props) => {
           )}
         </Col>
       </Row>
+      <hr />
       {mycartDisplay.length === 0 ||
       localStorage.getItem('mId') === '0' ||
       localStorage.getItem('mId') === null ? (

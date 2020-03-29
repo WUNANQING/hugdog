@@ -1,7 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { FaPaw } from 'react-icons/fa'
 import { Col, Card, Nav, Button, Image } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -27,10 +26,6 @@ const ProductCardSmall = (props) => {
           <Card.Text className="text-danger ">
             NTD {props.data.pPrice}元
           </Card.Text>
-          <div className="d-flex justify-content-around mb-3">
-            <FaPaw className="text-danger" /> <FaPaw /> <FaPaw /> <FaPaw />
-            <FaPaw />
-          </div>
           <div className="d-flex justify-content-around">
             <Button
               className=" p-1"
