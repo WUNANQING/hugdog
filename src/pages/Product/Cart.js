@@ -407,6 +407,7 @@ const Cart = (props) => {
                           id={value.mmId}
                           key={value.mmId}
                           value={value.mtDiscountP}
+                          data-mmId={value.mmId}
                         >
                           {value.mtName}
                         </option>

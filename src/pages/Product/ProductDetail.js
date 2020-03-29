@@ -18,7 +18,6 @@ import {
   Accordion,
   Card,
   Modal,
-  Form,
 } from 'react-bootstrap'
 import {
   MdAddShoppingCart,
@@ -435,17 +434,25 @@ const ProductDetail = (props) => {
                         props.comments.rows.map((value, index) => {
                           return (
                             <>
-                              {/* <img
-                                src={require('../../images/member/member-img/' +
-                                  value.mImg +
-                                  '.jpg')}
-                              /> */}
                               <div className="d-flex justify-content-between">
-                                <p>
-                                  {'***' + value.mAccount.slice(0, 3) + '***'}
-                                </p>
+                                <Image
+                                  roundedCircle
+                                  width="50"
+                                  src={
+                                    require('../../images/member/member-img/m' +
+                                      value.mImg.slice(1) +
+                                      '.jpg')
+                                      ? require('../../images/member/member-img/m' +
+                                          value.mImg.slice(1) +
+                                          '.jpg')
+                                      : 'https://via.placeholder.com/50'
+                                  }
+                                />
                                 <span>{index + 1 + 'F'}</span>
                               </div>
+                              <p>
+                                {'***' + value.mAccount.slice(0, 3) + '***'}
+                              </p>
                               <p>
                                 {value.rating === 1 ? (
                                   <AiFillLike />
