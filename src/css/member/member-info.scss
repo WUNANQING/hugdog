@@ -1,4 +1,7 @@
 .Member {
+  .wrapper {
+    transform: translateY(-50px);
+  }
   .member-info {
     // height: 900px;
     transform: translateX(-20px);
@@ -19,7 +22,7 @@
         transform: translate(0px, 0px);
       }
     }
-    @media screen and (max-width: 930px) {
+    @media screen and (max-width: 1000px) {
       .member-sidebar {
         display: none;
         color: red;
@@ -27,6 +30,7 @@
       .member-sidebar-RWD {
         display: flex;
         transform: translate(50px, -50px);
+        margin-bottom: 50px;
       }
     }
   }
