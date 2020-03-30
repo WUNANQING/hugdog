@@ -230,3 +230,20 @@ export const getLoveNanny = (mId) => {
     dispatch(showLoveNanny(data))
   }
 }
+//查看最愛活動
+export const showCommentList = (data) => {
+  return { type: 'SHOW_COMMENT_LIST', data }
+}
+export const getCommentList = (mId) => {
+  mId = localStorage.getItem('mId')
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/comment/${mId}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(showCommentList(data))
+  }
+}

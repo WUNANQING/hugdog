@@ -79,7 +79,7 @@ const getLoveList = (state = [], action) => {
       return state
   }
 }
-//會員最愛商品
+//會員最愛活動
 const getLoveActivity = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_LOVE_ACTIVITY':
@@ -88,10 +88,19 @@ const getLoveActivity = (state = [], action) => {
       return state
   }
 }
-//會員最愛商品
+//會員最愛保母
 const getLoveNanny = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_LOVE_NANNY':
+      return action.data
+    default:
+      return state
+  }
+}
+//會員最愛保母
+const getCommentList = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_COMMENT_LIST':
       return action.data
     default:
       return state
@@ -284,6 +293,7 @@ const rootReducer = combineReducers({
   showComments,
   couponId,
   getLoveNanny,
+  getCommentList,
 })
 
 export { rootReducer }

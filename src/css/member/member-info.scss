@@ -169,7 +169,8 @@
 .serviceOrderListContainer,
 .dogListContainer,
 .favoriteItems,
-.LoveNannyList {
+.LoveNannyList,
+.commentList {
   .card-body {
     background: #ffffff;
     border: none;
@@ -256,4 +257,12 @@
     line-height: 74px;
     font-size: 20px;
   }
+}
+.allListBtn {
+  border-radius: 20px;
+  // background: #6b9bff;
+  // height: 40px;
+  // line-height: 40px;
+  font-weight: 100;
+  box-shadow: 0px 5px 5px rgb(187, 187, 187);
 }
