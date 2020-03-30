@@ -57,7 +57,9 @@ const ServiceOrder = (props) => {
               完成訂單
             </div>
           ) : (
-            <div className="btn btn-primary allListBtn">評論</div>
+            <div className="btn btn-primary allListBtn" onClick={jump2}>
+              評論
+            </div>
           )}
         </td>
       </tr>
@@ -79,6 +81,13 @@ const ServiceOrder = (props) => {
       const res = await fetch(req)
       const data = await res.json()
       console.log('oId: ', orderId)
+      window.location.reload()
+    }
+    function jump2() {
+      window.location.replace(
+        `http://localhost:3000/service/comment/${orderId}`
+      )
+      console.log(123)
     }
   }
   return (

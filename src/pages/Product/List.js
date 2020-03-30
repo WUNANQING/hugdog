@@ -116,7 +116,7 @@ const List = (props) => {
                   >
                     <Button
                       className="mb-2"
-                      variant="primary"
+                      variant="outline-primary"
                       size="md"
                       onClick={() => {
                         let item = {
@@ -144,8 +144,8 @@ const List = (props) => {
                               text: '前往購物車結帳?',
                               icon: 'info',
                               showCancelButton: true,
-                              confirmButtonColor: '#3085d6',
-                              cancelButtonColor: '#d33',
+                              confirmButtonColor: '#cea160',
+                              cancelButtonColor: '#cccccc',
                               confirmButtonText: '確定',
                               cancelButtonText: '取消',
                             }).then((result) => {
@@ -165,8 +165,8 @@ const List = (props) => {
                               text: '前往購物車結帳?',
                               icon: 'info',
                               showCancelButton: true,
-                              confirmButtonColor: '#3085d6',
-                              cancelButtonColor: '#d33',
+                              confirmButtonColor: '#cea160',
+                              cancelButtonColor: '#cccccc',
                               confirmButtonText: '確定',
                               cancelButtonText: '取消',
                             }).then((result) => {
@@ -183,15 +183,15 @@ const List = (props) => {
                     </Button>
                     <Button
                       className="mb-2"
-                      variant="primary"
+                      variant="outline-primary"
                       size="md"
                       onClick={(e) => {
                         Swal.fire({
                           title: '確定刪除?',
                           icon: 'warning',
                           showCancelButton: true,
-                          confirmButtonColor: '#3085d6',
-                          cancelButtonColor: '#d33',
+                          confirmButtonColor: '#cea160',
+                          cancelButtonColor: '#cccccc',
                           confirmButtonText: '確定',
                           cancelButtonText: '取消',
                         }).then((result) => {

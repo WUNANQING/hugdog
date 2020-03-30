@@ -34,11 +34,13 @@
   }
 
   @media screen and (max-width: 1000px) {
+    transition: 1s;
     .imgContainer {
-      justify-content: center;
       // position: absolute;
       opacity: 40%;
       img {
+        min-width: 900px;
+        height: auto;
       }
     }
     .register_container {
