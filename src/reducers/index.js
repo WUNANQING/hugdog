@@ -204,6 +204,15 @@ const updateDog = (state = [], action) => {
       return state
   }
 }
+//更新服務狀態
+const updateService = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_SERVICE':
+      return { ...action.data }
+    default:
+      return state
+  }
+}
 //knowledge reducers
 //blog
 
@@ -294,6 +303,8 @@ const rootReducer = combineReducers({
   couponId,
   getLoveNanny,
   getCommentList,
+  updateDog,
+  updateService,
 })
 
 export { rootReducer }

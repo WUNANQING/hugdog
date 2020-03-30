@@ -170,7 +170,6 @@
 .activityOrderListContainer,
 .orderListContainer,
 .couponListContainer,
-.serviceOrderListContainer,
 .dogListContainer,
 .favoriteItems,
 .LoveNannyList,
@@ -189,6 +188,20 @@
   td {
     line-height: 74px;
     font-size: 17px;
+  }
+}
+.serviceOrderListContainer {
+  .card-body {
+    background: #ffffff;
+    border: none;
+  }
+  .card-width {
+    border: none;
+  }
+  th {
+    color: rgb(117, 117, 117);
+  }
+  td {
   }
 }
 .dogDetailContainer {
@@ -263,7 +276,7 @@
   }
 }
 .allListBtn {
-  border-radius: 20px;
+  border-radius: 30px;
   // background: #6b9bff;
   // height: 40px;
   // line-height: 40px;

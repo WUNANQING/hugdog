@@ -160,6 +160,27 @@ export const getServiceOrder = (mId) => {
     dispatch(showServiceOrder(data))
   }
 }
+//更新服務資料
+export const updateService = (data) => {
+  return { type: 'UPDATE_SERVICE', data }
+}
+export const updateServerService = () => {
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/Sorder/update/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ orderStsId: 'o03' }),
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(updateService(data))
+  }
+}
 //查看活動訂單
 export const showActivityOrder = (data) => {
   return { type: 'SHOW_ACTIVITY_ORDER', data }
@@ -243,7 +264,7 @@ export const getCommentList = (mId) => {
     })
     const res = await fetch(req)
     const data = await res.json()
-    console.log('list: ', data)
+    // console.log('list: ', data)
     dispatch(showCommentList(data))
   }
 }
