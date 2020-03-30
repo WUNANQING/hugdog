@@ -40,7 +40,7 @@ function Partner(props) {
   function sAlert() {
     Swal.fire({
       icon: 'success',
-      title: '發問成功',
+      title: '舉辦成功',
     })
   }
   //sweetAlert 會員

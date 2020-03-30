@@ -67,7 +67,7 @@ function PartnerClosed(props) {
             >
               <Card.Header className="justify-content-between d-flex">
                 <IconContext.Provider value={{ size: '1.2rem' }}>
-                  <div class="d-inlined-inline-block">
+                  <div className="d-inlined-inline-block">
                     <FaRegCalendarAlt />
                     <span className="carddate mr-3 text-danger">
                       {value.pDate}
@@ -76,7 +76,7 @@ function PartnerClosed(props) {
                     <span className="cardtime text-danger">{value.pTime}</span>
                   </div>
 
-                  <div class="d-inline-block">
+                  <div className="d-inline-block">
                     <MdLocationOn />
                     <span className="cardtime ">
                       活動地點：
