@@ -21,6 +21,9 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
 const Cart = (props) => {
   const [mycart, setMycart] = useState([])
   const [mycartDisplay, setMycartDisplay] = useState([])
+  // const [test, setTest] = useState('')
+  // const [test2, setTest2] = useState('')
+  // const [test3, setTest3] = useState('')
 
   //跳轉Cart頁先抓localStorage的key是否有cart,有就抓沒有就設立空陣列;否則頁面會無法render
   localStorage.getItem('cart')
@@ -413,14 +416,28 @@ const Cart = (props) => {
                   <select
                     id="coupon"
                     onChange={(e) => {
-                      $('#discount').text(e.currentTarget.value)
-                      $('#sum').text(
-                        'NT$' + (sum(mycartDisplay) - e.currentTarget.value)
+                      let test2 = e.currentTarget.value.slice(-1)
+                      let test3 = e.currentTarget.value.substring(
+                        0,
+                        e.currentTarget.value.length - 1
                       )
-                      props.useCoupon(Number(e.currentTarget.value))
+                      if (test2 == '%') {
+                        $('#discount').text(e.currentTarget.value)
+                        $('#sum').text(
+                          'NT$' + (sum(mycartDisplay) * (100 - test3)) / 100
+                        )
+                      } else {
+                        $('#discount').text(e.currentTarget.value)
+                        $('#sum').text(
+                          'NT$' + (sum(mycartDisplay) - e.currentTarget.value)
+                        )
+                      }
+
+                      props.useCoupon(e.currentTarget.value)
                       // console.log(
                       //   $('#coupon').find('option:selected').attr('id')
                       // )
+
                       let mmId = $('#coupon').find('option:selected').attr('id')
                       props.couponId(mmId)
                     }}
@@ -431,7 +448,11 @@ const Cart = (props) => {
                         <option
                           id={value.mmId}
                           key={value.mmId}
-                          value={value.mtDiscountP}
+                          value={
+                            value.mtDiscountP
+                              ? value.mtDiscountP
+                              : value.mtDiscount
+                          }
                         >
                           {value.mmId + '.' + value.mtName}
                         </option>
