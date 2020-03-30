@@ -168,13 +168,22 @@
 .couponListContainer,
 .serviceOrderListContainer,
 .dogListContainer,
-.favoriteItems {
+.favoriteItems,
+.LoveNannyList {
   .card-body {
     background: #ffffff;
     border: none;
   }
   .card-width {
     border: none;
+  }
+  th {
+    color: rgb(117, 117, 117);
+    font-size: 17px;
+  }
+  td {
+    line-height: 74px;
+    font-size: 17px;
   }
 }
 .dogDetailContainer {
