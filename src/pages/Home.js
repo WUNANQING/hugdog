@@ -796,7 +796,9 @@ function Home(props) {
         開啟購物車測試
       </Button>
       <div className="home">
-        <CarouselPage />
+        <div className="carousel">
+          <CarouselPage />
+        </div>
         <div className="container">
           <div className="product-collection my-4">
             <div className="row">
