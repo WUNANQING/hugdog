@@ -601,6 +601,7 @@ const ProductDetail = (props) => {
                                             'p-0 text-decoration-none btn btn-link'
                                           )
                                         editComment(value.id, value.mId)
+                                        window.location.reaload()
                                       }}
                                     >
                                       編輯完成 |{' '}
