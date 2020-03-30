@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Error from './pages/Error'
 import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -17,9 +18,8 @@ import Coupon from './pages/Marketing/Coupon'
 import BonusPoints from './pages/Marketing/BonusPoints1'
 import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
-import ActivityClass from './pages/Activity/ActivityClass'
-import ActivityLecture from './pages/Activity/ActivityLecture'
 import ActivitySale from './pages/Activity/ActivitySale'
+import ActivityEvent from './pages/Activity/ActivityEvent'
 import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
 import DogInsert from './pages/member/dogInsert'
@@ -39,20 +39,17 @@ function App() {
             <Route path="/member">
               <Member />
             </Route>
-            <Route path="/service/admin/">
+            <Route path="/service/admin">
               <ServiceAdmin />
             </Route>
-            <Route path="/service/">
+            <Route path="/service">
               <Service />
-            </Route>
-            <Route path="/activity/lecture/:LId">
-              <ActivityLecture />
-            </Route>
-            <Route path="/activity/class/:cId">
-              <ActivityClass />
             </Route>
             <Route path="/activity/sale/:sId">
               <ActivitySale />
+            </Route>
+            <Route path="/activity/:eId">
+              <ActivityEvent />
             </Route>
             <Route path="/activity">
               <Activity />
@@ -104,6 +101,9 @@ function App() {
             </Route>
             <Route path="/dog-edit">
               <DogDetail />
+            </Route>
+            <Route path="/">
+              <Error />
             </Route>
           </Switch>
         </section>
