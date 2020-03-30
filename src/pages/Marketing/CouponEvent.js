@@ -22,6 +22,8 @@ function CouponEvent(props) {
   const [userId, setUserId] = useState(y)
   const [marketingName, setMarketingName] = useState('')
   const [marketingId, setMarketingId] = useState('')
+  const [mtDiscountP, setMtDiscountP] = useState('')
+  const [mtDiscount, setMtDiscount] = useState('')
   const [endtime, setEndtime] = useState('')
   const [verify, setVerify] = useState('')
   const [couponCode, setCouponCode] = useState('')
@@ -70,6 +72,8 @@ function CouponEvent(props) {
       setMarketingName(props.data[0].mtName)
       setMarketingId(props.data[0].mtId)
       setEndtime(props.data[0].endTime)
+      setMtDiscountP(props.data[0].mtDiscountP)
+      setMtDiscount(props.data[0].mtDiscount)
       setTest(true)
     }
   }, [data])
@@ -105,6 +109,8 @@ function CouponEvent(props) {
       userId,
       marketingName,
       marketingId,
+      mtDiscountP,
+      mtDiscount,
       endtime,
       verify,
       // couponCode,
