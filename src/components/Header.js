@@ -127,7 +127,7 @@ function Header(props) {
                   ''
                 ) : (
                   <Link to="/coupon" className="dropdown-item nav-link logout">
-                    優惠卷
+                    優惠券
                   </Link>
                 )}
                 <Link to="/member" className="dropdown-item nav-link">

@@ -99,7 +99,7 @@ function CouponInsert(props) {
     // }
     if (props.data.length == 0 && +couponCode.length === 12) {
       // setErrorMessages(['序號無效'])
-      // alert('此優惠卷已取得過')
+      // alert('此優惠券已取得過')
       // setError(true)
       Swal.fire({
         icon: 'error',
@@ -177,7 +177,7 @@ function CouponInsert(props) {
       props.insertCouponAsync(userData, () => console.log('前端傳資料成功'))
       Swal.fire({
         icon: 'success',
-        title: '優惠卷領取成功',
+        title: '優惠券領取成功',
         // showConfirmButton: false,
         timer: 2500,
         preConfirm: () => {
@@ -189,13 +189,13 @@ function CouponInsert(props) {
       setEndtime('')
       // setTest2(true)
     } else if (marketingName !== '' && test && newendtimecheck < testTime) {
-      // setErrorMessages(['此優惠卷已過期'])
+      // setErrorMessages(['此優惠券已過期'])
       // setError(true)
-      // alert('此優惠卷已取得過')
+      // alert('此優惠券已取得過')
 
       Swal.fire({
         icon: 'error',
-        title: '此優惠卷已過期',
+        title: '此優惠券已過期',
         // showConfirmButton: false,
         timer: 2500,
         // preConfirm: () => {
@@ -205,12 +205,12 @@ function CouponInsert(props) {
         // setTest2(false)
       })
     } else if (props.data3 !== '' && test) {
-      // setErrorMessages(['此優惠卷已取得過'])
+      // setErrorMessages(['此優惠券已取得過'])
       // setError(true)
-      // alert('此優惠卷已取得過')
+      // alert('此優惠券已取得過')
       Swal.fire({
         icon: 'error',
-        title: '此優惠卷已取得',
+        title: '此優惠券已取得',
         // showConfirmButton: false,
         timer: 2500,
         // preConfirm: () => {
@@ -233,7 +233,7 @@ function CouponInsert(props) {
           <IconContext.Provider value={{ size: '2rem' }}>
             <GiTicket />
           </IconContext.Provider>
-          優惠碼與優惠卷
+          優惠碼與優惠券
         </h2>
         {error ? (
           <>
