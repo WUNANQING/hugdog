@@ -5,6 +5,7 @@
   }
   //icon選單
   .icon_menu {
+    font-family: 'Noto Sans TC';
     .event-icon {
       margin: 0px auto;
       img {
@@ -16,29 +17,29 @@
 
   //下拉選單
   .dropdown_menu {
-    .icon-dropdown-menu {
+    .icon_dropdown-menu {
       background-color: white;
       margin: 0px auto;
       display: none;
       transition: 3s;
       opacity: 0;
     }
-    .icon-dropdown-menu1.active {
+    .icon_dropdown-menu1.active {
       display: block;
       opacity: 1;
       //   border-bottom: 2px solid #acacac;
     }
-    .icon-dropdown-menu2.active {
+    .icon_dropdown-menu2.active {
       display: block;
       opacity: 1;
       //   border-bottom: 2px solid #acacac;
     }
-    .icon-dropdown-menu3.active {
+    .icon_dropdown-menu3.active {
       display: block;
       opacity: 1;
       //   border-bottom: 2px solid #acacac;
     }
-    .icon-dropdown-menu4.active {
+    .icon_dropdown-menu4.active {
       display: block;
       opacity: 1;
     }
