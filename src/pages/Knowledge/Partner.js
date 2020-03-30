@@ -198,7 +198,7 @@ function Partner(props) {
             aria-labelledby="contained-modal-title-vcenter"
           >
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
-              <Modal.Header closeButton>
+              <Modal.Header>
                 <Modal.Title>發起活動</Modal.Title>
               </Modal.Header>
               <Modal.Body>

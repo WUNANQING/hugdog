@@ -32,11 +32,17 @@ import QuestionArt from './QuestionArt'
 
 function Question(props) {
   const mId = localStorage.getItem('mId')
+  const [reShow, setReShow] = useState(false)
   useEffect(() => {
     props.getQuestion()
     props.getDogDetail()
     props.getMemberDetail(mId)
-  }, [])
+    console.log('reshow', reShow)
+  }, [reShow])
+
+  const setReShowow = () => {
+    setReShow(!reShow)
+  }
 
   //sweetalert
   const Swal = require('sweetalert2')
@@ -50,10 +56,17 @@ function Question(props) {
     Swal.fire({
       icon: 'warning',
       title: '尚未登入',
+      text: '前往登入頁面?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定',
+      cancelButtonText: '取消',
     }).then(function () {
       window.location.href = '/login'
     })
   }
+
   //發問視窗
   const [show, setShow] = useState(false)
   const handleClose = () => {
@@ -133,22 +146,65 @@ function Question(props) {
   }
   //建立問題
   async function postAsk(form) {
-    const req = new Request('http://localhost:6001/knowledge/question/ask', {
-      method: 'POST',
-      credentials: 'include',
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify(form),
-    })
+    const req = new Request(
+      'http://localhost:6001/knowledge/question/ask:mId?',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(form),
+      }
+    )
     const res = await fetch(req)
     const order = await res.json()
     await console.log(order)
   }
 
-  //選項
-  const optionType = new Array()
+  //
+
+  // //選項
+  // const optionType = new Array()
+  // optionType[0] = new Array()
+  // optionType[a] = new Array()
+  // optionType[b] = new Array()
+  // optionType[c] = new Array()
+  // optionType[0][0] = '請選擇類型'
+  // optionType[a][0] = '請選擇類型'
+  // optionType[a][1] = '過度舔毛'
+  // optionType[a][2] = '排泄異常'
+  // optionType[a][3] = '顫抖'
+  // optionType[a][4] = '攻擊'
+  // optionType[b][0] = '請選擇類型'
+  // optionType[b][5] = '食慾精神不振'
+  // optionType[b][6] = '嘔吐'
+  // optionType[b][7] = '搔抓身體'
+  // optionType[b][8] = '身體出現分泌物'
+  // optionType[b][9] = '呼吸困難'
+  // optionType[b][18] = '其他'
+  // optionType[a][18] = '其他'
+  // optionType[c][0] = '請選擇類型'
+  // optionType[c][10] = '鮮食調理'
+  // optionType[c][11] = '乾糧餵食'
+  // optionType[c][12] = '罐頭主食/副食'
+  // optionType[c][13] = '幼貓飲食'
+  // optionType[c][14] = '成貓飲食'
+  // optionType[c][15] = '高齡貓飲食'
+  // optionType[c][16] = '營養品與處方'
+  // optionType[c][17] = '食物中毒'
+  // optionType[c][18] = '其他'
+  // function ChangeType() {
+  //   var i, iClassify
+  //   iClassify = document.frm.optClassify.selectedIndex
+  //   iType = 0
+  //   while (optionType[iClassify][iType] != null) iType++
+  //   document.frm.optClassify.length = iType
+  //   for (i = 0; i <= iType - 1; i++)
+  //     document.frm.optClassify[i] = new Option(optionType[iClassify][i])
+  //   document.frm.optClassify.focus()
+  // }
 
   return (
     <>
@@ -213,8 +269,13 @@ function Question(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
-              <Modal.Header closeButton>
+            <Form
+              noValidate
+              validated={validated}
+              onSubmit={handleSubmit}
+              className="frm"
+            >
+              <Modal.Header>
                 <Modal.Title>
                   <MdPets /> 我要發問
                 </Modal.Title>
@@ -240,13 +301,13 @@ function Question(props) {
                     {/* <option>{props.data.qName}</option> */}
                   </Form.Control>
                 </Form.Group>
-                <Form.Row>
+                <Form.Row onfocus="ChangeType">
                   <Form.Group
                     as={Col}
                     controlId="exampleForm.ControlSelect1 typeselect"
                   >
                     <Form.Control
-                      name="classify"
+                      className="classify optClassify"
                       as="select"
                       required
                       onChange={(e) => askformInfo(e, 'classify')}
@@ -263,15 +324,13 @@ function Question(props) {
                     controlId="exampleForm.ControlSelect2 typeselect"
                   >
                     <Form.Control
-                      name="type"
+                      className="type optType"
                       as="select"
                       onChange={(e) => askformInfo(e, 'type')}
                       required
                     >
                       <option value="">請選擇類型</option>
-                      <option value="1">行為</option>
-                      <option value="2">照護</option>
-                      <option value="3">飲食</option>
+                      <option value="a">行為</option>
                     </Form.Control>
                   </Form.Group>
                 </Form.Row>
@@ -320,6 +379,7 @@ function Question(props) {
                             key={index}
                             data={props.post[index]}
                             changeClassify={props.post.qClassify}
+                            r={setReShowow}
                           />
                         )
                       }
