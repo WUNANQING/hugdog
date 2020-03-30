@@ -58,8 +58,6 @@ function ActivityMain(props) {
       setSearch(el.target.value)
       getActQueryData(search)
     }
-    // console.log('enter')
-    // getActQueryData(search)
   }
 
   function handleSearchType(type) {
@@ -69,33 +67,33 @@ function ActivityMain(props) {
 
   useEffect(() => {
     // Your code here
-    $('.event-icon .icon-time1').click(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-      $('.icon-dropdown-menu1').addClass('active')
+    $('.event-icon .icon_time1').click(function () {
+      $('.icon_dropdown-menu').removeClass('active')
+      $('.icon_dropdown-menu1').addClass('active')
     })
-    $('.event-icon .icon-categories').click(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-      $('.icon-dropdown-menu2').addClass('active')
+    $('.event-icon .icon_categories').click(function () {
+      $('.icon_dropdown-menu').removeClass('active')
+      $('.icon_dropdown-menu2').addClass('active')
     })
-    $('.event-icon .icon-location').click(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-      $('.icon-dropdown-menu3').addClass('active')
+    $('.event-icon .icon_location').click(function () {
+      $('.icon_dropdown-menu').removeClass('active')
+      $('.icon_dropdown-menu3').addClass('active')
     })
-    $('.event-icon .icon-keyword').click(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-      $('.icon-dropdown-menu4').addClass('active')
+    $('.event-icon .icon_keyword').click(function () {
+      $('.icon_dropdown-menu').removeClass('active')
+      $('.icon_dropdown-menu4').addClass('active')
     })
     // $('.event-icon').mouseleave(function () {
-    //   $('.icon-dropdown-menu').removeClass('active')
+    //   $('.icon_dropdown-menu').removeClass('active')
     // })
-    $('.icon-dropdown-menu').mouseover(function () {
+    $('.icon_dropdown-menu').mouseover(function () {
       $(this).addClass('active')
     })
-    // $('.icon-dropdown-menu').mouseleave(function () {
+    // $('.icon_dropdown-menu').mouseleave(function () {
     //   $(this).removeClass('active')
     // })
     // $('.activity-main2').click(function () {
-    //   $('.icon-dropdown-menu').removeClass('active')
+    //   $('.icon_dropdown-menu').removeClass('active')
     // })
 
     //fetch課程資料
@@ -163,7 +161,7 @@ function ActivityMain(props) {
         <IconMenu />
         <hr />
         <div className="dropdown_menu menu1 row">
-          <div className="col-6 icon-dropdown-menu icon-dropdown-menu1 px-4 pb-4">
+          <div className="col-6 icon_dropdown-menu icon_dropdown-menu1 px-4 pb-4">
             <div className="d-flex justify-content-around ">
               <Link>
                 <div className=" ">全部</div>
@@ -181,7 +179,7 @@ function ActivityMain(props) {
           </div>
         </div>
         <div className="dropdown_menu menu2 row">
-          <div className="col-6 icon-dropdown-menu icon-dropdown-menu2 px-4 pb-4">
+          <div className="col-6 icon_dropdown-menu icon_dropdown-menu2 px-4 pb-4">
             <div className="d-flex justify-content-around">
               <div>
                 <a type="button" onClick={() => handleSearchType('優惠')}>
@@ -207,7 +205,7 @@ function ActivityMain(props) {
           </div>
         </div>
         <div className="dropdown_menu menu3 row">
-          <div className="col-6 icon-dropdown-menu icon-dropdown-menu3 px-4 pb-4">
+          <div className="col-6 icon_dropdown-menu icon_dropdown-menu3 px-4 pb-4">
             <div className="d-flex justify-content-around">
               <div>
                 <a type="button" onClick={() => handleSearchType('優惠')}>
@@ -233,7 +231,7 @@ function ActivityMain(props) {
           </div>
         </div>
         <div className="dropdown_menu menu4 row">
-          <div className="col-6 icon-dropdown-menu icon-dropdown-menu4 px-4">
+          <div className="col-6 icon_dropdown-menu icon_dropdown-menu4 px-4">
             <div className="">
               <div className="input-group-prepend">
                 {/* <button
