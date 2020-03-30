@@ -14,7 +14,7 @@ import Component1 from './components/Component1'
 import IconMenu from './components/IconMenu'
 import ActCard from '../../components/activity/ActCard'
 
-function ActivityMain(props) {
+function ActivityQueryClass(props) {
   const [activityClassData, setActivityClassData] = useState([])
   const [activityLectureData, setActivityLectureData] = useState([])
   const [activitySaleData, setActivitySaleData] = useState([])
@@ -44,24 +44,22 @@ function ActivityMain(props) {
     // console.log(data.activity_event)
   }
 
-  //   useEffect(() => {
-  //     // console.log(search)
-  //     // setSearch(search)
-  //   }, [search])
+  useEffect(() => {
+    // console.log(search)
+    setSearch(search)
+  }, [search])
 
   useEffect(() => {
     getActQueryData()
   }, [])
 
   function handleSearch(el) {
+    // console.log('enter')
     if (el.charCode === 13) {
       setSearch(el.target.value)
       getActQueryData(search)
     }
-    // console.log('enter')
-    // getActQueryData(search)
   }
-
   function handleSearchType(type) {
     setSearch(type)
     getActQueryData(search)
@@ -101,7 +99,7 @@ function ActivityMain(props) {
     //fetch課程資料
     async function getActClassData() {
       const req = new Request(
-        `http://localhost:6001/activity_event/pageClass`,
+        `http://localhost:6001/activity_event/pageclass`,
         {
           method: 'GET',
           headers: new Headers({
@@ -236,7 +234,7 @@ function ActivityMain(props) {
           <div className="col-6 icon-dropdown-menu icon-dropdown-menu4 px-4">
             <div className="">
               <div className="input-group-prepend">
-                {/* <button
+                <button
                   type="button"
                   className="btn btn-outline-secondary"
                   id="button-addon1"
@@ -250,7 +248,7 @@ function ActivityMain(props) {
                   >
                     <FiSearch />
                   </IconContext.Provider>
-                </button> */}
+                </button>
               </div>
               <input
                 type="text"
@@ -264,9 +262,9 @@ function ActivityMain(props) {
           </div>
         </div>
         <div className="new-activity">
-          <h4>所有活動</h4>
+          <h4>課程活動</h4>
           <div className="row">
-            {activityQueryData.map((v, i) => (
+            {activityClassData.map((v, i) => (
               <div className="col-lg-4" key={i}>
                 <ActCard data={v} />
               </div>
@@ -278,4 +276,4 @@ function ActivityMain(props) {
   )
 }
 
-export default withRouter(ActivityMain)
+export default withRouter(ActivityQueryClass)
