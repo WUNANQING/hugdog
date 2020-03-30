@@ -143,7 +143,7 @@ function CouponEvent(props) {
       // alert('此優惠卷已取得過')
       Swal.fire({
         icon: 'error',
-        title: '此優惠卷已取得過',
+        title: '此優惠卷已取得',
         showConfirmButton: false,
         timer: 2500,
       })
@@ -158,7 +158,7 @@ function CouponEvent(props) {
     <>
       <div className="container">
         <Card className="text-center my-5">
-          <Card.Header>愚人節優惠卷一</Card.Header>
+          <Card.Header>四月優惠卷一</Card.Header>
           <Card.Img
             variant="top"
             className="couponeventImg"
@@ -167,8 +167,8 @@ function CouponEvent(props) {
           <Card.Body>
             <Card.Title>優惠券折50元</Card.Title>
             <Card.Text>
-              With supporting text below as a natural lead-in to additional
-              content.
+              <h6>此優惠卷可使用於任何種類商品</h6>
+              <h6>單一筆消費僅可使用一種優惠方式</h6>
             </Card.Text>
             <Button variant="primary" type="button" onClick={() => coupon1()}>
               取得優惠卷
@@ -179,7 +179,7 @@ function CouponEvent(props) {
           </Card.Footer>
         </Card>
         <Card className="text-center my-5">
-          <Card.Header>愚人節優惠卷二</Card.Header>
+          <Card.Header>四月優惠卷二</Card.Header>
           <Card.Img
             variant="top"
             className="couponeventImg"
@@ -188,8 +188,8 @@ function CouponEvent(props) {
           <Card.Body>
             <Card.Title>優惠券折88元</Card.Title>
             <Card.Text>
-              With supporting text below as a natural lead-in to additional
-              content.
+              <h6>此優惠卷可使用於任何種類商品</h6>
+              <h6>單一筆消費僅可使用一種優惠方式</h6>
             </Card.Text>
             <Button variant="primary" type="button" onClick={() => coupon2()}>
               取得優惠卷
@@ -200,7 +200,7 @@ function CouponEvent(props) {
           </Card.Footer>
         </Card>
         <Card className="text-center my-5">
-          <Card.Header>愚人節優惠卷三</Card.Header>
+          <Card.Header>四月優惠卷三</Card.Header>
           <Card.Img
             variant="top"
             className="couponeventImg"
@@ -209,8 +209,8 @@ function CouponEvent(props) {
           <Card.Body>
             <Card.Title>優惠券折168元</Card.Title>
             <Card.Text>
-              With supporting text below as a natural lead-in to additional
-              content.
+              <h6>此優惠卷可使用於任何種類商品</h6>
+              <h6>單一筆消費僅可使用一種優惠方式</h6>
             </Card.Text>
             <Button variant="primary" type="button" onClick={() => coupon3()}>
               取得優惠卷

@@ -210,7 +210,7 @@ function CouponInsert(props) {
       // alert('此優惠卷已取得過')
       Swal.fire({
         icon: 'error',
-        title: '此優惠卷已取得過',
+        title: '此優惠卷已取得',
         // showConfirmButton: false,
         timer: 2500,
         // preConfirm: () => {
