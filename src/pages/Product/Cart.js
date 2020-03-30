@@ -157,7 +157,7 @@ const Cart = (props) => {
                     alt="..."
                   />
                   <Link to="/products">
-                    <Button variant="primary" size="lg">
+                    <Button variant="outline-primary" size="lg">
                       前往選購
                     </Button>
                   </Link>
@@ -266,7 +266,7 @@ const Cart = (props) => {
                       <Col sm={6} md={2} lg={2}>
                         <ButtonGroup className="mb-sm-2">
                           <Button
-                            className="border-dark bg-light text-dark"
+                            className="border-dark bg-transparent text-dark"
                             id="-"
                             onClick={(e) => {
                               updateQuantityToLocalStorage(e, index, 1)
@@ -275,14 +275,14 @@ const Cart = (props) => {
                             -
                           </Button>
                           <Button
-                            className="border-dark bg-light text-dark"
+                            className="border-dark bg-transparent text-dark font-weight-bold"
                             value={value.pQuantity}
                             type="input"
                           >
                             {value.pQuantity}
                           </Button>
                           <Button
-                            className="border-dark bg-light text-dark"
+                            className="border-dark bg-transparent text-dark"
                             id="+"
                             onClick={(e) => {
                               value.pQuantity < 10 &&
@@ -294,7 +294,7 @@ const Cart = (props) => {
                         </ButtonGroup>
                       </Col>
                       <Col sm={6} md={2} lg={2} className="ml-md-auto">
-                        <h4 className="text-center text-sm-right font-weight-bold">
+                        <h4 className="text-center text-sm-right text-md-center font-weight-bold">
                           NT${value.pQuantity * value.pPrice}
                         </h4>
                       </Col>
@@ -305,7 +305,7 @@ const Cart = (props) => {
                       >
                         <Button
                           className="mb-2"
-                          variant="primary"
+                          variant="outline-primary"
                           size="md"
                           onClick={(e) => {
                             if (
@@ -345,7 +345,7 @@ const Cart = (props) => {
                         </Button>
                         <Button
                           className="mb-2"
-                          variant="primary"
+                          variant="outline-primary"
                           size="md"
                           onClick={(e) => {
                             Swal.fire({
