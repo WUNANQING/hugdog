@@ -19,9 +19,6 @@ import Order from './pages/Product/Order'
 import Activity from './pages/Activity/Activity'
 import ActivitySale from './pages/Activity/ActivitySale'
 import ActivityEvent from './pages/Activity/ActivityEvent'
-import ActivityQueryClass from './pages/Activity/ActivityQueryClass'
-import ActivityQueryLecture from './pages/Activity/ActivityQueryLecture'
-import ActivityQuerySale from './pages/Activity/ActivityQuerySale'
 import MemberLogin from './pages/member/memberLogin'
 import MemberRegister from './pages/member/member-register'
 import DogInsert from './pages/member/dogInsert'
@@ -49,15 +46,6 @@ function App() {
             </Route>
             <Route path="/activity/sale/:sId">
               <ActivitySale />
-            </Route>
-            <Route path="/activity/class/">
-              <ActivityQueryClass />
-            </Route>
-            <Route path="/activity/lecture/">
-              <ActivityQueryLecture />
-            </Route>
-            <Route path="/activity/sales/">
-              <ActivityQuerySale />
             </Route>
             <Route path="/activity/:eId">
               <ActivityEvent />
