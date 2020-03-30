@@ -113,7 +113,7 @@ const Products = (props) => {
 
   return (
     <>
-      <div className="mt-2 d-flex">
+      <div className="d-flex">
         <ReactPlayer
           className="react-player"
           url="https://youtu.be/v73T3eeEcaQ"
@@ -124,7 +124,7 @@ const Products = (props) => {
         />
         <ReactPlayer
           className="react-player"
-          url="https://youtu.be/SKpH2j6wfqs"
+          url="https://youtu.be/JaVptISRJVY"
           muted
           onReady
           playing
@@ -132,7 +132,7 @@ const Products = (props) => {
         />
         <ReactPlayer
           className="react-player"
-          url="https://youtu.be/JaVptISRJVY"
+          url="https://youtu.be/SKpH2j6wfqs"
           muted
           onReady
           playing

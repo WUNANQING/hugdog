@@ -37,12 +37,12 @@ function PartnerClosed() {
             <Button
               className="justify-right"
               variant="outline-primary"
-              onClick={function() {
+              onClick={function () {
                 Swal.fire({
                   title: '尚未開始報名',
                   icon: 'warning',
                   showCancelButton: false,
-                  confirmButtonColor: '#3085d6',
+                  confirmButtonColor: '#cea160',
                   confirmButtonText: '確定',
                 })
               }}
