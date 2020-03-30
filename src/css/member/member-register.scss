@@ -32,4 +32,17 @@
   }
   .form {
   }
+
+  @media screen and (max-width: 1000px) {
+    .imgContainer {
+      justify-content: center;
+      // position: absolute;
+      opacity: 40%;
+      img {
+      }
+    }
+    .register_container {
+      position: absolute;
+    }
+  }
 }

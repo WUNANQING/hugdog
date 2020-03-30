@@ -79,10 +79,28 @@ const getLoveList = (state = [], action) => {
       return state
   }
 }
-//會員最愛商品
+//會員最愛活動
 const getLoveActivity = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_LOVE_ACTIVITY':
+      return action.data
+    default:
+      return state
+  }
+}
+//會員最愛保母
+const getLoveNanny = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_LOVE_NANNY':
+      return action.data
+    default:
+      return state
+  }
+}
+//會員最愛保母
+const getCommentList = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_COMMENT_LIST':
       return action.data
     default:
       return state
@@ -138,6 +156,24 @@ const useCoupon = (state = 0, action) => {
       return state
   }
 }
+//紀錄使用過的優惠券的編號
+const couponId = (state = 0, action) => {
+  switch (action.type) {
+    case 'COUPON_ID':
+      return action.mmId
+    default:
+      return state
+  }
+}
+//顯示商品評論
+const showComments = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_COMMENTS':
+      return action.comments
+    default:
+      return state
+  }
+}
 //商品reducers
 
 const getDog = (state = [], action) => {
@@ -163,6 +199,15 @@ const getDogDetail = (state = [], action) => {
 const updateDog = (state = [], action) => {
   switch (action.type) {
     case 'UPDATE_DOG':
+      return { ...action.data }
+    default:
+      return state
+  }
+}
+//更新服務狀態
+const updateService = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_SERVICE':
       return { ...action.data }
     default:
       return state
@@ -254,6 +299,12 @@ const rootReducer = combineReducers({
   getLoveActivity,
   updateMember,
   useCoupon,
+  showComments,
+  couponId,
+  getLoveNanny,
+  getCommentList,
+  updateDog,
+  updateService,
 })
 
 export { rootReducer }

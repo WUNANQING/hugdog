@@ -139,6 +139,7 @@
     animation-name: detail;
     animation-duration: 0.5s;
   }
+
   .image {
     cursor: zoom-in;
     max-width: 350px;
@@ -150,6 +151,7 @@
     border-radius: 5px;
   }
 }
+
 @keyframes detail {
   from {
     opacity: 0;
@@ -161,6 +163,7 @@
     margin-top: 0%;
   }
 }
+
 //購物車
 .cart {
   .btn {
@@ -234,5 +237,16 @@
   to {
     opacity: 1;
     left: 0px;
+  }
+}
+
+//商品評論
+.productComment {
+  .like {
+    color: rgb(32, 120, 244);
+  }
+
+  .dislike {
+    color: rgb(243, 62, 88);
   }
 }

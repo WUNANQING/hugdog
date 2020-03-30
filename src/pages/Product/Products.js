@@ -32,7 +32,7 @@ const Products = (props) => {
   }, [])
 
   let sort = (
-    <div className="d-md-flex justify-content-md-between align-items-center my-3">
+    <div className="d-flex justify-content-between align-items-center my-3">
       <span>共有{props.list.totalRows}項商品</span>
       <select
         onChange={(e) => {
@@ -113,10 +113,10 @@ const Products = (props) => {
   return (
     <>
       <Container className="products">
-        <Row className="my-5">
+        <Row className="my-5 d-flex justify-content-center">
           <ProductSidebar />
           <Col md={10} className="bg-white">
-            <Breadcrumb />
+            {/* <Breadcrumb /> */}
             {sort}
             <Row>
               {props.list.rows &&

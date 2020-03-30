@@ -1,86 +1,113 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import $ from 'jquery'
-import { Card } from 'react-bootstrap'
-import '../../css/activity/activity.scss'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Jumbotorn from '../../components/activity/Jumbotron'
-import ActClassCard from '../../components/activity/ActClassCard'
-import ActLectureCard from '../../components/activity/ActLectureCard'
-import ActSaleCard from '../../components/activity/ActSaleCard'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { Form, Button } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
+import { IconContext } from 'react-icons'
+import { FiSearch } from 'react-icons/fi'
 
-function Activity(props) {
+//引入自己的css
+import '../../css/activity/activity2.scss'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import Component1 from './components/Component1'
+import IconMenu from './components/IconMenu'
+import ActCard from '../../components/activity/ActCard'
+
+function ActivityMain(props) {
   const [activityClassData, setActivityClassData] = useState([])
   const [activityLectureData, setActivityLectureData] = useState([])
   const [activitySaleData, setActivitySaleData] = useState([])
   const [activityQueryData, setActivityQueryData] = useState([])
   const [search, setSearch] = useState('')
 
-  // useEffect(() => {
-  //     console.log(search)
-  //     setSearch('')
-  //   }, [search])
-
-  useEffect(() => {
-    // console.log(search)
-    setSearch(search)
-  }, [search])
-
   //fetch搜尋資料
   async function getActQueryData() {
     // alert('aaa')
-    console.log('set', search)
-    const req = new Request(`http://localhost:6001/activity_querySearch/`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-    })
-    const res = await fetch(req)
-    const data = await res.json()
-    console.log('搜尋資料', data)
-
-    setActivityQueryData(data)
-  }
-  useEffect(() => {
-    // Your code here
-    $('.event-icon .icon-time').mouseover(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-      $('.icon-dropdown-menu1').addClass('active')
-    })
-    $('.event-icon .icon-categories').mouseover(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-      $('.icon-dropdown-menu2').addClass('active')
-    })
-    $('.event-icon .icon-location').mouseover(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-      $('.icon-dropdown-menu3').addClass('active')
-    })
-    $('.event-icon .icon-keyword').mouseover(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-      $('.icon-dropdown-menu4').addClass('active')
-    })
-    $('.event-icon').mouseleave(function () {
-      $('.icon-dropdown-menu').removeClass('active')
-    })
-    $('.icon-dropdown-menu').mouseover(function () {
-      $(this).addClass('active')
-    })
-    $('.icon-dropdown-menu').mouseleave(function () {
-      $(this).removeClass('active')
-    })
-
-    //fetch課程資料
-    async function getActClassData() {
-      const req = new Request(`http://localhost:6001/activity_class/`, {
+    // console.log('set', search)
+    const req = new Request(
+      `http://localhost:6001/activity_querySearch/?search=${search}`,
+      {
         method: 'GET',
+        credentials: 'include',
         headers: new Headers({
           Accept: 'application/json',
           'Content-Type': 'application/json',
         }),
-      })
+      }
+    )
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('搜尋資料', data)
+
+    setActivityQueryData(data.activity_event)
+    // console.log(data.activity_event)
+  }
+
+  //   useEffect(() => {
+  //     // console.log(search)
+  //     // setSearch(search)
+  //   }, [search])
+
+  useEffect(() => {
+    getActQueryData()
+  }, [])
+
+  function handleSearch(el) {
+    if (el.charCode === 13) {
+      setSearch(el.target.value)
+      getActQueryData(search)
+    }
+  }
+
+  function handleSearchType(type) {
+    setSearch(type)
+    getActQueryData(search)
+  }
+
+  useEffect(() => {
+    // Your code here
+    $('.event-icon .icon_time1').click(function () {
+      $('.icon_dropdown-menu').removeClass('active')
+      $('.icon_dropdown-menu1').addClass('active')
+    })
+    $('.event-icon .icon_categories').click(function () {
+      $('.icon_dropdown-menu').removeClass('active')
+      $('.icon_dropdown-menu2').addClass('active')
+    })
+    $('.event-icon .icon_location').click(function () {
+      $('.icon_dropdown-menu').removeClass('active')
+      $('.icon_dropdown-menu3').addClass('active')
+    })
+    $('.event-icon .icon_keyword').click(function () {
+      $('.icon_dropdown-menu').removeClass('active')
+      $('.icon_dropdown-menu4').addClass('active')
+    })
+    // $('.event-icon').mouseleave(function () {
+    //   $('.icon_dropdown-menu').removeClass('active')
+    // })
+    $('.icon_dropdown-menu').mouseover(function () {
+      $(this).addClass('active')
+    })
+    // $('.icon_dropdown-menu').mouseleave(function () {
+    //   $(this).removeClass('active')
+    // })
+    // $('.activity-main2').click(function () {
+    //   $('.icon_dropdown-menu').removeClass('active')
+    // })
+
+    //fetch課程資料
+    async function getActClassData() {
+      const req = new Request(
+        `http://localhost:6001/activity_event/pageClass`,
+        {
+          method: 'GET',
+          headers: new Headers({
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          }),
+        }
+      )
       const res = await fetch(req)
       const data = await res.json()
       // console.log(data)
@@ -90,13 +117,16 @@ function Activity(props) {
 
     //fetch講座資料
     async function getActLectureData() {
-      const req = new Request(`http://localhost:6001/activity_lecture/`, {
-        method: 'GET',
-        headers: new Headers({
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }),
-      })
+      const req = new Request(
+        `http://localhost:6001/activity_event/pagelecture`,
+        {
+          method: 'GET',
+          headers: new Headers({
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          }),
+        }
+      )
       const res = await fetch(req)
       const data = await res.json()
       // console.log(data)
@@ -106,7 +136,7 @@ function Activity(props) {
 
     //fetch優惠活動
     async function getActSaleData() {
-      const req = new Request(`http://localhost:6001/activity_sale/`, {
+      const req = new Request(`http://localhost:6001/activity_event/pagesale`, {
         method: 'GET',
         headers: new Headers({
           Accept: 'application/json',
@@ -122,165 +152,128 @@ function Activity(props) {
 
     // getActQueryData()
   }, [])
-
   return (
     <>
-      {/* <Route path="/activity/class">
-          <ActivityClass />
-        </Route> */}
-      {/* <Route path="/activity/lecture">
-        <ActivityLecture />
-      </Route> */}
-
-      <div className="activity-main">
-        <Jumbotorn />
-        <div className="container">
-          <section className="d-flex position-relative mb-2">
-            <div className="col-5 event-icon d-flex">
-              <div className="icon icon-time">
-                <Link href="">
-                  <img
-                    src={require('../../images/activity/activity-date.svg')}
-                    alt=""
-                  />
-                  <div className="text-center">時間</div>
-                </Link>
-              </div>
-              <div className="icon icon-categories">
-                <Link href="">
-                  <img
-                    src={require('../../images/activity/activity-category.svg')}
-                    alt=""
-                  />
-                  <div className="text-center">分類</div>
-                </Link>
-              </div>
-              <div className="icon icon-location">
-                <Link href="">
-                  <img
-                    src={require('../../images/activity/activity-loaction.svg')}
-                    alt=""
-                  />
-                  <div className="text-center">地點</div>
-                </Link>
-              </div>
-              <div className="icon icon-keyword">
-                <Link href="">
-                  <img
-                    src={require('../../images/activity/activity-search.svg')}
-                    alt=""
-                  />
-                  <div className="text-center">關鍵字</div>
-                </Link>
-              </div>
+      <div className="">
+        <Component1 className="component1"></Component1>
+      </div>
+      <div className="container activity-main2">
+        <IconMenu />
+        <hr />
+        <div className="dropdown_menu menu1 row">
+          <div className="col-6 icon_dropdown-menu icon_dropdown-menu1 px-4 pb-4">
+            <div className="d-flex justify-content-around ">
+              <Link>
+                <div className=" ">全部</div>
+              </Link>
+              <Link>
+                <div className="">進行中</div>
+              </Link>
+              <Link>
+                <div className="">預告中</div>
+              </Link>
+              <Link>
+                <div className="">已截止</div>
+              </Link>
             </div>
-            <div className="d-flex align-items-end position-absolute event-btn">
-              <button type="button" className="btn btn-primary">
-                進階篩選
-              </button>
-            </div>
-          </section>
-          <div className="position-relative">
-            <div className="col-6 icon-dropdown-menu icon-dropdown-menu1 position-absolute   p-4 ">
-              <div className="d-flex justify-content-around ">
-                <Link className="align-items-center">
-                  <div className=" ">全部</div>
-                </Link>
-                <Link>
-                  <div className="">進行中</div>
-                </Link>
-                <Link>
-                  <div className="">預告中</div>
-                </Link>
-                <Link>
-                  <div className="">已截止</div>
-                </Link>
+          </div>
+        </div>
+        <div className="dropdown_menu menu2 row">
+          <div className="col-6 icon_dropdown-menu icon_dropdown-menu2 px-4 pb-4">
+            <div className="d-flex justify-content-around">
+              <div>
+                <a type="button" onClick={() => handleSearchType('優惠')}>
+                  優惠活動
+                </a>
               </div>
-            </div>
-            <div className="col-6 icon-dropdown-menu icon-dropdown-menu2 position-absolute p-4">
-              <div className="d-flex justify-content-around">
-                <Link>
-                  <div className="">優惠活動</div>
-                </Link>
-                <Link>
-                  <div className="">講座活動</div>
-                </Link>
-                <Link>
-                  <div className="">課程活動</div>
-                </Link>
-                <Link>
-                  <div className="">寵物活動</div>
-                </Link>
-              </div>
-            </div>
-            <div className="col-6 icon-dropdown-menu icon-dropdown-menu3 position-absolute p-4">
-              <div className="">678</div>
-            </div>
-            <div className="col-6 icon-dropdown-menu icon-dropdown-menu4 position-absolute p-4">
               <div className="">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="請輸入搜尋關鍵字"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <button
+                <a type="button" onClick={() => handleSearchType('講座')}>
+                  講座活動
+                </a>
+              </div>
+              <div className="">
+                <a type="button" onClick={() => handleSearchType('課程')}>
+                  課程活動
+                </a>
+              </div>
+              <div className="">
+                <a type="button" onClick={() => handleSearchType('活動')}>
+                  所有活動
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="dropdown_menu menu3 row">
+          <div className="col-6 icon_dropdown-menu icon_dropdown-menu3 px-4 pb-4">
+            <div className="d-flex justify-content-around">
+              <div>
+                <a type="button" onClick={() => handleSearchType('優惠')}>
+                  優惠活動
+                </a>
+              </div>
+              <div className="">
+                <a type="button" onClick={() => handleSearchType('講座')}>
+                  講座活動
+                </a>
+              </div>
+              <div className="">
+                <a type="button" onClick={() => handleSearchType('課程')}>
+                  課程活動
+                </a>
+              </div>
+              <div className="">
+                <a type="button" onClick={() => handleSearchType('活動')}>
+                  所有活動
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="dropdown_menu menu4 row">
+          <div className="col-6 icon_dropdown-menu icon_dropdown-menu4 px-4">
+            <div className="">
+              <div className="input-group-prepend">
+                {/* <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-outline-secondary"
+                  id="button-addon1"
                   onClick={(search) => getActQueryData(search)}
                 >
-                  送出
-                </button>
+                  <IconContext.Provider
+                    value={{
+                      color: 'black',
+                      size: '1.5rem',
+                    }}
+                  >
+                    <FiSearch />
+                  </IconContext.Provider>
+                </button> */}
               </div>
+              <input
+                type="text"
+                className="form-control search-input "
+                placeholder="請輸入搜尋關鍵字"
+                value={search}
+                onKeyPress={handleSearch}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
           </div>
-          <div className="my-3 new-activity position-relative">
-            <h4>最新活動</h4>
-            <div className="row">
-              {activitySaleData.map((v, i) => (
-                <div className="col-lg-4" key={i}>
-                  <ActSaleCard data={v} />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="activity-class">
-            <h4>課程報名</h4>
-            <div className="row">
-              {activityClassData.map((v, i) => (
-                <div className="col-lg-4" key={i}>
-                  <ActClassCard data={v} />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="activity-all">
-            <h4>精選活動</h4>
-            <div className="row">
-              {activityLectureData.map((v, i) => (
-                <div className="col-lg-4" key={i}>
-                  <ActLectureCard data={v} />
-                </div>
-              ))}
-            </div>
-            <div align="center" className="mb-3">
-              <button type="button" className="btn btn-outline-theme">
-                顯示更多活動
-              </button>
-            </div>
+        </div>
+        <div className="new-activity">
+          <h4>所有活動</h4>
+          <div className="row">
+            {activityQueryData.map((v, i) => (
+              <div className="col-lg-4" key={i}>
+                <ActCard data={v} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </>
   )
 }
-// const mapStateToProps = store => {
-//   return { data: store.getActivityClassDetail }
-// }
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators({}, dispatch)
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(Activity)
 
-export default Activity
+export default withRouter(ActivityMain)
