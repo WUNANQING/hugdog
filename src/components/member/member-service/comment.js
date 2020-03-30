@@ -46,7 +46,9 @@ const CommentList = (props) => {
         <td>{props.data[i] ? props.data[i].txt : ''}</td>
         <td>{props.data[i] ? props.data[i].rating : ''}</td>
         <td>
-          <button className="btn btn-primary allListBtn">評論</button>
+          <div className="btn btn-primary allListBtn" onClick={jump2}>
+            評論
+          </div>
         </td>
       </tr>
     )
@@ -56,6 +58,14 @@ const CommentList = (props) => {
           props.data[i] ? props.data[i].id : ''
         }`
       )
+    }
+    function jump2() {
+      window.location.replace(
+        `http://localhost:3000/service/comment/${
+          props.data[i] ? props.data[i].orderId : ''
+        }`
+      )
+      console.log(123)
     }
   }
   return (
