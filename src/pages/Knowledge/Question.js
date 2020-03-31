@@ -340,12 +340,14 @@ function Question(props) {
                     if (classify) {
                       if (props.post[index].qClassify === classify) {
                         return (
-                          <QuestionArt
-                            key={index}
-                            data={props.post[index]}
-                            changeClassify={props.post.qClassify}
-                            r={setReShowow}
-                          />
+                          <div className="col-md-6">
+                            <QuestionArt
+                              key={index}
+                              data={props.post[index]}
+                              changeClassify={props.post.qClassify}
+                              r={setReShowow}
+                            />
+                          </div>
                         )
                       }
                     } else {
