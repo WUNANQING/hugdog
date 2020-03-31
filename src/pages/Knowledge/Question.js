@@ -250,7 +250,7 @@ function Question(props) {
                     {props.dogPost &&
                       props.dogPost.map((value, index) => {
                         return (
-                          <option value={value.dId} key={index}>
+                          <option value={value.dYear} key={index}>
                             {value.dName} ／ {value.dYear}歲
                           </option>
                         )
@@ -333,8 +333,8 @@ function Question(props) {
         </div>
         <div>
           <Row>
-            <Col xs={12} md={12}>
-              <Row xs={12} md={6} className="justify-content-right">
+            <Col>
+              <Row>
                 {props.post &&
                   props.post.map((value, index) => {
                     if (classify) {
