@@ -57,8 +57,9 @@ function PartnerClosed(props) {
     const data = await res.json()
     if (data.success) {
       sAlert()
-      setTimeout(){window.location.reload(),1500}
-      
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500)
     } else {
       alert('刪除失敗')
     }
