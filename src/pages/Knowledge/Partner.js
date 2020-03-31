@@ -339,11 +339,11 @@ function Partner(props) {
                 <PartnerClosed />
               </Col>
             </Tab>
-            <Tab eventKey="" title="我的收藏">
+            {/* <Tab eventKey="" title="我的收藏">
               <Col xs={12} className="justify-content-center mb-2">
                 ) })}
               </Col>
-            </Tab>
+            </Tab> */}
           </Tabs>
         </div>
       </Container>
