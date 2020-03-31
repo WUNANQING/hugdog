@@ -134,8 +134,8 @@ function Member() {
                   </Nav>
                 </div>
 
-                <div className="member-form-container d-flex container">
-                  <div>
+                <div className="member-form-container  container">
+                  <div className="member-form-2">
                     <div className="member-form">
                       <div className="title-box">
                         <p>個人資訊</p>
@@ -188,7 +188,7 @@ function Member() {
                       </ul>
                     </div>
                   </div>
-                  <div>
+                  <div className="member-form-2">
                     <div className="member-form">
                       <div className="title-box">
                         <p>服務查詢</p>

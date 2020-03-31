@@ -132,7 +132,9 @@ const MemberOrderInfo = (props) => {
                         // src={require('../../../images/product/' +
                         //   value.pImg +
                         //   '.jpg')}
-                        src={require('../../../images/product/C1.jpg')}
+                        src={require('../../../images/product/' +
+                          'C1' +
+                          '.jpg')}
                         alt="..."
                       />
                     </Col>

@@ -186,6 +186,7 @@ const MemberInfo = (props) => {
                             name="dId"
                             value={mId}
                             class="form-control"
+                            disabled
                           />
                         </td>
                       </tr>
