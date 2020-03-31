@@ -104,7 +104,7 @@ export function handleFormValueMatch(event, match, jsonData) {
 }
 //-----api key-----
 export function myGoogleMapApiKey() {
-  // return 'YourApiKey'
+  return 'YourApiKey'
 }
 //-----google map location-----
 export async function getGoogleMapLocation(sCity, sDist, sAddr) {
