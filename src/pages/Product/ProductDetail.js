@@ -470,13 +470,11 @@ const ProductDetail = (props) => {
                                   roundedCircle
                                   width="50"
                                   src={
-                                    require('../../images/member/member-img/m' +
-                                      value.mImg.slice(1) +
-                                      '.jpg')
-                                      ? require('../../images/member/member-img/m' +
+                                    value.mImg === '' || value.mImg === null
+                                      ? require('../../images/member/member-img/m300.jpg')
+                                      : require('../../images/member/member-img/m' +
                                           value.mImg.slice(1) +
                                           '.jpg')
-                                      : 'https://via.placeholder.com/50'
                                   }
                                 />
                                 <span>{index + 1 + 'F'}</span>
