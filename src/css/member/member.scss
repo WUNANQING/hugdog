@@ -27,7 +27,8 @@
     max-width: 1920px;
     height: 674px;
     background-size: cover;
-    background: url(../../images/member/member-bg.png) center center;
+
+    background: url(../../images/member/memberBanner1.jpg) center center;
     // opacity: 70%;
     text-align: center;
     margin-bottom: 80px;
@@ -48,13 +49,15 @@
     z-index: 5;
     margin: 0 auto;
     float: none;
-    transform: translateY(107px) scale(0.8);
+    // transform: translateY(107px) scale(0.8);
+    transform: translate(-15px, 230px) scale(0.6);
 
     img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
+      // transform: rotate(60deg);
     }
   }
 
@@ -143,10 +146,14 @@
 
 /* member-info */
 .full-body {
-  background: #fffcf0;
+  // background: #fffcf0;
   margin: 0;
 }
 .fastLogin {
   text-align: center;
   transform: translate(500px, 350px);
+}
+.member-form {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
 }

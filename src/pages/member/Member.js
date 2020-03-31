@@ -63,9 +63,9 @@ function Member() {
                   alt="Background"
                 ></img>
               </div>
-              <div className="head-text">
+              {/* <div className="head-text">
                 {localStorage.getItem('mName')}，歡迎使用HugDog會員頁面
-              </div>
+              </div> */}
             </div>
             <div className="full-body">
               <div className="member-content d-flex row ">
@@ -240,7 +240,7 @@ function Member() {
           </div>
         </Switch>
       )}
-      <Pokemon />
+      {localStorage.getItem('mId') === '0' ? '' : <Pokemon />}
     </>
   )
 }
