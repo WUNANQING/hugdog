@@ -93,9 +93,10 @@ export const getMemberDetail = (mId) => {
 export const showDog = (data) => {
   return { type: 'SHOW_DOG', data }
 }
-export const getDogData = () => {
+export const getDogData = (mId) => {
+  mId = localStorage.getItem('mId')
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/dog/`, {
+    const req = new Request(`http://localhost:6001/dog/${mId}`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -185,12 +186,16 @@ export const updateServerService = () => {
 export const showActivityOrder = (data) => {
   return { type: 'SHOW_ACTIVITY_ORDER', data }
 }
-export const getActivityOrder = () => {
+export const getActivityOrder = (mId) => {
+  mId = localStorage.getItem('mId')
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/activity_successEvent`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const req = new Request(
+      `http://localhost:6001/activity_successEvent/${mId}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
     const res = await fetch(req)
     const data = await res.json()
     console.log(data)
@@ -204,7 +209,7 @@ export const showLoveList = (data) => {
 export const getLoveList = (mId) => {
   mId = localStorage.getItem('mId')
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/member/list/${mId}`, {
+    const req = new Request(`http://localhost:6001/list/${mId}`, {
       method: 'GET',
       credentials: 'include',
     })
