@@ -41,7 +41,9 @@
   line-height: 120px;
   background: lightblue;
   opacity: 70%;
-
+  h2 {
+    transform: translateY(40px);
+  }
   /* display: none; */
 }
 

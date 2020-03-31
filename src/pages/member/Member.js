@@ -30,7 +30,14 @@ function Member() {
   return (
     <>
       {localStorage.getItem('mId') === '0' ? (
-        <h1>請登入</h1>
+        <div className="d-flex">
+          <img
+            // src={require('../../images/member/member-img/m004.jpg')}
+            src={require('../../images/member/nologin.png')}
+            alt="Background"
+          ></img>
+          <h1 className="fastLogin">趕緊去登入</h1>
+        </div>
       ) : (
         <Switch>
           <Route path="/member/member-info">
