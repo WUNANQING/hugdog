@@ -21,6 +21,12 @@ import MemberActivity from './member-activity'
 import Pokemon from '../../components/member/pokemon'
 
 function Member() {
+  if (
+    localStorage.getItem('mImg') === null ||
+    localStorage.getItem('mImg') === ''
+  ) {
+    localStorage.setItem('mImg', 'm300')
+  }
   return (
     <>
       {localStorage.getItem('mId') === '0' ? (
@@ -227,7 +233,7 @@ function Member() {
           </div>
         </Switch>
       )}
-      {/* <Pokemon /> */}
+      <Pokemon />
     </>
   )
 }
