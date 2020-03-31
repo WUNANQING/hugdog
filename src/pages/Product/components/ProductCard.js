@@ -5,6 +5,9 @@ import { Col, Card, Image, Button } from 'react-bootstrap'
 import '../../../css/product/productCard.scss'
 import Swal from 'sweetalert2/src/sweetalert2.js'
 import { FiClock } from 'react-icons/fi'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { count } from '../actions/index'
 
 const ProductCard = (props) => {
   return (
@@ -78,6 +81,7 @@ const ProductCard = (props) => {
                       })
                     } else {
                       const newCart = [...currentCart, item]
+                      props.count(newCart)
                       localStorage.setItem('cart', JSON.stringify(newCart))
                       Swal.fire({
                         title: '加入成功',
@@ -121,5 +125,8 @@ const ProductCard = (props) => {
     </Col>
   )
 }
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ count }, dispatch)
+}
 
-export default withRouter(ProductCard)
+export default withRouter(connect(null, mapDispatchToProps)(ProductCard))
