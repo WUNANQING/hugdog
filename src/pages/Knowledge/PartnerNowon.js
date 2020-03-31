@@ -17,32 +17,26 @@ import PartnerPlus from './PartnerPlus'
 function PartnerNowon(props) {
   //設定參加狀態
   const [open, setOpen] = useState(false)
-  const [plus, setPlus] = useState(+1)
 
-  const clickOpen = () => {
-    if (localStorage.getItem('mId') && localStorage.getItem('mId') !== '0') {
-      setOpen(true)
-    } else {
-      return mAlert()
-    }
+  const reSign = () => {
+    return sAlert()
   }
 
   //sweetalert
   const Swal = require('sweetalert2')
   function mAlert() {
     Swal.fire({
-      icon: 'warning',
-      title: '尚未登入',
-    }).then(function () {
-      window.location.href = '/login'
+      icon: 'success',
+      title: '報名成功',
     })
   }
   function sAlert() {
     Swal.fire({
       icon: 'warning',
-      title: '不能報名',
+      title: '您是發起人',
     })
   }
+
   //設定加入最愛愛心切換
   const [heart, setHeart] = useState(true)
 
@@ -84,7 +78,7 @@ function PartnerNowon(props) {
       >
         <Card.Header className="justify-content-between d-flex">
           <IconContext.Provider value={{ size: '1.2rem' }}>
-            <div class="d-inlined-inline-block">
+            <div className="d-inlined-inline-block">
               <FaRegCalendarAlt />
               <span className="carddate mr-3 text-danger">
                 {' '}
@@ -94,7 +88,7 @@ function PartnerNowon(props) {
               <span className="cardtime text-danger"> {props.data.pTime}</span>
             </div>
 
-            <div class="d-inline-block">
+            <div className="d-inline-block">
               <MdLocationOn />
               <span className="cardtime ">
                 活動地點：
@@ -112,7 +106,9 @@ function PartnerNowon(props) {
                 <Card.Img
                   className="partnerImg"
                   variant="top"
-                  src={require('../../images/knowledge/partner/p001.jpg')}
+                  src={require('../../images/knowledge/partner/' +
+                    props.data.id +
+                    '.jpg')}
                   alt=""
                 />
               </div>
@@ -160,26 +156,49 @@ function PartnerNowon(props) {
                 </div>
                 <div>
                   <strong className="p-1">已報名人數：</strong>
+                  {props.data.pNumber}
                   <strong>人</strong>
                 </div>
               </div>
             </Col>
             <Col className="">
               <div className="text-right align-items-end justify-content-end mt-2 d-flex">
-                <Button
-                  variant="primary"
-                  size="sm"
-                  aria-controls="example-collapse-text"
-                  aria-expanded={open}
-                  className="mr-2"
-                  onClick={() => {
-                    postPlus()
-                  }}
-                >
-                  我要參加
-                </Button>
+                {props.data.pNumberLimit == props.data.pNumber ? (
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    aria-controls="example-collapse-text"
+                    aria-expanded
+                    className="mr-2"
+                    disabled
+                  >
+                    已滿團
+                  </Button>
+                ) : (
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    aria-controls="example-collapse-text"
+                    aria-expanded
+                    className="mr-2"
+                    onClick={(e) => {
+                      if (localStorage.mId !== props.data.mId) {
+                        mAlert()
+                        $(e.currentTarget).addClass('disabled').text('已報名')
+                      } else {
+                        sAlert()
+                      }
+                      postPlus()
+                      setTimeout(() => {
+                        window.location.reload()
+                      }, 1500)
+                    }}
+                  >
+                    我要參加
+                  </Button>
+                )}
 
-                <Button
+                {/* <Button
                   type="submit"
                   variant="primary"
                   size="sm"
@@ -197,12 +216,12 @@ function PartnerNowon(props) {
                   id="heart"
                 >
                   加入最愛{heart ? <FaRegHeart /> : <FaHeart />}
-                </Button>
+                </Button> */}
               </div>
             </Col>
           </Row>
           <Row>
-            <Collapse in={open}>
+            <Collapse>
               <Col
                 id="example-collapse-text "
                 className="mt-2 p-2 bg-light"

@@ -161,6 +161,9 @@ function Header(props) {
                     登出
                   </Link>
                 )}
+                <Link to="/member" className="dropdown-item nav-link">
+                  會員首頁
+                </Link>
                 {localStorage.getItem('mId') === '0' ? (
                   ''
                 ) : (
@@ -168,13 +171,6 @@ function Header(props) {
                     優惠券
                   </Link>
                 )}
-                <Link to="/member" className="dropdown-item nav-link">
-                  會員頁測試
-                </Link>
-                <div className="dropdown-divider" role="separator"></div>
-                <Link to="#" className="dropdown-item nav-link">
-                  連結3
-                </Link>
               </div>
             </div>
             <Nav.Link
@@ -186,12 +182,7 @@ function Header(props) {
                 <FiHeart />
               </IconContext.Provider>
             </Nav.Link>
-            <Nav
-              className="nav-icon order-3 order-md-4"
-              onClick={() => {
-                props.history.push('/cart')
-              }}
-            >
+            <Nav className="nav-icon order-3 order-md-4">
               <div className="nav-link">
                 {JSON.parse(localStorage.getItem('cart')) === null ||
                 JSON.parse(localStorage.getItem('cart')).length === 0 ||

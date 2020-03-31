@@ -40,7 +40,7 @@ function Partner(props) {
   function sAlert() {
     Swal.fire({
       icon: 'success',
-      title: '發問成功',
+      title: '舉辦成功',
     })
   }
   //sweetAlert 會員
@@ -177,6 +177,7 @@ function Partner(props) {
     const res = await fetch(req)
     const order = await res.json()
     await console.log(order)
+    sAlert()
   }
 
   return (
@@ -290,31 +291,31 @@ function Partner(props) {
               >
                 請選擇檔案
               </label> */}
-                    <div className="form-group files mb-0">
+                    {/* <div className="form-group files mb-0">
                       <input type="file" className="form-control" multiple="" />
-                    </div>
-                    <button
+                    </div> */}
+                    {/* <button
                       type="button"
                       className="btn btn-sm btn-info btn-block"
                       disabled={selectedSingleFile === null}
                     >
-                      {/* <MdFileUpload /> */}
+                      <MdFileUpload />
                       上傳
-                    </button>
-                    <div className="my-2 text-info avatar-preview">
+                    </button> */}
+                    {/* <div className="my-2 text-info avatar-preview">
                       <figure>
                         <img alt="" />
                       </figure>
-                    </div>
+                    </div> */}
                   </div>
                 </Form.Group>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose} id="btn">
-                  取消發問
+                  取消舉辦
                 </Button>
                 <Button variant="primary" type="submit">
-                  發佈
+                  舉辦
                 </Button>
               </Modal.Footer>
             </Form>
@@ -339,11 +340,11 @@ function Partner(props) {
                 <PartnerClosed />
               </Col>
             </Tab>
-            <Tab eventKey="" title="我的收藏">
+            {/* <Tab eventKey="" title="我的收藏">
               <Col xs={12} className="justify-content-center mb-2">
                 ) })}
               </Col>
-            </Tab>
+            </Tab> */}
           </Tabs>
         </div>
       </Container>
