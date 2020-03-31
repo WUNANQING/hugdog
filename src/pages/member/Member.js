@@ -21,10 +21,23 @@ import MemberActivity from './member-activity'
 import Pokemon from '../../components/member/pokemon'
 
 function Member() {
+  if (
+    localStorage.getItem('mImg') === null ||
+    localStorage.getItem('mImg') === ''
+  ) {
+    localStorage.setItem('mImg', 'm300')
+  }
   return (
     <>
       {localStorage.getItem('mId') === '0' ? (
-        <h1>請登入</h1>
+        <div className="d-flex">
+          <img
+            // src={require('../../images/member/member-img/m004.jpg')}
+            src={require('../../images/member/nologin.png')}
+            alt="Background"
+          ></img>
+          <h1 className="fastLogin">趕緊去登入</h1>
+        </div>
       ) : (
         <Switch>
           <Route path="/member/member-info">
@@ -55,8 +68,40 @@ function Member() {
               </div>
             </div>
             <div className="full-body">
-              <div className="member-content d-flex container">
-                <div className="member-sidebar">
+              <div className="member-content d-flex row ">
+                <div className="member-sidebar w120 member-sidebar-home">
+                  <Nav>
+                    <Nav.Link className="member-sidebar-text" href="/member">
+                      首頁
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-info"
+                    >
+                      個人資訊
+                    </Nav.Link>
+
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-item"
+                    >
+                      商品查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-service"
+                    >
+                      服務查詢
+                    </Nav.Link>
+                    <Nav.Link
+                      className="member-sidebar-text"
+                      href="/member/member-activity"
+                    >
+                      活動查詢
+                    </Nav.Link>
+                  </Nav>
+                </div>
+                <div className="member-sidebar-RWD">
                   <Nav>
                     <Nav.Link className="member-sidebar-text" href="/member">
                       首頁
@@ -195,7 +240,7 @@ function Member() {
           </div>
         </Switch>
       )}
-      {/* <Pokemon /> */}
+      <Pokemon />
     </>
   )
 }

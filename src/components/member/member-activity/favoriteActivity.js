@@ -49,7 +49,7 @@ const ServiceOrder = (props) => {
     )
     function jump() {
       window.location.replace(
-        `http://localhost:3000/activity/class/${
+        `http://localhost:3000/activity/${
           props.data[i] ? props.data[i].oId : ''
         }`
       )

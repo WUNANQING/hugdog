@@ -160,16 +160,41 @@ export const getServiceOrder = (mId) => {
     dispatch(showServiceOrder(data))
   }
 }
+//更新服務資料
+export const updateService = (data) => {
+  return { type: 'UPDATE_SERVICE', data }
+}
+export const updateServerService = () => {
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/Sorder/update/`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ orderStsId: 'o03' }),
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(updateService(data))
+  }
+}
 //查看活動訂單
 export const showActivityOrder = (data) => {
   return { type: 'SHOW_ACTIVITY_ORDER', data }
 }
-export const getActivityOrder = () => {
+export const getActivityOrder = (mId) => {
+  mId = localStorage.getItem('mId')
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/activity_successEvent`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const req = new Request(
+      `http://localhost:6001/activity_successEvent/${mId}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    )
     const res = await fetch(req)
     const data = await res.json()
     console.log(data)
@@ -183,7 +208,7 @@ export const showLoveList = (data) => {
 export const getLoveList = (mId) => {
   mId = localStorage.getItem('mId')
   return async (dispatch) => {
-    const req = new Request(`http://localhost:6001/member/list/${mId}`, {
+    const req = new Request(`http://localhost:6001/list/${mId}`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -211,5 +236,39 @@ export const getLoveActivity = (mId) => {
     const data = await res.json()
     console.log('list: ', data)
     dispatch(showLoveActivity(data))
+  }
+}
+//查看最愛活動
+export const showLoveNanny = (data) => {
+  return { type: 'SHOW_LOVE_NANNY', data }
+}
+export const getLoveNanny = (mId) => {
+  mId = localStorage.getItem('mId')
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/nanny/${mId}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    console.log('list: ', data)
+    dispatch(showLoveNanny(data))
+  }
+}
+//查看最愛活動
+export const showCommentList = (data) => {
+  return { type: 'SHOW_COMMENT_LIST', data }
+}
+export const getCommentList = (mId) => {
+  mId = localStorage.getItem('mId')
+  return async (dispatch) => {
+    const req = new Request(`http://localhost:6001/member/comment/${mId}`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const res = await fetch(req)
+    const data = await res.json()
+    // console.log('list: ', data)
+    dispatch(showCommentList(data))
   }
 }

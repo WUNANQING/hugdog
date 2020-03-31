@@ -68,7 +68,7 @@ export function calcTimeDiff(startDate, endDate, raw) {
     hours += 1
     mins = 0
   }
-  return raw ? eval(hours + mins / 60) : hours + '時' + mins + '分'
+  return raw ? parseInt(hours + mins / 60) : hours + '時' + mins + '分'
 }
 
 //-----抓取使用fetch連線資料庫取得json格式資料-----
@@ -101,4 +101,17 @@ export function handleFormValueMatch(event, match, jsonData) {
   } else {
     return false
   }
+}
+//-----api key-----
+export function myGoogleMapApiKey() {
+  return 'YourApiKey'
+}
+//-----google map location-----
+export async function getGoogleMapLocation(sCity, sDist, sAddr) {
+  const request = new Request(
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${sCity}${sDist}${sAddr}&key=${myGoogleMapApiKey()}`
+  )
+  const response = await fetch(request)
+  const data = await response.json()
+  return data.results[0].geometry.location //輸出緯度與經度
 }

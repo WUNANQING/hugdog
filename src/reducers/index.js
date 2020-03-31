@@ -79,10 +79,28 @@ const getLoveList = (state = [], action) => {
       return state
   }
 }
-//會員最愛商品
+//會員最愛活動
 const getLoveActivity = (state = [], action) => {
   switch (action.type) {
     case 'SHOW_LOVE_ACTIVITY':
+      return action.data
+    default:
+      return state
+  }
+}
+//會員最愛保母
+const getLoveNanny = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_LOVE_NANNY':
+      return action.data
+    default:
+      return state
+  }
+}
+//會員最愛保母
+const getCommentList = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_COMMENT_LIST':
       return action.data
     default:
       return state
@@ -130,7 +148,7 @@ const getQuantity = (state = 0, action) => {
   }
 }
 //紀錄優惠券的優惠金額
-const useCoupon = (state = 0, action) => {
+const useCoupon = (state = '', action) => {
   switch (action.type) {
     case 'USE_COUPON':
       return action.discount
@@ -181,6 +199,15 @@ const getDogDetail = (state = [], action) => {
 const updateDog = (state = [], action) => {
   switch (action.type) {
     case 'UPDATE_DOG':
+      return { ...action.data }
+    default:
+      return state
+  }
+}
+//更新服務狀態
+const updateService = (state = [], action) => {
+  switch (action.type) {
+    case 'UPDATE_SERVICE':
       return { ...action.data }
     default:
       return state
@@ -244,6 +271,26 @@ const getQuestionDetail = (state = [], action) => {
   }
 }
 
+//partnerPlus
+const getPartnerPlus = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_PARTNERPLUS':
+      return action.data
+    default:
+      return state
+  }
+}
+
+const getPartnerPlusDetail = (state = [], action) => {
+  switch (action.type) {
+    case 'SHOW_PARTNERPLUS_DETAIL':
+      console.log('re', action.data)
+      return action.data
+    default:
+      return state
+  }
+}
+
 //knowledge end
 const rootReducer = combineReducers({
   getMember,
@@ -274,6 +321,12 @@ const rootReducer = combineReducers({
   useCoupon,
   showComments,
   couponId,
+  getLoveNanny,
+  getCommentList,
+  updateDog,
+  updateService,
+  getPartnerPlus,
+  getPartnerPlusDetail,
 })
 
 export { rootReducer }

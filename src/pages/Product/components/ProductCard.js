@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Col, Card, Image, Button } from 'react-bootstrap'
 import '../../../css/product/productCard.scss'
 import Swal from 'sweetalert2/src/sweetalert2.js'
+import { FiClock } from 'react-icons/fi'
 
 const ProductCard = (props) => {
   return (
@@ -22,7 +23,10 @@ const ProductCard = (props) => {
           <Card.Text as="h4" className="text-danger font-weight-bold">
             NTD {props.data.pPrice}元
           </Card.Text>
-          <p>上架時間 {props.data.created_at}</p>
+          <p>
+            <FiClock />
+            上架時間 {props.data.created_at}
+          </p>
           <div className="d-flex justify-content-around">
             <Button
               className="p-1"
@@ -63,8 +67,8 @@ const ProductCard = (props) => {
                         text: '前往購物車結帳?',
                         icon: 'info',
                         showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
+                        confirmButtonColor: '#cea160',
+                        cancelButtonColor: '#cccccc',
                         confirmButtonText: '確定',
                         cancelButtonText: '取消',
                       }).then((result) => {
@@ -80,8 +84,8 @@ const ProductCard = (props) => {
                         text: '前往購物車結帳?',
                         icon: 'success',
                         showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
+                        confirmButtonColor: '#cea160',
+                        cancelButtonColor: '#cccccc',
                         confirmButtonText: '確定',
                         cancelButtonText: '取消',
                       }).then((result) => {
@@ -97,8 +101,8 @@ const ProductCard = (props) => {
                     text: '前往登入頁面?',
                     icon: 'info',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#cea160',
+                    cancelButtonColor: '#cccccc',
                     confirmButtonText: '確定',
                     cancelButtonText: '取消',
                   }).then((result) => {

@@ -19,7 +19,7 @@ function ServiceDetailMain(props) {
         props.match.params.userId +
         '?order=created_at'
     )
-    Promise.resolve(commentData).then(data => {
+    Promise.resolve(commentData).then((data) => {
       setLoadComment(true)
       setComment(data)
     })
@@ -45,11 +45,11 @@ function ServiceDetailMain(props) {
                   </h4>
                   <hr className="title" />
                   <div className="mb-4">
-                    <h6>
+                    <h6 className="mb-3">
                       {props.sUsers.sYear ? props.sUsers.sYear + '年經驗' : ''}
                     </h6>
-                    <h5>{props.sUsers.sTitle}</h5>
-                    <div>{props.sUsers.sInfo}</div>
+                    <h5 className="mb-3">{props.sUsers.sTitle}</h5>
+                    <div className="user-info">{props.sUsers.sInfo}</div>
                   </div>
                   <div className="mb-4">
                     <h5>額外服務</h5>
@@ -58,9 +58,9 @@ function ServiceDetailMain(props) {
                         {props.sUsers.sExtra.split(',').map((v, i) => (
                           <li key={i}>
                             -
-                            {props.sExtra.map(s => s.extraId).indexOf(v) >= 0
+                            {props.sExtra.map((s) => s.extraId).indexOf(v) >= 0
                               ? props.sExtra[
-                                  props.sExtra.map(s => s.extraId).indexOf(v)
+                                  props.sExtra.map((s) => s.extraId).indexOf(v)
                                 ].extraName
                               : ''}
                           </li>
@@ -71,7 +71,7 @@ function ServiceDetailMain(props) {
                     )}
                   </div>
                   <h4>
-                    保母評價
+                    保姆評價
                     <span className="inline-block-icon ml-3">
                       {starRating(props.sRating)}
                       <span className="icon-text">
@@ -86,22 +86,24 @@ function ServiceDetailMain(props) {
                   <hr className="title" />
                   <ul className="comment mb-3" id="serviceDetailComment">
                     {props.sMember.length !== 0
-                      ? comment.map((v, i) => {
-                          let index = props.sMember
-                            .map(m => m.mId)
-                            .indexOf(parseInt(v.mId))
-                          //取得會員
-                          return (
-                            <ServiceDetailMainComment
-                              sComment={v}
-                              sMemberId={props.sMember[index].mId}
-                              sMemberName={props.sMember[index].mName}
-                              sMemberImg={props.sMember[index].mImg}
-                              sUsers={props.sUsers}
-                              key={i}
-                            />
-                          )
-                        })
+                      ? comment.length
+                        ? comment.map((v, i) => {
+                            let index = props.sMember
+                              .map((m) => m.mId)
+                              .indexOf(parseInt(v.mId))
+                            //取得會員
+                            return (
+                              <ServiceDetailMainComment
+                                sComment={v}
+                                sMemberId={props.sMember[index].mId}
+                                sMemberName={props.sMember[index].mName}
+                                sMemberImg={props.sMember[index].mImg}
+                                sUsers={props.sUsers}
+                                key={i}
+                              />
+                            )
+                          })
+                        : '尚未有任何評價'
                       : ''}
                   </ul>
                   <div className="text-center">
